@@ -44,16 +44,6 @@ h2 {
     margin: 20px 0 10px;
 }
 
-.skills {
-    list-style-type: none;
-    padding: 0;
-}
-.skills li {
-    background: #e2e2e2;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
-}
 footer {
     text-align: center;
     margin-top: 20px;
