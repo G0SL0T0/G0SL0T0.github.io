@@ -3,48 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сайт-визитка</title>
+    <title>Сайт-визитка - Иван Никифоров</title>
     <link rel="stylesheet" href="style.css">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
 <header>
-    <h1>Сайт-визитка</h1>
-    <nav>
-        <a href="#">Увлечения</a>
-        <a href="#">Обучение</a>
-        <a href="#">Обратная связь</a>
-        <a href="#">Чат</a>
-    </nav>
+    <div class="container header-container">
+        <h1>Иван - Gosloto</h1>
+        <nav>
+            <a href="#about">Обо мне</a>
+            <a href="#skills">Навыки</a>
+            <a href="#projects">Проекты</a>
+            <a href="#contact">Контакты</a>
+        </nav>
+    </div>
 </header>
 
-<div class="container">
-    <div class="profile">
-        <img src="Logo.png" alt="Мое фото">
-        <h1>Никифоров Иван</h1>
-        <h2>Навыки</h2>
-        <div class="skills-grid">
-            <div class="skill-button">HTML/CSS</div>
-            <div class="skill-button">JavaScript</div>
-            <div class="skill-button">Python</div>
-            <div class="skill-button">React</div>
-            <div class="skill-button">Node.js</div>
-            <div class="skill-button">Git</div>
-            <div class="skill-button">SQL</div>
-            <div class="skill-button">Django</div>
-            <div class="skill-button">Java</div>
-            <div class="skill-button">C#</div>
-            <div class="skill-button">PHP</div>
-            <div class="skill-button">Ruby</div>
+<main>
+    <section id="about" class="hero">
+        <div class="container hero-container">
+            <img src="Logo.png" alt="Иван Никифоров" class="profile-image">
+            <div>
+                <h2>Привет! Я Иван, веб-разработчик.</h2>
+                <p>Рад приветствовать вас на моем сайте-визитке.  Здесь вы можете узнать больше о моих навыках, опыте и проектах.  Готов к новым вызовам и сотрудничеству!</p>
+            </div>
         </div>
-    </div>
-</div>
+    </section>
 
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2>Мои навыки</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML5</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS3</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-js"></i>
+                    <h3>JavaScript</h3>
+                </div>
+                 <div class="skill-card">
+                    <i class="fab fa-react"></i>
+                    <h3>React</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-vuejs"></i>
+                    <h3>Vue.js</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-angular"></i>
+                    <h3>Angular</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-python"></i>
+                    <h3>Python</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-node-js"></i>
+                    <h3>Node.js</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-terminal"></i>
+                    <h3>Git</h3>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>Мои проекты</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <img src="skyt.png" alt="SKYT">
+                    <h3>SKYT</h3>
+                    <p>Программа для контроля своего времени. Помогает эффективно планировать и отслеживать затраты времени.</p>
+                </div>
+                <div class="project-card">
+                    <img src="sentinelguard.png" alt="SentinelGuard">
+                    <h3>SentinelGuard</h3>
+                    <p>Администратор сети, разработанный на Python и NMap. Предназначен для мониторинга и управления сетевой безопасностью.</p>
+                </div>
+                <div class="project-card">
+                    <img src="portfolio.png" alt="Сайт-портфолио">
+                    <h3>Сайт-портфолио</h3>
+                    <p>Персональный сайт-портфолио, демонстрирующий мои навыки и проекты.<br><br>В разработке.</br></br></p>
+                </div>
+            </div>  
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Свяжитесь со мной</h2>
+            <div class="contact-list">
+                <p><i class="fas fa-envelope"></i> <a href="Почта: Gosioto@yandex.ru">Gosioto@yandex.ru</a></p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+799914783571">+7 (991) 478-35-71</a></p>
+                <p><i class="fab fa-telegram"></i> <a href="https://t.me/G0SL0T0">@G0SL0T0</a></p>
+                <p><i class="fab fa-github"></i> <a href="https://github.com/G0SL0T0">/G0SL0T0</a></p>
+            </div>
+        </div>
+    </section>
+</main>
 
 <footer>
-    <p>© 2024 Иван (Gosloto). Все права защищены.</p>
+    <div class="container">
+        <p>&copy; 2024 - 2025 Иван Никифоров. Все права НЕ защищены.</p>
+    </div>
 </footer>
 
 </body>
