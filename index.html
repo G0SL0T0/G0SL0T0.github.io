@@ -3,179 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Иван - Gosloto - Веб-разработчик</title>
+    <title>Визитка Gosloto</title>
     <meta name="description" content="Сайт-визитка Ивана, веб-разработчика.  Узнайте о моих навыках, проектах и свяжитесь со мной.">
     <link rel="icon" type="png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        /* Встроенные стили для примера - лучше вынести в style.css */
-        .hero {
-            background-color: #e9ecef;
-            padding: 5rem 0;
-            overflow: hidden; /* Важно для параллакса */
-            position: relative;
-        }
-
-        .hero-container {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            position: relative; /* Для z-index */
-            z-index: 2; /* Поверх параллакс-элементов */
-        }
-
-        .hero-text {
-            flex: 1;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .hero.visible .hero-text {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #6c757d;
-        }
-
-        .profile-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transform: translateY(0); /*  Начальное положение для параллакса */
-            transition: transform 0.2s ease-out;
-        }
-
-        .hero.parallax .profile-image {
-            transform: translateY(-20px);  /* Смещение при параллаксе */
-        }
-    </style>
 </head>
+
 <body>
 
 <header>
     <div class="container header-container">
-        <a href="#" class="logo">Иван - Gosloto</a>
+        <a href="index.html" class="logo">Иван - Gosloto</a>
+        <div class="menu-toggle">☰</div>
         <nav>
-            <a href="#about">Обо мне</a>
-            <a href="#skills">Навыки</a>
-            <a href="#projects">Проекты</a>
-            <a href="#contact">Контакты</a>
+            <a href="about.html">Обо мне</a>
+            <a href="skills.html">Навыки</a>
+            <a href="projects.html">Проекты</a>
+            <a href="contact.html">Контакты</a>
         </nav>
     </div>
 </header>
 
 <main>
-    <section id="about" class="hero">
+    <section class="hero">
         <div class="container hero-container">
-            <img src="Logo.png" alt="Фотография Ивана Никифорова" class="profile-image">
+            <img src="Logo.png" alt="Аватарка" class="profile-image">
             <div class="hero-text">
                 <h1>Привет! Я Иван, веб-разработчик.</h1>
-                <p>Рад приветствовать вас на моем сайте-визитке. Здесь вы можете узнать больше о моих навыках, опыте и проектах. Готов к новым вызовам и сотрудничеству!</p>
-                <!-- Добавим кнопку для связи -->
-                <a href="#contact" class="button">Связаться со мной</a>
+                <p>Создаю современные, адаптивные и удобные веб-приложения с фокусом на производительность и пользовательский опыт.</p>
+                <p>
+                    <a href="about.html" class="button">Узнать больше</a>
+                    <a href="contact.html" class="button" style="margin-left: 1rem; background-color: #6c757d;">Связаться</a>
+                </p>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="skills">
+    <section class="about">
         <div class="container">
-            <h2>Мои навыки</h2>
+            <h2>Коротко обо мне</h2>
+            <div class="about-content" style="display: flex; align-items: center; gap: 2rem;">
+                <div style="flex: 1;">
+                    <p>Я веб-разработчик с 3-летним опытом работы над коммерческими проектами. Специализируюсь на создании современных веб-приложений с использованием React, Angular Vue.js и Node.js.</p>
+                    <p>Моя цель - создавать не просто работающие сайты, а продукты, которые решают проблемы пользователей и приносят бизнесу реальную пользу.</p>
+                    <a href="about.html" class="button">Читать подробнее</a>
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    <img src="img/coding.svg" alt="Программирование" style="max-width: 300px; width: 100%;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" style="background-color: #f8f9fa; padding: 4rem 0;">
+        <div class="container">
+            <h2 style="text-align: center;">Ключевые навыки</h2>
             <div class="skills-grid">
                 <div class="skill-card">
-                    <i class="fab fa-html5"></i>
-                    <h3>HTML5</h3>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-css3-alt"></i>
-                    <h3>CSS3</h3>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-js"></i>
-                    <h3>JavaScript</h3>
-                </div>
-                 <div class="skill-card">
                     <i class="fab fa-react"></i>
                     <h3>React</h3>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 90%"></div>
+                    </div>
                 </div>
                 <div class="skill-card">
                     <i class="fab fa-vuejs"></i>
                     <h3>Vue.js</h3>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-angular"></i>
-                    <h3>Angular</h3>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-python"></i>
-                    <h3>Python</h3>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 85%"></div>
+                    </div>
                 </div>
                 <div class="skill-card">
                     <i class="fab fa-node-js"></i>
                     <h3>Node.js</h3>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 80%"></div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fas fa-terminal"></i>
-                    <h3>Git</h3>
-                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="skills.html" class="button">Все навыки</a>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="projects">
+    <section class="projects">
         <div class="container">
-            <h2>Мои проекты</h2>
+            <h2 style="text-align: center;">Последние проекты</h2>
             <div class="project-grid">
                 <div class="project-card">
-                    <img src="skyt.png" alt="Скриншот программы SKYT">
+                    <img src="img/skyt.png" alt="Скриншот программы SKYT">
                     <h3>SKYT</h3>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">PyQt</span>
+                        <span class="project-tag">SQLite</span>
+                    </div>
                     <p>Программа для контроля своего времени. Помогает эффективно планировать и отслеживать затраты времени.</p>
-                    <!-- Добавим ссылку на проект (если есть) -->
-                    <!-- <a href="#" class="button">Посмотреть проект</a> -->
-                </div>
-                <div class="project-card">
-                    <img src="sentinelguard.png" alt="Скриншот SentinelGuard">
-                    <h3>SentinelGuard</h3>
-                    <p>Администратор сети, разработанный на Python и NMap. Предназначен для мониторинга и управления сетевой безопасностью.</p>
-                    <!-- Добавим ссылку на проект (если есть) -->
-                    <!-- <a href="#" class="button">Посмотреть проект</a> -->
-                </div>
-                <div class="project-card">
-                    <img src="portfolio.png" alt="Скриншот сайта-портфолио">
-                    <h3>Сайт-портфолио</h3>
-                    <p>Персональный сайт-портфолио, демонстрирующий мои навыки и проекты. В разработке.</p>
-                    <!-- Добавим ссылку на проект (если есть) -->
-                    <!-- <a href="#" class="button">Посмотреть проект</a> -->
+                    <a href="projects.html" class="button" style="display: block; text-align: center; margin-top: 1rem;">Все проекты</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section class="features">
         <div class="container">
-            <h2>Свяжитесь со мной</h2>
-            <div class="contact-list">
-                <p><i class="fas fa-envelope"></i> <a href="mailto:Gosioto@yandex.ru">Gosioto@yandex.ru</a></p>
-                <p><i class="fas fa-phone"></i> <a href="tel:+79914783571">+7 (991) 478-35-71</a></p>
-                <p><i class="fab fa-telegram"></i> <a href="https://t.me/G0SL0T0" target="_blank" rel="noopener noreferrer">@G0SL0T0</a></p>
-                <p><i class="fab fa-github"></i> <a href="https://github.com/G0SL0T0" target="_blank" rel="noopener noreferrer">/G0SL0T0</a></p>
+            <h2 style="text-align: center;">Почему стоит со мной работать?</h2>
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-code"></i>
+                    <h3>Чистый код</h3>
+                    <p>Соблюдаю лучшие практики разработки, пишу читаемый и поддерживаемый код.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Адаптивный дизайн</h3>
+                    <p>Все сайты идеально работают на любых устройствах - от смартфонов до десктопов.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Скорость</h3>
+                    <p>Оптимизирую производительность для быстрой загрузки и плавной работы.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -183,39 +139,38 @@
 
 <footer>
     <div class="container">
+<<<<<<< Updated upstream
         <p>&copy; 20xx Gosloto. Все права не защищены.</p>
+=======
+        <p>&copy; 2025 Gosloto. Все права НЕ защищены.</p>
+>>>>>>> Stashed changes
     </div>
 </footer>
 
-<script>
-    // JavaScript для эффекта параллакса и появления текста
-
-    const heroSection = document.querySelector('.hero');
-
-    // Intersection Observer для появления текста
-    const textObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                heroSection.classList.add('visible');
-                textObserver.unobserve(heroSection); // Прекратить наблюдение после первого появления
-            }
-        });
-    });
-    textObserver.observe(heroSection);
-
-    // Параллакс-эффект (простой вариант)
-    window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
-
-        // Добавляем класс .parallax только если секция видна (чтобы не было эффекта на невидимых элементах)
-        if (heroSection.classList.contains('visible')) {
-             heroSection.classList.add('parallax');
-        }  else {
-             heroSection.classList.remove('parallax');
+<style>
+    /* Стиль для выпадающего меню */
+    @media (max-width: 768px) {
+        .menu-toggle {
+            display: block;
         }
+        
+        nav {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        nav.show {
+            display: flex;
+        }
+    }
+</style>
 
+<script>
+    // Простейший скрипт для меню (можно удалить, если не нужен)
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('nav').classList.toggle('show');
     });
-
 </script>
 
 </body>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои проекты - Иван - Gosloto</title>
+    <meta name="description" content="Проекты веб-разработчика Ивана.">
+    <link rel="icon" type="png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<header>
+    <div class="container header-container">
+        <a href="index.html" class="logo">Иван - Gosloto</a>
+        <div class="menu-toggle">☰</div>
+        <nav>
+            <a href="about.html">Обо мне</a>
+            <a href="skills.html">Навыки</a>
+            <a href="projects.html" class="active">Проекты</a>
+            <a href="contact.html">Контакты</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="projects">
+        <div class="container">
+            <h1>Мои проекты</h1>
+            
+            <div class="project-accordion">
+                <!-- Проект 1 - SKYT -->
+                <div class="project-item">
+                    <input type="checkbox" id="project1" class="project-checkbox">
+                    <label for="project1" class="project-header">
+                        <div class="project-title">
+                            <img src="img/skyt.png" alt="SKYT" class="project-thumbnail">
+                            <h2>SKYT - Трекер времени</h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+                    <div class="project-content">
+                        <div class="project-details">
+                            <div class="project-description">
+                                <h3>Описание проекта</h3>
+                                <p>Программа для контроля своего времени с интуитивным интерфейсом и подробной статистикой. Помогает эффективно планировать и отслеживать затраты времени.</p>
+                                <div class="project-features">
+                                    <h4>Основные функции:</h4>
+                                    <ul>
+                                        <li>Учет времени по проектам и задачам</li>
+                                        <li>Графики и отчеты по продуктивности</li>
+                                        <li>Экспорт данных в CSV</li>
+                                        <li>Настраиваемые категории и теги</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="project-tech">
+                                <h3>Использованные технологии</h3>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">PyQt</span>
+                                    <span class="tech-tag">SQLite</span>
+                                    <span class="tech-tag">Matplotlib</span>
+                                </div>
+                                <div class="project-screenshots">
+                                    <h4>Скриншоты:</h4>
+                                    <div class="screenshots-grid">
+                                        <img src="img/skyt-screen1.jpg" alt="SKYT интерфейс">
+                                        <img src="img/skyt-screen2.jpg" alt="SKYT отчеты">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Проект 2 - SentinelGuard -->
+                <div class="project-item">
+                    <input type="checkbox" id="project2" class="project-checkbox">
+                    <label for="project2" class="project-header">
+                        <div class="project-title">
+                            <img src="img/sentinelguard.png" alt="SentinelGuard" class="project-thumbnail">
+                            <h2>SentinelGuard - Сетевой администратор</h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+                    <div class="project-content">
+                        <div class="project-details">
+                            <div class="project-description">
+                                <h3>Описание проекта</h3>
+                                <p>Администратор сети, разработанный на Python и NMap. Предназначен для мониторинга и управления сетевой безопасностью.</p>
+                                <div class="project-features">
+                                    <h4>Основные функции:</h4>
+                                    <ul>
+                                        <li>Сканирование сети и устройств</li>
+                                        <li>Обнаружение открытых портов</li>
+                                        <li>Мониторинг активности в сети</li>
+                                        <li>Генерация отчетов о безопасности</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="project-tech">
+                                <h3>Использованные технологии</h3>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">NMap</span>
+                                    <span class="tech-tag">Network Security</span>
+                                    <span class="tech-tag">Bash</span>
+                                </div>
+                                <div class="project-screenshots">
+                                    <h4>Скриншоты:</h4>
+                                    <div class="screenshots-grid">
+                                        <img src="img/sentinel-screen1.jpg" alt="SentinelGuard интерфейс">
+                                        <img src="img/sentinel-screen2.jpg" alt="SentinelGuard отчет">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Gosloto. Все права НЕ защищены.</p>
+    </div>
+</footer>
+
+<style>
+    /* Стили для аккордеона проектов */
+    .project-accordion {
+        max-width: 900px;
+        margin: 2rem auto;
+    }
+    
+    .project-item {
+        margin-bottom: 1.5rem;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        background: white;
+    }
+    
+    .project-checkbox {
+        display: none;
+    }
+    
+    .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .project-header:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .project-title {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    
+    .project-thumbnail {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    
+    .project-icon {
+        transition: transform 0.3s;
+    }
+    
+    .project-checkbox:checked + .project-header .project-icon {
+        transform: rotate(180deg);
+    }
+    
+    .project-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+    }
+    
+    .project-checkbox:checked ~ .project-content {
+        max-height: 2000px; /* Достаточно большое значение для контента */
+    }
+    
+    .project-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        padding: 0 1.5rem 1.5rem;
+    }
+    
+    .project-description, .project-tech {
+        padding: 1rem;
+    }
+    
+    .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1rem 0;
+    }
+    
+    .tech-tag {
+        background: #e9ecef;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+    
+    .screenshots-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .screenshots-grid img {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+    
+    .screenshots-grid img:hover {
+        transform: scale(1.03);
+    }
+    
+    @media (max-width: 768px) {
+        .project-details {
+            grid-template-columns: 1fr;
+        }
+        
+        .project-title h2 {
+            font-size: 1.2rem;
+        }
+        
+        .screenshots-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script>
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('nav').classList.toggle('show');
+    });
+</script>
+
+</body>
+</html>
