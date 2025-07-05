@@ -3,18 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сайт-визитка - Иван Никифоров</title>
+    <title>Иван - Gosloto - Веб-разработчик</title>
+    <meta name="description" content="Сайт-визитка Ивана, веб-разработчика.  Узнайте о моих навыках, проектах и свяжитесь со мной.">
+    <link rel="icon" type="png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Встроенные стили для примера - лучше вынести в style.css */
+        .hero {
+            background-color: #e9ecef;
+            padding: 5rem 0;
+            overflow: hidden; /* Важно для параллакса */
+            position: relative;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            position: relative; /* Для z-index */
+            z-index: 2; /* Поверх параллакс-элементов */
+        }
+
+        .hero-text {
+            flex: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .hero.visible .hero-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(0); /*  Начальное положение для параллакса */
+            transition: transform 0.2s ease-out;
+        }
+
+        .hero.parallax .profile-image {
+            transform: translateY(-20px);  /* Смещение при параллаксе */
+        }
+    </style>
 </head>
 <body>
 
 <header>
     <div class="container header-container">
-        <h1>Иван - Gosloto</h1>
+        <a href="#" class="logo">Иван - Gosloto</a>
         <nav>
             <a href="#about">Обо мне</a>
             <a href="#skills">Навыки</a>
@@ -27,10 +85,12 @@
 <main>
     <section id="about" class="hero">
         <div class="container hero-container">
-            <img src="Logo.png" alt="Иван Никифоров" class="profile-image">
-            <div>
-                <h2>Привет! Я Иван, веб-разработчик.</h2>
-                <p>Рад приветствовать вас на моем сайте-визитке.  Здесь вы можете узнать больше о моих навыках, опыте и проектах.  Готов к новым вызовам и сотрудничеству!</p>
+            <img src="Logo.png" alt="Фотография Ивана Никифорова" class="profile-image">
+            <div class="hero-text">
+                <h1>Привет! Я Иван, веб-разработчик.</h1>
+                <p>Рад приветствовать вас на моем сайте-визитке. Здесь вы можете узнать больше о моих навыках, опыте и проектах. Готов к новым вызовам и сотрудничеству!</p>
+                <!-- Добавим кнопку для связи -->
+                <a href="#contact" class="button">Связаться со мной</a>
             </div>
         </div>
     </section>
@@ -84,21 +144,27 @@
             <h2>Мои проекты</h2>
             <div class="project-grid">
                 <div class="project-card">
-                    <img src="skyt.png" alt="SKYT">
+                    <img src="skyt.png" alt="Скриншот программы SKYT">
                     <h3>SKYT</h3>
                     <p>Программа для контроля своего времени. Помогает эффективно планировать и отслеживать затраты времени.</p>
+                    <!-- Добавим ссылку на проект (если есть) -->
+                    <!-- <a href="#" class="button">Посмотреть проект</a> -->
                 </div>
                 <div class="project-card">
-                    <img src="sentinelguard.png" alt="SentinelGuard">
+                    <img src="sentinelguard.png" alt="Скриншот SentinelGuard">
                     <h3>SentinelGuard</h3>
                     <p>Администратор сети, разработанный на Python и NMap. Предназначен для мониторинга и управления сетевой безопасностью.</p>
+                    <!-- Добавим ссылку на проект (если есть) -->
+                    <!-- <a href="#" class="button">Посмотреть проект</a> -->
                 </div>
                 <div class="project-card">
-                    <img src="portfolio.png" alt="Сайт-портфолио">
+                    <img src="portfolio.png" alt="Скриншот сайта-портфолио">
                     <h3>Сайт-портфолио</h3>
-                    <p>Персональный сайт-портфолио, демонстрирующий мои навыки и проекты.<br><br>В разработке.</br></br></p>
+                    <p>Персональный сайт-портфолио, демонстрирующий мои навыки и проекты. В разработке.</p>
+                    <!-- Добавим ссылку на проект (если есть) -->
+                    <!-- <a href="#" class="button">Посмотреть проект</a> -->
                 </div>
-            </div>  
+            </div>
         </div>
     </section>
 
@@ -106,10 +172,10 @@
         <div class="container">
             <h2>Свяжитесь со мной</h2>
             <div class="contact-list">
-                <p><i class="fas fa-envelope"></i> <a href="Почта: Gosioto@yandex.ru">Gosioto@yandex.ru</a></p>
-                <p><i class="fas fa-phone"></i> <a href="tel:+799914783571">+7 (991) 478-35-71</a></p>
-                <p><i class="fab fa-telegram"></i> <a href="https://t.me/G0SL0T0">@G0SL0T0</a></p>
-                <p><i class="fab fa-github"></i> <a href="https://github.com/G0SL0T0">/G0SL0T0</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:Gosioto@yandex.ru">Gosioto@yandex.ru</a></p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+79914783571">+7 (991) 478-35-71</a></p>
+                <p><i class="fab fa-telegram"></i> <a href="https://t.me/G0SL0T0" target="_blank" rel="noopener noreferrer">@G0SL0T0</a></p>
+                <p><i class="fab fa-github"></i> <a href="https://github.com/G0SL0T0" target="_blank" rel="noopener noreferrer">/G0SL0T0</a></p>
             </div>
         </div>
     </section>
@@ -117,9 +183,40 @@
 
 <footer>
     <div class="container">
-        <p>&copy; 2024 - 2025 Иван Никифоров. Все права НЕ защищены.</p>
+        <p>&copy; 2024 Gosloto. Все права не защищены.</p>
     </div>
 </footer>
+
+<script>
+    // JavaScript для эффекта параллакса и появления текста
+
+    const heroSection = document.querySelector('.hero');
+
+    // Intersection Observer для появления текста
+    const textObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                heroSection.classList.add('visible');
+                textObserver.unobserve(heroSection); // Прекратить наблюдение после первого появления
+            }
+        });
+    });
+    textObserver.observe(heroSection);
+
+    // Параллакс-эффект (простой вариант)
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+
+        // Добавляем класс .parallax только если секция видна (чтобы не было эффекта на невидимых элементах)
+        if (heroSection.classList.contains('visible')) {
+             heroSection.classList.add('parallax');
+        }  else {
+             heroSection.classList.remove('parallax');
+        }
+
+    });
+
+</script>
 
 </body>
 </html>
