@@ -15,20 +15,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Mobile Adaptation & Menu Toggle Fix */
         @media (max-width: 768px) {
-            /* Fix for header layout */
             .header-container {
                 flex-direction: column;
                 align-items: stretch;
             }
-            
-            /* Hide menu toggle symbol (☰) */
+
             .menu-toggle {
                 display: none !important;
             }
             
-            /* Always show navigation */
             nav {
                 display: flex !important;
                 flex-direction: column;
@@ -36,14 +32,12 @@
                 margin-top: 1rem;
             }
             
-            /* Style navigation links */
             nav a {
                 margin: 0 !important;
                 padding: 0.75rem 0;
                 border-bottom: 1px solid rgba(255,255,255,0.1);
             }
             
-            /* Hero section adjustments */
             .hero-container {
                 flex-direction: column;
                 text-align: center;
@@ -53,12 +47,10 @@
                 margin: 0 auto 1.5rem;
             }
             
-            /* General content adjustments */
             .container {
                 padding: 1rem;
             }
             
-            /* Timeline adjustments */
             .timeline::after {
                 left: 31px;
             }
@@ -78,12 +70,10 @@
                 left: 0 !important;
             }
             
-            /* Project accordion adjustments */
             .project-details {
                 grid-template-columns: 1fr !important;
             }
             
-            /* Make buttons full width */
             .button {
                 display: block;
                 width: 100%;
@@ -91,7 +81,6 @@
             }
         }
 
-        /* Extra small devices */
         @media (max-width: 480px) {
             h1 {
                 font-size: 1.8rem !important;
@@ -107,6 +96,70 @@
             
             .logo {
                 font-size: 1.5rem !important;
+            }
+        }
+        .project-view-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #007bff, #00b4ff);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .project-view-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+            background: linear-gradient(135deg, #0069d9, #0095ff);
+        }
+        
+        .project-view-btn i {
+            margin-left: 8px;
+        }
+        
+        /* Переработанные стили для скриншотов */
+        .project-screenshots {
+            margin-top: 2rem;
+            grid-column: 1 / -1;
+        }
+        
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .screenshots-grid img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .screenshots-grid img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        /* Адаптация для мобильных */
+        @media (max-width: 768px) {
+            .project-view-btn {
+                width: 100%;
+                padding: 14px 24px;
+            }
+            
+            .screenshots-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -157,6 +210,9 @@
                                         <li>Настраиваемые категории и теги</li>
                                     </ul>
                                 </div>
+                                <a href="SKYT/index.html" target="_blank" class="project-view-btn">
+                                    Посмотреть проект <i class="fas fa-external-link-alt"></i>
+                                </a>
                             </div>
                             <div class="project-tech">
                                 <h3>Использованные технологии</h3>
@@ -166,12 +222,12 @@
                                     <span class="tech-tag">Node.js</span>
                                     <span class="tech-tag">PostgreSQL</span>
                                 </div>
-                                <div class="project-screenshots">
-                                    <h4>Скриншоты:</h4>
-                                    <div class="screenshots-grid">
-                                        <img src="img/skyt-screen1.jpg" alt="SKYT интерфейс">
-                                        <img src="img/skyt-screen2.jpg" alt="SKYT отчеты">
-                                    </div>
+                            </div>
+                            <div class="project-screenshots">
+                                <h4>Скриншоты проекта:</h4>
+                                <div class="screenshots-grid">
+                                    <img src="skyt-screen1.png" alt="SKYT_1">
+                                    <img src="skyt-screen2.png" alt="SKYT_2">
                                 </div>
                             </div>
                         </div>
@@ -183,7 +239,7 @@
                     <input type="checkbox" id="project2" class="project-checkbox">
                     <label for="project2" class="project-header">
                         <div class="project-title">
-                            <img src="img/sentinelguard.png" alt="SentinelGuard" class="project-thumbnail">
+                            <img src="img/Безымянный.png" alt="SentinelGuard" class="project-thumbnail">
                             <h2>SentinelGuard - Сетевой администратор</h2>
                         </div>
                         <i class="fas fa-chevron-down project-icon"></i>
@@ -202,6 +258,9 @@
                                         <li>Генерация отчетов о безопасности</li>
                                     </ul>
                                 </div>
+                                <a href="sentinelguard/index.html" target="_blank" class="project-view-btn">
+                                    Посмотреть проект <i class="fas fa-external-link-alt"></i>
+                                </a>
                             </div>
                             <div class="project-tech">
                                 <h3>Использованные технологии</h3>
@@ -211,12 +270,12 @@
                                     <span class="tech-tag">Network Security</span>
                                     <span class="tech-tag">Bash</span>
                                 </div>
-                                <div class="project-screenshots">
-                                    <h4>Скриншоты:</h4>
-                                    <div class="screenshots-grid">
-                                        <img src="img/sentinel-screen1.jpg" alt="SentinelGuard интерфейс">
-                                        <img src="img/sentinel-screen2.jpg" alt="SentinelGuard отчет">
-                                    </div>
+                            </div>
+                            <div class="project-screenshots">
+                                <h4>Скриншоты проекта:</h4>
+                                <div class="screenshots-grid">
+                                    <img src="img/sentinel-screen1.jpg" alt="SentinelGuard интерфейс">
+                                    <img src="img/sentinel-screen2.jpg" alt="SentinelGuard отчет">
                                 </div>
                             </div>
                         </div>
@@ -293,7 +352,7 @@
     }
     
     .project-checkbox:checked ~ .project-content {
-        max-height: 2000px; /* Достаточно большое значение для контента */
+        max-height: 2000px;
     }
     
     .project-details {

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentinelGuard - Инновационная защита данных</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/shield-icon.png" alt="SentinelGuard Logo" loading="lazy">
+                <h1>Sentinel<span>Guard</span></h1>
+            </div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="features.html">Возможности</a></li>
+                    <li><a href="security.html">Безопасность</a></li>
+                    <li><a href="solutions.html">Решения</a></li>
+                    <li><a href="pricing.html">Цены</a></li>
+                    <li><a href="contact.html">Контакты</a></li>
+                    <li><a href="#" class="button primary">Скачать</a></li>
+                    <li>
+                        <div class="theme-switch">
+                            <input type="checkbox" id="theme-toggle">
+                            <label for="theme-toggle" class="theme-toggle-label">
+                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-moon"></i>
+                                <span class="ball"></span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Герой (Hero Section) -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content animate__animated animate__fadeInLeft">
+                <h1>Инновационная защита <span>цифровых активов</span></h1>
+                <p>SentinelGuard использует искусственный интеллект для предотвращения кибератак в реальном времени.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="button primary large pulse">Начать бесплатно</a>
+                    <a href="#features" class="button secondary large">Узнать больше</a>
+                </div>
+                <div class="tech-stack">
+                    <span>Используемые технологии:</span>
+                    <div class="tech-icons">
+                        <i class="fab fa-aws" title="AWS"></i>
+                        <i class="fab fa-python" title="Python"></i>
+                        <i class="fas fa-brain" title="AI"></i>
+                        <i class="fab fa-docker" title="Docker"></i>
+                        <i class="fas fa-shield-alt" title="Security"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image animate__animated animate__fadeInRight">
+                <img src="images/dashboard-mockup.png" alt="SentinelGuard Dashboard" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Основные характеристики -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">Ключевые <span>возможности</span></h2>
+            <p class="section-subtitle">Мощные инструменты для комплексной защиты</p>
+            <div class="features-grid">
+                <div class="feature animate__animated" data-animation="animate__fadeInUp">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Мониторинг в реальном времени</h3>
+                    <p>Отслеживайте угрозы в реальном времени и реагируйте мгновенно с помощью нашей системы искусственного интеллекта.</p>
+                    <a href="features.html" class="feature-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature animate__animated" data-animation="animate__fadeInUp" data-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Анализ рисков</h3>
+                    <p>Оценивайте уровень риска с помощью продвинутых алгоритмов машинного обучения и приоритезируйте угрозы.</p>
+                    <a href="features.html" class="feature-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature animate__animated" data-animation="animate__fadeInUp" data-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Автоматическая защита</h3>
+                    <p>Автоматически блокируйте подозрительную активность с минимальным вмешательством человека.</p>
+                    <a href="features.html" class="feature-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section id="stats" class="parallax">
+        <div class="container">
+            <h2 class="section-title">Мы в <span>цифрах</span></h2>
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-title">Защищенных компаний</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" data-target="99.9">0</div>
+                    <div class="stat-title">% эффективности</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-title">/7 поддержка</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" data-target="5000">0</div>
+                    <div class="stat-title">Блокировок в день</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Безопасность -->
+    <section id="security">
+        <div class="container">
+            <div class="security-content">
+                <div class="security-text animate__animated animate__fadeInLeft">
+                    <h2 class="section-title">Многоуровневая <span>защита</span></h2>
+                    <p>SentinelGuard обеспечивает комплексную защиту вашей инфраструктуры, предотвращая кибератаки и утечки данных с помощью передовых технологий.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Обнаружение вторжений в реальном времени</li>
+                        <li><i class="fas fa-check-circle"></i> Защита от вредоносного ПО и ransomware</li>
+                        <li><i class="fas fa-check-circle"></i> Глубокий анализ сетевого трафика</li>
+                        <li><i class="fas fa-check-circle"></i> Защита облачных сред</li>
+                        <li><i class="fas fa-check-circle"></i> Соответствие GDPR и другим стандартам</li>
+                    </ul>
+                    <a href="security.html" class="button primary">Узнать о технологиях</a>
+                </div>
+                <div class="security-image animate__animated animate__fadeInRight">
+                    <img src="images/security-layers.png" alt="Многоуровневая защита" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ценообразование -->
+    <section id="pricing">
+        <div class="container">
+            <h2 class="section-title">Гибкие <span>тарифы</span></h2>
+            <p class="section-subtitle">Выберите решение, которое подходит именно вам</p>
+            <div class="pricing-plans">
+                <div class="plan animate__animated" data-animation="animate__fadeInUp">
+                    <div class="plan-header">
+                        <h3>Базовый</h3>
+                        <div class="price">$0<span>/месяц</span></div>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Мониторинг 5 устройств</li>
+                        <li><i class="fas fa-check"></i> Базовый анализ рисков</li>
+                        <li><i class="fas fa-check"></i> Техподдержка по email</li>
+                        <li><i class="fas fa-check"></i> Отчеты раз в неделю</li>
+                    </ul>
+                    <a href="#" class="button secondary">Начать бесплатно</a>
+                </div>
+                <div class="plan recommended animate__animated" data-animation="animate__fadeInUp" data-delay="100">
+                    <div class="plan-badge">Рекомендуем</div>
+                    <div class="plan-header">
+                        <h3>Премиум</h3>
+                        <div class="price">$99<span>/месяц</span></div>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Неограниченное количество устройств</li>
+                        <li><i class="fas fa-check"></i> Расширенный анализ рисков</li>
+                        <li><i class="fas fa-check"></i> Автоматическая блокировка угроз</li>
+                        <li><i class="fas fa-check"></i> Приоритетная техподдержка 24/7</li>
+                        <li><i class="fas fa-check"></i> Ежедневные отчеты</li>
+                    </ul>
+                    <a href="#" class="button primary">Купить сейчас</a>
+                </div>
+                <div class="plan animate__animated" data-animation="animate__fadeInUp" data-delay="200">
+                    <div class="plan-header">
+                        <h3>Корпоративный</h3>
+                        <div class="price">Индивидуально</div>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Индивидуальная настройка</li>
+                        <li><i class="fas fa-check"></i> Интеграция с существующими системами</li>
+                        <li><i class="fas fa-check"></i> Выделенный менеджер</li>
+                        <li><i class="fas fa-check"></i> Обучение сотрудников</li>
+                        <li><i class="fas fa-check"></i> SLA 99.99%</li>
+                    </ul>
+                    <a href="contact.html" class="button secondary">Обсудить проект</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Клиенты и отзывы -->
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Наши <span>клиенты</span></h2>
+            <p class="section-subtitle">Что говорят о нас компании, которые доверили нам свою безопасность</p>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"SentinelGuard полностью изменил наш подход к кибербезопасности. Теперь мы спим спокойно."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="images/client1.jpg" alt="Client" loading="lazy">
+                        <div>
+                            <h4>Иван Петров</h4>
+                            <span>CTO, TechCorp</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"За 3 месяца использования система предотвратила 12 серьезных атак. Лучшее вложение за последние годы."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="images/client2.jpg" alt="Client" loading="lazy">
+                        <div>
+                            <h4>Анна Смирнова</h4>
+                            <span>Директор по ИБ, FinSecure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Готовы защитить свой бизнес?</h2>
+                <p>Начните бесплатную 30-дневную пробную версию без необходимости ввода карты</p>
+                <a href="#" class="button primary large">Начать сейчас</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="logo">
+                        <img src="images/shield-icon.png" alt="SentinelGuard Logo" loading="lazy">
+                        <h1>Sentinel<span>Guard</span></h1>
+                    </div>
+                    <p>Инновационные решения для кибербезопасности вашего бизнеса.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Продукт</h3>
+                    <ul>
+                        <li><a href="features.html">Возможности</a></li>
+                        <li><a href="security.html">Безопасность</a></li>
+                        <li><a href="solutions.html">Решения</a></li>
+                        <li><a href="pricing.html">Цены</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Ресурсы</h3>
+                    <ul>
+                        <li><a href="#">Документация</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">Статус системы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Компания</h3>
+                    <ul>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="careers.html">Карьера</a></li>
+                        <li><a href="contact.html">Контакты</a></li>
+                        <li><a href="#">Партнеры</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 SentinelGuard. Все права защищены.</p>
+                <div class="legal-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Кнопка "Наверх" -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Встроенный JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Переключение темы
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            
+            // Проверяем сохраненную тему
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+            themeToggle.checked = savedTheme === 'dark';
+            
+            themeToggle.addEventListener('change', function() {
+                const theme = this.checked ? 'dark' : 'light';
+                html.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+            });
+            
+            // Мобильное меню
+            const menuToggle = document.getElementById('menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            
+            menuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mainNav.classList.toggle('active');
+            });
+            
+            // Плавная прокрутка
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Закрываем меню, если оно открыто
+                        menuToggle.classList.remove('active');
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Кнопка "Наверх"
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+            
+            backToTop.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Анимация чисел статистики
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            function animateNumbers() {
+                statNumbers.forEach(stat => {
+                    const target = +stat.getAttribute('data-target');
+                    const count = +stat.innerText;
+                    const increment = target / 100;
+                    
+                    if (count < target) {
+                        stat.innerText = Math.ceil(count + increment);
+                        setTimeout(animateNumbers, 20);
+                    } else {
+                        stat.innerText = target;
+                    }
+                });
+            }
+            
+            // Запускаем анимацию при появлении секции
+            const statsSection = document.getElementById('stats');
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    animateNumbers();
+                    observer.unobserve(statsSection);
+                }
+            }, { threshold: 0.5 });
+            
+            observer.observe(statsSection);
+            
+            // Фиксированная шапка при скролле
+            const header = document.querySelector('header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Анимация элементов при скролле
+            const animateElements = document.querySelectorAll('.animate__animated');
+            
+            const elementObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animation = entry.target.getAttribute('data-animation');
+                        const delay = entry.target.getAttribute('data-delay') || 0;
+                        
+                        setTimeout(() => {
+                            entry.target.classList.add(animation);
+                        }, delay);
+                        
+                        elementObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animateElements.forEach(element => {
+                elementObserver.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
