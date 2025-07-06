@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игровые увлечения - Иван - Gosloto</title>
+    <meta name="description" content="Мои игровые предпочтения, статистика и достижения">
+    <link rel="icon" type="png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Основные стили для страницы игр */
+        .hobby-detail {
+            padding: 2rem 0;
+        }
+        
+        .game-banner {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .banner-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .banner-overlay h1 {
+            color: white;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ddd;
+            font-style: italic;
+            margin: 0;
+        }
+        
+        /* Сетка статистики */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .accent-blue { 
+            background: linear-gradient(135deg, #007bff, #00b4ff); 
+        }
+        .accent-green { 
+            background: linear-gradient(135deg, #28a745, #00d084); 
+        }
+        .accent-purple { 
+            background: linear-gradient(135deg, #6f42c1, #a370f7); 
+        }
+        
+        .stat-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* Карточки игр */
+        .game-cards {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .game-card {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .game-card img {
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .game-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .game-info {
+            padding: 1.5rem;
+            flex: 1;
+        }
+        
+        .game-info h3 {
+            margin-top: 0;
+            color: #343a40;
+        }
+        
+        .game-meta {
+            display: flex;
+            gap: 1rem;
+            margin: 0.8rem 0;
+            align-items: center;
+        }
+        
+        .platform-tag {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            background: #343a40;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .platform-tag i {
+            margin-right: 0.3rem;
+        }
+        
+        .hours {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .game-rating {
+            color: #ffc107;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Текущие игры */
+        .current-games-section {
+            margin-top: 3rem;
+        }
+        
+        .currently-playing {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .current-game {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .current-game:last-child {
+            margin-bottom: 0;
+        }
+        
+        .current-game img {
+            width: 100px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-top: 0.8rem;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #007bff, #00b4ff);
+            border-radius: 4px;
+        }
+        
+        /* Сайдбар */
+        .hobby-sidebar {
+            position: sticky;
+            top: 120px;
+        }
+        
+        .sidebar-block {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .sidebar-block h3 {
+            margin-top: 0;
+            color: #007bff;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .genre-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+        
+        .genre-list li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .genre-list li:before {
+            content: "•";
+            color: #007bff;
+            font-weight: bold;
+            margin-right: 0.7rem;
+        }
+        
+        .platforms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 1rem;
+        }
+        
+        .screenshots {
+            display: grid;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .screenshots img {
+            width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .screenshots img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .game-stats-section,
+        .favorite-games-section,
+        .current-games-section,
+        .sidebar-block {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .favorite-games-section { animation-delay: 0.2s; }
+        .current-games-section { animation-delay: 0.4s; }
+        .sidebar-block { animation-delay: 0.6s; }
+        
+        /* Достижения */
+        .achievements-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .achievements-list li {
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed #eee;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .achievements-list li:before {
+            content: "🏆";
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Адаптация для мобильных */
+        @media (max-width: 768px) {
+            .hobby-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-card {
+                flex-direction: column;
+            }
+            
+            .game-card img {
+                width: 100%;
+                height: 200px;
+            }
+            
+            .current-game {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .banner-overlay {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-container">
+        <a href="index.html" class="logo">Иван - Gosloto</a>
+        <div class="menu-toggle"></div>
+        <nav>
+            <a href="hobbies.html" class="active">← Назад к хобби</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hobby-detail">
+        <div class="container">
+            <!-- Баннер с названием -->
+            <div class="hobby-header">
+                <div class="banner-container">
+                    <img src="img/games-banner.png" alt="Игровая коллекция" class="hobby-banner game-banner">
+                    <div class="banner-overlay">
+                        <h1><i class="fas fa-gamepad"></i> Игровые увлечения</h1>
+                        <p class="subtitle">От ретро-классики до современных AAA-проектов</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Основной контент -->
+            <div class="hobby-info">
+                <div class="hobby-main">
+                    <!-- Общая статистика -->
+                    <div class="game-stats-section">
+                        <h2><i class="fas fa-chart-bar"></i> Моя игровая статистика</h2>
+                        <div class="stats-grid">
+                            <div class="stat-card accent-blue">
+                                <i class="fas fa-hourglass"></i>
+                                <h3>10,000+</h3>
+                                <p>Часов в играх</p>
+                            </div>
+                            <div class="stat-card accent-green">
+                                <i class="fas fa-trophy"></i>
+                                <h3>73%</h3>
+                                <p>Достижений в Steam</p>
+                            </div>
+                            <div class="stat-card accent-purple">
+                                <i class="fas fa-gamepad"></i>
+                                <h3>100+</h3>
+                                <p>Игр в коллекции</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Любимые игры -->
+                    <div class="favorite-games-section">
+                        <h2><i class="fas fa-heart"></i> Топ-5 любимых игр</h2>
+                        <div class="game-cards">
+                            <!-- Игра 1 -->
+                            <div class="game-card">
+                                <img src="img/The Witcher 3.jpg" alt="The Witcher 3">
+                                <div class="game-info">
+                                    <h3>The Witcher 3: Wild Hunt</h3>
+                                    <div class="game-meta">
+                                        <span class="platform-tag"><i class="fas fa-desktop"></i> PC</span>
+                                        <span class="hours">6500+ часов</span>
+                                    </div>
+                                    <p>Лучшая RPG всех времен с потрясающим сюжетом и миром. Прошел более 80-ти раз на 100%.</p>
+                                    <div class="game-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Игра 2 -->
+                            <div class="game-card">
+                                <img src="img/gtfo.png" alt="GTFO">
+                                <div class="game-info">
+                                    <h3>GTFO</h3>
+                                    <div class="game-meta">
+                                        <span class="platform-tag"><i class="fas fa-desktop"></i> PC</span>
+                                        <span class="hours">900+ часов</span>
+                                    </div>
+                                    <p>Экстремальный кооперативный хоррор с элементами тактического шутера. Сложные миссии требуют идеальной командной работы.</p>
+                                    <div class="game-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Игра 3 -->
+                            <div class="game-card">
+                                <img src="img/Soulstorm.png" alt="Soulstorm">
+                                <div class="game-info">
+                                    <h3>Dawn of War® - Soulstorm</h3>
+                                    <div class="game-meta">
+                                        <span class="platform-tag"><i class="fas fa-desktop"></i> PC</span>
+                                        <span class="hours">700+ часов</span>
+                                    </div>
+                                    <p>Культовая стратегия в мире Warhammer 40,000. Лучшая часть серии с разнообразными фракциями.</p>
+                                    <div class="game-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Игра 4 -->
+                            <div class="game-card">
+                                <img src="img/tradesman-deal-to-dealer.png" alt="TRADESMAN">
+                                <div class="game-info">
+                                    <h3>TRADESMAN: Deal to Dealer</h3>
+                                    <div class="game-meta">
+                                        <span class="platform-tag"><i class="fas fa-desktop"></i> PC</span>
+                                        <span class="hours">300+ часов</span>
+                                    </div>
+                                    <!-- <p>Уникальный симулятор торговли с глубокой экономической системой и возможностью создавать собственные бизнес-схемы.</p> -->
+                                    <div class="game-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Игра 5 -->
+                            <div class="game-card">
+                                <img src="img/eve frontier.jpg" alt="EVE Frontier">
+                                <div class="game-info">
+                                    <h3>EVE Frontier</h3>
+                                    <div class="game-meta">
+                                        <span class="platform-tag"><i class="fas fa-desktop"></i> PC</span>
+                                        <span class="hours">50+ часов</span>
+                                    </div>
+                                    <p>Космическая MMO с уникальной экономикой и политикой. Игра, где каждое действие имеет последствия.</p>
+                                    <div class="game-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Текущие проекты -->
+                    <div class="current-games-section">
+                        <h2><i class="fas fa-play"></i> Сейчас играю</h2>
+                        <div class="currently-playing">
+                            <div class="current-game">
+                                <img src="img/expeditions.jpg" alt="Expeditions">
+                                <div>
+                                    <h3>Expeditions: A MudRunner Game</h3>
+                                    <p><strong>Прогресс:</strong> 15%</p>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 15%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="current-game">
+                                <img src="img/eve frontier.jpg" alt="EVE Frontier">
+                                <div>
+                                    <h3>EVE Frontier</h3>
+                                    <p><strong>Прогресс:</strong> 1-100%</p>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 50%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Сайдбар -->
+                <div class="hobby-sidebar">
+                    <!-- Жанры -->
+                    <div class="sidebar-block">
+                        <h3><i class="fas fa-tags"></i> Предпочитаемые жанры</h3>
+                        <ul class="genre-list">
+                            <li>MMO, прогрессивные ММО</li>
+                            <li>Космические тематики и космо-RPG</li>
+                            <li>Стратегии (X3 - X4, Dawn of War)</li>
+                            <li>Симуляторы</li>
+                            <li>Сюжетные RPG</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Платформы -->
+                    <div class="sidebar-block">
+                        <h3><i class="fas fa-desktop"></i> Платформы</h3>
+                        <div class="platforms"> 
+                            <span class="platform-tag"><i class="fas fa-desktop"></i> PC</span>
+                            <span class="platform-tag"><i class="fab fa-steam"></i> Steam</span>
+                            <span class="platform-tag"><i class="fas fa-mobile-alt"></i> Мобильные</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Достижения -->
+                    <div class="sidebar-block">
+                        <h3><i class="fas fa-trophy"></i> Последние достижения</h3>
+                        <ul class="achievements-list">
+                            <li>Завершил Tradesman на 100%</li>
+                            <li>Топ-100 в GTFO (R8)</li>
+                            <li>10 KDA в EVE Frontier</li>
+                            <li>Активное участие в Альфа тестировании EVE Frontier</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Контакты -->
+                    <div class="sidebar-block">
+                        <h3><i class="fas fa-user"></i> Контакты</h3>
+                        <ul class="genre-list">
+                            <li>
+                                <a href="https://steamcommunity.com/id/Gosloto/" target="_blank" style="color: #144477; text-decoration: none;">
+                                    <i class="fab fa-steam"></i> Steam профиль
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://discord.gg/gosloto" target="_blank" style="color: #5865F2; text-decoration: none;">
+                                    <i class="fab fa-discord"></i> Мой Discord
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Скриншоты -->
+                    <div class="sidebar-block">
+                        <h3><i class="fas fa-camera"></i> Скриншоты</h3>
+                        <div class="screenshots">
+                            <img src="img/screenshot1.jpg" alt="Игровой скриншот">
+                            <img src="img/screenshot3.jpg" alt="Игровой скриншот">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Gosloto. Все права НЕ защищены.</p>
+    </div>
+</footer>
+
+<script>
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('nav').classList.toggle('show');
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои хобби - Иван - Gosloto</title>
+    <meta name="description" content="Мои увлечения: игры, книги, электроника и другие интересы">
+    <link rel="icon" type="png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <div class="container header-container">
+        <a href="index.html" class="logo">Иван - Gosloto</a>
+        <div class="menu-toggle"></div>
+        <nav>
+            <a href="about.html">Обо мне</a>
+            <a href="skills.html">Навыки</a>
+            <a href="projects.html">Проекты</a>
+            <a href="hobbies.html" class="active">Хобби</a>
+            <a href="contact.html">Контакты</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hobbies-section">
+        <div class="container">
+            <h1>Мои хобби</h1>
+            
+            <div class="hobbies-grid">
+                <!-- Игры -->
+                <div class="hobby-card">
+                    <div class="hobby-image">
+                        <img src="img/games.jpg" alt="Игры">
+                    </div>
+                    <div class="hobby-content">
+                        <h2>Игры</h2>
+                        <p class="hobby-highlight">Любимая игра: The Witcher 3: Wild Hunt</p>
+                        <p class="hobby-stats">Проведенное время: 6000+ часов</p>
+                        <a href="hobby-games.html" class="button">Подробнее</a>
+                    </div>
+                </div>
+                
+                <!-- Книги -->
+                <div class="hobby-card">
+                    <div class="hobby-image">
+                        <img src="img/books.jpg" alt="Книги">
+                    </div>
+                    <div class="hobby-content">
+                        <h2>Книги</h2>
+                        <p class="hobby-highlight">Любимая книга: "Учебник Логики" Челпанов Георгий</p>
+                        <p class="hobby-stats">Прочитано книг: 20+</p>
+                        <a href="hobby-books.html" class="button">Подробнее</a>
+                    </div>
+                </div>
+                
+                <!-- Электроника -->
+                <div class="hobby-card">
+                    <div class="hobby-image">
+                        <img src="img/electronics.jpg" alt="Электроника">
+                    </div>
+                    <div class="hobby-content">
+                        <h2>Электроника</h2>
+                        <p class="hobby-highlight">Навыки: Схемотехника, пайка, программирование и прошивка микроконтроллеров</p>
+                        <p class="hobby-stats">Статистика неизвестна: **%</p>
+                        <a href="hobby-electronics.html" class="button">Подробнее</a>
+                    </div>
+                </div>
+
+                <!-- Микробиология -->
+                <div class="hobby-card">
+                    <div class="hobby-image">
+                        <img src="img/microbiology.jpg" alt="Микробиология">
+                    </div>
+                    <div class="hobby-content">
+                        <h2>Микробиология и наука</h2>
+                        <p class="hobby-highlight">Интерес: исследование микроорганизмов</p>
+                        <p class="hobby-stats">Статистика неизвестна: **%</p>
+                        <a href="hobby-microbiology.html" class="button">Подробнее</a>
+                    </div>
+                </div>
+
+                <!-- Кибербезопасность -->
+                <div class="hobby-card">
+                    <div class="hobby-image">
+                        <img src="img/cybersecurity.jpg" alt="Кибербезопасность">
+                    </div>
+                    <div class="hobby-content">
+                        <h2>Кибербезопасность и исследования</h2>
+                        <p class="hobby-highlight">Навыки: анализ уязвимостей, pentesting</p>
+                        <p class="hobby-stats">Статистика неизвестна: **%</p>
+                        <a href="hobby-cybersecurity.html" class="button">Подробнее</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Gosloto. Все права НЕ защищены.</p>
+    </div>
+</footer>
+
+<script>
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('nav').classList.toggle('show');
+    });
+</script>
+
+</body>
+</html>

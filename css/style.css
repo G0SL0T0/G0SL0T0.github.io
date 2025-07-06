@@ -657,3 +657,653 @@ nav a.active::after {
         font-size: 1.5rem;
     }
 }
+
+/* Стили для раздела Хобби */
+.hobbies-section {
+    padding: 4rem 0;
+}
+
+.hobbies-section h1 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: #343a40;
+}
+
+.hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.hobby-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hobby-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.hobby-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.hobby-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.hobby-card:hover .hobby-image img {
+    transform: scale(1.05);
+}
+
+.hobby-content {
+    padding: 1.5rem;
+}
+
+.hobby-content h2 {
+    margin-top: 0;
+    color: #007bff;
+    font-size: 1.8rem;
+}
+
+.hobby-highlight {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    color: #343a40;
+}
+
+.hobby-stats {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}
+
+.hobby-content .button {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background-color: #343a40;
+}
+
+.hobby-content .button:hover {
+    background-color: #495057;
+}
+
+/* Стили для детальных страниц хобби */
+.hobby-detail {
+    padding: 3rem 0;
+}
+
+.hobby-header {
+    position: relative;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.hobby-banner {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.hobby-header h1 {
+    font-size: 3rem;
+    color: #007bff;
+    margin: 0;
+}
+
+.hobby-info {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+}
+
+.hobby-main h2 {
+    color: #343a40;
+    margin-top: 0;
+}
+
+.hobby-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.stat-card i {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+}
+
+.stat-card h3 {
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+}
+
+.hobby-sidebar {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    align-self: start;
+    position: sticky;
+    top: 120px;
+}
+
+.favorite-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.favorite-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.favorite-list li:last-child {
+    border-bottom: none;
+}
+
+.equipment-list li:before {
+    content: "🧪";
+    margin-right: 0.5rem;
+}
+
+.tech-list li:before {
+    content: "🔐";
+    margin-right: 0.5rem;
+}
+
+/* Стили для игровой страницы */
+.game-banner {
+    object-position: center;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-top: 0.5rem;
+}
+
+/* Секции */
+.game-stats-section,
+.favorite-games-section,
+.current-games-section {
+    margin-bottom: 3rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+}
+
+.accent-blue { background: linear-gradient(135deg, #007bff, #00b4ff); }
+.accent-green { background: linear-gradient(135deg, #28a745, #00d084); }
+.accent-purple { background: linear-gradient(135deg, #6f42c1, #a370f7); }
+
+.stat-card i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Карточки игр */
+.game-cards {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.game-card {
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.game-card img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.game-info {
+    padding: 1.5rem;
+    flex: 1;
+}
+
+.game-meta {
+    display: flex;
+    gap: 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.platform-tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.hours {
+    color: #6c757d;
+}
+
+.game-rating {
+    color: #ffc107;
+    margin-top: 0.5rem;
+}
+
+/* Текущие игры */
+.currently-playing {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.current-game {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.current-game img {
+    width: 100px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(to right, #007bff, #00b4ff);
+    border-radius: 4px;
+}
+
+/* Сайдбар */
+.sidebar-block {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+}
+
+.genre-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.genre-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.genre-list li:last-child {
+    border-bottom: none;
+}
+
+.platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.screenshots {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.screenshots img {
+    width: 100%;
+    border-radius: 4px;
+    transition: transform 0.3s;
+}
+
+.screenshots img:hover {
+    transform: scale(1.03);
+}
+
+/* Глобальные улучшения для игровой страницы */
+.hobby-detail {
+    padding: 2rem 0;
+}
+
+.hobby-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.game-banner {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.hobby-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #007bff;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Сетка статистики */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    transition: transform 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.stat-card h3 {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+}
+
+/* Карточки игр */
+.game-cards {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.game-card {
+    display: flex;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.game-card img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.game-card:hover img {
+    transform: scale(1.05);
+}
+
+.game-info {
+    padding: 1.5rem;
+    flex: 1;
+}
+
+.game-info h3 {
+    margin-top: 0;
+    color: #343a40;
+}
+
+.game-meta {
+    display: flex;
+    gap: 1rem;
+    margin: 0.8rem 0;
+    align-items: center;
+}
+
+.platform-tag {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    background: #343a40;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+}
+
+.platform-tag i {
+    margin-right: 0.3rem;
+}
+
+.hours {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.game-rating {
+    color: #ffc107;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Текущие игры */
+.current-games-section {
+    margin-top: 3rem;
+}
+
+.currently-playing {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.current-game {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.current-game img {
+    width: 100px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    margin-top: 0.8rem;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #007bff, #00b4ff);
+    border-radius: 4px;
+}
+
+/* Сайдбар */
+.hobby-sidebar {
+    position: sticky;
+    top: 120px;
+}
+
+.sidebar-block {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-block h3 {
+    margin-top: 0;
+    color: #007bff;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.genre-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.genre-list li {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.genre-list li:before {
+    content: "•";
+    color: #007bff;
+    font-weight: bold;
+    margin-right: 0.7rem;
+}
+
+.platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1rem;
+}
+
+.screenshots {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.screenshots img {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.screenshots img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.game-stats-section,
+.favorite-games-section,
+.current-games-section,
+.sidebar-block {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+.favorite-games-section { animation-delay: 0.2s; }
+.current-games-section { animation-delay: 0.4s; }
+.sidebar-block { animation-delay: 0.6s; }
+
+/* Баннер с оверлеем */
+.banner-container {
+    position: relative;
+}
+
+.banner-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: white;
+    padding: 2rem;
+    border-radius: 0 0 10px 10px;
+}
+
+.banner-overlay h1 {
+    color: white !important;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.banner-overlay .subtitle {
+    color: #ddd !important;
+}
+
+/* Список достижений */
+.achievements-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.achievements-list li {
+    padding: 0.7rem 0;
+    border-bottom: 1px dashed #eee;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.achievements-list li:before {
+    content: "🏆";
+    position: absolute;
+    left: 0;
+}
