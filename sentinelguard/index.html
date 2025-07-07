@@ -68,8 +68,63 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-image animate__animated animate__fadeInRight">
-                <img src="images/dashboard-mockup.png" alt="SentinelGuard Dashboard" loading="lazy">
+            <div class="dashboard-preview animate__animated animate__fadeInRight">
+                <div class="dashboard-container">
+                    <div class="dashboard-header">
+                        <span class="status-dot online"></span>
+                        <span>Мониторинг активен</span>
+                        <div class="dashboard-actions">
+                            <i class="fas fa-cog"></i>
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">24</div>
+                            <div class="metric-label">Активных угроз</div>
+                            <div class="metric-trend up">
+                                <i class="fas fa-arrow-up"></i> 12%
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">98.7%</div>
+                            <div class="metric-label">Эффективность</div>
+                            <div class="metric-trend down">
+                                <i class="fas fa-arrow-down"></i> 0.3%
+                            </div>
+                        </div>
+                        <div class="alert-card critical">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div class="alert-content">
+                                <div class="alert-title">Критическая угроза</div>
+                                <div class="alert-desc">Обнаружена попытка DDoS атаки</div>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-header">Активность угроз</div>
+                            <div class="chart-placeholder"></div>
+                        </div>
+                        <div class="threat-list">
+                            <div class="threat-header">Последние угрозы</div>
+                            <div class="threat-item">
+                                <div class="threat-severity high"></div>
+                                <div class="threat-info">
+                                    <div class="threat-name">Фишинговая атака</div>
+                                    <div class="threat-time">2 мин назад</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="threat-item">
+                                <div class="threat-severity medium"></div>
+                                <div class="threat-info">
+                                    <div class="threat-name">Подозрительный трафик</div>
+                                    <div class="threat-time">15 мин назад</div>
+                                </div>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -136,21 +191,95 @@
     <!-- Безопасность -->
     <section id="security">
         <div class="container">
-            <div class="security-content">
-                <div class="security-text animate__animated animate__fadeInLeft">
-                    <h2 class="section-title">Многоуровневая <span>защита</span></h2>
-                    <p>SentinelGuard обеспечивает комплексную защиту вашей инфраструктуры, предотвращая кибератаки и утечки данных с помощью передовых технологий.</p>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Обнаружение вторжений в реальном времени</li>
-                        <li><i class="fas fa-check-circle"></i> Защита от вредоносного ПО и ransomware</li>
-                        <li><i class="fas fa-check-circle"></i> Глубокий анализ сетевого трафика</li>
-                        <li><i class="fas fa-check-circle"></i> Защита облачных сред</li>
-                        <li><i class="fas fa-check-circle"></i> Соответствие GDPR и другим стандартам</li>
-                    </ul>
-                    <a href="security.html" class="button primary">Узнать о технологиях</a>
+            <h2 class="section-title">Многоуровневая <span>защита</span></h2>
+            <p class="section-subtitle">Комплексный подход к безопасности на всех уровнях инфраструктуры</p>
+            
+            <div class="security-layers">
+                <div class="layer">
+                    <div class="layer-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Периметровая защита</h3>
+                    <p>Межсетевые экраны, IPS/IDS системы, защита от DDoS</p>
+                    <div class="layer-progress">
+                        <div class="progress-bar" style="width: 95%"></div>
+                    </div>
                 </div>
-                <div class="security-image animate__animated animate__fadeInRight">
-                    <img src="images/security-layers.png" alt="Многоуровневая защита" loading="lazy">
+                
+                <div class="layer">
+                    <div class="layer-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Сетевая безопасность</h3>
+                    <p>Сегментация сети, мониторинг трафика, защита от MITM</p>
+                    <div class="layer-progress">
+                        <div class="progress-bar" style="width: 90%"></div>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <div class="layer-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Защита серверов</h3>
+                    <p>Харденинг ОС, контроль доступа, мониторинг уязвимостей</p>
+                    <div class="layer-progress">
+                        <div class="progress-bar" style="width: 93%"></div>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <div class="layer-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Безопасность рабочих станций</h3>
+                    <p>Антивирус, EDR решения, контроль устройств</p>
+                    <div class="layer-progress">
+                        <div class="progress-bar" style="width: 88%"></div>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <div class="layer-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Идентификация и доступ</h3>
+                    <p>MFA, RBAC, контроль привилегий, биометрия</p>
+                    <div class="layer-progress">
+                        <div class="progress-bar" style="width: 97%"></div>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <div class="layer-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Защита данных</h3>
+                    <p>Шифрование, DLP, резервное копирование, маскирование</p>
+                    <div class="layer-progress">
+                        <div class="progress-bar" style="width: 96%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="security-visualization">
+                <div class="visualization-container">
+                    <div class="core">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Ваши данные</span>
+                    </div>
+                    <div class="ring encryption">
+                        <div class="ring-info">Шифрование</div>
+                    </div>
+                    <div class="ring access">
+                        <div class="ring-info">Контроль доступа</div>
+                    </div>
+                    <div class="ring network">
+                        <div class="ring-info">Сетевая защита</div>
+                    </div>
+                    <div class="ring perimeter">
+                        <div class="ring-info">Периметр</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -328,8 +457,14 @@
             
             themeToggle.addEventListener('change', function() {
                 const theme = this.checked ? 'dark' : 'light';
-                html.setAttribute('data-theme', theme);
+                document.documentElement.setAttribute('data-theme', theme);
                 localStorage.setItem('theme', theme);
+                
+                // Принудительное обновление стилей
+                const logo = document.querySelector('header .logo h1');
+                logo.style.display = 'none';
+                logo.offsetHeight; // Триггер reflow
+                logo.style.display = '';
             });
             
             // Мобильное меню
