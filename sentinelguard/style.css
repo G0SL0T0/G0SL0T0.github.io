@@ -3631,3 +3631,86 @@ footer .logo h1 {
         max-width: 280px;
     }
 }
+
+/* Дополнительные услуги */
+#addons {
+    padding: 100px 0;
+    background-color: var(--light-color);
+}
+
+.addons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.addon-card {
+    background: var(--light-color);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(67, 97, 238, 0.1);
+    text-align: center;
+}
+
+[data-theme="dark"] .addon-card {
+    background: rgba(30, 30, 60, 0.7);
+}
+
+.addon-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.addon-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    color: white;
+    font-size: 1.8rem;
+    box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+}
+
+.addon-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-family: var(--font-heading);
+}
+
+.addon-card p {
+    color: var(--gray-color);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.addon-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 20px 0;
+}
+
+.addon-card .button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .addons-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .addons-grid {
+        grid-template-columns: 1fr;
+    }
+}
