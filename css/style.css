@@ -1346,3 +1346,250 @@ nav a.active::after {
 .platform-tag, .stat-card {
     transition: all 0.3s ease;
 }
+
+/* Стили для раздела кейсов */
+.cases {
+    padding: 4rem 0;
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+}
+
+.case-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.case-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.case-description {
+    padding: 2rem;
+}
+
+.case-description h3 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    color: #343a40;
+}
+
+.case-description p {
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.case-demo {
+    position: relative;
+    min-height: 400px;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+}
+
+.case-demo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+    z-index: 1;
+}
+
+.case-demo p {
+    position: relative;
+    z-index: 2;
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.8);
+    text-align: center;
+    padding: 1rem;
+}
+
+.case-stats {
+    margin: 1.5rem 0;
+    padding: 0;
+    list-style: none;
+}
+
+.case-stats li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.8rem;
+    position: relative;
+    color: #495057;
+    line-height: 1.5;
+}
+
+.case-stats li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    background-color: #007bff;
+    border-radius: 50%;
+}
+
+.case-stats strong {
+    color: #343a40;
+    font-weight: 600;
+}
+
+/* Стили для игрового раздела */
+.game-container {
+    padding: 4rem 0;
+    background-color: #343a40;
+    color: white;
+    position: relative;
+}
+
+.game-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(to right, #007bff, #00b4ff);
+}
+
+.game-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.game-container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.game-container p {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #adb5bd;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.game-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.game-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.game-button.start {
+    background-color: #28a745;
+    color: white;
+}
+
+.game-button.start:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.game-button.reset {
+    background-color: #dc3545;
+    color: white;
+}
+
+.game-button.reset:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+#game-canvas {
+    width: 100%;
+    border: 2px solid #495057;
+    border-radius: 8px;
+    background-color: #212529;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    display: block;
+    margin: 0 auto;
+}
+
+.game-container .instructions {
+    text-align: center;
+    margin-top: 1rem;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .case-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .case-demo {
+        order: -1;
+        min-height: 300px;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .game-button {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    #game-canvas {
+        height: auto;
+        max-height: 400px;
+    }
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.case-card {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+.case-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.case-card:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.game-container {
+    animation: fadeIn 0.6s ease-out 0.6s forwards;
+    opacity: 0;
+}
