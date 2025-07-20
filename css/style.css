@@ -1363,6 +1363,9 @@ nav a.active::after {
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 100%;
+    grid-auto-rows: 1fr;
+    align-items: stretch;
 }
 
 .case-card:hover {
@@ -1383,17 +1386,6 @@ nav a.active::after {
 .case-description p {
     color: #6c757d;
     line-height: 1.6;
-}
-
-.case-demo {
-    position: relative;
-    min-height: 400px;
-    background: #1a1a1a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    overflow: hidden;
 }
 
 .case-demo::before {
@@ -1592,4 +1584,661 @@ nav a.active::after {
 .game-container {
     animation: fadeIn 0.6s ease-out 0.6s forwards;
     opacity: 0;
+}
+
+.cases {
+    padding: 4rem 0;
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    position: relative;
+}
+
+.cases h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #343a40;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cases h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #007bff, #00b4ff);
+    border-radius: 3px;
+}
+
+
+.case-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.case-description {
+    padding: 2rem;
+}
+
+.case-description h3 {
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #007bff;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.case-description h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: #007bff;
+}
+
+.case-description p {
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.case-stats {
+    margin: 1.5rem 0;
+    padding: 0;
+    list-style: none;
+}
+
+.case-stats li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.case-stats li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #007bff;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.case-stats strong {
+    color: #343a40;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .cases h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .case-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .case-demo {
+        order: -1;
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cases h2 {
+        font-size: 1.8rem;
+    }
+    
+    .case-description h3 {
+        font-size: 1.5rem;
+    }
+}
+
+
+/* Специфические стили для второго кейса */
+.case-card:nth-child(2) {
+    border: 2px solid #4CAF50;
+    position: relative;
+    overflow: visible;
+}
+
+.case-card:nth-child(2)::before {
+    content: "Важное достижение";
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background: #4CAF50;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.case-card:nth-child(2) .case-description h3 {
+    color: #4CAF50;
+}
+
+.case-card:nth-child(2) .case-description h3::after {
+    background-color: #4CAF50;
+}
+
+.case-card:nth-child(2) .case-stats li::before {
+    color: #4CAF50;
+}
+
+/* Стили для блока с информацией о переписывании кода */
+.rewrite-info {
+    background: #f8f9fa;
+    border-left: 4px solid #4CAF50;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.rewrite-info h4 {
+    margin-top: 0;
+    color: #4CAF50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rewrite-info h4 i {
+    font-size: 1.5rem;
+}
+
+.rewrite-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.rewrite-stat {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.rewrite-stat i {
+    font-size: 2rem;
+    color: #4CAF50;
+    margin-bottom: 0.5rem;
+}
+
+.rewrite-stat .number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #343a40;
+    display: block;
+}
+
+.rewrite-stat .label {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.case-demo {
+    position: relative;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    overflow: hidden;
+}
+
+.case-images {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.case-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.case-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.case-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #2a2a2a;
+    padding: 10px;
+}
+
+.case-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+.case-nav {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    z-index: 2;
+}
+
+.case-nav-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.case-nav-button:hover {
+    background: rgba(255,255,255,0.4);
+}
+
+.case-nav-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.case-pagination {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.case-pagination-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.case-pagination-dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+    .case-demo {
+        min-height: 300px;
+    }
+    
+    .case-nav-button {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Специфические стили для второго кейса */
+.case-card:nth-child(2) .case-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.case-card:nth-child(2) .case-image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+.case-card:nth-child(2) .case-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* Если изображений только 2, используем 2x1 сетку */
+.case-card:nth-child(2) .case-images[data-count="2"] {
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .case-images-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .case-image {
+        max-height: 200px;
+    }
+}
+
+.case-card:first-child .case-demo {
+    height: 400px;
+    overflow: hidden;
+}
+
+.case-card:first-child .case-images {
+    height: 100%;
+}
+
+.case-card:first-child .case-image {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    padding: 20px;
+}
+
+.case-description {
+    padding: 1.5rem;
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+@media (max-width: 768px) {
+    .case-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .case-demo {
+        order: -1;
+        height: 300px;
+    }
+    
+    .case-description {
+        max-height: none;
+    }
+}
+
+.case-card:nth-child(2) {
+    border: 2px solid #4CAF50;
+    position: relative;
+    overflow: visible;
+}
+
+.case-card:nth-child(2)::before {
+    content: "Важное достижение";
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background: #4CAF50;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.case-card:nth-child(2) .case-description h3 {
+    color: #4CAF50;
+}
+
+.case-card:nth-child(2) .case-description h3::after {
+    background-color: #4CAF50;
+}
+
+.case-card:nth-child(2) .case-stats li::before {
+    color: #4CAF50;
+}
+
+.rewrite-info {
+    background: #f8f9fa;
+    border-left: 4px solid #4CAF50;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.rewrite-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.rewrite-stat {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.rewrite-stat i {
+    font-size: 2rem;
+    color: #4CAF50;
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .case-card:nth-child(2) .case-image {
+        min-width: 100%;
+        height: auto;
+        max-height: 300px;
+        object-fit: contain;
+    }
+
+    .case-card:nth-child(2) .case-demo {
+        display: block;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .case-card:nth-child(2) .case-images-grid {
+        display: flex;
+        width: 200%;
+        transition: transform 0.3s ease;
+    }
+
+    .case-card:nth-child(2) .case-image {
+        min-width: 50%;
+        height: auto;
+        max-height: 300px;
+    }
+
+    /* Показываем навигацию на мобильных */
+    .case-card:nth-child(2) .case-nav {
+        display: flex;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* Показываем точки навигации */
+    .case-card:nth-child(2) .case-pagination {
+        display: flex;
+        position: absolute;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+    }    
+
+}
+
+.about-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+.about-text {
+  flex: 1;
+}
+.about-text p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+.accent {
+  color: #007bff;
+  font-weight: 700;
+}
+
+.mini-stats {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.mini-stats li {
+  font-size: 1.1rem;
+}
+.mini-stats .number {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #007bff;
+}
+
+.about-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.button.secondary {
+  background: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+.button.secondary:hover {
+  background: #007bff;
+  color: #fff;
+}
+
+.code-window {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+  transition: transform .3s ease;
+}
+.code-window:hover {
+  transform: translateY(-5px);
+}
+
+/* Анимация счётчиков */
+@keyframes countUp {
+  to { transform: translateY(0); opacity: 1; }
+}
+.number {
+  display: inline-block;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: countUp .6s ease forwards;
+}
+.number:nth-child(1) { animation-delay: .1s; }
+.number:nth-child(2) { animation-delay: .2s; }
+.number:nth-child(3) { animation-delay: .3s; }
+
+/* Overlay */
+.cv-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.45);
+  z-index: 1000;
+}
+.cv-modal.hidden {
+  display: none;
+}
+
+/* Содержимое */
+.cv-modal__box {
+  position: relative;
+  max-width: 380px;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+  text-align: center;
+}
+.cv-modal__text {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #333;
+}
+.cv-modal__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #555;
+}
+
+.skill-icon svg {
+  width: 40px;
+  height: 40px;
+}
+.skill-card {
+  position: relative;
+  cursor: default;
+}
+.skill-card::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -2.5rem;
+  left: 50%;
+  transform: translateX(-50%) scale(.9);
+  padding: .5rem .75rem;
+  background: #000c;
+  color: #fff;
+  font-size: .8rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: .2s;
+}
+.skill-card:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
 }

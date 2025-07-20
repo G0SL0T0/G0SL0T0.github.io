@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Визитка Gosloto</title>
     <meta name="description" content="Сайт-визитка Ивана, веб-разработчика. Узнайте о моих навыках, проектах и свяжитесь со мной.">
-    <link rel="icon" type="png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,15 +15,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <base href="./">
-
+    
+    <!-- Подключаем Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
     
     <style>
-        /* Существующие медиа-запросы остаются без изменений */
+
         @media (max-width: 768px) {
             .header-container { flex-direction: column; align-items: stretch; }
             .menu-toggle { display: none !important; }
@@ -38,8 +35,6 @@
             .right { left: 0 !important; }
             .project-details { grid-template-columns: 1fr !important; }
             .button { display: block; width: 100%; margin-bottom: 0.5rem; }
-            
-            /* Новые стили для мобильной версии кейсов */
             .case-card { grid-template-columns: 1fr; }
             .case-demo { order: -1; min-height: 300px; }
         }
@@ -51,35 +46,46 @@
             .logo { font-size: 1.5rem !important; }
         }
 
-        /* Стили для нового раздела кейсов */
+        .about h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .about h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #007bff, #00b4ff);
+            border-radius: 2px;
+        }
+
+        .about-illustration {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .about-illustration:hover {
+            transform: translateY(-5px);
+        }
+
         .cases {
             padding: 4rem 0;
             background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
         }
 
-        .case-card {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
         .case-description {
             padding: 2rem;
-        }
-
-        .case-demo {
-            position: relative;
-            min-height: 400px;
-            background: #1a1a1a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
         }
 
         .case-stats {
@@ -143,6 +149,43 @@
             background-color: #212529;
         }
 
+        .cv-error {
+        margin-top: 1rem;
+        padding: 1rem 1.25rem;
+        background: #fff3cd;
+        color: #856404;
+        border-left: 5px solid #ffc107;
+        border-radius: 6px;
+        font-size: 1rem;
+        }
+        .cv-error .button {
+        margin-top: 0.5rem;
+        }
+
+        .about-actions {
+        position: relative;
+        }
+
+        .cv-error {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 2;
+        margin-top: 0.5rem;
+        padding: 1rem 1.25rem;
+        background: #fff3cd;
+        color: #856404;
+        border-left: 5px solid #ffc107;
+        border-radius: 6px;
+        font-size: 1rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,.15);
+        }
+
+        .cv-error .button {
+        margin-top: 0.5rem;
+        }
+
         /* Стиль для выпадающего меню */
         @media (max-width: 768px) {
             .menu-toggle { display: block; }
@@ -150,6 +193,7 @@
             nav.show { display: flex; }
         }
     </style>
+
 </head>
 
 <body>
@@ -183,49 +227,131 @@
     </section>
 
     <section class="about">
-        <div class="container">
-            <h2>Коротко обо мне</h2>
-            <div class="about-content" style="display: flex; align-items: center; gap: 2rem;">
-                <div style="flex: 1;">
-                    <p>Я веб-разработчик с 4-летним опытом работы над коммерческими проектами. Специализируюсь на создании современных веб-приложений с использованием React, Angular Vue.js и Node.js.</p>
-                    <p>Моя цель - создавать не просто работающие продукты, а реальные решения проблемы пользователей которые приносят бизнесу реальную пользу.</p>
-                    <a href="about.html" class="button">Читать подробнее</a>
-                </div>
-                <div style="flex: 1; text-align: center;">
-                    <img src="img/coding.svg" alt="Программирование" style="max-width: 300px; width: 100%;">
+    <div class="container">
+        <h2>Коротко обо мне</h2>
+
+        <div class="about-content">
+        <!-- ЛЕВАЯ КОЛОНКА -->
+        <div class="about-text">
+            <p>
+            Я — full-stack веб-разработчик с&nbsp;<span class="accent">4+ годами</span> коммерческого опыта.
+            Специализируюсь на&nbsp;React, Angular, Vue и&nbsp;Node.js.
+            </p>
+            <p>
+            Создаю не просто «сайты», а&nbsp;инструменты, которые решают задачи бизнеса
+            и&nbsp;экономят часы пользователей.
+            </p>
+
+            <!-- Интерактивные счётчики -->
+            <ul class="mini-stats">
+            <li><span class="number" data-count="4">4+</span> года опыта</li>
+            <li><span class="number" data-count="50">7</span> реализованных проектов</li>
+            <li><span class="number" data-count="98">-100</span> % довольных клиентов</li>
+            </ul>
+
+            <!-- Кнопки действий -->
+            <div class="about-actions">
+            <a href="about.html" class="button">Подробнее</a>
+            <button id="download-cv" class="button secondary">Скачать резюме</button>
+            </div>       
+            <div id="cv-modal" class="cv-modal hidden">
+                <div class="cv-modal__box">
+                    <p class="cv-modal__text">
+                    Кажется, резюме решило прогуляться в облаке и ещё не вернулось.
+                    </p>
+                    <a href="contact.html" class="button">Связаться со мной</a>
+                    <button class="cv-modal__close" aria-label="Закрыть">×</button>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section class="skills" style="background-color: #f8f9fa; padding: 4rem 0;">
+        <!-- ПРАВАЯ КОЛОНКА -->
+        <div class="about-visual">
+            <svg class="code-window" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- фон -->
+            <rect width="300" height="200" rx="12" fill="#1e293b"/>
+            <!-- «таб» -->
+            <rect x="0" y="0" width="300" height="24" fill="#0f172a" rx="12 12 0 0"/>
+            <circle cx="16" cy="12" r="4" fill="#f43f5e"/>
+            <circle cx="30" cy="12" r="4" fill="#f59e0b"/>
+            <circle cx="44" cy="12" r="4" fill="#10b981"/>
+
+            <!-- код -->
+            <g font-family="monospace" font-size="11" fill="#e2e8f0">
+                <text x="20" y="44">import developer from 'ivan';</text>
+                <text x="20" y="58">developer.skills = {</text>
+                <text x="32" y="72">frontend: ['React','Vue','Angular'],</text>
+                <text x="32" y="86">backend : ['Node','Python','PostgreSQL'],</text>
+                <text x="32" y="100">result  : 'fast &amp; clean',</text>
+                <text x="20" y="114">};</text>
+            </g>
+
+            <!-- мигающий курсор -->
+            <rect id="cursor" x="210" y="101" width="8" height="12" fill="#10b981">
+                <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+            </rect>
+            </svg>
+        </div>
+        </div>
+    </div>
+    </section>
+        
+    <section class="skills" style="background:#f8f9fa; padding:4rem 0;">
         <div class="container">
-            <h2 style="text-align: center;">Ключевые навыки</h2>
+            <h2>Ключевые навыки</h2>
+
             <div class="skills-grid">
-                <div class="skill-card">
-                    <i class="fab fa-js"></i>
+            <!-- JavaScript -->
+                <div class="skill-card" data-tooltip="ES6+, TypeScript, Webpack, Vite">
+                    <i class="skill-icon">
+                    <svg viewBox="0 0 256 256"><path fill="#f7df1e" d="M0 0h256v256H0z"/><path d="M67.312 213.932l19.59-11.856c3.78 6.701 7.218 12.371 15.465 12.371 7.905 0 12.89-3.092 12.89-15.12v-81.798h24.057v82.138c0 24.917-14.606 36.259-35.884 36.259-19.245 0-30.416-9.967-36.087-21.995M152.381 211.354l19.588-11.341c5.157 8.421 11.859 14.607 23.715 14.607 9.969 0 16.325-4.984 16.325-11.858 0-8.248-6.53-11.17-17.528-15.98l-6.013-2.58c-17.357-7.387-28.87-16.667-28.87-36.257 0-18.044 13.747-31.792 35.228-31.792 15.294 0 26.292 5.328 34.196 19.247l-18.732 12.03c-4.125-7.389-8.591-10.31-15.465-10.31-7.046 0-11.514 4.465-11.514 10.31 0 7.217 4.465 10.14 14.778 14.608l6.014 2.577c20.45 8.765 31.963 17.7 31.963 37.804 0 21.607-17.012 33.51-39.867 33.51-22.339.001-36.774-10.654-43.819-24.574" fill="#000"/></svg>
+                    </i>
                     <h3>JavaScript</h3>
+                    <p>Современный стек ES6+, TypeScript, Tree-shaking, Webpack&nbsp;5.</p>
                     <div class="skill-progress">
                         <div class="skill-progress-bar" style="width: 90%"></div>
                     </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fab fa-vuejs"></i>
+
+                <!-- React -->
+                <div class="skill-card" data-tooltip="Hooks, Next.js, Redux Toolkit, React-Query">
+                    <i class="skill-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 10.11c1.03 0 1.87.84 1.87 1.89 0 1.03-.84 1.87-1.87 1.87-1.03 0-1.87-.84-1.87-1.87 0-1.03.84-1.89 1.87-1.89M7.37 20c.63.38 2.01-.2 3.6-1.7-.52-.59-1.03-1.23-1.51-1.9a22.7 22.7 0 0 1-2.4-.36c-.51 2.14-.32 3.61.31 3.96m.71-5.74l-.29.51c.75 1.4 1.69 2.71 2.73 3.81.23-.5.44-1.01.62-1.53-.91-.78-1.87-1.59-2.94-2.43M12 6.53c-3.35 0-6.07 1.3-6.07 2.9 0 1.6 2.72 2.9 6.07 2.9 3.35 0 6.07-1.3 6.07-2.9 0-1.6-2.72-2.9-6.07-2.9M12 22c-2.21 0-4-1.79-4-4 0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 2.21-1.79 4-4 4m0-7.47c-1.93 0-3.5 1.57-3.5 3.5 0 1.93 1.57 3.5 3.5 3.5 1.93 0 3.5-1.57 3.5-3.5 0-1.93-1.57-3.5-3.5-3.5z" fill="#61dafb"/></svg>
+                    </i>
+                    <h3>React</h3>
+                    <p>Hooks, Context, Next.js, SSR, PWA, Redux&nbsp;Toolkit.</p>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 85%"></div>
+                    </div>
+                </div>
+
+                <!-- Vue.js -->
+                <div class="skill-card" data-tooltip="Composition API, Pinia, Nuxt3">
+                    <i class="skill-icon">
+                    <svg viewBox="0 0 24 24"><path d="M3.89 3.46L12 12.57l8.11-9.11L12 0 3.89 3.46zm0 17.08L12 24l8.11-3.46V6.92L12 12.57 3.89 6.92v13.62z" fill="#4fc08d"/></svg>
+                    </i>
                     <h3>Vue.js</h3>
+                    <p>Composition API, Vue&nbsp;3, SSR, миграция Vue&nbsp;2 → 3.</p>
                     <div class="skill-progress">
                         <div class="skill-progress-bar" style="width: 70%"></div>
                     </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fab fa-angular"></i>
+
+                <!-- Angular -->
+                <div class="skill-card" data-tooltip="RxJS, Standalone Components, Angular Universal">
+                    <i class="skill-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L0 4l1.9 15.4L12 22l10.1-2.6L24 4z" fill="#dd0031"/><path d="M12 2v20l10.1-2.6L24 4z" fill="#c3002f"/></svg>
+                    </i>
                     <h3>Angular</h3>
+                    <p>RxJS, корпоративные приложения, SEO, Angular&nbsp;Universal.</p>
                     <div class="skill-progress">
                         <div class="skill-progress-bar" style="width: 70%"></div>
                     </div>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <a href="skills.html" class="button">Все навыки</a>
+
+            <div style="text-align:center; margin-top:2rem;">
+            <a href="skills.html" class="button">Все навыки</a>
             </div>
         </div>
     </section>
@@ -250,111 +376,127 @@
     </section>
 
 
-<!-- Раздел с кейсами -->
-<section class="cases">
-    <div class="container">
-        <h2 style="text-align: center;">Кейсы и результаты</h2>
-        
-        <!-- Кейс 1 - SKYT -->
-        <div class="case-card">
-            <div class="case-description">
-                <h3>SKYT - Трекер времени</h3>
-                <p>Программа для контроля своего времени с интуитивным интерфейсом и подробной статистикой.</p>
-                <ul class="case-stats">
-                    <li><strong>Результат:</strong> Повышение личной продуктивности на 30%</li>
-                    <li><strong>Технологии:</strong> JavaScript, Vue.js, Node.js, PostgreSQL</li>
-                    <li><strong>Функции:</strong> Учет времени, графики продуктивности, экспорт данных</li>
-                </ul>
-                <a href="SKYT/index.html" class="button">Посмотреть проект</a>
-            </div>
-            <div class="case-demo">
-                <img src="skyt-screen1.png" alt="SKYT интерфейс" style="max-width: 100%; border-radius: 8px;">
-            </div>
-        </div>
-        
-        <!-- Кейс 2 -->
-        <div class="case-card">
-            <div class="case-description">
-                <h3>АААААААА</h3>
-                <p>Интерактивный кейс который находится в разработке.</p>
-                <ul class="case-stats">
-                    <li><strong>Результат:</strong> Уникальный инструмент представления навыков</li>
-                    <li><strong>Технологии:</strong> Разные</li>
-                    <li><strong>Особенность:</strong> Да</li>
-                </ul>
-                <a href="index.html#pixel-ecosystem-game" class="button">Запустить симуляцию</a>
-            </div>
-            <div class="case-demo">
-                <img src="pixel-ecosystem-preview.png" alt="Какой то левый кейс" style="max-width: 100%; border-radius: 8px;">
-            </div>
-        </div>
-        
-        <!-- Кейс 3 - SentinelGuard -->
-        <div class="case-card">
-            <div class="case-description">
-                <h3>SentinelGuard - Сетевой администратор</h3>
-                <p>Администратор сети для мониторинга и управления сетевой безопасностью.</p>
-                <ul class="case-stats">
-                    <li><strong>Результат:</strong> Автоматизация 80% рутинных задач</li>
-                    <li><strong>Технологии:</strong> Python, NMap, Network Security, Bash</li>
-                    <li><strong>Функции:</strong> Сканирование сети, обнаружение уязвимостей, отчеты</li>
-                </ul>
-                <a href="sentinelguard/index.html" class="button">Подробнее</a>
-            </div>
-            <div class="case-demo">
-                <img src="img/sentinel-screen1.png" alt="SentinelGuard интерфейс" style="max-width: 100%; border-radius: 8px;">
-            </div>
-        </div>
-    </div>
-</section>
-
-
-    <!-- Раздел с игрой -->
-
-    <!-- Раздел для игры -->
-
-    <section class="game-container">
+    <!-- Раздел с кейсами -->
+    <section class="cases">
         <div class="container">
-            <div id="pixel-ecosystem-game"></div>
+            <h2 style="text-align: center;">Кейсы и результаты</h2>
+                        
+            <!-- Кейс 1 - SKYT -->
+            <div class="case-card">
+                <div class="case-description">
+                    <h3>SKYT - Трекер времени</h3>
+                    <p>Программа для контроля своего времени с интуитивным интерфейсом и подробной статистикой.</p>
+                    <ul class="case-stats">
+                        <li><strong>Результат:</strong> Повышение продуктивности пользователей на 30%</li>
+                        <li><strong>Технологии:</strong> JavaScript, Vue.js, Node.js, PostgreSQL</li>
+                        <li><strong>Функции:</strong> Учет времени, графики продуктивности, экспорт данных</li>
+                    </ul>
+                    <a href="SKYT/index.html" class="button" style="margin-top: auto; align-self: flex-start;">Посмотреть проект</a>
+                </div>
+                <div class="case-demo">
+                    <div class="case-images">
+                        <img src="img/skyt-screen1.png" class="case-image" alt="Главный экран SKYT">
+                        <img src="img/skyt-screen2.png" class="case-image" alt="Статистика в SKYT">
+                        <img src="img/Skyt-screenshot_1.png" class="case-image" alt="Настройки SKYT">
+                    </div>
+                    <div class="case-nav">
+                        <button class="case-nav-button prev-button" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="case-nav-button next-button">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="case-pagination">
+                        <div class="case-pagination-dot active"></div>
+                        <div class="case-pagination-dot"></div>
+                        <div class="case-pagination-dot"></div>
+                    </div>
+                </div>
+            </div>
+                                        
+            <!-- Кейс 2 - Оптимизация Пиксельной Экосистемы -->
+            <div class="case-card">
+                <div class="case-description">
+                    <h3>Оптимизация Пиксельной Экосистемы</h3>
+                    <p>Полный рефакторинг и переписывание игры с React на чистый JavaScript для улучшения производительности и уменьшения размера кода.</p>
+                    
+                    <div class="rewrite-info">
+                        <h4><i class="fas fa-code"></i> Рефакторинг кода</h4>
+                        <p>Переписал сложную React-игру (3000+ строк кода) на чистый Vanilla JS, сохранив всю функциональность, но значительно улучшив производительность.</p>
+                        
+                        <div class="rewrite-stats">
+                            <div class="rewrite-stat">
+                                <i class="fas fa-file-code"></i>
+                                <span class="number">-70%</span>
+                                <span class="label">Объема кода</span>
+                            </div>
+                            <div class="rewrite-stat">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span class="number">+40%</span>
+                                <span class="label">Производительности</span>
+                            </div>
+                            <div class="rewrite-stat">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span class="number">-85%</span>
+                                <span class="label">Зависимостей</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="case-stats">
+                        <li><strong>Результат:</strong> Увеличение производительности и скорость загрузки на 40%, уменьшение размера кода на 70%</li>
+                        <li><strong>Технологии:</strong> JavaScript (ES6+), Canvas API, Web Workers</li>
+                        <li><strong>Особенности:</strong> Полная переработка архитектуры, оптимизация алгоритмов</li>
+                        <li><strong>Сложность:</strong> Адаптация React-логики к императивному стилю</li>
+                    </ul>
+                    <a href="index.html#pixel-ecosystem-game" class="button">Запустить симуляцию</a>
+                </div>
+                <div class="case-demo">
+                    <div class="case-images-grid">
+                        <img src="img/pixel-eco-1.png" class="case-image" alt="Скриншот игры до оптимизации">
+                        <img src="img/pixel-eco-2.png" class="case-image" alt="Скриншот игры после оптимизации">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Кейс 3 - SentinelGuard -->
+            <div class="case-card">
+                <div class="case-description">
+                    <h3>SentinelGuard - Сетевой администратор</h3>
+                    <p>Администратор сети для мониторинга и управления сетевой безопасностью.</p>
+                    <ul class="case-stats">
+                        <li><strong>Результат:</strong> Автоматизация 80% рутинных задач</li>
+                        <li><strong>Технологии:</strong> Python, NMap, Network Security, Bash</li>
+                        <li><strong>Функции:</strong> Сканирование сети, обнаружение уязвимостей, отчеты</li>
+                    </ul>
+                    <a href="sentinelguard/index.html" class="button">Подробнее</a>
+                </div>
+                <div class="case-demo">
+                    <div class="case-images">
+                        <img src="img/sentinel-screen1.png" class="case-image" alt="Интерфейс SentinelGuard">
+                        <img src="img/sentinel-screen2.png" class="case-image" alt="Отчеты SentinelGuard">
+                    </div>
+                    <div class="case-nav">
+                        <button class="case-nav-button prev-button" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="case-nav-button next-button">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="case-pagination">
+                        <div class="case-pagination-dot active"></div>
+                        <div class="case-pagination-dot"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <script type="module">
-        // Динамически загружаем React и компонент игры
-        async function loadGame() {
-            try {
-                // Загружаем React
-                await Promise.all([
-                    import('https://esm.sh/react@18.2.0'),
-                    import('https://esm.sh/react-dom@18.2.0/client')
-                ]);
-                
-                // Загружаем компонент игры
-                const response = await fetch('component.js');
-                const gameCode = await response.text();
-                
-                // Создаем blob для импорта
-                const blob = new Blob([gameCode], { type: 'text/javascript' });
-                const blobUrl = URL.createObjectURL(blob);
-                const module = await import(blobUrl);
-                URL.revokeObjectURL(blobUrl);
-                
-                // Рендерим игру
-                const root = ReactDOM.createRoot(document.getElementById('pixel-ecosystem-game'));
-                root.render(React.createElement(module.default));
-            } catch (error) {
-                console.error('Ошибка загрузки игры:', error);
-                document.getElementById('pixel-ecosystem-game').innerHTML = `
-                    <div class="error-message">
-                        <p>Не удалось загрузить игру. Пожалуйста, попробуйте позже.</p>
-                    </div>
-                `;
-            }
-        }
-        
-        // Запускаем загрузку игры
-        loadGame();
-    </script>
+<!-- Раздел с игрой -->
+
+    <section id="pixel-ecosystem-game"></section>
 
 </main>
 
@@ -392,15 +534,254 @@
     ctx.fillText('Нажмите "Запустить" для начала', canvas.width/2, canvas.height/2);
 </script>
 
+<script src="minigame.js"></script>
+
+<script>
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('nav').classList.toggle('show');
+    });
+</script>
+
+<script>
+    // Полная инициализация всех слайд-шоу
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // Обрабатываем каждый кейс
+        document.querySelectorAll('.case-demo').forEach((caseDemo, index) => {
+            
+            const imagesContainer = caseDemo.querySelector('.case-images, .case-images-grid');
+            if (!imagesContainer) return;
+
+            const images = Array.from(imagesContainer.querySelectorAll('.case-image'));
+            if (images.length <= 1) return;
+
+            let currentIndex = 0;
+            
+            // Находим или создаем элементы навигации
+            let prevBtn = caseDemo.querySelector('.prev-button');
+            let nextBtn = caseDemo.querySelector('.next-button');
+            let dots = caseDemo.querySelectorAll('.case-pagination-dot');
+
+            // Создаем навигацию если её нет
+            if (!prevBtn || !nextBtn || dots.length === 0) {
+                
+                // Создаем контейнер навигации
+                if (!caseDemo.querySelector('.case-nav')) {
+                    const nav = document.createElement('div');
+                    nav.className = 'case-nav';
+                    nav.innerHTML = `
+                        <button class="case-nav-button prev-button" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="case-nav-button next-button">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    `;
+                    caseDemo.appendChild(nav);
+                }
+
+                // Создаем точки навигации
+                if (!caseDemo.querySelector('.case-pagination')) {
+                    const pagination = document.createElement('div');
+                    pagination.className = 'case-pagination';
+                    images.forEach((_, i) => {
+                        const dot = document.createElement('div');
+                        dot.className = 'case-pagination-dot' + (i === 0 ? ' active' : '');
+                        pagination.appendChild(dot);
+                    });
+                    caseDemo.appendChild(pagination);
+                }
+
+                // Переопределяем элементы
+                prevBtn = caseDemo.querySelector('.prev-button');
+                nextBtn = caseDemo.querySelector('.next-button');
+                dots = caseDemo.querySelectorAll('.case-pagination-dot');
+            }
+
+            // Функция обновления слайд-шоу
+            function updateSlideshow() {
+                
+                const offset = -currentIndex * 100;
+                imagesContainer.style.transform = `translateX(${offset}%)`;
+
+                // Обновляем точки
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+
+                // Обновляем кнопки
+                if (prevBtn) prevBtn.disabled = currentIndex === 0;
+                if (nextBtn) nextBtn.disabled = currentIndex === images.length - 1;
+            }
+
+            // Обработчики событий
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        updateSlideshow();
+                    }
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    if (currentIndex < images.length - 1) {
+                        currentIndex++;
+                        updateSlideshow();
+                    }
+                });
+            }
+
+            // Навигация по точкам
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateSlideshow();
+                });
+            });
+
+            // Свайпы для мобильных
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            caseDemo.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            caseDemo.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const swipeDistance = touchEndX - touchStartX;
+
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0 && currentIndex > 0) {
+                        currentIndex--;
+                        updateSlideshow();
+                    } else if (swipeDistance < 0 && currentIndex < images.length - 1) {
+                        currentIndex++;
+                        updateSlideshow();
+                    }
+                }
+            }
+
+            // Инициализация
+            updateSlideshow();
+        });
+    });
+
+</script>
+
+<script>
+    //скрипт для Svg
+  const svg = document.querySelector('.about-illustration');
+  svg.addEventListener('mouseenter', () => {
+    const text = svg.querySelector('text:last-of-type');
+    text.textContent = '4 года опыта • 50+ проектов';
+  });
+  svg.addEventListener('mouseleave', () => {
+    const text = svg.querySelector('text:last-of-type');
+    text.textContent = 'Hover me — the code is alive!';
+  });
+</script>
 
 
+<style>
+    .game-button {
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .game-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    .entity-button {
+        transition: all 0.2s ease;
+        border-radius: 6px;
+        font-weight: 500;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .entity-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+    
+    /* Цвета кнопок */
+    .btn-start {
+        background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    }
+    
+    .btn-pause {
+        background: linear-gradient(135deg, #F44336 0%, #C62828 100%);
+    }
+    
+    .btn-reset {
+        background: linear-gradient(135deg, #2196F3 0%, #1565C0 100%);
+    }
+    
+    .btn-pixel {
+        background: linear-gradient(135deg, #9C27B0 0%, #6A1B9A 100%);
+    }
+    
+    .btn-button {
+        background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    }
+    
+    .btn-basket {
+        background: linear-gradient(135deg, #FF9800 0%, #EF6C00 100%);
+    }
+    
+    .btn-container {
+        background: linear-gradient(135deg, #2196F3 0%, #1565C0 100%);
+    }
+</style>
 
+<script>
+    // Диалоговое окно прогула резюме
+    const overlay  = document.getElementById('cv-modal');
+    const closeBtn = overlay.querySelector('.cv-modal__close');
 
-<!-- Canvas игра  -->
+    function openModal() {
+    overlay.classList.remove('hidden');
+    }
+    function closeModal() {
+    overlay.classList.add('hidden');
+    }
 
+    // клик по кнопке «Скачать резюме»
+    document.getElementById('download-cv').addEventListener('click', async () => {
+    const fileName = 'cv.pdf';
+    try {
+        const res = await fetch(fileName, { method: 'HEAD' });
+        if (res.ok) {
+        const a = document.createElement('a');
+        a.href = fileName; a.download = fileName;
+        document.body.appendChild(a); a.click(); a.remove();
+        } else throw new Error();
+    } catch {
+        openModal();
+    }
+    });
 
+    // закрытие
+    overlay.addEventListener('click', (e) => {
+    if (e.target === overlay || e.target === closeBtn) closeModal();
+    });
+</script>
 
-
+<!-- Canvas игра на React -->
+<!--
 <script type="text/babel" data-presets="react">
     const { useRef, useState, useEffect } = React;
 
@@ -1394,7 +1775,8 @@
         const gameRoot = ReactDOM.createRoot(document.getElementById('pixel-ecosystem-game'));
         gameRoot.render(<PixelEcosystem />);
     });
-</script>
+</script> 
+-->
 
 </body>
 </html>
