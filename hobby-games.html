@@ -195,7 +195,8 @@
                         </div>
                     </div>
                 </div>
-                                                
+                                                                
+                <!-- --------------  STEAM GAMES  -------------- -->
                 <section class="steam-games">
                     <h2><i class="fab fa-steam"></i> Мои игры в Steam</h2>
                     <button class="mini-toggle" id="toggleSteam" title="Показать/скрыть">
@@ -204,26 +205,20 @@
 
                     <div id="steamList" class="steam-list hidden">
                         <ul id="steamGamesList">
-                            <!-- первые 10 игр по часам -->
-                            <li class="steam-item">
-                                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg" alt="The Witcher 3">
-                                <h4>The Witcher 3: Wild Hunt</h4>
-                                <span class="hours">6 945 ч.</span>
-                            </li>
-                            <li class="steam-item">
-                                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/230410/header.jpg" alt="Warframe">
-                                <h4>Warframe</h4>
-                                <span class="hours">5 206 ч.</span>
-                            </li>
-                            <li class="steam-item">
-                                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/8500/header.jpg" alt="EVE Online">
-                                <h4>EVE Online</h4>
-                                <span class="hours">4 807 ч.</span>
-                            </li>
+                        <!-- заполняемый скриптом -->
                         </ul>
-                        <button id="loadMoreGamesBtn" class="load-more-games">Показать ещё 10</button>
+                    </div>
+
+                    <!-- Модальное окно для деталей игры -->
+                    <div id="steamModal" class="steam-modal hidden">
+                        <div class="steam-modal-content">
+                        <span class="steam-modal-close">&times;</span>
+                        <div id="steamModalBody"></div>
+                        </div>
                     </div>
                 </section>
+
+                <!-- ддд -->
                 <script src="steam-games.js" defer></script>
 
                 <!-- Сайдбар -->
@@ -280,6 +275,7 @@
 
                     <!-- ==========  КАТАЛОГ СКРИНШОТОВ  ========== -->
                     <section class="mini-gallery">
+                        
                         <div class="container">
                             <h2><i class="fas fa-images"></i> Скриншоты</h2>
 

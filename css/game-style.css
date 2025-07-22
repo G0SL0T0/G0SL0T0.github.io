@@ -298,12 +298,11 @@ nav a.active::after {
     transition: width .6s ease;
 }
 
-/* 8. Сайдбар (sticky) */
+/* 8. Сайдбар (sticky) 
 .hobby-sidebar {
-    max-height: calc(100vh - 140px); /* 140px = header + отступ */
-    overflow-y: auto;
+    max-height: calc(100vh - 140px);  140px = header + отступ 
 }
-
+*/
 .sidebar-block {
     background: #fff;
     padding: 1.5rem;
@@ -440,10 +439,6 @@ nav a.active::after {
     margin-top: 2rem;
 }
 
-.mini-gallery h2 {
-    margin-bottom: 1rem;
-    color: var(--clr-primary);
-}
 
 .mini-grid {
     display: grid;
@@ -486,4 +481,121 @@ footer {
     padding: 1rem 0;
     font-size: .9rem;
     margin-top: 3rem;
+}
+
+/* === STEAM MODAL === */
+.steam-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.steam-modal.hidden { display: none; }
+
+.steam-modal-content {
+  background: #fff;
+  border-radius: var(--radius);
+  max-width: 500px;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+}
+.steam-modal-close {
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.steam-modal-content h2 {
+  margin-top: 0;
+  color: var(--clr-primary);
+}
+.steam-modal-content p {
+  margin: .5rem 0;
+}
+
+/* ----------  Сайдбар-скриншоты - опять  ---------- */
+.mini-gallery {
+    margin-top: 1.5rem;
+}
+
+.mini-gallery h2 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+    color: var(--clr-primary);
+    font-size: 1.25rem;
+}
+
+.mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .6rem;
+}
+
+.mini-grid img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.mini-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,.25);
+}
+
+.mini-gallery .button {
+    display: block;
+    width: 100%;
+    margin-top: .75rem;
+    font-size: .9rem;
+    padding: .5rem 0;
+}
+/* ----------  Сайдбар-скриншоты (вертикальный лента)  ---------- */
+.mini-gallery {
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+.mini-grid {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.mini-grid img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,.15);
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.mini-grid img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 16px rgba(0,0,0,.25);
+}
+
+.mini-gallery .button {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    font-size: .9rem;
+    padding: .6rem 0;
+}
+.mini-gallery {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    width: 100%;
 }
