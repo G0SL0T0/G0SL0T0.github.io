@@ -572,7 +572,9 @@
                     <!-- ==========  КАТАЛОГ СКРИНШОТОВ  ========== -->
                     <section class="mini-gallery">
                         <div class="container">
-                            <h2><i class="fas fa-camera"></i> Скриншоты</h2>
+                            <h2><i class="fas fa-images"></i> Скриншоты</h2>
+
+                            <!-- первые 3 скриншота -->
                             <div class="mini-grid">
                                 <img src="img/screenshot/screenshot1.jpg" loading="lazy">
                                 <img src="img/screenshot/screenshot2.jpg" loading="lazy">
@@ -585,33 +587,28 @@
                         </div>
                     </section>
 
-                    <!-- Модальное окно -->
+                    <!-- ----------  MODAL окно  ---------- -->
                     <div id="galleryModal" class="modal">
                         <div class="modal-content">
                             <span class="close">&times;</span>
 
-                            <!-- фильтры -->
                             <div class="filter-row">
                                 <select id="gameSel">
                                     <option value="all">Все игры</option>
                                 </select>
                                 <select id="sortSel">
-                                    <option value="date-desc">Сначала новые</option>
-                                    <option value="date-asc">Сначала старые</option>
+                                    <option value="date-desc">Новые</option>
+                                    <option value="date-asc">Старые</option>
                                 </select>
                             </div>
 
-                            <!-- сетка -->
                             <div id="modalGrid" class="modal-grid"></div>
-
                             <button id="modalMoreBtn" class="load-more">Показать ещё</button>
                         </div>
                     </div>
 
-                    <!-- стили и скрипт -->
                     <link rel="stylesheet" href="css/gallery.css">
                     <script src="gallery.js" defer></script>
-
                 </div>
             </div>
         </div>
