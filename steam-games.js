@@ -9,7 +9,7 @@ const STEP    = 10;
 
 /* 1. Steam Web API (замените ключ и steamid) */
 const STEAM_API = 'https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/'
-                + '?key=F6F02C073AA8F7021A3EB00AB8C67FE5'
+                + '?key=C35B2E88C0EB7BD71DE28FCC4B1F5701'
                 + '&steamid=76561198263312345'
                 + '&include_appinfo=1&format=json';
 
