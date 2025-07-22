@@ -1,0 +1,489 @@
+/* ===========================================================
+   GAME-STYLE.CSS — полностью автономный
+   =========================================================== */
+
+/* 0. CSS Reset / Normalize */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #343a40;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 1. Общие переменные и анимации */
+:root {
+    --clr-primary: #007bff;
+    --clr-primary-light: #00b4ff;
+    --clr-secondary: #28a745;
+    --clr-bg-dark: #0f172a;
+    --clr-bg-light: #e2e8f0;
+    --radius: 10px;
+    --shadow: 0 3px 10px rgba(0,0,0,.1);
+    --shadow-hover: 0 10px 20px rgba(0,0,0,.15);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. Шапка и навигация */
+header {
+    background: #343a40;
+    color: #fff;
+    padding: .5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,.2);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    gap: 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: .9rem;
+    padding: .5rem 0;
+    position: relative;
+    transition: color .3s;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--clr-primary), var(--clr-primary-light));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .3s;
+}
+
+nav a:hover::after,
+nav a.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+/* 3. Основная раскладка страницы игр */
+.hobby-detail {
+    padding: 2rem 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.hobby-info {
+    display: grid;
+    grid-template-areas:
+        "main sidebar"
+        "steam sidebar";
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+.hobby-main  { grid-area: main; }
+.steam-games { grid-area: steam; }
+.hobby-sidebar { grid-area: sidebar; }
+
+@media (max-width: 768px) {
+    .hobby-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 4. Баннер */
+.banner-container {
+    position: relative;
+}
+
+.game-banner {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: 0 5px 15px rgba(0,0,0,.2);
+}
+
+.banner-overlay {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 2rem;
+    background: linear-gradient(transparent 60%, rgba(0,0,0,.8));
+    color: #fff;
+    border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.banner-overlay h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    text-shadow: 0 2px 5px rgba(0,0,0,.5);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #ddd;
+    margin: 0;
+}
+
+/* 5. Сетка статистики */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    text-align: center;
+    color: #fff;
+    transition: transform .3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.accent-blue   { background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-light)); }
+.accent-green  { background: linear-gradient(135deg, var(--clr-secondary), #00d084); }
+.accent-purple { background: linear-gradient(135deg, #6f42c1, #a370f7); }
+
+.stat-card i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* 6. Карточки игр */
+.game-cards {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.game-card {
+    display: flex;
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform .3s, box-shadow .3s;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.game-card img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    transition: transform .5s;
+}
+
+.game-card:hover img {
+    transform: scale(1.05);
+}
+
+.game-info {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.game-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: .9rem;
+}
+
+.platform-tag {
+    padding: .3rem .8rem;
+    border-radius: 20px;
+    font-size: .8rem;
+    background: #343a40;
+    color: #fff;
+}
+
+.hours {
+    color: #6c757d;
+}
+
+.game-rating {
+    color: #ffc107;
+    font-size: 1.1rem;
+}
+
+/* 7. Сейчас играю */
+.currently-playing {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.current-game {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.current-game img {
+    width: 100px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--clr-primary), var(--clr-primary-light));
+    border-radius: 4px;
+    transition: width .6s ease;
+}
+
+/* 8. Сайдбар (sticky) */
+.hobby-sidebar {
+    max-height: calc(100vh - 140px); /* 140px = header + отступ */
+    overflow-y: auto;
+}
+
+.sidebar-block {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-block h3 {
+    margin-top: 0;
+    color: var(--clr-primary);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.genre-list,
+.achievements-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+}
+
+.genre-list li,
+.achievements-list li {
+    padding: .7rem 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.genre-list li:before {
+    content: "•";
+    color: var(--clr-primary);
+    font-weight: bold;
+    margin-right: .7rem;
+}
+
+.achievements-list li:before {
+    content: "🏆";
+    color: #ffc107;
+    margin-right: .5rem;
+}
+
+.platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .7rem;
+    margin-top: 1rem;
+}
+
+/* 9. Steam games (внутри .hobby-main) */
+.steam-games {
+    margin-top: 3rem;
+}
+
+.steam-games h2 {
+    display: inline-block;
+    margin-right: .5rem;
+    color: var(--clr-primary);
+}
+
+.mini-toggle {
+    background: var(--clr-primary);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.mini-toggle:hover {
+    transform: scale(1.1);
+}
+
+.steam-list.hidden {
+    display: none;
+}
+
+.steam-list ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 0;
+    list-style: none;
+}
+
+.steam-item {
+    background: #1e293b;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    color: #e2e8f0;
+}
+
+.steam-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.steam-item h4 {
+    margin: .5rem 0 0;
+    font-size: 1rem;
+}
+
+.steam-item .hours {
+    color: #94a3b8;
+    font-size: .8rem;
+}
+
+.load-more-games {
+    display: block;
+    margin: 1rem auto 0;
+    padding: .5rem 1.5rem;
+    border: none;
+    border-radius: 999px;
+    background: var(--clr-primary);
+    color: #fff;
+    cursor: pointer;
+    transition: background .3s;
+}
+
+.load-more-games:hover {
+    background: #0056b3;
+}
+
+/* 10. Каталог скриншотов (mini-gallery) */
+.mini-gallery {
+    margin-top: 2rem;
+}
+
+.mini-gallery h2 {
+    margin-bottom: 1rem;
+    color: var(--clr-primary);
+}
+
+.mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .8rem;
+    margin-bottom: 1rem;
+}
+
+.mini-grid img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    aspect-ratio: 16 / 10;
+    transition: transform .3s;
+}
+
+.mini-grid img:hover {
+    transform: scale(1.03);
+}
+
+.button {
+    display: inline-block;
+    padding: .75rem 1.5rem;
+    background: var(--clr-primary);
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background .3s;
+}
+
+.button:hover {
+    background: #0056b3;
+}
+
+/* 11. Footer */
+footer {
+    background: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: .9rem;
+    margin-top: 3rem;
+}

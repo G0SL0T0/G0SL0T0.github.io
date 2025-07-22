@@ -61,4 +61,14 @@ moreBtn.onclick=()=>{
   moreBtn.style.display=start>=filtered.length?'none':'block';
 };
 
+// любой скриншот → полный экран
+document.addEventListener('click', e=>{
+  if(!e.target.matches('.gallery-item img, .modal-item img')) return;
+  const overlay=document.createElement('div');
+  overlay.className='fullscreen';
+  overlay.innerHTML='<img src="'+e.target.src+'">';
+  overlay.onclick=()=>overlay.remove();
+  document.body.appendChild(overlay);
+});
+
 [gameSel,sortSel].forEach(el=>el.addEventListener('change', applyFilters));
