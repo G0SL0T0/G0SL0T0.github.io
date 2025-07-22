@@ -2242,3 +2242,133 @@ nav a.active::after {
   opacity: 1;
   transform: translateX(-50%) scale(1);
 }
+
+.feature-cards + .about-actions {
+  margin-top: 1.5rem;
+}
+
+.hero-sub {
+  margin-bottom: 1.75rem;   /* 28 px отступ до кнопок */
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.boxed {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: box-shadow 0.25s ease;
+}
+
+.boxed:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.boxed p {
+  margin-bottom: 0.75rem;
+  line-height: 1.55;
+  color: #374151;
+}
+
+.mini-stats {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mini-stats li {
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.mini-stats .number {
+  font-weight: 700;
+  color: #007bff;
+}
+
+.feature-cards {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.feature-cards li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #4b5563;
+  transition: background 0.2s;
+}
+
+.feature-cards li:hover {
+  background: #e0f2fe;
+}
+
+.feature-cards i {
+  color: #007bff;
+  font-size: 1.1rem;
+}
+
+.latest-project {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.project-demo {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+.project-metric {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.project-metric li {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .9rem;
+  color: #007bff;
+}
+
+.project-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .latest-project {
+    grid-template-columns: 1fr;
+  }
+}

@@ -15,37 +15,107 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <base href="./">
-    
-    <!-- Подключаем Tailwind CSS -->
+
+    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <style>
-
-        @media (max-width: 768px) {
-            .header-container { flex-direction: column; align-items: stretch; }
-            .menu-toggle { display: none !important; }
-            nav { display: flex !important; flex-direction: column; width: 100%; margin-top: 1rem; }
-            nav a { margin: 0 !important; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
-            .hero-container { flex-direction: column; text-align: center; }
-            .profile-image { margin: 0 auto 1.5rem; }
-            .container { padding: 1rem; }
-            .timeline::after { left: 31px; }
-            .timeline-item { width: 100% !important; padding-left: 70px; padding-right: 25px; }
-            .left::after, .right::after { left: 21px !important; }
-            .right { left: 0 !important; }
-            .project-details { grid-template-columns: 1fr !important; }
-            .button { display: block; width: 100%; margin-bottom: 0.5rem; }
-            .case-card { grid-template-columns: 1fr; }
-            .case-demo { order: -1; min-height: 300px; }
+        /* ======  ГЛОБАЛЬНО  ====== */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #343a40;
+            overflow-x: hidden;
+        }
+        img { max-width: 100%; height: auto; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
-        @media (max-width: 480px) {
-            h1 { font-size: 1.8rem !important; }
-            h2 { font-size: 1.5rem !important; }
-            .hero p { font-size: 1rem !important; }
-            .logo { font-size: 1.5rem !important; }
+        /* ======  ШАПКА  ====== */
+        header {
+            background-color: #343a40;
+            color: #fff;
+            padding: .5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,.2);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            margin: 0;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            gap: 1rem;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: color .3s ease;
+            position: relative;
+            padding: .5rem 0;
+            font-size: .9rem;
+        }
+        nav a:hover { color: #adb5bd; }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, #007bff, #66a3ff);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform .3s ease;
+        }
+        nav a:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+
+        /* ======  HERO  ====== */
+        .hero {
+            background-color: #e9ecef;
+            padding: 5rem 0;
+        }
+        .hero-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .hero-text { flex: 1; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .hero-sub {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 1.75rem;
+            line-height: 1.6;
+        }
+        .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0,0,0,.1);
         }
 
+        /* ======  ABOUT  ====== */
         .about h2 {
             font-size: 2.4rem;
             font-weight: 700;
@@ -54,11 +124,10 @@
             text-align: center;
             position: relative;
         }
-
         .about h2::after {
             content: '';
             position: absolute;
-            bottom: -0.5rem;
+            bottom: -.5rem;
             left: 50%;
             transform: translateX(-50%);
             width: 60px;
@@ -66,134 +135,660 @@
             background: linear-gradient(90deg, #007bff, #00b4ff);
             border-radius: 2px;
         }
-
-        .about-illustration {
-            width: 100%;
-            max-width: 320px;
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+        .about-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
         }
-
-        .about-illustration:hover {
-            transform: translateY(-5px);
+        .about-text { flex: 1; }
+        .about-text p { margin-bottom: 1rem; line-height: 1.6; }
+        .accent { color: #007bff; font-weight: 700; }
+        .boxed {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,.05);
+            transition: box-shadow .25s ease;
         }
-
-        .cases {
-            padding: 4rem 0;
-            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
-        }
-
-        .case-description {
-            padding: 2rem;
-        }
-
-        .case-stats {
-            margin: 1.5rem 0;
-            padding: 0;
+        .boxed:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+        .feature-cards {
             list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
-
-        .case-stats li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
+        .feature-cards li {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .5rem .75rem;
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: .95rem;
+            color: #4b5563;
+            transition: background .2s;
+        }
+        .feature-cards li:hover { background: #e0f2fe; }
+        .feature-cards i { color: #007bff; font-size: 1.1rem; }
+        .about-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
             position: relative;
         }
-
-        .case-stats li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
+        .button {
+            display: inline-block;
+            padding: .75rem 1.5rem;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color .3s ease;
+        }
+        .button:hover { background-color: #0056b3; }
+        .button.secondary {
+            background: transparent;
             color: #007bff;
+            border: 2px solid #007bff;
+        }
+        .button.secondary:hover { background: #007bff; color: #fff; }
+
+        /* ======  SKILLS  ====== */
+        .skills { background: #f8f9fa; padding: 4rem 0; }
+        .skills h2 { font-size: 2rem; margin-bottom: 2rem; text-align: center; }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap: 2rem;
+        }
+        .skill-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,.1);
+            transition: transform .2s ease, box-shadow .2s ease;
+            position: relative;
+            cursor: default;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,.15);
+        }
+        .skill-card::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: -2.5rem;
+            left: 50%;
+            transform: translateX(-50%) scale(.9);
+            padding: .5rem .75rem;
+            background: #000c;
+            color: #fff;
+            font-size: .8rem;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: .2s;
+        }
+        .skill-card:hover::after { opacity: 1; transform: translateX(-50%) scale(1); }
+        .skill-icon svg { width: 40px; height: 40px; }
+        .skill-progress {
+            margin-top: 1rem;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .skill-progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #007bff, #66a3ff);
+            border-radius: 5px;
+            transition: width 1s ease;
         }
 
-        /* Стили для игрового раздела */
+        /* ======  PROJECTS  ====== */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: #ffffff;
+            text-shadow: 0 2px 5px rgba(0,0,0,.4);
+        }
+        .projects { background: #e9ecef; padding: 4rem 0; }
+        .projects h2 { font-size: 2rem; margin-bottom: 2rem; text-align: center; }
+        .latest-project {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 2.5rem;
+            align-items: flex-start;
+            margin-top: 2rem;
+        }
+        .project-demo {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,.08);
+        }
+        .project-body { display: flex; flex-direction: column; gap: .75rem; }
+        .project-metric {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .project-metric li {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            font-size: .9rem;
+            color: #007bff;
+        }
+        .project-actions {
+            margin-top: 1.25rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* ======  CASES  ====== */
+        .cases {
+            padding: 4rem 0;
+            background: linear-gradient(to bottom,#f8f9fa,#e9ecef);
+        }
+        .cases h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #343a40;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .cases h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right,#007bff,#00b4ff);
+            border-radius: 3px;
+        }
+        .case-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,.1);
+            transition: transform .3s ease, box-shadow .3s ease;
+            max-width: 100%;
+            grid-auto-rows: 1fr;
+            align-items: stretch;
+        }
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,.15);
+        }
+        .case-description { padding: 2rem; overflow-y: auto; max-height: 500px; }
+        .case-description h3 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            color: #007bff;
+            position: relative;
+            padding-bottom: .5rem;
+        }
+        .case-description h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #007bff;
+        }
+        .case-description p { color: #6c757d; line-height: 1.6; margin-bottom: 1.5rem; }
+        .case-stats { margin: 1.5rem 0; padding: 0; list-style: none; }
+        .case-stats li {
+            margin-bottom: .8rem;
+            padding-left: 1.8rem;
+            position: relative;
+            color: #495057;
+            line-height: 1.5;
+        }
+        .case-stats li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: .5rem;
+            width: 8px;
+            height: 8px;
+            background-color: #007bff;
+            border-radius: 50%;
+        }
+        .case-stats strong { color: #343a40; font-weight: 600; }
+        .rewrite-info {
+            background: #f8f9fa;
+            border-left: 4px solid #4CAF50;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .rewrite-info h4 {
+            margin-top: 0;
+            color: #4CAF50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .rewrite-info h4 i { font-size: 1.5rem; }
+        .rewrite-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .rewrite-stat {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,.1);
+        }
+        .rewrite-stat i {
+            font-size: 2rem;
+            color: #4CAF50;
+            margin-bottom: .5rem;
+        }
+        .rewrite-stat .number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #343a40;
+            display: block;
+        }
+        .case-demo {
+            position: relative;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            overflow: hidden;
+        }
+        .case-images {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform .3s ease;
+        }
+        .case-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-width: 100%;
+            max-height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .case-images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap: 15px;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .case-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 2;
+        }
+        .case-nav-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.2);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .3s ease;
+        }
+        .case-nav-button:hover { background: rgba(255,255,255,.4); }
+        .case-nav-button:disabled { opacity: .5; cursor: not-allowed; }
+        .case-pagination {
+            display: flex;
+            gap: 8px;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .case-pagination-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.3);
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+        .case-pagination-dot.active { background: white; transform: scale(1.2); }
+
+        /* ======  GAME  ====== */
         .game-container {
             padding: 4rem 0;
             background-color: #343a40;
             color: white;
+            position: relative;
         }
-
+        .game-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(to right,#007bff,#00b4ff);
+        }
         .game-wrapper {
             max-width: 800px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
-
+        .game-container h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: white;
+        }
+        .game-container p {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #adb5bd;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
         .game-controls {
             display: flex;
             gap: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
-
         .game-button {
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            padding: .75rem 1.5rem;
+            border-radius: 6px;
             border: none;
             cursor: pointer;
+            font-weight: 600;
+            transition: all .3s ease;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
         }
-
         .game-button.start {
             background-color: #28a745;
             color: white;
         }
-
+        .game-button.start:hover { background-color: #218838; transform: translateY(-2px); }
         .game-button.reset {
             background-color: #dc3545;
             color: white;
         }
-
+        .game-button.reset:hover { background-color: #c82333; transform: translateY(-2px); }
         #game-canvas {
             width: 100%;
             border: 2px solid #495057;
             border-radius: 8px;
             background-color: #212529;
+            box-shadow: 0 4px 10px rgba(0,0,0,.3);
+            display: block;
+            margin: 0 auto;
+        }
+        .game-container .instructions {
+            text-align: center;
+            margin-top: 1rem;
+            color: #6c757d;
+            font-size: .9rem;
         }
 
-        .cv-error {
-        margin-top: 1rem;
-        padding: 1rem 1.25rem;
-        background: #fff3cd;
-        color: #856404;
-        border-left: 5px solid #ffc107;
-        border-radius: 6px;
-        font-size: 1rem;
-        }
-        .cv-error .button {
-        margin-top: 0.5rem;
+        /* ======  FOOTER  ====== */
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            font-size: .9rem;
         }
 
-        .about-actions {
-        position: relative;
-        }
-
-        .cv-error {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        z-index: 2;
-        margin-top: 0.5rem;
-        padding: 1rem 1.25rem;
-        background: #fff3cd;
-        color: #856404;
-        border-left: 5px solid #ffc107;
-        border-radius: 6px;
-        font-size: 1rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,.15);
-        }
-
-        .cv-error .button {
-        margin-top: 0.5rem;
-        }
-
-        /* Стиль для выпадающего меню */
+        /* ======  МОБИЛЬНАЯ АДАПТАЦИЯ  ====== */
         @media (max-width: 768px) {
+            .hero-container, .about-content { flex-direction: column; text-align: center; }
+            .latest-project, .case-card { grid-template-columns: 1fr; }
+            .case-demo, .case-image { order: -1; min-height: 300px; }
+            nav { flex-direction: column; width: 100%; }
             .menu-toggle { display: block; }
-            nav { display: none; flex-direction: column; width: 100%; }
-            nav.show { display: flex; }
+            nav a { margin: 0; padding: .75rem 0; border-bottom: 1px solid rgba(255,255,255,.1); }
         }
-    </style>
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem !important; }
+            h2 { font-size: 1.5rem !important; }
+            .hero p { font-size: 1rem !important; }
+            .logo { font-size: 1.5rem !important; }
+        }
 
+        /* ======  АНИМАЦИИ  ====== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .case-card { animation: fadeIn .6s ease-out forwards; }
+        .case-card:nth-child(2) { animation-delay: .2s; }
+        .case-card:nth-child(3) { animation-delay: .4s; }
+        .game-container { animation: fadeIn .6s ease-out .6s forwards; opacity: 0; }
+
+        /* ======  ОВЕРЛЕЙ РЕЗЮМЕ  ====== */
+        .cv-modal {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,.45);
+            z-index: 1000;
+        }
+        .cv-modal.hidden { display: none; }
+        .cv-modal__box {
+            position: relative;
+            max-width: 380px;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(0,0,0,.25);
+            text-align: center;
+        }
+        .cv-modal__text {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        .cv-modal__close {
+            position: absolute;
+            top: .75rem;
+            right: .75rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #555;
+        }
+
+        /* ======  ЛОГОТИП  ====== */
+        .skyt-logo-new {
+        --size: 160px;
+        width: var(--size);
+        height: var(--size);
+        position: relative;
+        margin: 0 auto;
+        cursor: pointer;
+        transform-style: preserve-3d;
+        transition: transform .8s cubic-bezier(.17,.67,.12,.99);
+        }
+        .skyt-logo-new:hover {
+        transform: rotateY(25deg) rotateX(10deg) scale(1.05);
+        }
+
+        .layer {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        }
+
+        .layer-outer {
+        background: conic-gradient(
+            from 0deg at 50% 50%,
+            #00f5ff 0deg 90deg,
+            #ff007a 90deg 180deg,
+            #00f5ff 180deg 270deg,
+            #ff007a 270deg 360deg
+        );
+        animation: spin 8s linear infinite;
+        box-shadow: 0 0 20px #00f5ff, inset 0 0 20px rgba(0,0,0,.4);
+        }
+
+        .layer-glass {
+        inset: 10%;
+        background: rgba(255,255,255,.06);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,.2);
+        animation: spin 6s linear infinite reverse;
+        }
+
+        .layer-typo {
+        display: grid;
+        place-items: center;
+        position: absolute;
+        inset: 0;
+        }
+        .s-letter {
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: #fff;
+        text-shadow: 0 0 10px #00f5ff;
+        animation: pulse 2s infinite alternate;
+        }
+        .kyt {
+        font-size: .9rem;
+        letter-spacing: .2em;
+        color: #ff007a;
+        }
+
+        .icon-ring {
+        position: absolute;
+        inset: -30%;
+        animation: orbit 18s linear infinite;
+        }
+        .icon-ring i {
+        position: absolute;
+        color: #fff;
+        font-size: .9rem;
+        }
+
+        .latest-project-card.text-white h3,
+        .latest-project-card.text-white p,
+        .latest-project-card.text-white li {
+        color: #ffffff !important;
+        }
+
+        /* 2. ОБЁРТКА */
+        .latest-project-wrapper {
+        padding: 5rem 0;
+        background: radial-gradient(circle at top left, #0f172a 0%, #1e293b 100%);
+        position: relative;
+        overflow: hidden;
+        }
+
+        /* светящаяся линия сверху */
+        .latest-project-wrapper::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #00f5ff, #ff007a);
+        z-index: 2;
+        }
+
+        /* карточка */
+        .latest-project-card {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 3rem;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        padding: 3rem;
+        max-width: 900px;
+        margin: 0 auto;
+        box-shadow:
+            0 0 0 1px rgba(0, 245, 255, 0.15),
+            0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .latest-project-card:hover {
+        transform: translateY(-6px);
+        box-shadow:
+            0 0 0 1px rgba(0, 245, 255, 0.3),
+            0 32px 60px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        /* адаптив */
+        @media (max-width: 768px) {
+        .latest-project-card {
+            grid-template-columns: 1fr;
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+        .project-logo {
+            margin: 0 auto;
+        }
+        }
+
+        .icon-ring i:nth-child(1){ top: 0; left: 50%; transform: translateX(-50%); }
+        .icon-ring i:nth-child(2){ top: 50%; right: 0; transform: translateY(-50%); }
+        .icon-ring i:nth-child(3){ bottom: 0; left: 50%; transform: translateX(-50%); }
+        .icon-ring i:nth-child(4){ top: 50%; left: 0; transform: translateY(-50%); }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes orbit { to { transform: rotate(360deg); } }
+        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
+
+    </style>
 </head>
 
 <body>
@@ -217,11 +812,13 @@
             <img src="Logo.png" alt="Аватарка" class="profile-image">
             <div class="hero-text">
                 <h1>Привет! Я Иван, веб-разработчик.</h1>
-                <p>Создаю современные, адаптивные и удобные веб-приложения с фокусом на производительность и пользовательский опыт.</p>
-                <p>
-                    <a href="about.html" class="button">Узнать больше</a>
-                    <a href="contact.html" class="button" style="margin-left: 1rem; background-color: #6c757d;">Связаться</a>
+                <p class="hero-sub">
+                    Создаю современные, адаптивные и удобные веб-приложения с фокусом на производительность и пользовательский опыт.
                 </p>
+                <div class="hero-actions">
+                    <a href="about.html" class="button">Узнать больше</a>
+                    <a href="contact.html" class="button secondary">Связаться</a>
+                </div>
             </div>
         </div>
     </section>
@@ -232,22 +829,35 @@
 
         <div class="about-content">
         <!-- ЛЕВАЯ КОЛОНКА -->
-        <div class="about-text">
-            <p>
-            Я — full-stack веб-разработчик с&nbsp;<span class="accent">4+ годами</span> коммерческого опыта.
-            Специализируюсь на&nbsp;React, Angular, Vue и&nbsp;Node.js.
-            </p>
-            <p>
-            Создаю не просто «сайты», а&nbsp;инструменты, которые решают задачи бизнеса
-            и&nbsp;экономят часы пользователей.
-            </p>
+            <div class="about-text boxed">
+                <p>
+                    Я — full-stack веб-разработчик с&nbsp;<span class="accent">4+ годами</span>
+                    коммерческого опыта.  
+                    Специализируюсь на&nbsp;<strong>React, Angular, Vue&nbsp;и&nbsp;Node.js</strong>.
+                </p>
 
-            <!-- Интерактивные счётчики -->
-            <ul class="mini-stats">
-            <li><span class="number" data-count="4">4+</span> года опыта</li>
-            <li><span class="number" data-count="50">7</span> реализованных проектов</li>
-            <li><span class="number" data-count="98">-100</span> % довольных клиентов</li>
-            </ul>
+                <p>
+                    Создаю не просто «сайты», а&nbsp;инструменты, которые решают задачи бизнеса
+                    и&nbsp;экономят часы пользователей.
+                </p>
+
+                <!-- цифры-инфо -->
+                <ul class="feature-cards">
+                    <li>
+                        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                        <span>4+ лет опыта</span>
+                    </li>
+
+                    <li>
+                        <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                        <span>8+ проектов</span>
+                    </li>
+
+                    <li>
+                        <i class="fas fa-smile" aria-hidden="true"></i>
+                        <span>100 % довольных клиентов</span>
+                    </li>
+                </ul>
 
             <!-- Кнопки действий -->
             <div class="about-actions">
@@ -356,20 +966,43 @@
         </div>
     </section>
 
-    <section class="projects">
+    <section class="latest-project-wrapper">
         <div class="container">
-            <h2 style="text-align: center;">Последние проекты</h2>
-            <div class="project-grid">
-                <div class="project-card">
-                    <img src="skyt.png" alt="Скриншот программы SKYT">
-                    <h3>SKYT</h3>
-                    <div class="project-tags">
-                        <span class="project-tag">JavaScript</span>
-                        <span class="project-tag">Node.js</span>
-                        <span class="project-tag">PostgreSQL</span>
+            <h2 class="section-title text-white">Последний проект</h2>
+            <div class="latest-project-card text-white">
+                <div class="project-logo">
+                    <div class="skyt-logo-new">
+                        <div class="layer layer-outer"></div>
+                        <div class="layer layer-glass"></div>
+                        <div class="layer layer-typo">
+                            <span class="s-letter">S</span>
+                            <span class="kyt">KYT</span>
+                        </div>
+                        <div class="icon-ring">
+                            <i class="fas fa-rocket"></i>
+                            <i class="fas fa-clock"></i>
+                            <i class="fas fa-chart-line"></i>
+                            <i class="fas fa-bolt"></i>
+                        </div>
                     </div>
-                    <p>Программа для контроля своего времени. Помогает эффективно планировать и отслеживать затраты времени.</p>
-                    <a href="projects.html" class="button" style="display: block; text-align: center; margin-top: 1rem;">Все проекты</a>
+                </div>
+
+                <div class="project-info">
+                    <h3>SKYT — трекер времени</h3>
+                    <p>
+                        MVP в разработке: базовый учёт задач, таймеры и экспорт CSV уже работают.<br>
+                        Следующий релиз добавит аналитику и мобильную версию.
+                    </p>
+
+                    <ul class="project-metric">
+                        <li><i class="fas fa-tools"></i> Текущая стадия: MVP</li>
+                        <li><i class="fas fa-rocket"></i> Релиз PWA: Октябрь 2025</li>
+                    </ul>
+
+                    <div class="project-actions">
+                        <a href="SKYT/index.html" class="button">Попробовать демо</a>
+                        <a href="projects.html" class="button secondary">Все кейсы</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -505,6 +1138,15 @@
         <p>&copy; 2025 Gosloto. Все права НЕ защищены.</p>
     </div>
 </footer>
+
+<script>
+    // Мини-JS для мобильного меню
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        if (menuToggle) menuToggle.addEventListener('click', () => nav.classList.toggle('show'));
+    });
+</script>
 
 <script>
     // Простейшая реализация для демонстрации
