@@ -569,14 +569,49 @@
                         </ul>
                     </div>
 
-                    <!-- Скриншоты -->
-                    <div class="sidebar-block">
-                        <h3><i class="fas fa-camera"></i> Скриншоты</h3>
-                        <div class="screenshots">
-                            <img src="img/screenshot1.jpg" alt="Игровой скриншот">
-                            <img src="img/screenshot3.jpg" alt="Игровой скриншот">
+                    <!-- ==========  КАТАЛОГ СКРИНШОТОВ  ========== -->
+                    <section class="mini-gallery">
+                        <div class="container">
+                            <h2><i class="fas fa-camera"></i> Скриншоты</h2>
+                            <div class="mini-grid">
+                                <img src="img/screenshot/screenshot1.jpg" loading="lazy">
+                                <img src="img/screenshot/screenshot2.jpg" loading="lazy">
+                                <img src="img/screenshot/screenshot3.jpg" loading="lazy">
+                            </div>
+
+                            <button class="button open-gallery" id="openGalleryBtn">
+                                <i class="fas fa-external-link-alt"></i> Показать все
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Модальное окно -->
+                    <div id="galleryModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+
+                            <!-- фильтры -->
+                            <div class="filter-row">
+                                <select id="gameSel">
+                                    <option value="all">Все игры</option>
+                                </select>
+                                <select id="sortSel">
+                                    <option value="date-desc">Сначала новые</option>
+                                    <option value="date-asc">Сначала старые</option>
+                                </select>
+                            </div>
+
+                            <!-- сетка -->
+                            <div id="modalGrid" class="modal-grid"></div>
+
+                            <button id="modalMoreBtn" class="load-more">Показать ещё</button>
                         </div>
                     </div>
+
+                    <!-- стили и скрипт -->
+                    <link rel="stylesheet" href="css/gallery.css">
+                    <script src="gallery.js" defer></script>
+
                 </div>
             </div>
         </div>
