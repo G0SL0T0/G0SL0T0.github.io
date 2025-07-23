@@ -177,19 +177,18 @@ nav a.active::after {
     gap: 1.5rem;
     margin: 2rem 0;
 }
-
 .stat-card {
     padding: 1.5rem;
     border-radius: var(--radius);
     text-align: center;
     color: #fff;
     transition: transform .3s;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
-
-.stat-card:hover {
-    transform: translateY(-5px);
-}
-
+.stat-card:hover { transform: translateY(-5px); }
+.stat-card h3 { font-size: 2.25rem; margin: .5rem 0 0; }
+.stat-card p  { font-size: 1rem; margin: .25rem 0 0; opacity: .9; }
 .accent-blue   { background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-light)); }
 .accent-green  { background: linear-gradient(135deg, var(--clr-secondary), #00d084); }
 .accent-purple { background: linear-gradient(135deg, #6f42c1, #a370f7); }
@@ -296,28 +295,6 @@ nav a.active::after {
     background: linear-gradient(90deg, var(--clr-primary), var(--clr-primary-light));
     border-radius: 4px;
     transition: width .6s ease;
-}
-
-/* 8. Сайдбар (sticky) 
-.hobby-sidebar {
-    max-height: calc(100vh - 140px);  140px = header + отступ 
-}
-*/
-.sidebar-block {
-    background: #fff;
-    padding: 1.5rem;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    margin-bottom: 1.5rem;
-}
-
-.sidebar-block h3 {
-    margin-top: 0;
-    color: var(--clr-primary);
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: .5rem;
 }
 
 .genre-list,
@@ -599,3 +576,145 @@ footer {
     margin-bottom: 1.5rem;
     width: 100%;
 }
+
+
+/* Ниже работа с сайд баром */
+@media (min-width: 769px) {
+    .hobby-info {
+        position: relative;          /* create containing box */
+    }
+
+    .hobby-sidebar {
+        position: absolute;          /* sits inside .hobby-info */
+        top: 0;
+        right: 0;
+        width: 100%;                 /* take the grid cell */
+        height: 100%;                /* full height of .hobby-info */
+        overflow: hidden;            /* hide OS scrollbar */
+        pointer-events: none;        /* let clicks fall through */
+    }
+
+    .hobby-sidebar > .sidebar-inner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;                /* your column width */
+        height: 100%;                /* full column height */
+        overflow-y: scroll;          /* but we hide the bar */
+        scrollbar-width: none;       /* Firefox */
+        scroll-behavior: smooth;
+        pointer-events: auto;
+        /* speed-up scroll (parallax) */
+        transform: translateY(0);
+    }
+
+    .hobby-sidebar > .sidebar-inner::-webkit-scrollbar {
+        display: none;               /* Chrome / Edge */
+    }
+
+    /* parallax driver – JS adds data-scroll to body */
+    [data-scroll] .hobby-sidebar > .sidebar-inner {
+        transform: translateY(calc(var(--scroll-y, 0) * 0.29));
+    }
+}
+
+/* mobile – normal flow */
+@media (max-width: 768px) {
+    .hobby-sidebar,
+    .hobby-sidebar > .sidebar-inner {
+        position: static;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+    }
+}
+
+.hobby-sidebar__rail {
+    position: fixed;
+    top: 110px;              /* below sticky header */
+    right: max(2rem, 50vw - 600px); /* align to 1200-container */
+    width: 300px;
+    max-height: calc(100vh - 130px);
+    overflow-y: auto;
+    pointer-events: auto;
+    z-index: 10;
+
+    /* glass-morphism + shadow */
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 32px rgba(0,0,0,.12);
+    padding: 1rem;
+
+    /* smooth scroll & thin scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: var(--clr-primary) transparent;
+    transition: transform .3s ease, opacity .3s ease;
+}
+
+.hobby-sidebar__rail::-webkit-scrollbar { width: 4px; }
+.hobby-sidebar__rail::-webkit-scrollbar-thumb { background: var(--clr-primary); border-radius: 2px; }
+
+/* 2. hide header when scrolling down */
+@media (min-width: 769px) {
+    body.scrolled-down .hobby-sidebar__rail {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    .hobby-info {
+        position: relative;
+    }
+}
+
+/* 3. mobile fallback */
+@media (max-width: 768px) {
+    .hobby-sidebar__rail {
+        position: static;
+        width: 100%;
+        max-height: none;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+    }
+    .hobby-sidebar,
+    .hobby-sidebar > .sidebar-inner {
+        position: static;
+        width: 100%;
+        max-height: none;
+        overflow: visible;
+    }
+
+}
+
+/* 4. blocks inside the rail keep your style */
+.sidebar-block {
+    background: rgba(255,255,255,.9);
+    margin-bottom: 1rem;
+    border-radius: var(--radius);
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    padding: 1.25rem 1.5rem;
+    transition: transform .2s;
+}
+.sidebar-block:hover {
+    transform: translateY(-2px);
+}
+
+.sidebar-block {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-block h3 {
+    margin-top: 0;
+    color: var(--clr-primary);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+/* Выше работа с сайд баром */
+
+

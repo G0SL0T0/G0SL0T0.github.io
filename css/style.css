@@ -803,16 +803,6 @@ nav a.active::after {
     font-size: 1.5rem;
 }
 
-.hobby-sidebar {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    align-self: start;
-    position: sticky;
-    top: 120px;
-}
-
 .favorite-list {
     list-style-type: none;
     padding: 0;
@@ -1180,12 +1170,6 @@ nav a.active::after {
     height: 100%;
     background: linear-gradient(90deg, #007bff, #00b4ff);
     border-radius: 4px;
-}
-
-/* Сайдбар */
-.hobby-sidebar {
-    position: sticky;
-    top: 120px;
 }
 
 .sidebar-block {
