@@ -78,17 +78,17 @@ function renderPage(list) {
   });
 }
 
-/* единый обработчик на весь grid */
-grid.addEventListener('click', e => {
-  const img = e.target.closest('.modal-item img');
-  if (!img) return;
-
-  const overlay = document.createElement('div');
-  overlay.className = 'fullscreen';
-  overlay.innerHTML = `<img src="${img.src}" alt="">`;
-  overlay.onclick = () => overlay.remove();
-  document.body.appendChild(overlay);
+window.addEventListener('click', e => {
+  if (e.target.matches('.modal-item img')) {
+    const overlay = document.createElement('div');
+    overlay.className = 'fullscreen';
+    overlay.innerHTML = `<img src="${e.target.src}" alt="">`;
+    overlay.onclick = () => overlay.remove();
+    document.body.appendChild(overlay);
+  }
 });
+
+
 
 /* ---------- кнопка "Показать ещё" ---------- */
 moreBtn.onclick = loadMore;
