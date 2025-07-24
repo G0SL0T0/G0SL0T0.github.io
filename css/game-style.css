@@ -796,15 +796,16 @@ footer {
 .fullscreen {
   position: fixed;
   inset: 0;
-  background: #000d;
+  z-index: 10001;
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
   cursor: pointer;
 }
+
 .fullscreen img {
-  max-width: 95vw;
-  max-height: 95vh;
+  max-width: 90vw;
+  max-height: 90vh;
   object-fit: contain;
 }
