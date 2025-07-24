@@ -64,46 +64,27 @@ function loadMore() {
   moreBtn.style.display = start >= filtered.length ? 'none' : 'block';
 }
 
-function renderPage(list) {
-  list.forEach(img => {
-    const div = document.createElement('div');
-    div.className = 'modal-item';
+moreBtn.onclick = loadMore;
 
-    const imgEl = document.createElement('img');
-    imgEl.src = img.url;
-    imgEl.loading = 'lazy';
-    imgEl.style.cursor = 'pointer';
-
-    const info = document.createElement('div');
-    info.className = 'modal-info';
-    info.innerHTML = `<strong>${img.game}</strong>`;
-
-    div.appendChild(imgEl);
-    div.appendChild(info);
-    grid.appendChild(div);
-
-    imgEl.addEventListener('click', () => {
-      const overlay = document.createElement('div');
-      overlay.className = 'fullscreen';
-      overlay.innerHTML = `<img src="${imgEl.src}" style="max-width: 100%; max-height: 100%;" />`;
-      overlay.onclick = () => overlay.remove();
-      document.body.appendChild(overlay);
-    });
-  });
-}
-
-function showFullscreenImage(event) {
-  const imgSrc = event.target.src;
+function showFullscreenImage(imgElement) {
   const overlay = document.createElement('div');
   overlay.className = 'fullscreen';
-  overlay.innerHTML = `<img src="${imgSrc}" style="max-width: 100%; max-height: 100%;" />`;
+  overlay.innerHTML = `<img src="${imgElement.src}" style="max-width: 100%; max-height: 100%; object-fit: contain;" />`;
   overlay.onclick = () => overlay.remove();
-  document.body.appendChild(overlay);
+  overlay.style.zIndex = 10001;
+  
+  const modalContent = modal.querySelector('.modal-content');
+  if (modalContent) {
+    modalContent.appendChild(overlay);
+    modal.style.display = 'flex';
+  } else {
+    document.body.appendChild(overlay);
+  }
 }
 
-window.addEventListener('click', (event) => {
-  if (event.target.tagName === 'IMG' && event.target.closest('#galleryModal')) {
-    showFullscreenImage(event);
+window.addEventListener('click', e => {
+  if (e.target.matches('.modal-item img')) {
+    showFullscreenImage(e.target);
   }
 });
 
