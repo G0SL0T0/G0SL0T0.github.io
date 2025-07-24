@@ -64,34 +64,20 @@ function loadMore() {
   moreBtn.style.display = start >= filtered.length ? 'none' : 'block';
 }
 
-function renderPage(list) {
-  list.forEach(img => {
-    const div = document.createElement('div');
-    div.className = 'modal-item';
+moreBtn.onclick = () => {
+  const nextImages = filtered.slice(start, start + PER_PAGE);
+  renderPage(nextImages);
+  start += PER_PAGE;
+  moreBtn.style.display = start >= filtered.length ? 'none' : 'block';
 
-    const imgEl = document.createElement('img');
-    imgEl.src = img.url;
-    imgEl.loading = 'lazy';
-
-    const info = document.createElement('div');
-    info.className = 'modal-info';
-    info.innerHTML = `<strong>${img.game}</strong>`;
-
-    div.appendChild(imgEl);
-    div.appendChild(info);
-    grid.appendChild(div);
-
-    // Add click event listener to each image
-    imgEl.addEventListener('click', () => {
-      console.log('Image clicked:', imgEl.src); // Debug log
-      const overlay = document.createElement('div');
-      overlay.className = 'fullscreen';
-      overlay.innerHTML = `<img src="${imgEl.src}" alt="screenshot">`;
-      overlay.onclick = () => overlay.remove();
-      document.body.appendChild(overlay);
-    });
-  });
-}
+  // Если вы хотите показать следующее изображение при клике на "Показать еще"
+  if (start === 0) {
+    const firstImgEl = document.querySelector('.modal-item img');
+    if (firstImgEl) {
+      firstImgEl.click();
+    }
+  }
+};
 
 /* ---------- Button "Show more" ---------- */
 moreBtn.onclick = loadMore;
