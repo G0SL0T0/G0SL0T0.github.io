@@ -24,7 +24,7 @@ closeBtn.onclick = () => (modal.style.display = 'none');
 
 /* ---------- LOAD ---------- */
 async function loadData() {
-  if (allImages.length) return;               // уже загружено
+  if (allImages.length) return;               // already loaded
   const res  = await fetch(ROOT_JSON);
   if (!res.ok) throw new Error(res.status);
   allImages  = await res.json();
@@ -42,7 +42,7 @@ function populateGameFilter() {
   });
 }
 
-/* ---------- фильтры и рендер ---------- */
+/* ---------- Filters and Render ---------- */
 function resetAndRender() {
   start   = 0;
   grid.innerHTML = '';
@@ -54,7 +54,7 @@ function resetAndRender() {
   const dir = sortSel.value === 'date-asc' ? 1 : -1;
   filtered.sort((a, b) => dir * (a.date - b.date));
 
-  loadMore();                // первую порцию
+  loadMore();                // first batch
 }
 
 function loadMore() {
@@ -69,31 +69,34 @@ function renderPage(list) {
     const div = document.createElement('div');
     div.className = 'modal-item';
 
-    div.innerHTML = `
-      <img src="${img.url}" loading="lazy">
-      <div class="modal-info"><strong>${img.game}</strong></div>
-    `;
+    const imgEl = document.createElement('img');
+    imgEl.src = img.url;
+    imgEl.loading = 'lazy';
 
+    const info = document.createElement('div');
+    info.className = 'modal-info';
+    info.innerHTML = `<strong>${img.game}</strong>`;
+
+    div.appendChild(imgEl);
+    div.appendChild(info);
     grid.appendChild(div);
+
+    // Add click event listener to each image
+    imgEl.addEventListener('click', () => {
+      console.log('Image clicked:', imgEl.src); // Debug log
+      const overlay = document.createElement('div');
+      overlay.className = 'fullscreen';
+      overlay.innerHTML = `<img src="${imgEl.src}" alt="screenshot">`;
+      overlay.onclick = () => overlay.remove();
+      document.body.appendChild(overlay);
+    });
   });
 }
 
-window.addEventListener('click', e => {
-  if (e.target.matches('.modal-item img')) {
-    const overlay = document.createElement('div');
-    overlay.className = 'fullscreen';
-    overlay.innerHTML = `<img src="${e.target.src}" alt="">`;
-    overlay.onclick = () => overlay.remove();
-    document.body.appendChild(overlay);
-  }
-});
-
-
-
-/* ---------- кнопка "Показать ещё" ---------- */
+/* ---------- Button "Show more" ---------- */
 moreBtn.onclick = loadMore;
 
-/* ---------- изменение фильтров ---------- */
+/* ---------- Change Filters ---------- */
 [gameSel, sortSel].forEach(el =>
   el.addEventListener('change', resetAndRender)
 );
