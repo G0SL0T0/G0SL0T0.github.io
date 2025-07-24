@@ -7,15 +7,15 @@ const OUT  = 'screenshots.json';
 // полное название → ключ папки
 const GAME_NAMES = {
   ''          : 'Общие',
-  witcher     : 'The Witcher 3: Wild Hunt',
-  gtfo        : 'GTFO',
-  eve         : 'EVE Frontier',
-  expeditions : 'Expeditions: A MudRunner Game',
-  skyrim      : 'The Elder Scrolls V: Skyrim',
-  tradesman   : 'TRADESMAN: Deal to Dealer',
-  warframe    : 'Warframe',
-  dbd         : 'Dead by Daylight',
-  everyone    : 'Разные игры'
+  "1witcher"     : 'The Witcher 3: Wild Hunt',
+  "5gtfo"        : 'GTFO',
+  "4eve"         : 'EVE Frontier',
+  "3expeditions" : 'Expeditions: A MudRunner Game',
+  "6skyrim"      : 'The Elder Scrolls V: Skyrim',
+  "2tradesman"   : 'TRADESMAN: Deal to Dealer',
+  "4warframe"    : 'Warframe',
+  "7dbd"         : 'Dead by Daylight',
+  "8everyone"    : 'Разные игры'
 };
 
 let data = [];

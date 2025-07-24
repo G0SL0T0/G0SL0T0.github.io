@@ -10,7 +10,7 @@ const games = [
   { name: 'Destiny 2',                   hours: 1598, lastLaunch: '6 мая 2023', achievements: '23/23', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1085660/header.jpg' },
   { name: 'Crossout',                    hours: 1361, lastLaunch: '29 мая',  achievements: '193/193', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/386180/header.jpg' },
   { name: 'Hunt: Showdown 1896',         hours: 1357, lastLaunch: '1 февр.',  achievements: '36/36', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/594650/header.jpg' },
-  { name: 'GTFO',                        hours: 976,  lastLaunch: 'Вчера',    achievements: '56/57', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/493520/header.jpg' },
+  { name: 'GTFO',                        hours: 976,  lastLaunch: 'Активная игра',    achievements: '56/57', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/493520/header.jpg' },
   { name: 'Shattered Pixel Dungeon',     hours: 876,  lastLaunch: '3 апр.',   achievements: '83/97', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1769170/header.jpg' },
   { name: '枝江畔之梦',                   hours: 871,  lastLaunch: '15 сент. 2024', achievements: '20/20', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1827680/header.jpg' },
   { name: 'PAYDAY 2',                    hours: 836,  lastLaunch: '15 мар. 2024', achievements: '1302/1328', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/218620/header.jpg' },
