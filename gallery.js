@@ -22,6 +22,7 @@ closeBtn.onclick= () => { modal.style.display='none'; };
 async function loadData() {
   if (allImages.length) return;
   const res = await fetch(ROOT_JSON);
+    if (!res.ok) throw new Error(`Не удалось загрузить JSON: ${res.status}`);
   allImages = await res.json();
   populateGameFilter();
   applyFilters();
