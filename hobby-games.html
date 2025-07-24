@@ -62,111 +62,31 @@
                     </div>
 
                     <!-- Любимые игры -->
-                    <div class="favorite-games-section">
+                    <section class="favorite-games-section">
                         <h2><i class="fas fa-heart"></i> Топ-5 любимых игр</h2>
-                        <div class="game-cards">
-                            <!-- Игра 1 -->
-                            <div class="game-card">
-                                <img src="img/The Witcher 3.jpg" alt="The Witcher 3">
-                                <div class="game-info">
-                                    <h3>The Witcher 3: Wild Hunt</h3>
-                                    <div class="game-meta">
-                                        <span class="platform-tag"><i class="fas fa-desktop"></i> PC</span>
-                                        <span class="hours">6500+ часов</span>
-                                    </div>
-                                    <p>Лучшая RPG всех времен с потрясающим сюжетом и миром. Прошел более 80-ти раз на 100%.</p>
-                                    <div class="game-rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Игра 2 -->
-                            <div class="game-card">
-                                <img src="img/gtfo.png" alt="GTFO">
-                                <div class="game-info">
-                                    <h3>GTFO</h3>
-                                    <div class="game-meta">
-                                        <span class="platform-tag"><i class="fas fa-desktop"></i> PC</span>
-                                        <span class="hours">900+ часов</span>
-                                    </div>
-                                    <p>Экстремальный кооперативный хоррор с элементами тактического шутера. Сложные миссии требуют идеальной командной работы.</p>
-                                    <div class="game-rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Игра 3 -->
-                            <div class="game-card">
-                                <img src="img/soulstorm.png" alt="Soulstorm">
-                                <div class="game-info">
-                                    <h3>Dawn of War® - Soulstorm</h3>
-                                    <div class="game-meta">
-                                        <span class="platform-tag"><i class="fas fa-desktop"></i> PC</span>
-                                        <span class="hours">700+ часов</span>
-                                    </div>
-                                    <p>Культовая стратегия в мире Warhammer 40,000. Лучшая часть серии Dawn of War.</p>
-                                    <div class="game-rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <!-- Игра 4 -->
-                            <div class="game-card">
-                                <img src="img/tradesman-deal-to-dealer.png" alt="TRADESMAN">
-                                <div class="game-info">
-                                    <h3>TRADESMAN: Deal to Dealer</h3>
-                                    <div class="game-meta">
-                                        <span class="platform-tag"><i class="fas fa-desktop"></i> PC</span>
-                                        <span class="platform-tag"><i class="fas fa-mobile-alt"></i> Мобильные</span>
-                                        <span class="hours">400+ часов</span>
-                                    </div>
-                                    <p>Уникальный симулятор торговли с глубоким и капельку комичным сюжетом. </p>
-                                    <div class="game-rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="top-vertical">
+                            <!-- JS - steam-games.js -->
+                        </div>
+                        <div id="detailDrawer" class="detail-drawer hidden">
+                            <button class="detail-close" aria-label="Закрыть">&times;</button>
 
-                            <!-- Игра 5 -->
-                            <div class="game-card">
-                                <img src="img/eve frontier.jpg" alt="EVE Frontier">
-                                <div class="game-info">
-                                    <h3>EVE Frontier</h3>
-                                    <div class="game-meta">
-                                        <span class="platform-tag"><i class="fas fa-desktop"></i> PC</span>
-                                        <span class="hours">50+ часов</span>
-                                    </div>
-                                    <p>Космическая MMO с уникальной экономикой и политикой. Игра, где каждое действие имеет последствия.</p>
-                                    <div class="game-rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                </div>
+                            <div class="detail-content">
+                                <img id="detailImg" src="" alt="">
+                                <h2 id="detailTitle"></h2>
+
+                                <p><strong>Часы в Steam:</strong> <span id="detailHours"></span></p>
+                                <p><strong>Последний запуск:</strong> <span id="detailLastLaunch"></span></p>
+                                <p><strong>Достижения:</strong> <span id="detailAchievements"></span></p>
+                                <p id="detailDesc"></p>
+
+                                <button class="btn-screens" id="btnOpenScreens">
+                                    <i class="fas fa-images"></i> Посмотреть скриншоты
+                                </button>
                             </div>
                         </div>
-                    </div>
+
+                    </section>
 
                     <!-- Текущие проекты -->
                     <div class="current-games-section">
@@ -183,7 +103,7 @@
                                 </div>
                             </div>
                             <div class="current-game">
-                                <img src="img/eve frontier.jpg" alt="EVE Frontier">
+                                <img src="img/eve-frontier.jpg" alt="EVE Frontier">
                                 <div>
                                     <h3>EVE Frontier</h3>
                                     <p><strong>Прогресс:</strong> ~32%   <strong><i class="fas fa-play"></i>Закрытый Альфа тест</strong></p>
@@ -337,6 +257,37 @@
         document.body.setAttribute('data-scroll', '');
     }, { passive: true });
 </script>
+<script>
+    (() => {
+    const drawer         = document.getElementById('detailDrawer');
+    const closeBtn       = drawer.querySelector('.detail-close');
+    const btnOpenScreens = document.getElementById('btnOpenScreens');
+    const gameMap = {};
+    games.forEach(g => gameMap[g.name] = g);
+    document.querySelectorAll('.top-card').forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => {
+        const title = card.querySelector('h3').textContent;
+        const g     = gameMap[title] || {};
 
+        document.getElementById('detailImg').src       = g.image || card.style.backgroundImage.slice(5, -2);
+        document.getElementById('detailTitle').textContent   = g.name || title;
+        document.getElementById('detailHours').textContent   = g.hours ? g.hours + ' ч' : '—';
+        document.getElementById('detailLastLaunch').textContent = g.lastLaunch || '—';
+        document.getElementById('detailAchievements').textContent = g.achievements || '—';
+        document.getElementById('detailDesc').textContent = g.desc || '';
+        drawer.classList.remove('hidden');
+        });
+    });
+
+    closeBtn.onclick = () => drawer.classList.add('hidden');
+
+    btnOpenScreens.onclick = () => {
+        drawer.classList.add('hidden');
+        document.getElementById('galleryModal').style.display = 'flex';
+        if (!window.allImages?.length) loadData?.();
+    };
+    })();
+</script>
 </body>
 </html>
