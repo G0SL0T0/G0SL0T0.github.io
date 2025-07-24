@@ -801,6 +801,7 @@ footer {
   align-items: center;
   justify-content: center;
   z-index: 10000;
+  cursor: pointer;
 }
 .fullscreen img {
   max-width: 95vw;

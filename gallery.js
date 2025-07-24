@@ -77,18 +77,17 @@ function renderPage(list) {
     info.className = 'modal-info';
     info.innerHTML = `<strong>${img.game}</strong>`;
 
-    div.appendChild(imgEl);
-    div.appendChild(info);
-
-    /* клик → fullscreen */
+    /* клик по картинке → fullscreen */
     imgEl.addEventListener('click', () => {
       const overlay = document.createElement('div');
       overlay.className = 'fullscreen';
-      overlay.innerHTML = `<img src="${img.url}" alt="">`;
+      overlay.innerHTML = `<img src="${img.url}" alt="screenshot">`;
       overlay.onclick = () => overlay.remove();
       document.body.appendChild(overlay);
     });
 
+    div.appendChild(imgEl);
+    div.appendChild(info);
     grid.appendChild(div);
   });
 }
