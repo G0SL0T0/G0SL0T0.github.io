@@ -291,20 +291,22 @@
 
                         <!-- Модальное окно -->
                         <div id="galleryModal" class="modal">
-                            <div class="modal-content">
-                                <span class="close">&times;</span>
-                                <div class="filter-row">
-                                    <select id="gameSel">
-                                        <option value="all">Все игры</option>
-                                    </select>
-                                    <select id="sortSel">
-                                        <option value="date-desc">Новые</option>
-                                        <option value="date-asc">Старые</option>
-                                    </select>
-                                </div>
-                                <div id="modalGrid" class="modal-grid"></div>
-                                <button id="modalMoreBtn" class="load-more">Показать ещё</button>
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+
+                            <div class="filter-row">
+                            <select id="gameSel">
+                                <option value="all">Все игры</option>
+                            </select>
+                            <select id="sortSel">
+                                <option value="date-desc">Новые</option>
+                                <option value="date-asc">Старые</option>
+                            </select>
                             </div>
+
+                            <div id="modalGrid" class="modal-grid"></div>
+                            <button id="modalMoreBtn" class="load-more">Показать ещё</button>
+                        </div>
                         </div>
 
                         <link rel="stylesheet" href="css/gallery.css">
@@ -321,6 +323,8 @@
         <p>&copy; 2025 Gosloto. Все права НЕ защищены.</p>
     </div>
 </footer>
+
+<script src="gallery.js" defer></script>
 
 <script>
     document.querySelector('.menu-toggle').addEventListener('click', function() {

@@ -112,3 +112,22 @@
   max-height:100%;
   object-fit:contain;
 }
+#galleryModal {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+
+  /* Let the browser treat it as if it were attached to <body> */
+  position-try: viewport; /* modern keyword, works in Chromium-based browsers */
+  transform: none !important;
+  contain: none !important;
+  clip-path: none !important;
+}
+
+/* fallback for browsers that don’t support position-try */
+@supports not (position-try: viewport) {
+  #galleryModal {
+    /* move it to the viewport manually */
+    transform: translate3d(0, 0, 0) !important;
+  }
+}

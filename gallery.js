@@ -61,6 +61,17 @@ moreBtn.onclick=()=>{
   moreBtn.style.display=start>=filtered.length?'none':'block';
 };
 
+/* before showing the modal, move it to <body> */
+openBtn.onclick = () => {
+  document.body.appendChild(modal);   // detach & attach to body
+  modal.style.display = 'flex';
+};
+
+/* optional: move it back to the sidebar when closed */
+closeBtn.onclick = () => {
+  modal.style.display = 'none';
+  // if you want to keep DOM order, re-append to sidebar here
+};
 // любой скриншот → полный экран
 document.addEventListener('click', e=>{
   if(!e.target.matches('.gallery-item img, .modal-item img')) return;

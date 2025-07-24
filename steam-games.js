@@ -107,3 +107,4 @@ window.addEventListener('click', e => e.target === MODAL && MODAL.classList.add(
 /* === INIT === */
 renderList();
 TOGGLE_BTN.addEventListener('click', () => LIST.classList.toggle('hidden'));
+
