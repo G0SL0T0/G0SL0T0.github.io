@@ -15,7 +15,7 @@ const grid    = document.getElementById('modalGrid');
 const moreBtn = document.getElementById('modalMoreBtn');
 
 // ---------- OPEN / CLOSE ----------
-openBtn.onclick = () => { modal.style.display='flex'; loadData(); };
+openBtn.onclick = () => { document.body.appendChild(modal); modal.style.display='flex'; loadData(); };
 closeBtn.onclick= () => { modal.style.display='none'; };
 
 // ---------- LOAD ----------
@@ -39,9 +39,15 @@ function populateGameFilter() {
 function applyFilters() {
   grid.innerHTML=''; start=0;
   let temp=[...allImages];
+  console.log('before filter', temp.length);
+
   if (gameSel.value !== 'all') temp = temp.filter(i=>i.game===gameSel.value);
+  console.log('after game filter', temp.length);
+
   const dir = sortSel.value === 'date-asc' ? 1 : -1;
   temp.sort((a,b)=>dir*(a.date-b.date));
+  console.log('after sort', temp.length);
+
   filtered=temp;
   renderPage(temp.slice(0,PER_PAGE));
   start=PER_PAGE;
@@ -49,6 +55,7 @@ function applyFilters() {
 }
 
 function renderPage(list) {
+  console.log('renderPage', list.length, list); // <— добавь
   list.forEach(img=>{
     const div=document.createElement('div');
     div.className='modal-item';
