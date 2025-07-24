@@ -55,11 +55,14 @@ function applyFilters() {
 }
 
 function renderPage(list) {
-  console.log('renderPage', list.length, list); // <— добавь
-  list.forEach(img=>{
-    const div=document.createElement('div');
-    div.className='modal-item';
-    div.innerHTML=`<img src="${img.url}" loading="lazy"><div class="modal-info"><strong>${img.game}</strong></div>`;
+  if (start === 0) grid.innerHTML = '';
+
+  list.forEach(img => {
+    const div = document.createElement('div');
+    div.className = 'modal-item';
+    div.innerHTML = `
+      <img src="${img.url}" loading="lazy">
+      <div class="modal-info"><strong>${img.game}</strong></div>`;
     grid.appendChild(div);
   });
 }
@@ -70,12 +73,14 @@ moreBtn.onclick=()=>{
   moreBtn.style.display=start>=filtered.length?'none':'block';
 };
 
-document.addEventListener('click', e=>{
-  if(!e.target.matches('.gallery-item img, .modal-item img')) return;
-  const overlay=document.createElement('div');
-  overlay.className='fullscreen';
-  overlay.innerHTML='<img src="'+e.target.src+'">';
-  overlay.onclick=()=>overlay.remove();
+grid.addEventListener('click', e => {
+  const img = e.target.closest('img');
+  if (!img) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'fullscreen';
+  overlay.innerHTML = `<img src="${img.src}" alt="">`;
+  overlay.onclick = () => overlay.remove();
   document.body.appendChild(overlay);
 });
 
