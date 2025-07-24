@@ -69,28 +69,26 @@ function renderPage(list) {
     const div = document.createElement('div');
     div.className = 'modal-item';
 
-    const imgEl = document.createElement('img');
-    imgEl.src = img.url;
-    imgEl.loading = 'lazy';
+    div.innerHTML = `
+      <img src="${img.url}" loading="lazy">
+      <div class="modal-info"><strong>${img.game}</strong></div>
+    `;
 
-    const info = document.createElement('div');
-    info.className = 'modal-info';
-    info.innerHTML = `<strong>${img.game}</strong>`;
-
-    /* клик по картинке → fullscreen */
-    imgEl.addEventListener('click', () => {
-      const overlay = document.createElement('div');
-      overlay.className = 'fullscreen';
-      overlay.innerHTML = `<img src="${img.url}" alt="screenshot">`;
-      overlay.onclick = () => overlay.remove();
-      document.body.appendChild(overlay);
-    });
-
-    div.appendChild(imgEl);
-    div.appendChild(info);
     grid.appendChild(div);
   });
 }
+
+/* единый обработчик на весь grid */
+grid.addEventListener('click', e => {
+  const img = e.target.closest('.modal-item img');
+  if (!img) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'fullscreen';
+  overlay.innerHTML = `<img src="${img.src}" alt="">`;
+  overlay.onclick = () => overlay.remove();
+  document.body.appendChild(overlay);
+});
 
 /* ---------- кнопка "Показать ещё" ---------- */
 moreBtn.onclick = loadMore;
