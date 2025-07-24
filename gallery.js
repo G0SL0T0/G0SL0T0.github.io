@@ -24,7 +24,7 @@ closeBtn.onclick = () => (modal.style.display = 'none');
 
 /* ---------- LOAD ---------- */
 async function loadData() {
-  if (allImages.length) return;               // already loaded
+  if (allImages.length) return;
   const res  = await fetch(ROOT_JSON);
   if (!res.ok) throw new Error(res.status);
   allImages  = await res.json();
@@ -54,7 +54,7 @@ function resetAndRender() {
   const dir = sortSel.value === 'date-asc' ? 1 : -1;
   filtered.sort((a, b) => dir * (a.date - b.date));
 
-  loadMore();                // first batch
+  loadMore();
 }
 
 function loadMore() {
@@ -64,20 +64,48 @@ function loadMore() {
   moreBtn.style.display = start >= filtered.length ? 'none' : 'block';
 }
 
-moreBtn.onclick = () => {
-  const nextImages = filtered.slice(start, start + PER_PAGE);
-  renderPage(nextImages);
-  start += PER_PAGE;
-  moreBtn.style.display = start >= filtered.length ? 'none' : 'block';
+function renderPage(list) {
+  list.forEach(img => {
+    const div = document.createElement('div');
+    div.className = 'modal-item';
 
-  // Если вы хотите показать следующее изображение при клике на "Показать еще"
-  if (start === 0) {
-    const firstImgEl = document.querySelector('.modal-item img');
-    if (firstImgEl) {
-      firstImgEl.click();
-    }
+    const imgEl = document.createElement('img');
+    imgEl.src = img.url;
+    imgEl.loading = 'lazy';
+    imgEl.style.cursor = 'pointer';
+
+    const info = document.createElement('div');
+    info.className = 'modal-info';
+    info.innerHTML = `<strong>${img.game}</strong>`;
+
+    div.appendChild(imgEl);
+    div.appendChild(info);
+    grid.appendChild(div);
+
+    imgEl.addEventListener('click', () => {
+      const overlay = document.createElement('div');
+      overlay.className = 'fullscreen';
+      overlay.innerHTML = `<img src="${imgEl.src}" style="max-width: 100%; max-height: 100%;" />`;
+      overlay.onclick = () => overlay.remove();
+      document.body.appendChild(overlay);
+    });
+  });
+}
+
+function showFullscreenImage(event) {
+  const imgSrc = event.target.src;
+  const overlay = document.createElement('div');
+  overlay.className = 'fullscreen';
+  overlay.innerHTML = `<img src="${imgSrc}" style="max-width: 100%; max-height: 100%;" />`;
+  overlay.onclick = () => overlay.remove();
+  document.body.appendChild(overlay);
+}
+
+window.addEventListener('click', (event) => {
+  if (event.target.tagName === 'IMG' && event.target.closest('#galleryModal')) {
+    showFullscreenImage(event);
   }
-};
+});
 
 /* ---------- Button "Show more" ---------- */
 moreBtn.onclick = loadMore;
