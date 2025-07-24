@@ -12,19 +12,19 @@ const games = [
   { name: 'Hunt: Showdown 1896',         hours: 1357, lastLaunch: '1 февр.',  achievements: '36/36', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/594650/header.jpg' },
   { name: 'GTFO',                        hours: 976,  lastLaunch: 'Вчера',    achievements: '56/57', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/493520/header.jpg' },
   { name: 'Shattered Pixel Dungeon',     hours: 876,  lastLaunch: '3 апр.',   achievements: '83/97', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1769170/header.jpg' },
-  { name: '枝江畔之梦',                  hours: 871,  lastLaunch: '15 сент. 2024', achievements: '20/20', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1827680/header.jpg' },
+  { name: '枝江畔之梦',                   hours: 871,  lastLaunch: '15 сент. 2024', achievements: '20/20', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1827680/header.jpg' },
   { name: 'PAYDAY 2',                    hours: 836,  lastLaunch: '15 мар. 2024', achievements: '1302/1328', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/218620/header.jpg' },
-  { name: 'Warhammer 40,000: Dawn of War - Soulstorm',hours: 794,  lastLaunch: '29 нояб. 2024', achievements: '', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/9450/header.jpg' },
+  { name: 'Dawn of War - Soulstorm',     hours: 794,  lastLaunch: '29 нояб. 2024', achievements: '', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/9450/header.jpg' },
   { name: 'Generation Zero®',            hours: 632,  lastLaunch: '28 июн. 2024', achievements: '72/72', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/704270/header.jpg' },
   { name: 'Palia',                       hours: 628,  lastLaunch: '5 апр.',  achievements: '52/52', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2707930/header.jpg' },
-  { name: 'Ropuka\'s Idle Island',        hours: 597,  lastLaunch: '14 июл.',  achievements: '30/31', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/3416070/header.jpg' },
+  { name: 'Ropuka\'s Idle Island',       hours: 597,  lastLaunch: '14 июл.',  achievements: '30/31', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/3416070/header.jpg' },
   { name: 'Frostpunk',                   hours: 576,  lastLaunch: '6 нояб. 2023', achievements: '0/115', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/323190/header.jpg' },
   { name: 'ARK: Survival Evolved',       hours: 545,  lastLaunch: '12 февр. 2023', achievements: '32/32', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/346110/header.jpg' },
   { name: 'SCP: Secret Laboratory',      hours: 493,  lastLaunch: '6 мая 2023', achievements: '35/52', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/700330/header.jpg' },
   { name: 'Albion Online',               hours: 485,  lastLaunch: '27 апр. 2023', achievements: '0/154', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/761890/header.jpg' },
   { name: 'Northgard',                   hours: 474,  lastLaunch: '11 янв.',  achievements: '0/289', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/466560/header.jpg' },
   { name: 'Rogue Company',               hours: 409,  lastLaunch: '6 мая 2023', achievements: '20/20', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/872200/header.jpg' },
-  { name: 'TRADESMAN: Deal to Dealer',   hours: 414,  lastLaunch: 'Активная игра',  achievements: '100 %', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2555430/header.jpg' },
+  { name: 'TRADESMAN: Deal to Dealer',   hours: 414,  lastLaunch: 'Активная игра',  achievements: 'Скоро будут ;)', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2555430/header.jpg' },
   { name: 'RimWorld',                    hours: 314,  lastLaunch: '19 дек. 2023', achievements: '-', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/294100/header.jpg' },
   { name: 'Asphalt Legends Unite',       hours: 262,  lastLaunch: '25 июн.',  achievements: '39/42', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1815780/header.jpg' },
   { name: 'Warhammer 40,000: Gladius',   hours: 254,  lastLaunch: '23 апр. 2024', achievements: '97/166', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/489630/header.jpg' },
@@ -63,121 +63,81 @@ const games = [
   { name: 'WRC 7',                       hours: 8,    lastLaunch: '25 июл. 2024', achievements: '7/41', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/621830/header.jpg' },
   { name: 'Masterplan Tycoon',           hours: 7,    lastLaunch: '8 июл. 2024', achievements: '8/16', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1644500/header.jpg' },
   { name: 'Soundfall',                   hours: 6,    lastLaunch: '27 окт. 2024', achievements: '19/45', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1608700/header.jpg' },
-  { name: 'The Forever Winter',          hours: 5,    lastLaunch: '31 окт. 2024', achievements: '-', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2828860/header.jpg' }
+  { name: 'The Forever Winter',          hours: 5,    lastLaunch: '31 окт. 2024', achievements: '-', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2828860/header.jpg' },
+  { name: 'EVE Frontier',                hours: 48,    lastLaunch: 'Активная игра', achievements: '-', image: 'img/eve-frontier.jpg' }
 ];
 
-/* =====  TOP-5  (no conflicts)  ===== */
+/* ===== TOP-5 аккордеон ===== */
 (() => {
-  const TOP_GAMES = [
-    {
-      name: 'The Witcher 3: Wild Hunt',
-      hours: 6500,
-      image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg',
-      desc: 'Лучшая RPG всех времен с потрясающим сюжетом и миром.',
-      rating: 5
-    },
-    {
-      name: 'GTFO',
-      hours: 900,
-      image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/493520/header.jpg',
-      desc: 'Экстремальный кооперативный хоррор.',
-      rating: 5
-    },
-    {
-      name: 'Dawn of War - Soulstorm',
-      hours: 700,
-      image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/9450/header.jpg',
-      desc: 'Культовая стратегия в мире Warhammer 40,000.',
-      rating: 4.5
-    },
-    {
-      name: 'TRADESMAN: Deal to Dealer',
-      hours: 400,
-      image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2555430/header.jpg',
-      desc: 'Уникальный симулятор торговли.',
-      rating: 5
-    },
-    {
-      name: 'EVE Frontier',
-      hours: 50,
-      image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/8500/header.jpg',
-      desc: 'Космическая MMO с уникальной экономикой.',
-      rating: 4.5
-    }
-  ];
-
-  const parent = document.querySelector('.favorite-games-section .game-cards.modern');
-  if (!parent) return;
-
-  parent.innerHTML = '';
-
-  TOP_GAMES.forEach(game => {
-    const card = document.createElement('article');
-    card.className = 'game-card modern';
-    card.innerHTML = `
-      <figure class="img-wrap">
-        <img src="${game.image}" alt="${game.name}">
-      </figure>
-      <div class="info">
-        <h3>${game.name}</h3>
-        <p class="platform">
-          <i class="fas fa-desktop"></i> PC
-          <span class="hours">· ${game.hours}+ ч</span>
-        </p>
-        <p class="desc">${game.desc}</p>
-        <div class="stars">${'★'.repeat(Math.floor(game.rating))}${'☆'.repeat(5 - Math.floor(game.rating))}</div>
-      </div>
-    `;
-    parent.appendChild(card);
-  });
-})();
-
-/* ===== TOP-5 VERTICAL BACKGROUND-CARDS ===== */
-(() => {
-  const TOP_GAMES = [
-    { name:'The Witcher 3', hours:6500, img:'https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg', desc:'Лучшая RPG' },
-    { name:'GTFO', hours:900, img:'https://cdn.cloudflare.steamstatic.com/steam/apps/493520/header.jpg', desc:'Кооперативный хоррор' },
-    { name:'Dawn of War - Soulstorm', hours:700, img:'https://cdn.cloudflare.steamstatic.com/steam/apps/9450/header.jpg', desc:'Культовая стратегия' },
-    { name:'TRADESMAN', hours:400, img:'https://cdn.cloudflare.steamstatic.com/steam/apps/2555430/header.jpg', desc:'Симулятор торговли' },
-    { name:'EVE Frontier', hours:50, img:'img/eve-frontier.jpg', desc:'Космическая MMO' }
+  const TOP_NAMES = [
+    'The Witcher 3: Wild Hunt',
+    'GTFO',
+    'Warhammer 40,000: Dawn of War - Soulstorm',
+    'Dawn of War - Soulstorm',
+    'TRADESMAN: Deal to Dealer',
+    'EVE Frontier'
   ];
 
   const container = document.querySelector('.top-vertical');
   if (!container) return;
 
-  container.innerHTML = ''; // очистка
+  container.innerHTML = '';
 
-  TOP_GAMES.forEach(game => {
+  TOP_NAMES.forEach(name => {
+    const g = games.find(game => game.name === name);
+    if (!g) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'top-card-wrapper';
+
+    // карточка
     const card = document.createElement('div');
     card.className = 'top-card';
-    card.style.backgroundImage = `url(${game.img})`;
-
+    card.style.backgroundImage = `url(${g.image})`;
     card.innerHTML = `
       <div class="top-card-overlay">
-        <h3>${game.name}</h3>
-        <p class="details">${game.hours}+ ч · ${game.desc}</p>
+        <h3>${g.name}</h3>
+        <p class="details">${g.hours}+ ч · Топ-5 любимых игр</p>
       </div>
     `;
 
-    // автоматическая смена цвета текста (через JS)
-    const img = new Image();
-    img.src = game.img;
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = canvas.height = 1;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, 1, 1);
-      const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
-      const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-      card.style.color = brightness < 128 ? '#fff' : '#000';
-    };
+    // drawer
+    const drawer = document.createElement('div');
+    drawer.className = 'top-card-drawer';
+    drawer.innerHTML = `
+      <h2>${g.name}</h2>
+      <p><strong>Часы в Steam:</strong> ${g.hours} ч</p>
+      <p><strong>Последний запуск:</strong> ${g.lastLaunch}</p>
+      <p><strong>Достижения:</strong> ${g.achievements}</p>
+      <button class="btn-screens" data-game="${g.name}">
+        <i class="fas fa-images"></i> Посмотреть скриншоты
+      </button>
+    `;
 
-    container.appendChild(card);
+    wrapper.appendChild(card);
+    wrapper.appendChild(drawer);
+    container.appendChild(wrapper);
+
+    /* переключение */
+    card.addEventListener('click', () => {
+      const open = wrapper.classList.contains('open');
+      document.querySelectorAll('.top-card-wrapper').forEach(w => w.classList.remove('open'));
+      if (!open) wrapper.classList.add('open');
+    });
+
+    /* кнопка «скриншоты» */
+    drawer.querySelector('.btn-screens').addEventListener('click', e => {
+      e.stopPropagation();
+      const gameTitle = e.target.dataset.game;
+      document.getElementById('galleryModal').style.display = 'flex';
+      if (!window.allImages?.length) loadData?.();
+      else {
+        document.getElementById('gameSel').value = gameTitle;
+        resetAndRender?.();
+      }
+    });
   });
 })();
-
-
 /* === RENDER === */
 const UL = document.getElementById('steamGamesList');
 const TOGGLE_BTN = document.getElementById('toggleSteam');

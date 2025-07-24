@@ -68,23 +68,6 @@
                         <div class="top-vertical">
                             <!-- JS - steam-games.js -->
                         </div>
-                        <div id="detailDrawer" class="detail-drawer hidden">
-                            <button class="detail-close" aria-label="Закрыть">&times;</button>
-
-                            <div class="detail-content">
-                                <img id="detailImg" src="" alt="">
-                                <h2 id="detailTitle"></h2>
-
-                                <p><strong>Часы в Steam:</strong> <span id="detailHours"></span></p>
-                                <p><strong>Последний запуск:</strong> <span id="detailLastLaunch"></span></p>
-                                <p><strong>Достижения:</strong> <span id="detailAchievements"></span></p>
-                                <p id="detailDesc"></p>
-
-                                <button class="btn-screens" id="btnOpenScreens">
-                                    <i class="fas fa-images"></i> Посмотреть скриншоты
-                                </button>
-                            </div>
-                        </div>
 
                     </section>
 
@@ -174,6 +157,7 @@
                                 <li>Топ-100 в GTFO (R8)</li>
                                 <li>10 KDA в EVE Frontier</li>
                                 <li>Активное участие в Альфа тестировании EVE Frontier</li>
+                                <br><span class="platform-tag">Раздел в разработке</span>
                             </ul>
                         </div>
 
@@ -211,22 +195,22 @@
 
                         <!-- Модальное окно -->
                         <div id="galleryModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
 
-                            <div class="filter-row">
-                            <select id="gameSel">
-                                <option value="all">Все игры</option>
-                            </select>
-                            <select id="sortSel">
-                                <option value="date-desc">Новые</option>
-                                <option value="date-asc">Старые</option>
-                            </select>
+                                <div class="filter-row">
+                                <select id="gameSel">
+                                    <option value="all">Все игры</option>
+                                </select>
+                                <select id="sortSel">
+                                    <option value="date-desc">Новые</option>
+                                    <option value="date-asc">Старые</option>
+                                </select>
+                                </div>
+
+                                <div id="modalGrid" class="modal-grid"></div>
+                                <button id="modalMoreBtn" class="load-more">Показать ещё</button>
                             </div>
-
-                            <div id="modalGrid" class="modal-grid"></div>
-                            <button id="modalMoreBtn" class="load-more">Показать ещё</button>
-                        </div>
                         </div>
 
                         <link rel="stylesheet" href="css/gallery.css">
@@ -251,43 +235,10 @@
 </script>
 
 <script>
-    /* feed scroll delta to CSS variable */
     window.addEventListener('scroll', () => {
         document.body.style.setProperty('--scroll-y', window.scrollY + 'px');
         document.body.setAttribute('data-scroll', '');
     }, { passive: true });
-</script>
-<script>
-    (() => {
-    const drawer         = document.getElementById('detailDrawer');
-    const closeBtn       = drawer.querySelector('.detail-close');
-    const btnOpenScreens = document.getElementById('btnOpenScreens');
-    const gameMap = {};
-    games.forEach(g => gameMap[g.name] = g);
-    document.querySelectorAll('.top-card').forEach(card => {
-        card.style.cursor = 'pointer';
-        card.addEventListener('click', () => {
-        const title = card.querySelector('h3').textContent;
-        const g     = gameMap[title] || {};
-
-        document.getElementById('detailImg').src       = g.image || card.style.backgroundImage.slice(5, -2);
-        document.getElementById('detailTitle').textContent   = g.name || title;
-        document.getElementById('detailHours').textContent   = g.hours ? g.hours + ' ч' : '—';
-        document.getElementById('detailLastLaunch').textContent = g.lastLaunch || '—';
-        document.getElementById('detailAchievements').textContent = g.achievements || '—';
-        document.getElementById('detailDesc').textContent = g.desc || '';
-        drawer.classList.remove('hidden');
-        });
-    });
-
-    closeBtn.onclick = () => drawer.classList.add('hidden');
-
-    btnOpenScreens.onclick = () => {
-        drawer.classList.add('hidden');
-        document.getElementById('galleryModal').style.display = 'flex';
-        if (!window.allImages?.length) loadData?.();
-    };
-    })();
 </script>
 </body>
 </html>

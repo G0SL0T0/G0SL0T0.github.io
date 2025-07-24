@@ -159,15 +159,46 @@ nav a.active::after {
 }
 
 .banner-overlay h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    text-shadow: 0 2px 5px rgba(0,0,0,.5);
+    font-weight: 800;
+    font-size: 3rem;
+    letter-spacing: .5px;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000;
+}
+
+.banner-overlay h1::before {
+    content: '';
+    position: absolute;
+    inset: -8px -12px;
+    background: rgba(0,0,0,.35);
+    filter: blur(6px);
+    z-index: -1;
+    border-radius: 6px;
 }
 
 .subtitle {
     font-size: 1.2rem;
     color: #ddd;
     margin: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000;
 }
 
 /* 5. Сетка статистики */
@@ -990,15 +1021,20 @@ footer {
   gap: 1.2rem;
 }
 
-.top-card {
+.top-card-wrapper {
   position: relative;
-  height: 280px;
-  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius);
   overflow: hidden;
-  cursor: pointer;
-  transition: transform .3s;
+}
+.top-card {
+  height: 280px;
   background-size: cover;
   background-position: center;
+  position: relative;
+  cursor: pointer;
+  transition: filter .3s;
 }
 
 .top-card:hover {
@@ -1008,22 +1044,37 @@ footer {
 .top-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.8) 0%, transparent 30%);
-  backdrop-filter: blur(2px);
+  background: linear-gradient(to top, rgba(0,0,0,.8) 0%, transparent 40%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 1.5rem;
   color: #fff;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  transition: opacity .3s;
+}
+.top-card-wrapper.open .top-card-overlay {
+  opacity: 0;
+}
+.top-card .top-card-overlay h3,
+.top-card .top-card-overlay .details {
+    color: #fff;
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
 }
 
 .top-card h3 {
-  font-size: 1.25rem;
-  margin: 0 0 .25rem;
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 0 0 .25rem;
 }
 .top-card .details {
-  font-size: .9rem;
-  opacity: .9;
+    font-weight: 800;
+    font-size: .9rem;
+    opacity: .9;
 }
 /* ---- кнопка «Посмотреть скриншоты» ---- */
 .btn-screens {
@@ -1112,3 +1163,84 @@ footer {
   font-size: 1rem;
 }
 .btn-screens:hover { background: #0056b3; }
+/* Slide-down drawer */
+.top-game-drawer {
+    grid-column: 1 / -1;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    margin-top: 1.5rem;
+    padding: 2rem;
+    position: relative;
+    animation: fadeIn .4s ease;
+}
+.top-game-drawer.hidden { display: none; }
+
+.top-card-drawer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 0 1.5rem;
+}
+
+.top-card-drawer.open {
+  max-height: 600px;
+  padding: 1.5rem 2rem;
+}
+
+.drawer-close {
+  position: absolute;
+  top: .75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6c757d;
+}
+.drawer-content img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+.drawer-content h2 { margin-top: 0; color: var(--clr-primary); }
+.btn-screens {
+    margin-top: 1rem;
+    padding: .6rem 1.4rem;
+    background: var(--clr-primary);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+}
+.btn-screens:hover { background: #0056b3; }
+.top-card.open .top-card-overlay {
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.top-card-drawer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease;
+  background: rgba(0, 0, 0, .55);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 0 2rem;
+}
+
+.top-card-wrapper.open .top-card-drawer {
+  max-height: 600px;
+  padding: 1.5rem 2rem;
+}
+
+/* скрыть текст при открытии */
+.top-card-wrapper.open .top-card-overlay {
+  opacity: 0;
+}
