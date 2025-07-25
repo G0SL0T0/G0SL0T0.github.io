@@ -1,0 +1,196 @@
+
+:root {
+  --modal-bg: rgba(0, 0, 0, .7);
+  --modal-radius: 20px;
+  --modal-shadow: 0 24px 48px rgba(0, 0, 0, .4);
+  --accent: #007bff;
+  --accent-light: #00d4ff;
+  --text: #e2e8f0;
+  --surface: #1e293b;
+}
+
+/* фон-подложка */
+.steam-modal,
+.modal,
+.achievements-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--modal-bg);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn .35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* -------------------------------------------------
+   2.  СОДЕРЖИМОЕ
+-------------------------------------------------- */
+.steam-modal-content,
+.modal-content,
+.achievements-modal .modal-content {
+  position: relative;
+  max-width: 620px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--modal-radius);
+  box-shadow: var(--modal-shadow);
+  padding: 2.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+.steam-modal-content::-webkit-scrollbar,
+.modal-content::-webkit-scrollbar,
+.achievements-modal .modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+.steam-modal-content::-webkit-scrollbar-thumb,
+.modal-content::-webkit-scrollbar-thumb,
+.achievements-modal .modal-content::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+}
+
+/* заголовки */
+.steam-modal-content h2,
+.modal-content h2,
+.achievements-modal h2 {
+  margin-top: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.25rem;
+}
+
+/* изображение внутри модалки */
+.steam-modal-content img,
+.modal-content img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+}
+
+/* абзацы */
+.steam-modal-content p,
+.modal-content p {
+  margin: .4rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.steam-modal-content strong,
+.modal-content strong {
+  color: var(--accent-light);
+}
+
+.btn-screens {
+  margin-top: 1.25rem;
+  padding: .65rem 1.5rem;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s;
+}
+.btn-screens:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 123, 255, .45);
+}
+
+.steam-modal-close,
+.close,
+.achievements-modal .close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .1);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .25s;
+}
+.steam-modal-close:hover,
+.close:hover,
+.achievements-modal .close:hover {
+  background: rgba(255, 255, 255, .2);
+}
+
+#allAchievementsList {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  padding: .5rem 0 1.5rem;
+}
+
+.ach-item {
+  background: rgba(255, 255, 255, .08);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  transition: transform .25s, box-shadow .25s;
+}
+.ach-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 123, 255, .25);
+}
+.ach-item.unlocked { border-left: 4px solid #28a745; }
+.ach-item.locked   { border-left: 4px solid #6c757d; opacity: .7; }
+.ach-item i {
+  font-size: 1.6rem;
+  min-width: 28px;
+  text-align: center;
+}
+.ach-item.unlocked i { color: #28a745; }
+.ach-item.locked   i { color: #6c757d; }
+.ach-item strong {
+  font-size: 1rem;
+  margin-bottom: .15rem;
+  display: block;
+}
+.ach-item small {
+  font-size: .8rem;
+  color: #94a3b8;
+}
+.ach-date {
+  font-size: .75rem;
+  color: #cbd5e1;
+  margin-top: .3rem;
+}
+
+@media (max-width: 600px) {
+  .steam-modal-content,
+  .modal-content,
+  .achievements-modal .modal-content {
+    padding: 1.5rem;
+    border-radius: 0;
+  }
+  .steam-modal,
+  .modal,
+  .achievements-modal {
+    padding: 0;
+  }
+}

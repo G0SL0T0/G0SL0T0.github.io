@@ -23,7 +23,7 @@ const games = [
   { name: 'SCP: Secret Laboratory',      hours: 493,  lastLaunch: '6 мая 2023', achievements: '35/52', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/700330/header.jpg' },
   { name: 'Albion Online',               hours: 485,  lastLaunch: '27 апр. 2023', achievements: '0/154', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/761890/header.jpg' },
   { name: 'Northgard',                   hours: 474,  lastLaunch: '11 янв.',  achievements: '0/289', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/466560/header.jpg' },
-  { name: 'TRADESMAN: Deal to Dealer',   hours: 417,  lastLaunch: 'Активная игра',  achievements: 'Скоро будут ;)', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2555430/header.jpg' },
+  { name: 'TRADESMAN: Deal to Dealer',   hours: 427,  lastLaunch: 'Активная игра',  achievements: 'Скоро будут ;)', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2555430/header.jpg' },
   { name: 'Rogue Company',               hours: 409,  lastLaunch: '6 мая 2023', achievements: '20/20', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/872200/header.jpg' },
   { name: 'RimWorld',                    hours: 314,  lastLaunch: '19 дек. 2023', achievements: '-', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/294100/header.jpg' },
   { name: 'Asphalt Legends Unite',       hours: 262,  lastLaunch: '25 июн.',  achievements: '39/42', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1815780/header.jpg' },
@@ -154,14 +154,74 @@ const games = [
   });
 })();
 
+/* ===== СЕЙЧАС ИГРАЮ ===== */
+(() => {
+  const CURRENT = [
+    { name: 'Expeditions: A MudRunner Game', progress: 47 },
+    { name: 'EVE Frontier',                  progress: 32 }
+  ];
+
+  const box = document.getElementById('currentGamesJS');
+  if (!box) return;
+
+  CURRENT.forEach(c => {
+    const g = games.find(x => x.name === c.name);
+    if (!g) return;
+    const card = document.createElement('div');
+    card.className = 'current-game-card accordion-item';
+    card.innerHTML = `
+      <img src="${g.image}" alt="${g.name}">
+      <div class="current-info">
+        <h3>${g.name} <small>(${g.hours} ч)</small></h3>
+        <p class="progress-label">${c.progress} % пройдено</p>
+        <div class="progress-bar">
+          <div class="progress" style="width:${c.progress}%"></div>
+        </div>
+        <p class="meta">${g.lastLaunch}</p>
+      </div>
+
+      <div class="current-drawer">
+        ${buildAchievementsDrawer(g.name)}
+        <button class="btn-screens" data-game="${g.name}">
+          <i class="fas fa-images"></i> Скриншоты
+        </button>
+      </div>
+    `;
+
+    box.appendChild(card);
+    card.addEventListener('click', e => {
+      if (e.target.closest('.btn-screens, .ach-btn, .ach-panel')) return;
+      card.classList.toggle('open');
+    });     
+    /* кнопка «скриншоты» */
+    card.querySelector('.btn-screens')
+        .addEventListener('click', e => {
+          e.stopPropagation();
+          const modal = document.getElementById('galleryModal');
+          modal.style.display = 'flex';
+          if (!window.allImages?.length) window.loadData?.();
+          document.getElementById('gameSel').value = g.name;
+          window.resetAndRender?.();
+        });
+  });
+})();
+
+['Expeditions: A MudRunner Game', 'EVE Frontier'].forEach(title => {
+  const g = games.find(o => o.name === title);
+  if (!g) return;
+  document
+    .querySelectorAll(`[data-game="${title}"] .hours-plug`)
+    .forEach(el => (el.textContent = `(${g.hours} ч)`));
+  document
+    .querySelectorAll(`[data-game="${title}"] .last-launch-plug`)
+    .forEach(el => (el.textContent = g.lastLaunch));
+});
+
 document.querySelector('.current-games-section').addEventListener('click', e => {
   const header = e.target.closest('.current-game-header');
   if (!header) return;
-
   const item = header.closest('.accordion-item');
   const open = item.classList.contains('open');
-
-  /* закрыть все */
   document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
   if (!open) item.classList.add('open');
 });
@@ -173,46 +233,63 @@ document.addEventListener('click', e => {
 
 /* ===============  ДОСТИЖЕНИЯ =============== */
 function buildAchievementsDrawer(gameName) {
-  const achs   = ACH_DB.filter(a => a.game === gameName && a.name);
-  const done   = achs.filter(a => a.unlocked && a.type === 'achievement');
-  const chall  = achs.filter(a => a.type === 'challenge');
-  const locked = achs.filter(a => !a.unlocked && a.type === 'achievement');
+  const list = ACH_DB.filter(a => a.game === gameName && a.name);
 
-  return /* html */`
+  const achDone   = list.filter(a => a.type === 'achievement' && a.unlocked);
+  const achTodo   = list.filter(a => a.type === 'achievement' && !a.unlocked);
+  const challDone = list.filter(a => a.type === 'challenge'  && a.unlocked);
+  const challTodo = list.filter(a => a.type === 'challenge'  && !a.unlocked);
+
+  const buildAccordion = (title, items, cls) => {
+    if (!items.length) return '';
+    const id = Math.random().toString(36).substr(2, 6);
+    return `
+      <div class="ach-accordion">
+        <button class="ach-btn ${cls}" onclick="toggleAcc(event,'${id}')">
+          ${title} (${items.length})
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div id="${id}" class="ach-panel">
+          ${items.map(a => `
+            <div class="ach-row ${a.unlocked ? 'done' : 'pending'}">
+              <i class="fas ${a.unlocked ? 'fa-check-circle' : 'fa-hourglass-half'}"></i>
+              <span>${a.name}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  };
+
+  return `
     <div class="ach-drawer">
-      ${done.length ? `
-        <h4><i class="fas fa-trophy"></i> Достижения</h4>
-        ${done.map(a => `
-          <div class="ach-mini done">
-            <i class="fas fa-check-circle" style="color:#28a745;"></i>
-            <span>${a.name}</span>
-          </div>
-        `).join('')}
-      ` : ''}
-
-      ${chall.length ? `
-        <h4><i class="fas fa-bullseye"></i> Челленджи</h4>
-        ${chall.map(a => `
-          <div class="ach-mini ${a.unlocked ? 'done' : 'pending'}">
-            <i class="fas ${a.unlocked ? 'fa-check-circle' : 'fa-hourglass-half'}" 
-               style="color:${a.unlocked ? '#28a745' : '#dc3545'};"></i>
-            <span>${a.name}</span>
-          </div>
-        `).join('')}
-      ` : ''}
-
-      ${locked.length ? `
-        <h4><i class="fas fa-lock"></i> Не получено</h4>
-        ${locked.map(a => `
-          <div class="ach-mini locked">
-            <i class="fas fa-lock" style="color:#6c757d;"></i>
-            <span>${a.name}</span>
-          </div>
-        `).join('')}
-      ` : ''}
+      ${buildAccordion('Личные Достижения', [...achDone, ...achTodo], 'done')}
+      ${buildAccordion('Личные Челленджи',  [...challDone, ...challTodo], 'chal')}
     </div>
   `;
 }
+
+window.toggleAcc = (e, id) => {
+  e.stopPropagation();
+  const btn  = e.currentTarget;
+  const panel = document.getElementById(id);
+  const scope = btn.closest('.current-game-card') ||
+                btn.closest('.top-card-wrapper') ||
+                btn.closest('.steam-modal-content');
+  if (!scope) return;
+  scope.querySelectorAll('.ach-panel, .ach-btn').forEach(el => el.classList.remove('open'));
+  const open = btn.classList.contains('open');
+  if (!open) {
+    btn.classList.add('open');
+    panel?.classList.add('open');
+  }
+};
+
+window.toggleAch = btn => {
+  const collapse = btn.nextElementSibling;
+  collapse.classList.toggle('open');
+  btn.classList.toggle('open');
+};
 
 /* === RENDER === */
 const UL = document.getElementById('steamGamesList');
@@ -246,11 +323,12 @@ function openModal(game) {
     <p><strong>Общее время:</strong> ${game.hours} ч</p>
     <p><strong>Последний запуск:</strong> ${game.lastLaunch}</p>
     <p><strong>Достижения:</strong> ${game.achievements}</p>
-    ${buildAchievementsDrawer(game.name)} <!-- ⬅ ВОТ ЭТО -->
+    ${buildAchievementsDrawer(game.name)}
+
     <button class="btn-screens" data-game="${game.name}">
       <i class="fas fa-images"></i> Посмотреть скриншоты
     </button>
-  `;               
+  `;          
   MODAL.classList.remove('hidden');
 }
 

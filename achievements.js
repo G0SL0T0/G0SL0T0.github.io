@@ -6,7 +6,10 @@ const ACH_DB = [
   { name: '10 KDA в EVE Frontier',                 game: 'EVE Frontier',                       date: '2025-07-02', unlocked: true,  type: 'achievement' },
   { name: 'Активный участник альфа-теста',         game: 'EVE Frontier',                       date: '2025-06-15', unlocked: true,  type: 'achievement' },
   { name: 'Построить мегабазу в EVE Frontier',     game: 'EVE Frontier',                       date: null,         unlocked: false, type: 'challenge' },
-  { name: '10 killmarks на одном корабле',         game: 'EVE Frontier',                       date: 'null',       unlocked: false, type: 'challenge' },
+  { name: '10 killmarks на одном корабле',         game: 'EVE Frontier',                       date: null,         unlocked: false, type: 'challenge' },
+  { name: 'Построить last принтер на месте дислокации',game: 'EVE Frontier',                   date: null,         unlocked: false, type: 'challenge' },
+  { name: 'Открыть 5 секретных секторов',          game: 'EVE Frontier',                       date: null,         unlocked: false, type: 'challenge' },
+  { name: 'Убить стационарными турелями',          game: 'EVE Frontier',                       date: '2025-07-01', unlocked: true,  type: 'achievement' },
   { name: 'Пройти кампанию за каждую фракцию',     game: 'Dawn of War - Soulstorm',            date: '2023-11-25', unlocked: true,  type: 'achievement' },
   { name: 'Используя определенных юнитов пройти кампанию',game: 'Dawn of War - Soulstorm',     date: '2024-01-12', unlocked: true,  type: 'challenge' },
   { name: 'Добится 70000 хп в шкале здоровья',     game: 'The Witcher 3: Wild Hunt',           date: '2024-08-19', unlocked: true,  type: 'achievement' },
@@ -23,10 +26,12 @@ const ACH_DB = [
   { name: 'Приобрести 10 автомобилей',             game: 'Expeditions: A MudRunner Game',      date: '2025-07-15', unlocked: true,  type: 'achievement' },
   { name: 'Заработать первый 1 млн валюты',        game: 'Expeditions: A MudRunner Game',      date: '2025-07-15', unlocked: true,  type: 'achievement' },
   { name: 'Завершить экспедицию с 1+ бонусной наградой',game: 'Expeditions: A MudRunner Game', date: '2025-07-05', unlocked: true,  type: 'achievement' },
-  { name: 'Первые 200 км пробега',                 game: 'Expeditions: A MudRunner Game',      date: 'null', unlocked: false,  type: 'achievement' },
+  { name: 'Первые 200 км пробега',                 game: 'Expeditions: A MudRunner Game',      date: 'null',       unlocked: false, type: 'achievement' },
+  { name: 'Закрыть полностью карту только на скаутах',game: 'Expeditions: A MudRunner Game',   date: null,         unlocked: false, type: 'challenge' },
+  { name: 'Повредить колеса на скауте макс. скоростью',game: 'Expeditions: A MudRunner Game',  date: null,         unlocked: false, type: 'challenge' },
+  { name: 'Эвакуация тяжелого вездехода скаутом',  game: 'Expeditions: A MudRunner Game',      date: null,         unlocked: false, type: 'challenge' },
 ];
 
-/* 🎨 Генератор авто-иконки: 2 буквы + цвет по имени игры */
 function gameIcon(gameName) {
   const colors = [
     '#ff6b6b', '#f9844a', '#ee6c4d', '#c9184a', '#560bad', '#7209b7',
@@ -45,7 +50,7 @@ const allGames = [...new Set([
   ...ACH_DB.map(a => a.game)
 ])].sort();
 
-/* 🧹 Очистка контейнера */
+/* Очистка контейнера */
 const $ = sel => document.querySelector(sel);
 
 function renderLatest() {
@@ -88,7 +93,7 @@ function renderAll(filterGame = 'все') {
   `).join('');
 }
 
-/* 🎛️ Фильтр по игре */
+/* Фильтр по игре */
 function buildFilter() {
   const sel = $('#achGameFilter');
   if (!sel) return;

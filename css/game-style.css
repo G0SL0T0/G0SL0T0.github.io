@@ -373,16 +373,19 @@ nav a.active::after {
     margin-top: 1rem;
 }
 
-/* 9. Steam games (внутри .hobby-main) */
+/* ======  ОСНОВНОЙ КОНТЕЙНЕР STEAM гамес ====== */
 .steam-games {
   margin-top: 3rem;
 }
 
 .steam-games h2 {
-  display: inline-block;
-  margin-right: .5rem;
-  color: var(--clr-primary);
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
 }
 
 .mini-toggle {
@@ -404,39 +407,7 @@ nav a.active::after {
     display: none;
 }
 
-.steam-list ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-    padding: 0;
-    list-style: none;
-}
-
-.steam-item {
-    background: #1e293b;
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
-    color: #e2e8f0;
-}
-
-.steam-item img {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 4px;
-}
-
-.steam-item h4 {
-    margin: .5rem 0 0;
-    font-size: 1rem;
-}
-
-.steam-item .hours {
-    color: #94a3b8;
-    font-size: .8rem;
-}
+/* ======  СЕТКА  ====== */
 .steam-list ul {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -444,71 +415,90 @@ nav a.active::after {
   padding: 0;
   list-style: none;
 }
-
-/* --- карточка --- */
+/* ======  КАРТОЧКА  ====== */
 .steam-item {
   position: relative;
-  border-radius: var(--radius);
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
   overflow: hidden;
-  background: #1e293b;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
-  transition: transform .3s ease, box-shadow .3s ease;
   cursor: pointer;
+  background: #1e293b;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.steam-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #007bff, #00b4ff);
+  opacity: 0;
+  transition: opacity .35s ease;
+  z-index: 1;
+  mix-blend-mode: multiply;
 }
 
 .steam-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 123, 255, .25);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0,123,255,.35);
 }
+.steam-item:hover::before { opacity: .7; }
 
-/* изображение */
+/* ======  ИЗОБРАЖЕНИЕ  ====== */
 .steam-item img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   object-fit: cover;
-  filter: brightness(.8) contrast(1.05);
-  transition: filter .3s ease;
+  transition: transform .5s ease;
 }
+.steam-item:hover img { transform: scale(1.08); }
 
-.steam-item:hover img {
-  filter: brightness(1) contrast(1.1);
-}
-
-/* затемнённый градиент поверх картинки */
+/* ======  ОВЕРЛЕЙ  ====== */
 .steam-item-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(15, 23, 42, .85) 0%, transparent 50%);
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    rgba(0,0,0,.6) 75%,
+    rgba(0,0,0,.85) 100%
+  );
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 1rem;
-  color: #e2e8f0;
+  padding: 1rem 1.25rem;
+  color: #fff;
 }
 
-/* название */
 .steam-item h4 {
-  margin: 0 0 .25rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 700;
+  margin: 0 0 .25rem;
   line-height: 1.2;
   text-shadow: 0 1px 2px rgba(0,0,0,.8);
 }
 
-/* часы и иконка платформы */
 .steam-item .hours {
-  font-size: .8rem;
-  color: #94a3b8;
+  font-size: .85rem;
+  font-weight: 500;
+  opacity: .9;
   display: flex;
   align-items: center;
   gap: .4rem;
 }
-
 .steam-item .hours::before {
-  content: '\f1b6';
-  font-family: 'Font Awesome 6 Free';
+  content: "\f1b6";
+  font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  color: var(--clr-primary-light);
+  color: #00d4ff;
+}
+
+/* ======  АДАПТИВ  ====== */
+@media (max-width: 600px) {
+  .steam-list ul {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* кнопка «Показать ещё» */
@@ -605,6 +595,7 @@ footer {
   justify-content: center;
   padding: 1rem;
 }
+
 .steam-modal.hidden { display: none; }
 
 .steam-modal-content {
@@ -732,7 +723,7 @@ footer {
         position: absolute;
         top: 0;
         right: 0;
-        width: 300px;
+        width: 350px;
         height: 100%;
         overflow-y: scroll;
         scrollbar-width: none;
@@ -1044,15 +1035,7 @@ footer {
 }
 
 /* ---- Модалка ---- */
-.steam-modal {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.85);
-  z-index: 1002;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
+
 .steam-modal.hidden { display: none; }
 
 .steam-modal-content {
@@ -1263,6 +1246,7 @@ footer {
   box-shadow: var(--shadow);
   transition: box-shadow .3s ease;
   cursor: pointer;
+  user-select: none;
 }
 
 @media (max-width: 480px) {
@@ -1662,6 +1646,172 @@ footer {
   border-radius: 6px;
   backdrop-filter: blur(4px);
 }
+.ach-collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease;
+  margin-top: .5rem;
+}
+.ach-collapse.open {
+  max-height: 1000px;
+}
+.ach-toggle {
+  cursor: pointer;
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: #e2e8f0;
+  user-select: none;
+}
+.ach-toggle i { transition: transform .3s; }
+.ach-toggle.open i { transform: rotate(90deg); }
+
+.ach-toggle-block {
+  margin-top: .75rem;
+}
+.ach-toggle-btn {
+  cursor: pointer;
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: #e2e8f0;
+  user-select: none;
+}
+.ach-toggle-btn i { transition: transform .3s; }
+.ach-toggle-btn.open i { transform: rotate(90deg); }
+
+.ach-toggle-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease;
+  margin-top: .5rem;
+}
+.ach-toggle-list.open {
+  max-height: 1000px;
+}
+
+.ach-mini {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .85rem;
+  margin-bottom: .4rem;
+}
+.ach-accordion {
+  margin-top: 1rem;
+}
+.ach-btn {
+  width: 100%;
+  padding: .9rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background .3s, box-shadow .3s;
+}
+.ach-btn.done  { background: #28a745; color: #fff; }
+.ach-btn.chal  { background: #007bff; color: #fff; }
+
+.ach-btn:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+.ach-btn i {
+  transition: transform .3s;
+}
+.ach-btn.open i {
+  transform: rotate(90deg);
+}
+
+.ach-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease;
+  margin-top: .5rem;
+}
+.ach-panel.open {
+  max-height: 1000px;
+}
+.ach-row {
+  padding: .6rem .8rem;
+  font-size: .95rem;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.ach-row:last-child { border-bottom: none; }
+.ach-row i { width: 18px; }
+.ach-row.done  i { color: #28a745; }
+.ach-row.pending i { color: #dc3545; }
+.ach-btn {
+  width: 100%;
+  padding: .9rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #000;
+  background: #e2e8f0;
+  transition: background .3s, box-shadow .3s;
+} 
+.ach-btn.done  { background: #bbbbbb; }
+.ach-btn.chal  { background: #b9b9b9; }
+
+.ach-btn:hover { box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+.ach-btn i     { transition: transform .3s; }
+.ach-btn.open i { transform: rotate(90deg); }
+
+.ach-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease;
+}
+.ach-panel.open { max-height: 1000px; }
+
+.ach-row {
+  padding: .6rem .8rem;
+  font-size: .95rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.ach-row.done  i { color: #28a745; }
+.ach-row.pending i { color: #dc3545; }
+.ach-btn,
+.ach-toggle-btn {
+  color: #000 !important;
+  background: #e2e8f0;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ach-btn,
+.ach-toggle-btn,
+.ach-panel,
+.ach-toggle-list {
+  transition: all .4s cubic-bezier(.4,.0,.2,1);
+}
+.current-info { cursor:pointer; user-select:none; }
+#toggleSteam {
+  width: 100%;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
 
 
 
