@@ -1549,7 +1549,6 @@ footer {
 }
 .achievements-modal .close:hover { color: #fff; }
 
-/* Карточки достижений */
 #allAchievementsList {
   display: grid;
   gap: 1.25rem;
@@ -1613,7 +1612,6 @@ footer {
   margin-right: .75rem;
   box-shadow: 0 2px 6px rgba(0,0,0,.25);
 }
-/* 🏆 Достижения внутри drawer */
 .ach-drawer {
   margin-top: 1rem;
   display: grid;
@@ -1651,17 +1649,13 @@ footer {
 }
 .ach-mini i { color: #28a745; }
 .ach-mini.pending i { color: #6c757d; }
-/* 🟢 Выполненные челленджи / достижения */
 .ach-mini i.fa-check-circle {
-  color: var(--clr-secondary);  /* зелёный */
+  color: var(--clr-secondary);
 }
 
-/* 🔴 Не-выполненные челленджи */
 .ach-mini.pending i {
-  color: #dc3545;               /* ярко-красный */
+  color: #dc3545;
 }
-
-/* ⚪ Контрастный фон, чтобы не сливались */
 .ach-mini {
   background: rgba(255, 255, 255, .12);
   padding: .4rem .6rem;
