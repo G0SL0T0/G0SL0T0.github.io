@@ -30,6 +30,58 @@ const ACH_DB = [
   { name: 'Закрыть полностью карту только на скаутах',game: 'Expeditions: A MudRunner Game',   date: null,         unlocked: false, type: 'challenge' },
   { name: 'Повредить колеса на скауте макс. скоростью',game: 'Expeditions: A MudRunner Game',  date: null,         unlocked: false, type: 'challenge' },
   { name: 'Эвакуация тяжелого вездехода скаутом',  game: 'Expeditions: A MudRunner Game',      date: null,         unlocked: false, type: 'challenge' },
+
+  /* === Достижения для первых 15 игр === */
+{ name: 'Страйк - убить 9 мобов, 1 бомбой',      game: 'The Witcher 3: Wild Hunt', date: '2024-08-19', unlocked: true, type: 'achievement' },
+{ name: 'Все вопросики на Скеллиге',             game: 'The Witcher 3: Wild Hunt', date: '2023-08-15', unlocked: true, type: 'achievement' },
+{ name: 'Барон повесился 100 раз. Зачем?',       game: 'The Witcher 3: Wild Hunt', date: '2025-01-10', unlocked: true, type: 'achievement' },
+
+{ name: 'Полный комплект прайм-фреймов',         game: 'Warframe',                 date: '2024-03-30', unlocked: true, type: 'achievement' },
+{ name: 'Пройти весь стальной путь',             game: 'Warframe',                 date: '2025-02-12', unlocked: true, type: 'achievement' },
+{ name: '10 часов на 1 ммиссии',                 game: 'Warframe',                 date: '2024-01-20', unlocked: true, type: 'achievement' },
+
+{ name: 'Участие в убийстве первого КБТ',        game: 'EVE Online',               date: '2025-02-05', unlocked: true, type: 'achievement' },
+{ name: 'Востановится в игру спустя 1+ год',     game: 'EVE Online',               date: '2024-03-18', unlocked: true, type: 'achievement' },
+{ name: 'Дудосить "китайских" фармеров',         game: 'EVE Online',               date: '2025-04-01', unlocked: true, type: 'achievement' },
+
+{ name: 'Достигнуть 62 уровня',                  game: 'Black Desert',             date: '2022-08-20', unlocked: true, type: 'achievement' },
+{ name: 'Получить легендарный корабль',          game: 'Black Desert',             date: '2023-07-05', unlocked: true, type: 'achievement' },
+
+{ name: 'Иметь бизнес в шутере',                 game: 'Counter-Strike 2',         date: '2025-00-00', unlocked: true, type: 'achievement' },
+{ name: '1000-7 матчей в Premier',               game: 'Counter-Strike 2',         date: '2023-09-15', unlocked: true, type: 'achievement' },
+
+{ name: 'Мастер-убийца (10 000 убийств)',        game: 'Apex Legends',             date: '2019-05-18', unlocked: true, type: 'achievement' },
+{ name: 'Победа без помощи напарников',          game: 'Apex Legends',             date: '2019-04-30', unlocked: true, type: 'achievement' },
+
+{ name: 'Получить престиж 100',                  game: 'Dead by Daylight',         date: '2025-05-25', unlocked: true, type: 'achievement' },
+{ name: '1000 побед за выживших',                game: 'Dead by Daylight',         date: '2025-04-10', unlocked: true, type: 'achievement' },
+
+{ name: 'Полный рейд «Король падших»',           game: 'Destiny 2',                date: '2023-04-22', unlocked: true, type: 'achievement' },
+{ name: 'Коллекция экзотиков 100/100',           game: 'Destiny 2',                date: '2023-03-15', unlocked: true, type: 'achievement' },
+
+{ name: '1000 побед на арене',                   game: 'Crossout',                 date: '2024-06-12', unlocked: true, type: 'achievement' },
+{ name: 'Полный репутационный стандарт',         game: 'Crossout',                 date: '2023-05-01', unlocked: true, type: 'achievement' },
+
+{ name: 'Получить 10 престижей',                 game: 'Hunt: Showdown 1896',      date: '2024-01-28', unlocked: true, type: 'achievement' },
+{ name: '500 PvP-фрагов в QuickPlay',            game: 'Hunt: Showdown 1896',      date: '2024-12-11', unlocked: true, type: 'achievement' },
+
+{ name: 'Спидран R8A1 - 6:07',                   game: 'GTFO',                     date: '2025-04-11', unlocked: true, type: 'achievement' },
+{ name: '100 % достижений GTFO',                 game: 'GTFO',                     date: '2025-04-11', unlocked: true, type: 'achievement' },
+
+{ name: 'Победить Yog-Dzewa',                    game: 'Shattered Pixel Dungeon',  date: '2025-03-22', unlocked: true, type: 'achievement' },
+{ name: 'Пройти игру на всех классах',           game: 'Shattered Pixel Dungeon',  date: '2025-02-18', unlocked: true, type: 'achievement' },
+
+{ name: 'Получить 100 % Steam-достижений',       game: '枝江畔之梦',               date: '2024-09-15', unlocked: true, type: 'achievement' },
+{ name: 'Полный саундтрек в коллекции',          game: '枝江畔之梦',               date: '2024-09-10', unlocked: true, type: 'achievement' },
+
+{ name: '100 % достижений PAYDAY 2',             game: 'PAYDAY 2',                 date: '2024-12-01', unlocked: true, type: 'achievement' },
+{ name: '1000 ограблений Death Sentence',        game: 'PAYDAY 2',                 date: '2024-11-20', unlocked: true, type: 'achievement' },
+
+{ name: 'Победить всех фракций на сложности',    game: 'Dawn of War - Soulstorm',  date: '2023-11-25', unlocked: true, type: 'achievement' },
+{ name: 'Пройти кампанию за некронов без потерь',game: 'Dawn of War - Soulstorm',  date: '2024-01-12', unlocked: true, type: 'challenge' },
+
+{ name: '100 % достижений Generation Zero',      game: 'Generation Zero®',         date: '2024-06-28', unlocked: true, type: 'achievement' },
+{ name: 'Уничтожить 1000 машин-роботов',         game: 'Generation Zero®',         date: '2024-06-15', unlocked: true, type: 'achievement' }
 ];
 
 function gameIcon(gameName) {

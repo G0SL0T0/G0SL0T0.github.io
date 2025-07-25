@@ -23,7 +23,7 @@ const games = [
   { name: 'SCP: Secret Laboratory',      hours: 493,  lastLaunch: '6 мая 2023', achievements: '35/52', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/700330/header.jpg' },
   { name: 'Albion Online',               hours: 485,  lastLaunch: '27 апр. 2023', achievements: '0/154', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/761890/header.jpg' },
   { name: 'Northgard',                   hours: 474,  lastLaunch: '11 янв.',  achievements: '0/289', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/466560/header.jpg' },
-  { name: 'TRADESMAN: Deal to Dealer',   hours: 427,  lastLaunch: 'Активная игра',  achievements: 'Скоро будут ;)', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2555430/header.jpg' },
+  { name: 'TRADESMAN: Deal to Dealer',   hours: 430,  lastLaunch: 'Активная игра',  achievements: 'Скоро будут ;)', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2555430/header.jpg' },
   { name: 'Rogue Company',               hours: 409,  lastLaunch: '6 мая 2023', achievements: '20/20', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/872200/header.jpg' },
   { name: 'RimWorld',                    hours: 314,  lastLaunch: '19 дек. 2023', achievements: '-', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/294100/header.jpg' },
   { name: 'Asphalt Legends Unite',       hours: 262,  lastLaunch: '25 июн.',  achievements: '39/42', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1815780/header.jpg' },
@@ -271,15 +271,17 @@ function buildAchievementsDrawer(gameName) {
 
 window.toggleAcc = (e, id) => {
   e.stopPropagation();
-  const btn  = e.currentTarget;
+  const btn   = e.currentTarget;
   const panel = document.getElementById(id);
+  const alreadyOpen = btn.classList.contains('open');
   const scope = btn.closest('.current-game-card') ||
                 btn.closest('.top-card-wrapper') ||
                 btn.closest('.steam-modal-content');
   if (!scope) return;
-  scope.querySelectorAll('.ach-panel, .ach-btn').forEach(el => el.classList.remove('open'));
-  const open = btn.classList.contains('open');
-  if (!open) {
+  scope.querySelectorAll('.ach-panel, .ach-btn').forEach(el => {
+    el.classList.remove('open');
+  });
+  if (!alreadyOpen) {
     btn.classList.add('open');
     panel?.classList.add('open');
   }
