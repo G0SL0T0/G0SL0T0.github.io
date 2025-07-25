@@ -8,7 +8,8 @@
     <link rel="icon" type="png" sizes="32x32" href="img/favicon-32x32.png">
     <link rel="stylesheet" href="css/game-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+    <script src="achievements.js" defer></script>
+    <script src="steam-games.js" defer></script>
 </head>
 <body>
 
@@ -199,7 +200,7 @@
                                         <div class="mini-bar done">
                                             <div class="mini-progress" style="width: 100%"></div>
                                         </div>
-                                        <i class="fas fa-check-circle"> 1 / 1</i>
+                                        <i class="fas fa-check-circle"></i>
                                     </li>
                                     <li class="achievement-item">
                                         <span class="label">Открыть 5 секретных секторов</span>
@@ -251,9 +252,6 @@
                     </div>
                 </section>
 
-                <!-- ддд -->
-                <script src="steam-games.js" defer></script>
-
                 <!-- Сайдбар -->
                 <div class="hobby-sidebar">
                     <div class="sidebar-inner">
@@ -282,13 +280,12 @@
                         <!-- Достижения -->
                         <div class="sidebar-block">
                             <h3><i class="fas fa-trophy"></i> Последние достижения</h3>
-                            <ul class="achievements-list">
-                                <li>Завершил Tradesman на 100% <br><i class="fas fa-play"></i>(Повторяемое) - 7 раз</li>
-                                <li>Топ-100 в GTFO (R8)</li>
-                                <li>10 KDA в EVE Frontier</li>
-                                <li>Активное участие в Альфа тестировании EVE Frontier</li>
-                                <br><span class="platform-tag">Раздел в разработке</span>
+                            <ul class="achievements-list" id="latestAchievements">
+                                <!-- JS - achievements.js -->
                             </ul>
+                            <button id="openAllAchievements" class="button" style="margin-top:.75rem;width:100%">
+                                <i class="fas fa-list"></i> Все достижения
+                            </button>
                         </div>
 
                         <!-- Контакты -->
@@ -345,10 +342,15 @@
 
                         <link rel="stylesheet" href="css/gallery.css">
                         <script src="gallery.js" defer></script>
+
                     </div>
                 </div>
             </div>
         </div>
+
+
+
+
     </section>
 </main>
 
@@ -357,6 +359,18 @@
         <p>&copy; 2025 Gosloto. Все права НЕ защищены.</p>
     </div>
 </footer>
+
+<div id="achievementsModal" class="modal achievements-modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 style="margin-top:0;color:#e2e8f0;">Все достижения и челленджи</h2>
+
+        <!-- Фильтр по игре -->
+        <select id="achGameFilter" class="ach-filter" style="margin-bottom:1.5rem;padding:.5rem 1rem;border-radius:8px;border:none;font-size:1rem;"></select>
+
+        <div id="allAchievementsList" class="modal-grid"></div>
+    </div>
+</div>
 
 <script>
     /* ==== кнопка «Скриншоты» в «Сейчас играю» (как в TOP-5) ==== */

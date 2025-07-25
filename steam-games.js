@@ -111,6 +111,7 @@ const games = [
       <p><strong>Часы в Steam:</strong> ${g.hours} ч</p>
       <p><strong>Последний запуск:</strong> ${g.lastLaunch}</p>
       <p><strong>Достижения:</strong> ${g.achievements}</p>
+      ${buildAchievementsDrawer(g.name)} <!-- ВОТ ЭТО -->
       <button class="btn-screens" data-game="${g.name}">
         <i class="fas fa-images"></i> Посмотреть скриншоты
       </button>
@@ -170,6 +171,48 @@ document.addEventListener('click', e => {
   item.classList.toggle('open');
 });
 
+/* ===============  ДОСТИЖЕНИЯ =============== */
+function buildAchievementsDrawer(gameName) {
+  const achs   = ACH_DB.filter(a => a.game === gameName && a.name);
+  const done   = achs.filter(a => a.unlocked && a.type === 'achievement');
+  const chall  = achs.filter(a => a.type === 'challenge');
+  const locked = achs.filter(a => !a.unlocked && a.type === 'achievement');
+
+  return /* html */`
+    <div class="ach-drawer">
+      ${done.length ? `
+        <h4><i class="fas fa-trophy"></i> Достижения</h4>
+        ${done.map(a => `
+          <div class="ach-mini done">
+            <i class="fas fa-check-circle" style="color:#28a745;"></i>
+            <span>${a.name}</span>
+          </div>
+        `).join('')}
+      ` : ''}
+
+      ${chall.length ? `
+        <h4><i class="fas fa-bullseye"></i> Челленджи</h4>
+        ${chall.map(a => `
+          <div class="ach-mini ${a.unlocked ? 'done' : 'pending'}">
+            <i class="fas ${a.unlocked ? 'fa-check-circle' : 'fa-hourglass-half'}" 
+               style="color:${a.unlocked ? '#28a745' : '#dc3545'};"></i>
+            <span>${a.name}</span>
+          </div>
+        `).join('')}
+      ` : ''}
+
+      ${locked.length ? `
+        <h4><i class="fas fa-lock"></i> Не получено</h4>
+        ${locked.map(a => `
+          <div class="ach-mini locked">
+            <i class="fas fa-lock" style="color:#6c757d;"></i>
+            <span>${a.name}</span>
+          </div>
+        `).join('')}
+      ` : ''}
+    </div>
+  `;
+}
 
 /* === RENDER === */
 const UL = document.getElementById('steamGamesList');
@@ -203,8 +246,11 @@ function openModal(game) {
     <p><strong>Общее время:</strong> ${game.hours} ч</p>
     <p><strong>Последний запуск:</strong> ${game.lastLaunch}</p>
     <p><strong>Достижения:</strong> ${game.achievements}</p>
-    <p>${game.details || ''}</p>
-  `;
+    ${buildAchievementsDrawer(game.name)} <!-- ⬅ ВОТ ЭТО -->
+    <button class="btn-screens" data-game="${game.name}">
+      <i class="fas fa-images"></i> Посмотреть скриншоты
+    </button>
+  `;               
   MODAL.classList.remove('hidden');
 }
 
