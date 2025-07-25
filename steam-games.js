@@ -23,8 +23,8 @@ const games = [
   { name: 'SCP: Secret Laboratory',      hours: 493,  lastLaunch: '6 мая 2023', achievements: '35/52', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/700330/header.jpg' },
   { name: 'Albion Online',               hours: 485,  lastLaunch: '27 апр. 2023', achievements: '0/154', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/761890/header.jpg' },
   { name: 'Northgard',                   hours: 474,  lastLaunch: '11 янв.',  achievements: '0/289', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/466560/header.jpg' },
+  { name: 'TRADESMAN: Deal to Dealer',   hours: 417,  lastLaunch: 'Активная игра',  achievements: 'Скоро будут ;)', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2555430/header.jpg' },
   { name: 'Rogue Company',               hours: 409,  lastLaunch: '6 мая 2023', achievements: '20/20', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/872200/header.jpg' },
-  { name: 'TRADESMAN: Deal to Dealer',   hours: 414,  lastLaunch: 'Активная игра',  achievements: 'Скоро будут ;)', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2555430/header.jpg' },
   { name: 'RimWorld',                    hours: 314,  lastLaunch: '19 дек. 2023', achievements: '-', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/294100/header.jpg' },
   { name: 'Asphalt Legends Unite',       hours: 262,  lastLaunch: '25 июн.',  achievements: '39/42', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1815780/header.jpg' },
   { name: 'Warhammer 40,000: Gladius',   hours: 254,  lastLaunch: '23 апр. 2024', achievements: '97/166', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/489630/header.jpg' },
@@ -67,7 +67,7 @@ const games = [
   { name: 'EVE Frontier',                hours: 48,    lastLaunch: 'Активная игра', achievements: '-', image: 'img/eve-frontier.jpg' }
 ];
 
-/* ===== TOP-5 аккордеон ===== */
+/* ===== TOP-5 ===== */
 (() => {
   const TOP_NAMES = [
     'The Witcher 3: Wild Hunt',
@@ -93,11 +93,13 @@ const games = [
     // карточка
     const card = document.createElement('div');
     card.className = 'top-card';
-    card.style.backgroundImage = `url(${g.image})`;
+    /*card.style.backgroundImage = `url(${g.image})`;*/
     card.innerHTML = `
-      <div class="top-card-overlay">
-        <h3>${g.name}</h3>
-        <p class="details">${g.hours}+ ч · Топ-5 любимых игр</p>
+      <div class="top-card" style="background-image:url(${g.image})">
+        <div class="top-card-overlay">
+          <h3>${g.name}</h3>
+          <p class="details">${g.hours}+ ч · Топ-5</p>
+        </div>
       </div>
     `;
 
@@ -128,16 +130,47 @@ const games = [
     /* кнопка «скриншоты» */
     drawer.querySelector('.btn-screens').addEventListener('click', e => {
       e.stopPropagation();
+
       const gameTitle = e.target.dataset.game;
-      document.getElementById('galleryModal').style.display = 'flex';
-      if (!window.allImages?.length) loadData?.();
-      else {
-        document.getElementById('gameSel').value = gameTitle;
-        resetAndRender?.();
+
+      /* 1. открыть общее модальное окно */
+      const modal = document.getElementById('galleryModal');
+      document.body.appendChild(modal);
+      modal.style.display = 'flex';
+
+      /* 2. загрузить данные, если ещё не загружены */
+      if (!window.allImages?.length) {
+        window.loadData();          // функция из gallery.js
       }
+
+      /* 3. выбрать нужную игру в фильтре */
+      const gameSel = document.getElementById('gameSel');
+      gameSel.value = gameTitle;
+
+      /* 4. перерисовать галерею */
+      window.resetAndRender();      // функция из gallery.js
     });
   });
 })();
+
+document.querySelector('.current-games-section').addEventListener('click', e => {
+  const header = e.target.closest('.current-game-header');
+  if (!header) return;
+
+  const item = header.closest('.accordion-item');
+  const open = item.classList.contains('open');
+
+  /* закрыть все */
+  document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+  if (!open) item.classList.add('open');
+});
+document.addEventListener('click', e => {
+  const item = e.target.closest('.current-game');
+  if (!item) return;
+  item.classList.toggle('open');
+});
+
+
 /* === RENDER === */
 const UL = document.getElementById('steamGamesList');
 const TOGGLE_BTN = document.getElementById('toggleSteam');

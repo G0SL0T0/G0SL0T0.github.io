@@ -1,7 +1,3 @@
-/* ===========================================================
-   GAME-STYLE.CSS — полностью автономный
-   =========================================================== */
-
 /* 0. CSS Reset / Normalize */
 *,
 *::before,
@@ -153,9 +149,22 @@ nav a.active::after {
     position: absolute;
     inset: auto 0 0;
     padding: 2rem;
-    background: linear-gradient(transparent 60%, rgba(0,0,0,.8));
+      background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 40%,
+    rgba(0,0,0,.7) 75%,
+    rgba(0,0,0,.85) 100%
+  );
     color: #fff;
     border-radius: 0 0 var(--radius) var(--radius);
+}
+.banner-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 40%,
+    rgba(0,0,0,.7) 75%,
+    rgba(0,0,0,.85) 100%
+  );
 }
 
 .banner-overlay h1 {
@@ -315,17 +324,19 @@ nav a.active::after {
 }
 
 .progress-bar {
-    height: 8px;
-    background: #e9ecef;
-    border-radius: 4px;
-    overflow: hidden;
+  height: 6px;
+  background: #e9ecef;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: .5rem;
+  width: 100%;
 }
 
 .progress {
-    height: 100%;
-    background: linear-gradient(90deg, var(--clr-primary), var(--clr-primary-light));
-    border-radius: 4px;
-    transition: width .6s ease;
+  height: 100%;
+  background: linear-gradient(90deg, var(--clr-primary), var(--clr-primary-light));
+  border-radius: 3px;
+  transition: width .6s ease;
 }
 
 .genre-list,
@@ -364,24 +375,25 @@ nav a.active::after {
 
 /* 9. Steam games (внутри .hobby-main) */
 .steam-games {
-    margin-top: 3rem;
+  margin-top: 3rem;
 }
 
 .steam-games h2 {
-    display: inline-block;
-    margin-right: .5rem;
-    color: var(--clr-primary);
+  display: inline-block;
+  margin-right: .5rem;
+  color: var(--clr-primary);
+  font-size: 1.5rem;
 }
 
 .mini-toggle {
-    background: var(--clr-primary);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    transition: transform .2s;
+  background: var(--clr-primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: transform .2s;
 }
 
 .mini-toggle:hover {
@@ -425,7 +437,98 @@ nav a.active::after {
     color: #94a3b8;
     font-size: .8rem;
 }
+.steam-list ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  padding: 0;
+  list-style: none;
+}
 
+/* --- карточка --- */
+.steam-item {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #1e293b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+  transition: transform .3s ease, box-shadow .3s ease;
+  cursor: pointer;
+}
+
+.steam-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 123, 255, .25);
+}
+
+/* изображение */
+.steam-item img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  filter: brightness(.8) contrast(1.05);
+  transition: filter .3s ease;
+}
+
+.steam-item:hover img {
+  filter: brightness(1) contrast(1.1);
+}
+
+/* затемнённый градиент поверх картинки */
+.steam-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 23, 42, .85) 0%, transparent 50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  color: #e2e8f0;
+}
+
+/* название */
+.steam-item h4 {
+  margin: 0 0 .25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0,0,0,.8);
+}
+
+/* часы и иконка платформы */
+.steam-item .hours {
+  font-size: .8rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.steam-item .hours::before {
+  content: '\f1b6';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  color: var(--clr-primary-light);
+}
+
+/* кнопка «Показать ещё» */
+.load-more-games {
+  display: block;
+  margin: 2rem auto 0;
+  padding: .6rem 1.8rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--clr-primary);
+  color: #fff;
+  font-size: .9rem;
+  cursor: pointer;
+  transition: background .3s, transform .2s;
+}
+
+.load-more-games:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
 .load-more-games {
     display: block;
     margin: 1rem auto 0;
@@ -612,38 +715,36 @@ footer {
 /* Ниже работа с сайд баром */
 @media (min-width: 769px) {
     .hobby-info {
-        position: relative;          /* create containing box */
+        position: relative;
     }
 
     .hobby-sidebar {
-        position: absolute;          /* sits inside .hobby-info */
+        position: absolute;
         top: 0;
         right: 0;
-        width: 100%;                 /* take the grid cell */
-        height: 100%;                /* full height of .hobby-info */
-        overflow: hidden;            /* hide OS scrollbar */
-        pointer-events: none;        /* let clicks fall through */
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
     }
 
     .hobby-sidebar > .sidebar-inner {
         position: absolute;
         top: 0;
         right: 0;
-        width: 300px;                /* your column width */
-        height: 100%;                /* full column height */
-        overflow-y: scroll;          /* but we hide the bar */
-        scrollbar-width: none;       /* Firefox */
+        width: 300px;
+        height: 100%;
+        overflow-y: scroll;
+        scrollbar-width: none;
         scroll-behavior: smooth;
         pointer-events: auto;
-        /* speed-up scroll (parallax) */
         transform: translateY(0);
     }
 
     .hobby-sidebar > .sidebar-inner::-webkit-scrollbar {
-        display: none;               /* Chrome / Edge */
+        display: none;
     }
 
-    /* parallax driver – JS adds data-scroll to body */
     [data-scroll] .hobby-sidebar > .sidebar-inner {
         transform: translateY(calc(var(--scroll-y, 0) * 0.22));
     }
@@ -662,22 +763,18 @@ footer {
 
 .hobby-sidebar__rail {
     position: fixed;
-    top: 110px;              /* below sticky header */
-    right: max(2rem, 50vw - 600px); /* align to 1200-container */
+    top: 110px;
+    right: max(2rem, 50vw - 600px);
     width: 300px;
     max-height: calc(100vh - 130px);
     overflow-y: auto;
     pointer-events: auto;
     z-index: 10;
-
-    /* glass-morphism + shadow */
     background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(10px);
     border-radius: var(--radius);
     box-shadow: 0 8px 32px rgba(0,0,0,.12);
     padding: 1rem;
-
-    /* smooth scroll & thin scrollbar */
     scrollbar-width: thin;
     scrollbar-color: var(--clr-primary) transparent;
     transition: transform .3s ease, opacity .3s ease;
@@ -746,8 +843,6 @@ footer {
     align-items: center;
     gap: .5rem;
 }
-/* Выше работа с сайд баром */
-
 
 /* ---------- Modal ---------- */
 .modal {
@@ -764,18 +859,14 @@ footer {
   position: fixed;
   inset: 0;
   z-index: 10001;
-
-  /* Let the browser treat it as if it were attached to <body> */
-  position-try: viewport; /* modern keyword, works in Chromium-based browsers */
+  position-try: viewport;
   transform: none !important;
   contain: none !important;
   clip-path: none !important;
 }
 
-/* fallback for browsers that don’t support position-try */
 @supports not (position-try: viewport) {
   #galleryModal {
-    /* move it to the viewport manually */
     transform: translate3d(0, 0, 0) !important;
   }
 }
@@ -982,13 +1073,13 @@ footer {
 }
 .stat-card.modern h3 { font-size: 1.5rem; margin-bottom: 1rem; }
 .stat-card.modern p { margin: .5rem 0; font-size: 1rem; }
-/* ---- TOP-5 современные карточки ---- */
+
+/* ---- TOP-5 современные карточки ---- 
 .game-cards.modern {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
 }
-
 .game-card.modern {
   background: #fff;
   border-radius: 12px;
@@ -997,7 +1088,7 @@ footer {
   transition: transform .3s;
 }
 .game-card.modern:hover { transform: translateY(-5px); }
-
+*/
 .img-wrap {
   aspect-ratio: 16 / 9;
   overflow: hidden;
@@ -1021,61 +1112,6 @@ footer {
   gap: 1.2rem;
 }
 
-.top-card-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-.top-card {
-  height: 280px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  cursor: pointer;
-  transition: filter .3s;
-}
-
-.top-card:hover {
-  transform: scale(1.02);
-}
-
-.top-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.8) 0%, transparent 40%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.5rem;
-  color: #fff;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  transition: opacity .3s;
-}
-.top-card-wrapper.open .top-card-overlay {
-  opacity: 0;
-}
-.top-card .top-card-overlay h3,
-.top-card .top-card-overlay .details {
-    color: #fff;
-    text-shadow:
-        -1px -1px 0 #000,
-         1px -1px 0 #000,
-        -1px  1px 0 #000,
-         1px  1px 0 #000;
-}
-
-.top-card h3 {
-    font-weight: 700;
-    font-size: 2rem;
-    margin: 0 0 .25rem;
-}
-.top-card .details {
-    font-weight: 800;
-    font-size: .9rem;
-    opacity: .9;
-}
 /* ---- кнопка «Посмотреть скриншоты» ---- */
 .btn-screens {
   margin-top: .5rem;
@@ -1163,33 +1199,6 @@ footer {
   font-size: 1rem;
 }
 .btn-screens:hover { background: #0056b3; }
-/* Slide-down drawer */
-.top-game-drawer {
-    grid-column: 1 / -1;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,.15);
-    margin-top: 1.5rem;
-    padding: 2rem;
-    position: relative;
-    animation: fadeIn .4s ease;
-}
-.top-game-drawer.hidden { display: none; }
-
-.top-card-drawer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .4s ease;
-  background: rgba(0,0,0,.55);
-  backdrop-filter: blur(8px);
-  color: #fff;
-  padding: 0 1.5rem;
-}
-
-.top-card-drawer.open {
-  max-height: 600px;
-  padding: 1.5rem 2rem;
-}
 
 .drawer-close {
   position: absolute;
@@ -1219,28 +1228,392 @@ footer {
     cursor: pointer;
 }
 .btn-screens:hover { background: #0056b3; }
-.top-card.open .top-card-overlay {
+
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform .4s, box-shadow .4s;
+}
+.stat-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 60%, var(--clr-primary-light) 100%);
   opacity: 0;
-  transition: opacity .3s ease;
+  transition: opacity .4s;
+}
+.stat-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,123,255,.35);
+}
+.stat-card:hover::after { opacity: .2; }
+.stat-card:hover i { animation: fa-bounce .7s; }
+
+
+
+/* ==== контейнер секции ==== */
+.current-games-section {
+  margin-top: 2.5rem;
 }
 
-.top-card-drawer {
+.current-games-section h2 {
+  margin-bottom: 1rem;
+  color: var(--clr-primary);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+/* ==== каждая карточка ==== */
+.current-game-card {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: .75rem 1rem;
+  align-items: center;
+  background: #fff;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: box-shadow .3s ease;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .current-game-card {
+    grid-template-columns: 80px 1fr;
+    padding: .75rem 1rem;
+  }
+}
+
+.current-game-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* ==== изображение фиксированного размера ==== */
+.current-game-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+@media (max-width: 480px) {
+  .current-game-card img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* ==== текст и прогресс ==== */
+.current-info {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .25rem;
+}
+
+.current-info h3 {
+  margin: 0;
+  font-size: clamp(1rem, 1.1vw, 1.2rem);
+  font-weight: 700;
+  color: var(--clr-primary);
+  line-height: 1.2;
+}
+
+.progress-label {
+  margin: 0;
+  font-size: .85rem;
+  color: #495057;
+}
+
+.progress-bar {
+  height: 6px;
+  background: #e9ecef;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--clr-primary), var(--clr-primary-light));
+  border-radius: 3px;
+  transition: width .6s ease;
+}
+
+.meta {
+  margin: 0;
+  font-size: .8rem;
+  color: #6c757d;
+}
+
+/* ==== аккордеон-контент ==== */
+.current-drawer {
+  grid-column: 1 / 3;
+  background: rgba(0, 0, 0, .03);
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 0 1.25rem;
   max-height: 0;
   overflow: hidden;
-  transition: max-height .4s ease;
-  background: rgba(0, 0, 0, .55);
-  backdrop-filter: blur(8px);
+  transition: max-height .35s ease, padding .35s ease;
+}
+.current-game-card.open {
+  grid-template-rows: auto 1fr;
+}
+.current-game-card.open .current-drawer {
+  max-height: 300px;
+  max-height: none;
+  padding: .75rem 1.25rem 1rem;
+  padding: .75rem 1.25rem 1rem;
+}
+
+.current-drawer p {
+  margin: .2rem 0;
+  font-size: .85rem;
+  color: #334155;
+}
+
+.current-drawer strong {
+  color: #0f172a;
+}
+
+/* ==== кнопка «Скриншоты» ==== */
+.btn-screens {
+  margin-top: .5rem;
+  padding: .4rem 1rem;
+  background: var(--clr-primary);
   color: #fff;
-  border-radius: 0 0 var(--radius) var(--radius);
-  padding: 0 2rem;
+  border: none;
+  border-radius: 999px;
+  font-size: .8rem;
+  cursor: pointer;
+  transition: background .3s;
 }
 
-.top-card-wrapper.open .top-card-drawer {
-  max-height: 600px;
-  padding: 1.5rem 2rem;
+.btn-screens:hover {
+  background: #0056b3;
 }
 
-/* скрыть текст при открытии */
-.top-card-wrapper.open .top-card-overlay {
-  opacity: 0;
+/* ===== общие стили для блоков ===== */
+.challenge-block,
+.achievement-block {
+  margin-bottom: 1rem;
 }
+
+.challenge-block h4,
+.achievement-block h4 {
+  margin: 0 0 .5rem;
+  font-size: .95rem;
+  color: var(--clr-primary);
+}
+
+.custom-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.challenge-item,
+.achievement-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .5rem .75rem;
+  align-items: center;
+  font-size: .8rem;
+  margin-bottom: .4rem;
+}
+
+.label {
+  grid-column: 1 / 2;
+  color: #334155;
+}
+
+.mini-bar {
+  grid-column: 1 / 3;
+  height: 5px;
+  background: #e9ecef;
+  border-radius: 2.5px;
+  overflow: hidden;
+}
+
+.mini-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--clr-primary), var(--clr-primary-light));
+  border-radius: 2.5px;
+  transition: width .3s ease;
+}
+
+/* для полностью выполненных целей */
+.mini-bar.done .mini-progress {
+  background: var(--clr-secondary);
+}
+
+.fa-check-circle {
+  color: var(--clr-secondary);
+  font-size: 1rem;
+}
+
+.percent {
+  font-size: .75rem;
+  color: #6c757d;
+  justify-self: end;
+}
+.speech,
+.speech-small {
+  margin: .5rem 0 1.25rem;
+  padding: .75rem 1rem;
+  background: rgba(0,123,255,.06);
+  border-left: 3px solid var(--clr-primary);
+  border-radius: 6px;
+  font-style: italic;
+  font-size: .9rem;
+  color: #334155;
+}
+
+.speech-small {
+  margin: 0 0 .75rem;
+  font-size: .8rem;
+}
+.speech.expandable {
+  position: relative;
+  margin: .5rem 0 1.25rem;
+  padding: .75rem 1rem;
+  background: rgba(0,123,255,.06);
+  border-left: 3px solid var(--clr-primary);
+  border-radius: 6px;
+  font-style: italic;
+  font-size: .9rem;
+  color: #334155;
+  cursor: pointer;
+  overflow: hidden;
+}
+.speech.expandable.open {
+  max-height: 9999px;
+  padding: .75rem 1rem;
+}
+.speech-preview {
+  display: inline;
+}
+
+.speech-full {
+  display: none;
+}
+
+.speech.expandable.open .speech-preview {
+  display: none;
+}
+
+.speech.expandable.open .speech-full {
+  display: inline;
+}
+
+
+
+
+
+
+
+
+/* Карточки ТОП 5 игр */
+/* НЕ ДАЙ БОГ ТЫ ТРОНЕШЬ ЧТО ТО ИЗ ЭТОЙ ОБЛАСТИ, 5 часов правок ушли не зря*/ 
+.top-card {
+    height: 280px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform .35s ease, filter .35s ease;
+    filter: blur(1px);
+}
+.top-card h3 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 0 0 .25rem;
+    filter: blur(0px);
+}
+.top-card .details {
+    font-weight: 800;
+    font-size: .9rem;
+    opacity: .9;
+    filter: blur(0px);
+}
+.top-card-drawer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s ease;
+    background: rgba(0, 0, 0, .55);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    border-radius: 0 0 var(--radius) var(--radius);
+    padding: 0 2rem;
+}
+.top-card-wrapper .top-card-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: filter .35s ease;
+}
+.top-card-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+.top-card:hover { transform: scale(1.02); filter: blur(0px);}
+.top-card-bg {
+    position: absolute;
+    inset: -5%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px);
+    transition: filter .35s ease;
+    filter: inherit;
+    z-index: 1;
+}
+.top-card-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    color: #fff;
+    text-shadow:    -1px -1px 0 #000,
+                    1px -1px 0 #000,
+                    -1px  1px 0 #000,
+                    1px  1px 0 #000;
+    transition: opacity .35s ease;
+}
+.top-card-drawer {
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height .40s ease, padding .40s ease; 
+    background: rgba(0,0,0,.55); 
+    backdrop-filter: blur(8px);
+    color: #fff;
+    padding: 0 1.5rem;
+}
+.top-card .top-card-overlay h3,
+.top-card .top-card-overlay .details {
+    color: #fff;
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+.top-card.open .top-card-overlay { opacity: 0; transition: opacity .3s ease;}
+.top-card-drawer.open { max-height: 600px; padding: 1.5rem 2rem;}
+.top-card-wrapper.open .top-card-drawer { max-height: 600px; padding: 1.5rem 2rem;}
+.top-card-wrapper.open .top-card-overlay { opacity: 0;}
+.top-card-wrapper.open .top-card { filter: blur(0px); transform: scale(1.02);}
+.top-card-wrapper.open .top-card-bg { filter: blur(0px);}
+/* КОД ПИСАТЬ ДО ЭТИХ БЛОКОВ */

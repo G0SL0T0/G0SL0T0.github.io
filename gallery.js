@@ -114,3 +114,5 @@ grid.addEventListener('click', e => {
   el.addEventListener('change', resetAndRender)
 );
 moreBtn.onclick = loadMore;
+window.loadData       = loadData;
+window.resetAndRender = resetAndRender;

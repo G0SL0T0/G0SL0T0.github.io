@@ -43,19 +43,24 @@
                     <div class="game-stats-section">
                         <h2><i class="fas fa-chart-bar"></i> Моя игровая статистика</h2>
                         <div class="stats-grid">
+                            <!-- 10 000+ -->
                             <div class="stat-card accent-blue">
                                 <i class="fas fa-hourglass"></i>
-                                <h3>10,000+</h3>
+                                <h3><span class="counter" data-target="10000">0</span>+</h3>
                                 <p>Часов в играх</p>
                             </div>
+
+                            <!-- 73 % -->
                             <div class="stat-card accent-green">
                                 <i class="fas fa-trophy"></i>
-                                <h3>73%</h3>
+                                <h3><span class="counter-percent" data-target="73">0</span></h3>
                                 <p>Достижений в Steam</p>
                             </div>
+
+                            <!-- 100+ -->
                             <div class="stat-card accent-purple">
                                 <i class="fas fa-gamepad"></i>
-                                <h3>100+</h3>
+                                <h3><span class="counter-plus" data-target="100">0</span></h3>
                                 <p>Игр в коллекции</p>
                             </div>
                         </div>
@@ -71,32 +76,156 @@
 
                     </section>
 
-                    <!-- Текущие проекты -->
-                    <div class="current-games-section">
+                    <!-- Сейчас играю -->
+                    <section class="current-games-section">
                         <h2><i class="fas fa-play"></i> Сейчас играю</h2>
-                        <div class="currently-playing">
-                            <div class="current-game">
-                                <img src="img/expeditions.jpg" alt="Expeditions">
-                                <div>
-                                    <h3>Expeditions: A MudRunner Game</h3>
-                                    <p><strong>Прогресс:</strong> 47%</p>
-                                    <div class="progress-bar">
-                                        <div class="progress" style="width: 47%"></div>
-                                    </div>
-                                </div>
+                                                
+                        <blockquote class="speech expandable">
+                            <span class="speech-preview">
+                                «Самые ценные достижения — те, что мы ставим перед собой…»
+                            </span>
+                            <span class="speech-full">
+                                «Самые ценные достижения в играх — те, что мы ставим перед собой. Я заранее придумываю челленджи: пройти уровень без урона, пройти игру без фаст тревелов или миникарты, построить мегабазу. Эти личные цели не дают мне бросить игру на полпути и превращают каждую сессию в маленький квест.»
+                            </span>
+                        </blockquote>                  
+
+                        <!-- Expeditions -->
+                        <div class="current-game-card accordion-item">
+                            <img src="img/expeditions.jpg" alt="Expeditions">
+                            <div class="current-info">
+                            <h3>Expeditions: A MudRunner Game</h3>
+                            <p class="progress-label">47 % пройдено</p>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 47%"></div>
                             </div>
-                            <div class="current-game">
-                                <img src="img/eve-frontier.jpg" alt="EVE Frontier">
-                                <div>
-                                    <h3>EVE Frontier</h3>
-                                    <p><strong>Прогресс:</strong> ~32%   <strong><i class="fas fa-play"></i>Закрытый Альфа тест</strong></p>
-                                    <div class="progress-bar">
-                                        <div class="progress" style="width: 32%"></div>
+                            <p class="meta">Последний запуск: сегодня / вчера</p>
+                            </div>
+
+                            <!-- аккордеон -->
+                            <div class="current-drawer">
+                            <div class="challenge-block">
+                                <h4>Мои челленджи</h4>
+                                <ul class="custom-list">
+                                <li class="challenge-item">
+                                    <span class="label">Закрыть полностью карту только на скаутах</span>
+                                    <div class="mini-bar">
+                                    <div class="mini-progress" style="width: 50%"></div>
                                     </div>
-                                </div>
+                                    <span class="percent">x / x</span>
+                                </li>
+                                <li class="challenge-item">
+                                    <span class="label">Повредить колеса на скауте макс. скоростью</span>
+                                    <div class="mini-bar">
+                                    <div class="mini-progress" style="width: 0%"></div>
+                                    </div>
+                                    <span class="percent">0 / 1</span>
+                                </li>
+                                </ul>
+                            </div>
+
+                            <div class="achievement-block">
+                                <h4>Мои достижения</h4>
+                                <ul class="custom-list">
+                                <li class="achievement-item">
+                                    <span class="label">Первые 100 км пробег</span>
+                                    <div class="mini-bar done">
+                                    <div class="mini-progress" style="width: 100%"></div>
+                                    </div>
+                                    <i class="fas fa-check-circle"></i>
+                                </li>
+                                <li class="achievement-item">
+                                    <span class="label">Первые 200 км пробега</span>
+                                    <div class="mini-bar">
+                                    <div class="mini-progress" style="width: 70%"></div>
+                                    </div>
+                                    <span class="percent">140 / 200</span>
+                                </li>
+                                <li class="achievement-item">
+                                    <span class="label">Эвакуация тяжелого вездехода скаутом (без мощностей вездехода)</span>
+                                    <div class="mini-bar">
+                                    <div class="mini-progress" style="width: 40%"></div>
+                                    </div>
+                                    <span class="percent">2 / 5</span>
+                                </li>
+                                </ul>
+                            </div>
+
+                            <button class="btn-screens" data-game="Expeditions: A MudRunner Game">
+                                <i class="fas fa-images"></i> Скриншоты
+                            </button>
                             </div>
                         </div>
-                    </div>
+
+                        <!-- EVE FRONTIER -->
+                        <div class="current-game-card accordion-item">
+                            <img src="img/eve-frontier.jpg" alt="EVE Frontier">
+                            <div class="current-info">
+                                <h3>EVE Frontier</h3>
+                                <p class="progress-label">32 % пройдено</p>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 32%"></div>
+                                </div>
+                                <p class="meta">Закрытая альфа тест</p>
+                            </div>
+
+                            <div class="current-drawer">
+                                <!-- Мои челленджи -->
+                                <div class="challenge-block">
+                                <h4>Мои челленджи</h4>
+                                <ul class="custom-list">
+                                    <li class="challenge-item">
+                                        <span class="label">Набить 10+ killmark на одном корабле</span>
+                                        <div class="mini-bar">
+                                            <div class="mini-progress" style="width: 40%"></div>
+                                        </div>
+                                        <span class="percent">4 / 10</span>
+                                    </li>
+                                    <li class="challenge-item">
+                                        <span class="label">Построить last принтер на месте дислокации</span>
+                                        <div class="mini-bar">
+                                            <div class="mini-progress" style="width: 25%"></div>
+                                        </div>
+                                        <span class="percent">2 / 4</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Мои достижения -->
+                            <div class="achievement-block">
+                                <h4>Мои достижения</h4>
+                                <ul class="custom-list">
+                                    <li class="achievement-item">
+                                        <span class="label">Первое убийство в "чесном" PvP</span>
+                                        <div class="mini-bar done">
+                                            <div class="mini-progress" style="width: 100%"></div>
+                                        </div>
+                                        <i class="fas fa-check-circle"> 1 / 1</i>
+                                    </li>
+                                    <li class="achievement-item">
+                                        <span class="label">Открыть 5 секретных секторов</span>
+                                        <div class="mini-bar">
+                                            <div class="mini-progress" style="width: 60%"></div>
+                                        </div>
+                                        <span class="percent">3 / 5</span>
+                                    </li>
+                                    <li class="achievement-item">
+                                        <span class="label">Убить стационарными турелями</span>
+                                        <div class="mini-bar done">
+                                            <div class="mini-progress" style="width: 0%"></div>
+                                        </div>
+                                        <i class="percent">0 / 1</i>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <button class="btn-screens" data-game="EVE Frontier">
+                                <i class="fas fa-images"></i> Скриншоты
+                            </button>
+                            </div>
+                        </div>
+                    </section>
+
+
                 </div>
                                                                 
                 <!-- --------------  STEAM GAMES  -------------- -->
@@ -105,6 +234,7 @@
                     <button class="mini-toggle" id="toggleSteam" title="Показать/скрыть">
                         <i class="fas fa-list"></i>
                     </button>
+                    <br>Разработка
 
                     <div id="steamList" class="steam-list hidden">
                         <ul id="steamGamesList">
@@ -229,6 +359,37 @@
 </footer>
 
 <script>
+    /* ==== кнопка «Скриншоты» в «Сейчас играю» (как в TOP-5) ==== */
+    document.addEventListener('click', e => {
+        const btn = e.target.closest('.btn-screens');
+        if (!btn) return;
+
+        e.stopPropagation();
+        const gameTitle = btn.dataset.game;
+
+        /* открываем общую модалку */
+        const modal = document.getElementById('galleryModal');
+        document.body.appendChild(modal);
+        modal.style.display = 'flex';
+
+        /* гарантируем загрузку данных */
+        if (!window.allImages?.length) window.loadData?.();
+
+        /* выбираем игру и перерисовываем */
+        const gameSel = document.getElementById('gameSel');
+        gameSel.value = gameTitle;
+        window.resetAndRender?.();
+    });
+</script>
+<script>
+    document.addEventListener('click', e => {
+        const block = e.target.closest('.speech.expandable');
+        if (!block) return;
+
+        block.classList.toggle('open');
+    });
+</script>
+<script>
     document.querySelector('.menu-toggle').addEventListener('click', function() {
         document.querySelector('nav').classList.toggle('show');
     });
@@ -240,5 +401,81 @@
         document.body.setAttribute('data-scroll', '');
     }, { passive: true });
 </script>
+
+<script>
+function animateValue(el, start, end, duration) {
+  let startTime = null;
+
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const value = Math.floor(progress * (end - start) + start);
+    el.textContent = value.toLocaleString();
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+/* ---------- счётчик для 73 % ---------- */
+function animatePercent(el, start, end, duration) {
+  let startTime = null;
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const value = Math.floor(progress * (end - start) + start);
+    el.textContent = value + '%';
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+/* ---------- счётчик для 100+ ---------- */
+function animatePlus(el, start, end, duration) {
+  let startTime = null;
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const value = Math.floor(progress * (end - start) + start);
+    el.textContent = value + '+';
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const card = entry.target;
+      /* 10 000+ */
+      const hours = card.querySelector('.counter[data-target]');
+      if (hours && !hours.dataset.animated) {
+        animateValue(hours, 0, +hours.dataset.target, 1500);
+        hours.dataset.animated = true;
+      }
+      /* 73 % */
+      const percent = card.querySelector('.counter-percent');
+      if (percent && !percent.dataset.animated) {
+        animatePercent(percent, 0, 73, 1500);
+        percent.dataset.animated = true;
+      }
+      /* 100+ */
+      const plus = card.querySelector('.counter-plus');
+      if (plus && !plus.dataset.animated) {
+        animatePlus(plus, 0, 100, 1500);
+        plus.dataset.animated = true;
+      }
+    }
+  });
+}, { threshold: .5 });
+
+document.querySelectorAll('.stat-card').forEach(card => observer.observe(card));
+</script>
+
+<script>
+    document.addEventListener('click', e => {
+    const card = e.target.closest('.current-game-card');
+    if (!card) return;
+
+    card.classList.toggle('open');
+    });
+</script>
+
 </body>
 </html>
