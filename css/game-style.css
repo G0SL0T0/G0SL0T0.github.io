@@ -353,12 +353,76 @@ nav a.active::after {
     position: relative;
 }
 
-.genre-list li:before {
-    content: "•";
-    color: var(--clr-primary);
-    font-weight: bold;
-    margin-right: .7rem;
+.genre-list li::before {
+  position: absolute;
+  left: .7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  z-index: 1;
 }
+
+.genre-list li::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  padding: .5rem .75rem;
+  background: #111827;
+  color: #fff;
+  font-size: .75rem;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s;
+  z-index: 10;
+}
+.genre-list li:hover::after {
+  opacity: 1;
+}
+.genre-list li[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  padding: .5rem .75rem;
+  background: #111827;
+  color: #fff;
+  font-size: .75rem;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s;
+  z-index: 10;
+  white-space: normal;
+  bottom: 100%;
+  transform: translateX(-50%) translateY(-8px);
+  width: 350px;
+  max-width: 90vw;  
+  z-index: 1999; 
+
+}
+
+.genre-list li[data-tooltip]::before {
+  /* стрелка */
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 2px);
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #111827;
+  opacity: 0;
+  transition: opacity .25s;
+  z-index: 8;
+}
+
+.genre-list li:hover::after,
+.genre-list li:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px); /* лёгкий «выезд» */
+}
+
 
 .achievements-list li:before {
     content: "🏆";
@@ -487,6 +551,7 @@ nav a.active::after {
   align-items: center;
   gap: .4rem;
 }
+
 .steam-item .hours::before {
   content: "\f1b6";
   font-family: "Font Awesome 6 Free";
@@ -1811,7 +1876,139 @@ footer {
   font-size: 1rem;
   font-weight: 600;
 }
+/* список ссылок в сайдбаре */
 
+/* контейнер */
+.genre-list {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin: .75rem 0 0;
+}
+
+.genre-list li {
+  position: relative;
+  padding: .6rem 1rem .6rem 2.2rem;
+  border-radius: 8px;
+  font-size: .9rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 2px 6px rgba(102,126,234,.25);
+  transition: transform .25s, box-shadow .25s;
+}
+
+.genre-list li::before {
+  position: absolute;
+  left: .7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+}*
+
+.genre-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(102,126,234,.45);
+}
+
+/* общий контейнер в сайдбаре */
+.sidebar-block .genre-list:has(a[href*="steam"], a[href*="discord"]) {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.sidebar-block .genre-list li:has(a[href*="steam"]),
+.sidebar-block .genre-list li:has(a[href*="discord"]) {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: .75rem 1rem;
+  font-weight: 600;
+  transition: .25s;
+}
+
+.sidebar-block .genre-list li:has(a[href*="steam"]) {
+  border-left: 4px solid #1b2838;
+}
+.sidebar-block .genre-list li:has(a[href*="discord"]) {
+  border-left: 4px solid #5865F2;
+}
+
+.sidebar-block .genre-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+
+/* иконки */
+.sidebar-block .genre-list li a {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  text-decoration: none;
+  color: #111827;
+}
+
+.sidebar-block .genre-list li i {
+  font-size: 1.3rem;
+  width: 24px;
+  text-align: center;
+}
+
+.sidebar-block .genre-list li a[href*="steam"] i {
+  color: #1b2838;
+}
+.sidebar-block .genre-list li a[href*="discord"] i {
+  color: #5865F2;
+}
+
+
+/* Платформы */
+.platform-tag {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  color: #fff;
+  font-size: 1.4rem;
+  transition: .3s;
+  position: relative;
+}
+
+/* всплывающая подпись при наведении */
+.platform-tag::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: rgba(0,0,0,.75);
+  color: #fff;
+  padding: .25rem .6rem;
+  border-radius: 4px;
+  font-size: .7rem;
+  opacity: 0;
+  transition: .25s;
+  pointer-events: none;
+}
+
+.platform-tag:hover::after { opacity: 1; }
+
+/* цвета платформ */
+.platform-tag:nth-child(1){ background:#0078d4; } /* PC */
+.platform-tag:nth-child(2){ background:#1b2838; } /* Steam */
+.platform-tag:nth-child(3){ background:#5865F2; } /* Discord */
+
+.platform-tag:hover {
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 0 8px currentColor);
+}
 
 
 
