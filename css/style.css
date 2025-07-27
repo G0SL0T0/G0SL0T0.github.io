@@ -2356,3 +2356,171 @@ nav a.active::after {
     grid-template-columns: 1fr;
   }
 }
+
+.projects-intro {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 3rem 0;
+}
+
+.intro-text {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #495057;
+}
+
+.project-view-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #007bff, #00b4ff);
+  color: white;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all .3s ease;
+  box-shadow: 0 4px 15px rgba(0,123,255,.3);
+}
+
+.project-view-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,123,255,.4);
+}
+
+/* Маркдаун-подписи к кейсам */
+.case-card::before {
+  content: "🧪 Vanilla JS • 🖥️ Front-End • 🚫 Бэкенд";
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: #4CAF50;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  z-index: 2;
+}
+/* Стили для блока-предыстории */
+.projects-prelude {
+  padding: 4rem 0;
+  background: #f8f9fa;
+  text-align: center;
+}
+
+.projects-prelude h2 {
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
+  color: #343a40;
+}
+
+.prelude-lead {
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #495057;
+}
+
+.prelude-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.prelude-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prelude-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.prelude-card i {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.prelude-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  color: #212529;
+}
+
+.prelude-card p {
+  font-size: 0.95rem;
+  color: #6c757d;
+}
+
+.prelude-note {
+  font-size: 0.95rem;
+  color: #495057;
+}
+/* Без адаптивных медиа-запросов */
+.projects-prelude {
+  padding: 4rem 0;
+  background: #f8f9fa;
+  text-align: center;
+}
+
+.projects-prelude h2 {
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
+  color: #343a40;
+}
+
+.prelude-lead {
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #495057;
+}
+
+.prelude-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.prelude-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prelude-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.prelude-card i {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.prelude-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  color: #212529;
+}
+
+.prelude-card p {
+  font-size: 0.95rem;
+  color: #6c757d;
+}
+
+.prelude-note {
+  font-size: 0.95rem;
+  color: #495057;
+}

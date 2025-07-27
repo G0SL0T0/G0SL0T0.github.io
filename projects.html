@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мои проекты - Иван - Gosloto</title>
     <meta name="description" content="Проекты веб-разработчика Ивана.">
-    <link rel="icon" type="png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,6 +79,17 @@
                 width: 100%;
                 margin-bottom: 0.5rem;
             }
+        }
+
+        .projects h1 {
+            text-align: center;
+            font-size: 2.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #007bff, #00b4ff);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            margin: 2rem 0 3rem;
         }
 
         @media (max-width: 480px) {
@@ -181,9 +192,51 @@
 </header>
 
 <main>
+    <!-- Блок-текста -->
+    <section class="projects-prelude">
+        <div class="container">
+            <h2>Кейсы и проекты, список (дополняемый)</h2>
+
+            <p class="prelude-lead">
+            Ниже собраны живые примеры интерфейсов и мини-игр, которые я разрабатывал «с нуля» без бэкенда и сторонних CMS.  
+            Все кейсы открываются в браузере, работают офлайн и демонстрируют именно фронтенд-часть: верстку, логику, анимацию и производительность.
+            </p>
+
+            <div class="prelude-grid">
+            <div class="prelude-card">
+                <i class="fas fa-palette"></i>
+                <h3>UI / UX детали</h3>
+                <p>Тонкая настройка цвета, тени, микро-анимаций и фидбеков на каждое действие.</p>
+            </div>
+
+            <div class="prelude-card">
+                <i class="fas fa-rocket"></i>
+                <h3>Производительность</h3>
+                <p>Метрики Lighthouse, FPS-каунтеры и «чистый» бандл без лишних килобайт.</p>
+            </div>
+
+            <div class="prelude-card">
+                <i class="fas fa-gamepad"></i>
+                <h3>Интерактив</h3>
+                <p>Canvas, WebGL, drag-n-drop и игровые механики на чистом JavaScript.</p>
+            </div>
+
+            <div class="prelude-card">
+                <i class="fas fa-file-export"></i>
+                <h3>Экспорт данных</h3>
+                <p>Генерация CSV, JSON или изображений прямо в браузере без сервера.</p>
+            </div>
+            </div>
+
+            <p class="prelude-note">
+            👉 Нажмите «Посмотреть проект», чтобы открыть демо в новой вкладке.  
+            Исходный код каждого кейса доступен на GitHub по запросу.
+            </p>
+        </div>
+    </section>
     <section class="projects">
         <div class="container">
-            <h1>Мои проекты</h1>
+            <h1>Проекты и выполненные Кейсы</h1>
             
             <div class="project-accordion">
                 <!-- Проект 1 - SKYT -->
@@ -281,6 +334,76 @@
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Проект 3 - Оптимизация Пиксельной Экосистемы -->
+                <div class="project-item">
+                    <input type="checkbox" id="project3" class="project-checkbox">
+                    <label for="project3" class="project-header">
+                        <div class="project-title">
+                            <img src="img/pixel-eco-thumb.png" alt="Pixel Ecosystem" class="project-thumbnail">
+                            <h2>Оптимизация Пиксельной Экосистемы</h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+
+                    <div class="project-content">
+                        <div class="project-details">
+                            <!-- Левая колонка: описание -->
+                            <div class="project-description">
+                                <h3>Описание проекта</h3>
+                                <p>
+                                    Полный рефакторинг и переписывание игры с React (3000+ строк) на чистый Vanilla&nbsp;JS.  
+                                    Цель — улучшить производительность, сократить время загрузки и убрать зависимости.
+                                </p>
+
+                                <h4>Ключевые улучшения</h4>
+                                <ul>
+                                    <li>Уменьшение размера бандла на&nbsp;85&nbsp;% (без&nbsp;React&nbsp;+&nbsp;Webpack).</li>
+                                    <li>Ускорение первой отрисовки на&nbsp;40&nbsp;% за&nbsp;счёт отказа от&nbsp;VDOM.</li>
+                                    <li>Архитектура «Entity–Component–System» на&nbsp;чистых классах&nbsp;ES6.</li>
+                                    <li>Анимация через&nbsp;<code>requestAnimationFrame</code> и&nbsp;Canvas&nbsp;2D.</li>
+                                    <li>Локальное хранилище состояния без&nbsp;сторонних библиотек.</li>
+                                </ul>
+
+                                <a href="index.html#pixel-ecosystem-game" target="_blank" class="project-view-btn">
+                                    Запустить симуляцию <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+
+                            <!-- Правая колонка: технологии -->
+                            <div class="project-tech">
+                                <h3>Использованные технологии</h3>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">JavaScript ES6+</span>
+                                    <span class="tech-tag">Canvas 2D API</span>
+                                    <span class="tech-tag">Web Workers (опционально)</span>
+                                    <span class="tech-tag">CSS Custom Properties</span>
+                                </div>
+
+                                <h4 style="margin-top: 1.5rem;">Метрики</h4>
+                                <ul class="mini-stats">
+                                    <li><span class="number">-70 %</span> строк кода</li>
+                                    <li><span class="number">-85 %</span> зависимостей</li>
+                                    <li><span class="number">+40 %</span> FPS на мобильных</li>
+                                </ul>
+                            </div>
+
+                            <!-- Скриншоты -->
+                            <div class="project-screenshots">
+                                <h4>Скриншоты до / после</h4>
+                                <div class="screenshots-grid">
+                                    <img src="img/pixel-eco-1.png" alt="До оптимизации (React)">
+                                    <img src="img/pixel-eco-2.png" alt="После оптимизации (Vanilla JS)">
+                                </div>
+                                <p class="caption">
+                                    Слева — React-версия, справа — Vanilla JS. Визуально идентично, но скорость загрузки и FPS выросли.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
