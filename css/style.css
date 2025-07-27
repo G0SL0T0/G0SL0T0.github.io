@@ -2524,3 +2524,58 @@ nav a.active::after {
   font-size: 0.95rem;
   color: #495057;
 }
+
+/* ---------- APP POOL ---------- */
+.app-pool {
+  padding: 4rem 0;
+  background: #eef2f7;
+  text-align: center;
+}
+
+.app-pool h2 {
+  font-size: 2.25rem;
+  margin-bottom: 1rem;
+  color: #343a40;
+}
+
+.pool-lead {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: #495057;
+  font-size: 1.1rem;
+}
+
+.pool-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.pool-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.pool-card:hover {
+  transform: translateY(-6px);
+}
+
+.pool-card i {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.pool-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  color: #212529;
+}
+
+.pool-card p {
+  font-size: 0.95rem;
+  color: #6c757d;
+}

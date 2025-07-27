@@ -383,9 +383,9 @@
 
                                 <h4 style="margin-top: 1.5rem;">Метрики</h4>
                                 <ul class="mini-stats">
-                                    <li><span class="number">-70 %</span> строк кода</li>
+                                    <li><span class="number">-60 %</span> строк кода</li>
                                     <li><span class="number">-85 %</span> зависимостей</li>
-                                    <li><span class="number">+40 %</span> FPS на мобильных</li>
+                                    <li><span class="number">+40 %</span> производительности</li>
                                 </ul>
                             </div>
 
@@ -403,6 +403,64 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- === Кейс 4 - Маркет плейс в частных сетях === -->
+                <div class="project-item">
+                    <input type="checkbox" id="project4" class="project-checkbox">
+                    <label for="project4" class="project-header">
+                        <div class="project-title">
+                        <img src="img/ansible-ssh-thumb.png" alt="Ansible Remote Installer" class="project-thumbnail">
+                        <h2>Практический кейс испытания<br>(Лига Рабочих Специальностей)</h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+
+                    <div class="project-content">
+                        <div class="project-details">
+                        <!-- описание -->
+                        <div class="project-description">
+                            <h3>Описание проекта</h3>
+                            <p>
+                            Внутренний сервис для деплоя ПО в закрытых сетях.  
+                            Python-backend отправляет плейбуки Ansible по SSH и отслеживает статус установки на каждом хосте в реальном времени.
+                            </p>
+                            <ul>
+                            <li>REST API: <code>/deploy</code>, <code>/status</code>, <code>/logs</code></li>
+                            <li>Ansible-роли для SAP, Docker, PostgreSQL, Nginx</li>
+                            <li>WebSocket-стрим логов установки</li>
+                            <li>JWT-авторизация и RBAC</li>
+                            </ul>
+
+                            <a href="case/remote-admin.html" target="_blank" class="project-view-btn">
+                            Исходники <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+
+                        <!-- технологии -->
+                        <div class="project-tech">
+                            <h3>Технологии</h3>
+                            <div class="tech-tags">
+                            <span class="tech-tag">Python 3.12</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">Ansible Core</span>
+                            <span class="tech-tag">SSH Paramiko</span>
+                            <span class="tech-tag">Redis</span>
+                            <span class="tech-tag">WebSocket</span>
+                            </div>
+                        </div>
+
+                        <!-- скриншоты -->
+                        <div class="project-screenshots">
+                            <h4>Скриншоты</h4>
+                            <div class="screenshots-grid">
+                            <img src="img/installer-dashboard.png" alt="Dashboard">
+                            <img src="img/installer-log.png"    alt="Real-time log">
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </div>
