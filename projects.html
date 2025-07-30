@@ -15,6 +15,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -173,6 +177,31 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Модальное окно для скриншотов */
+        .modal-full {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.9);
+            z-index: 9999;
+            display: none;
+            place-items: center;
+            padding: 2rem;
+        }
+        .modal-full img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .modal-full .close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -279,8 +308,8 @@
                             <div class="project-screenshots">
                                 <h4>Скриншоты проекта:</h4>
                                 <div class="screenshots-grid">
-                                    <img src="skyt-screen1.png" alt="SKYT_1">
-                                    <img src="skyt-screen2.png" alt="SKYT_2">
+                                    <img src="img/skyt-screen1.png" alt="SKYT_1" onclick="openModal(this.src)">
+                                    <img src="img/skyt-screen2.png" alt="SKYT_2" onclick="openModal(this.src)">
                                 </div>
                             </div>
                         </div>
@@ -327,8 +356,8 @@
                             <div class="project-screenshots">
                                 <h4>Скриншоты проекта:</h4>
                                 <div class="screenshots-grid">
-                                    <img src="img/sentinel-screen1.png" alt="SentinelGuard интерфейс">
-                                    <img src="img/sentinel-screen2.png" alt="SentinelGuard отчет">
+                                    <img src="img/sentinel-screen1.png" alt="SentinelGuard интерфейс" onclick="openModal(this.src)">
+                                    <img src="img/sentinel-screen2.png" alt="SentinelGuard отчет" onclick="openModal(this.src)">
                                 </div>
                             </div>
                         </div>
@@ -393,8 +422,8 @@
                             <div class="project-screenshots">
                                 <h4>Скриншоты до / после</h4>
                                 <div class="screenshots-grid">
-                                    <img src="img/pixel-eco-1.png" alt="До оптимизации (React)">
-                                    <img src="img/pixel-eco-2.png" alt="После оптимизации (Vanilla JS)">
+                                    <img src="img/pixel-eco-1.png" alt="До оптимизации (React)" onclick="openModal(this.src)">
+                                    <img src="img/pixel-eco-2.png" alt="После оптимизации (Vanilla JS)" onclick="openModal(this.src)">
                                 </div>
                                 <p class="caption">
                                     Слева — React-версия, справа — Vanilla JS. Визуально идентично, но скорость загрузки и FPS выросли.
@@ -404,7 +433,7 @@
                     </div>
                 </div>
 
-                <!-- === Кейс 4 - Маркет плейс в частных сетях === -->
+                <!-- === Кейс 4 - Маркетплейс в частных сетях === -->
                 <div class="project-item">
                     <input type="checkbox" id="project4" class="project-checkbox">
                     <label for="project4" class="project-header">
@@ -430,10 +459,14 @@
                             <li>WebSocket-стрим логов установки</li>
                             <li>JWT-авторизация и RBAC</li>
                             </ul>
-
-                            <a href="case/remote-admin.html" target="_blank" class="project-view-btn">
-                            Исходники <i class="fab fa-github"></i>
-                            </a>
+                            <div class="project-actions" style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                                <a href="case/remote-admin.html" target="_blank" class="project-view-btn">
+                                    <i class="fas fa-cogs"></i> Интерфейс Администратора
+                                </a>
+                                <a href="case/user-installer.html" target="_blank" class="project-view-btn">
+                                    <i class="fas fa-user"></i> Интерфейс Пользователя
+                                </a>
+                            </div>
                         </div>
 
                         <!-- технологии -->
@@ -450,13 +483,13 @@
                         </div>
 
                         <!-- скриншоты -->
-                        <div class="project-screenshots">
-                            <h4>Скриншоты</h4>
-                            <div class="screenshots-grid">
-                            <img src="img/installer-dashboard.png" alt="Dashboard">
-                            <img src="img/installer-log.png"    alt="Real-time log">
+                            <div class="project-screenshots">
+                                <h4>Скриншоты</h4>
+                                <div class="screenshots-grid">
+                                    <img src="img/Case_screenshot_1.png" alt="Dashboard" onclick="openModal(this.src)">
+                                    <img src="img/Case_screenshot_2.png" alt="Real-time log" onclick="openModal(this.src)">
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -466,6 +499,12 @@
         </div>
     </section>
 </main>
+
+<!-- Модальное окно -->
+<div id="imgModal" class="modal-full">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img id="modalImg" src="" alt="Full-size screenshot">
+</div>
 
 <footer>
     <div class="container">
@@ -595,6 +634,34 @@
 </style>
 
 <script>
+    // Модальное окно
+    function openModal(src) {
+        const modal = document.getElementById('imgModal');
+        document.getElementById('modalImg').src = src;
+        modal.style.display = 'grid';
+        document.body.style.overflow = 'hidden';
+    }
+    // Закрыть модальное окно
+    function closeModal() {
+        document.getElementById('imgModal').style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    // Закрытие по Escape
+    window.addEventListener('keydown', e => e.key === 'Escape' && closeModal());
+    document.getElementById('imgModal').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closeModal();
+    });
+</script>
+
+<script>
+    /* ——— плавный скролл ——— */
+    document.querySelectorAll('.project-header').forEach(header => {
+        header.addEventListener('click', () => {
+            // задержка
+            setTimeout(() => header.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+        });
+    });
+
     document.querySelector('.menu-toggle').addEventListener('click', function() {
         document.querySelector('nav').classList.toggle('show');
     });
