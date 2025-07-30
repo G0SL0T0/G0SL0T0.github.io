@@ -92,7 +92,13 @@
                 margin-bottom: 0.5rem;
             }
         }
-
+        .projects-prelude::after {
+            content: "";
+            display: block;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #007bff 30%, #007bff 70%, transparent);
+            margin: 3rem 0;
+        }
                 
         .li-logo {/* Кейс 4 */
             width: 60px;
@@ -188,7 +194,6 @@
             margin-left: 8px;
         }
         
-        /* Переработанные стили для скриншотов */
         .project-screenshots {
             margin-top: 2rem;
             grid-column: 1 / -1;
@@ -223,7 +228,6 @@
             transform: scale(1.02);
         }
         
-        /* Адаптация для мобильных */
         @media (max-width: 768px) {
             .project-view-btn {
                 width: 100%;
@@ -235,7 +239,6 @@
             }
         }
 
-        /* Модальное окно для скриншотов */
         .modal-full {
             position: fixed;
             inset: 0;
@@ -320,6 +323,9 @@
             </p>
         </div>
     </section>
+    <div aria-hidden="true" style="text-align:center;">
+        <i class="fas fa-chevron-down fa-2x" style="color:#007bff;"></i>
+    </div>
     <section class="projects">
         <div class="container">
             <h1>Проекты и выполненные Кейсы</h1>
@@ -717,7 +723,6 @@
 </footer>
 
 <style>
-    /* Стили для аккордеона проектов */
     .project-accordion {
         max-width: 900px;
         margin: 2rem auto;

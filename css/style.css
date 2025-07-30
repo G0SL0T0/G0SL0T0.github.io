@@ -2388,7 +2388,7 @@ nav a.active::after {
 
 /* Маркдаун-подписи к кейсам */
 .case-card::before {
-  content: "🧪 Vanilla JS • 🖥️ Front-End • 🚫 Бэкенд";
+  content: "";
   position: absolute;
   top: -12px;
   left: 20px;
