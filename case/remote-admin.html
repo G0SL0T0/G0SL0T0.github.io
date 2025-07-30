@@ -2,127 +2,116 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Remote Installer</title>
+
+
   <style>
-    :root{
-      --bg:#f5f5f5;
-      --card:#fff;
-      --accent:#007bff;
-      --text:#222;
-    }
-    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+    :root{--bg:#111;--card:#222;--accent:#007bff;--text:#eee;--bad:#ff0033}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,sans-serif}
     body{background:var(--bg);color:var(--text);padding:1rem}
-    .app{width:100%;display:flex;flex-direction:column;gap:1rem}
-    .controls{display:flex;gap:1rem;flex-wrap:wrap}
-    select,button{padding:.5rem .75rem;border:none;border-radius:0}
-    select{background:#e0e0e0}
-    button{background:var(--accent);color:#fff;cursor:pointer}
-    .host-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-      gap:1rem;
-    }
-    .host{
-      background:var(--card);
-      border:1px solid #ccc;
-      padding:1rem;
-      display:flex;
-      flex-direction:column;
-      gap:.5rem;
-    }
-    .host .ip{font-size:.9rem;color:#555}
-    .ping{font-weight:bold}
-    .bar{height:4px;background:#ddd;margin-top:.25rem}
-    .bar div{height:100%;background:var(--accent)}
-    .log{background:#111;color:#0f0;font-family:monospace;padding:.5rem;max-height:200px;overflow-y:auto}
+    .app{width:100%;max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:1rem}
+    header{text-align:center;font-size:2rem;margin-bottom:1rem}
+    .host-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+    .host{background:var(--card);padding:1rem;border:1px solid #333}
+    .host.red{border-color:var(--bad)}
+    .ping{font-size:1.1rem;margin:.25rem 0}
+    .bar{height:4px;background:#444;margin-top:.25rem}
+    .bar div{height:100%;background:var(--accent);transition:width .2s}
+    .progress-bar{height:6px;background:#444;margin-top:1rem}
+    .progress-bar div{height:100%;background:var(--accent);transition:width .3s}
+    .console{background:#000;color:var(--accent);padding:.5rem;max-height:150px;overflow-y:auto;font-family:monospace}
+    select,button{padding:.35rem .5rem;border:none;background:#444;color:var(--text);margin:.25rem 0}
+    button{background:var(--accent);cursor:pointer}
   </style>
 </head>
 <body>
   <div class="app">
-    <h1>Admin Remote Installer</h1>
-
-    <!-- Управление -->
-    <div class="controls">
-      <select id="playbook">
-        <option value="nginx.yml">nginx.yml</option>
-        <option value="sap.yml">sap.yml</option>
-        <option value="docker.yml">docker.yml</option>
-      </select>
-      <button onclick="runPlaybook()">Запустить</button>
-    </div>
+    <header>Admin Remote Installer</header>
 
     <!-- 12 хостов -->
     <div class="host-grid" id="hostGrid"></div>
 
-    <!-- Логи -->
-    <div class="log" id="log"></div>
+    <div class="progress-bar" id="progressBar" style="display:none">
+      <div id="progress"></div>
+    </div>
+
+    <div class="console" id="console">Console</div>
   </div>
 
 <script>
-  const hosts = [
-    {id:'h01',name:'srv-01',ip:'192.168.1.10'},
-    {id:'h02',name:'srv-02',ip:'192.168.1.11'},
-    {id:'h03',name:'srv-03',ip:'192.168.1.12'},
-    {id:'h04',name:'srv-04',ip:'192.168.1.13'},
-    {id:'h05',name:'srv-05',ip:'192.168.1.14'},
-    {id:'h06',name:'srv-06',ip:'192.168.1.15'},
-    {id:'h07',name:'srv-07',ip:'192.168.1.16'},
-    {id:'h08',name:'srv-08',ip:'192.168.1.17'},
-    {id:'h09',name:'srv-09',ip:'192.168.1.18'},
-    {id:'h10',name:'sap-01',ip:'192.168.1.20'},
-    {id:'h11',name:'sap-02',ip:'192.168.1.21'},
-    {id:'h12',name:'db-01',ip:'192.168.1.30'}
-  ];
+// замените функцию render() и всё что ниже в <script>
+const hosts = [...Array(12)].map((_,i)=>({id:i+1,name:`host-${String(i+1).padStart(2,'0')}`,ip:`192.168.1.${10+i}`,ping:45,highlight:false}));
 
-  let spikeHost = null;
+const consoleEl = document.getElementById('console');
 
-  function renderHosts(){
-    const grid = document.getElementById('hostGrid');
-    grid.innerHTML = hosts.map(h => `
-      <div class="host" id="${h.id}">
-        <div>${h.name}</div>
-        <div class="ip">${h.ip}</div>
-        <div class="ping" id="ping-${h.id}">-- ms</div>
-        <div class="bar"><div id="bar-${h.id}"></div></div>
-      </div>
-    `).join('');
-  }
+// первоначальная отрисовка
+function render(){
+  const grid=document.getElementById('hostGrid');
+  grid.innerHTML='';
+  hosts.forEach(h=>{
+    const el=document.createElement('div');
+    el.className='host'+(h.highlight?' red':'');
+    el.dataset.id=h.id;
+    el.innerHTML=`
+      <div>${h.name}</div>
+      <div class="ip">${h.ip}</div>
+      <div class="ping">${h.ping} ms</div>
+      <div class="bar"><div style="width:${100-h.ping}%"></div></div>
+      <select class="disk">
+        <option>C:</option><option>D:</option><option>E:</option>
+      </select>
+      <select class="app">
+        ${['Office','SAP','Chrome','1С','NauMen','Kaspersky','TeamViewer','Adobe','WinRAR','Zoom','LibreOffice','Bitrix24'].map(a=>`<option>${a}</option>`).join('')}
+      </select>
+      <button onclick="install(${h.id})">Install</button>
+    `;
+    grid.appendChild(el);
+  });
+}
 
-  function updatePing(){
-    // сброс спайка
-    if (spikeHost && Math.random() > 0.5) spikeHost = null;
+// обновление пинга без перерисовки всего блока
+function updatePing(){
+  hosts.forEach(h=>{
+    const el=document.querySelector(`.host[data-id="${h.id}"]`);
+    if(!el) return;
+    if(h===spike){
+      h.ping=Math.min(150,h.ping+2);
+      if(h.ping<=50){h.ping=50;h.highlight=false;spike=null;}
+    }else{
+      h.ping=45+Math.floor(Math.random()*21-10);
+    }
+    el.classList.toggle('red',h.highlight);
+    el.querySelector('.ping').textContent=h.ping+' ms';
+    el.querySelector('.bar div').style.width=(100-h.ping)+'%';
+  });
+}
 
-    // выбор нового для спайка
-    if (!spikeHost && Math.random() < 0.15) spikeHost = hosts[Math.floor(Math.random()*hosts.length)];
+let spike = null;
+setInterval(()=>{if(!spike&&Math.random()<.15){spike=hosts[Math.floor(Math.random()*hosts.length)];spike.highlight=true;}},5000+Math.random()*5000);
+setInterval(updatePing,1000);
 
-    hosts.forEach(h=>{
-      let ping = 40 + Math.floor(Math.random()*11); // 40-50
-      if (h === spikeHost) ping *= 2;
-      const avail = Math.max(0,100-ping);
-      document.getElementById(`ping-${h.id}`).textContent = ping + ' ms';
-      document.getElementById(`bar-${h.id}`).style.width = avail + '%';
-    });
-  }
-  setInterval(updatePing, 5000 + Math.random()*5000);
+function install(id){
+  const host=hosts.find(h=>h.id===id);
+  const el=document.querySelector(`.host[data-id="${id}"]`);
+  const disk=el.querySelector('.disk').value;
+  const app=el.querySelector('.app').value;
+  const bar=document.getElementById('progress');
+  const consoleEl=document.getElementById('console');
+  consoleEl.insertAdjacentHTML('beforeend',`> install ${app} on ${host.name} (${disk})<br>`);
+  document.getElementById('progressBar').style.display='block';
+  bar.style.width='0%';
+  const steps=['TASK ok','TASK changed','PLAY ok=1'];
+  let i=0;
+  const t=setInterval(()=>{
+    consoleEl.insertAdjacentHTML('beforeend',steps[i]+'<br>');
+    bar.style.width=((i+1)/steps.length*100)+'%';
+    i++;
+    if(i===steps.length){clearInterval(t);setTimeout(()=>document.getElementById('progressBar').style.display='none',1500);}
+  },600);
+}
 
-  function runPlaybook(){
-    const pb = document.getElementById('playbook').value;
-    const log = document.getElementById('log');
-    log.innerHTML = `ansible-playbook ${pb} -l all\n`;
-    const steps = [
-      'TASK [Gathering Facts] *** ok',
-      'TASK [Install package] *** changed',
-      'PLAY RECAP ok=12 changed=12 failed=0'
-    ];
-    let i=0;
-    const t = setInterval(()=>{
-      log.insertAdjacentHTML('beforeend', steps[i] + '<br>');
-      i++;
-      if (i>=steps.length) clearInterval(t);
-    },600);
-  }
-
-  renderHosts();
+render();
 </script>
 </body>
 </html>

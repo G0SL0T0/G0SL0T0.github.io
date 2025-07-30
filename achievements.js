@@ -14,10 +14,13 @@ const ACH_DB = [
   { name: 'Используя определенных юнитов пройти кампанию',game: 'Dawn of War - Soulstorm',     date: '2024-01-12', unlocked: true,  type: 'challenge' },
   { name: 'Добится 70000 хп в шкале здоровья',     game: 'The Witcher 3: Wild Hunt',           date: '2024-08-19', unlocked: true,  type: 'achievement' },
   { name: 'Арбалет как основное оружие',           game: 'The Witcher 3: Wild Hunt',           date: '2023-08-15', unlocked: true,  type: 'achievement' },
+  { name: 'Выполнить заказ бутафорским мечем',     game: 'The Witcher 3: Wild Hunt',           date: '2020-07-05', unlocked: true, type: 'achievement' },
   { name: 'Пройти The Witcher 3 без фаст-тревелов',game: 'The Witcher 3: Wild Hunt',           date:'2023-08-12',  unlocked:true,   type:'challenge' },
   { name: 'Пройти игру на базовом снаряжении',     game: 'The Witcher 3: Wild Hunt',           date: '2023-08-13', unlocked: true,  type: 'challenge' },
   { name: 'Лопата + магия = пройти игру',          game: 'The Witcher 3: Wild Hunt',           date: '2023-09-29', unlocked: true,  type: 'challenge' },
   { name: 'Пройти через: магию/алхимию/физ.дмг.',  game: 'The Witcher 3: Wild Hunt',           date: '2023-08-14', unlocked: true,  type: 'challenge' },
+  { name: 'Ориенттироватся на местности',          game: 'The Witcher 3: Wild Hunt',           date: '2023-11-14', unlocked: true,  type: 'challenge' },
+  { name: 'Пройти игру Игни + физ дмг.',           game: 'The Witcher 3: Wild Hunt',           date: '2021-09-24', unlocked: true,  type: 'challenge' },
   { name: '250 уровень торговца',                  game: 'TRADESMAN: Deal to Dealer',          date: '2025-07-23', unlocked: true,  type: 'achievement' },
   { name: 'Победить босса "Скелехорд"',            game: 'TRADESMAN: Deal to Dealer',          date: '2025-04-20', unlocked: true,  type: 'achievement' },
   { name: 'Получить на счет 1 млн валюты',         game: 'TRADESMAN: Deal to Dealer',          date: 'null',       unlocked: false, type: 'achievement' },
@@ -31,7 +34,6 @@ const ACH_DB = [
   { name: 'Повредить колеса на скауте макс. скоростью',game: 'Expeditions: A MudRunner Game',  date: null,         unlocked: false, type: 'challenge' },
   { name: 'Эвакуация тяжелого вездехода скаутом',  game: 'Expeditions: A MudRunner Game',      date: null,         unlocked: false, type: 'challenge' },
 
-  /* === Достижения для первых 15 игр === */
 { name: 'Страйк - убить 9 мобов, 1 бомбой',      game: 'The Witcher 3: Wild Hunt', date: '2024-08-19', unlocked: true, type: 'achievement' },
 { name: 'Все вопросики на Скеллиге',             game: 'The Witcher 3: Wild Hunt', date: '2023-08-15', unlocked: true, type: 'achievement' },
 { name: 'Барон повесился 100 раз. Зачем?',       game: 'The Witcher 3: Wild Hunt', date: '2025-01-10', unlocked: true, type: 'achievement' },

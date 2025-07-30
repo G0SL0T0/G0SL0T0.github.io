@@ -23,7 +23,7 @@ const games = [
   { name: 'SCP: Secret Laboratory',      hours: 493,  lastLaunch: '6 мая 2023', achievements: '35/52', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/700330/header.jpg' },
   { name: 'Albion Online',               hours: 485,  lastLaunch: '27 апр. 2023', achievements: '0/154', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/761890/header.jpg' },
   { name: 'Northgard',                   hours: 474,  lastLaunch: '11 янв.',  achievements: '0/289', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/466560/header.jpg' },
-  { name: 'TRADESMAN: Deal to Dealer',   hours: 430,  lastLaunch: 'Активная игра',  achievements: 'Скоро будут ;)', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2555430/header.jpg' },
+  { name: 'TRADESMAN: Deal to Dealer',   hours: 432,  lastLaunch: 'Активная игра',  achievements: 'Скоро будут ;)', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2555430/header.jpg' },
   { name: 'Rogue Company',               hours: 409,  lastLaunch: '6 мая 2023', achievements: '20/20', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/872200/header.jpg' },
   { name: 'RimWorld',                    hours: 314,  lastLaunch: '19 дек. 2023', achievements: '-', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/294100/header.jpg' },
   { name: 'Asphalt Legends Unite',       hours: 262,  lastLaunch: '25 июн.',  achievements: '39/42', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1815780/header.jpg' },
@@ -44,7 +44,7 @@ const games = [
   { name: 'Aimlabs',                     hours: 74,   lastLaunch: '15 янв. 2024', achievements: '100/100', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/714010/header.jpg' },
   { name: 'Geometry Dash',               hours: 62,   lastLaunch: '22 июн.',  achievements: '31/120', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/322170/header.jpg' },
   { name: 'Among Us',                    hours: 57,   lastLaunch: '9 авг. 2023', achievements: '33/33', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/945360/header.jpg' },
-  { name: 'Expeditions: A MudRunner Game', hours: 45, lastLaunch: 'Активная игра',  achievements: '11/20', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2477340/header.jpg' },
+  { name: 'Expeditions: A MudRunner Game', hours: 56, lastLaunch: 'Активная игра',  achievements: '11/20', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2477340/header.jpg' },
   { name: 'KEO',                         hours: 41,   lastLaunch: '16 июн. 2022', achievements: '-', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1424910/header.jpg' },
   { name: 'Foxhole',                     hours: 37,   lastLaunch: '21 июн. 2024', achievements: '-', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/505460/header.jpg' },
   { name: 'Once Human',                  hours: 37,   lastLaunch: '27 июл. 2024', achievements: '-', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2139460/header.jpg' },
@@ -63,7 +63,7 @@ const games = [
   { name: 'WRC 7',                       hours: 8,    lastLaunch: '25 июл. 2024', achievements: '7/41', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/621830/header.jpg' },
   { name: 'Masterplan Tycoon',           hours: 7,    lastLaunch: '8 июл. 2024', achievements: '8/16', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1644500/header.jpg' },
   { name: 'Soundfall',                   hours: 6,    lastLaunch: '27 окт. 2024', achievements: '19/45', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1608700/header.jpg' },
-  { name: 'The Forever Winter',          hours: 5,    lastLaunch: '31 окт. 2024', achievements: '-', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2828860/header.jpg' },
+  { name: 'The Forever Winter',          hours: 10,    lastLaunch: '31 окт. 2024', achievements: '-', image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/2828860/header.jpg' },
   { name: 'EVE Frontier',                hours: 48,    lastLaunch: 'Активная игра', achievements: '-', image: 'img/eve-frontier.jpg' }
 ];
 
