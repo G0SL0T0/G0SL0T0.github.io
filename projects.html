@@ -18,7 +18,15 @@
         html {
             scroll-behavior: smooth;
         }
-
+        .badge {
+            background: linear-gradient(135deg,#ff416c,#ff4b2b);
+            color: #fff;
+            font-size: .7rem;
+            padding: .2rem .5rem;
+            border-radius: 12px;
+            margin-left: .5rem;
+            vertical-align: text-bottom;
+        }
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -83,6 +91,46 @@
                 width: 100%;
                 margin-bottom: 0.5rem;
             }
+        }
+
+                
+        .li-logo {/* Кейс 4 */
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -1px;
+            box-shadow: 0 3px 8px rgba(0,0,0,.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .li-logo::before {
+            content: "";
+            position: absolute;
+            inset: -50%;
+            background: radial-gradient(circle, rgba(255,255,255,.3) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }/* Кейс 4 */
+
+        .uc-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            color: #999;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 1.25rem;
         }
 
         .projects h1 {
@@ -283,7 +331,7 @@
                     <label for="project1" class="project-header">
                         <div class="project-title">
                             <img src="img/skyt.png" alt="SKYT" class="project-thumbnail">
-                            <h2>SKYT - Трекер времени</h2>
+                            <h2>SKYT - Трекер времени <span class="badge">BEST</span></h2>
                         </div>
                         <i class="fas fa-chevron-down project-icon"></i>
                     </label>
@@ -331,7 +379,7 @@
                     <label for="project2" class="project-header">
                         <div class="project-title">
                             <img src="img/shield-icon.png" alt="SentinelGuard" class="project-thumbnail">
-                            <h2>SentinelGuard - Сетевой администратор</h2>
+                            <h2>SentinelGuard - Сетевой администратор <span class="badge">BEST</span></h2>
                         </div>
                         <i class="fas fa-chevron-down project-icon"></i>
                     </label>
@@ -380,7 +428,7 @@
                     <label for="project3" class="project-header">
                         <div class="project-title">
                             <img src="Pic-world.png" alt="Pixel Ecosystem" class="project-thumbnail">
-                            <h2>Оптимизация Пиксельной Экосистемы</h2>
+                            <h2>Оптимизация Пиксельной Экосистемы <span class="badge">BEST</span></h2>
                         </div>
                         <i class="fas fa-chevron-down project-icon"></i>
                     </label>
@@ -442,7 +490,58 @@
                     </div>
                 </div>
 
-                <!-- === Кейс 4 - Маркетплейс в частных сетях === -->
+                <!-- Кейс #4 (JS) -->
+                <div class="project-item">
+                    <input type="checkbox" id="project6" class="project-checkbox">
+                    <label for="project6" class="project-header">
+                        <div class="project-title">
+                            <div class="li-logo" aria-label="LI">
+                                <span>SMf</span>
+                            </div>
+                            <h2>Static MarkForge - генератор сайтов (не ИИ)</h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+
+                    <div class="project-content">
+                        <div class="project-details">
+                            <div class="project-description">
+                                <h3>Описание проекта</h3>
+                                <p>
+                                Браузерный генератор статических сайтов из Markdown.  
+                                Drag-and-drop файл → получаем готовый HTML-сайт за 60 секунд, без серверов.
+                                </p>
+                                <ul>
+                                <li>Pure JavaScript (ES2023)</li>
+                                <li>Live-preview и instant ZIP-экспорт</li>
+                                <li>Responsive тема + SEO meta-теги</li>
+                                <li>Работает офлайн, вес < 150 KB</li>
+                                </ul>
+                                <div class="project-actions">
+                                <a href="static-site-gen/index.html" target="_blank" class="project-view-btn">
+                                    <i class="fas fa-play-circle"></i> Запустить генератор
+                                </a>
+                                <a href="https://github.com/G0SL0T0/static-site-gen-js" target="_blank" class="project-view-btn">
+                                    <i class="fab fa-github"></i> Код на GitHub
+                                </a>
+                                </div>
+                            </div>
+
+                            <div class="project-tech">
+                                <h3>Технологии</h3>
+                                <div class="tech-tags">
+                                <span class="tech-tag">Vanilla JS ES2023</span>
+                                <span class="tech-tag">Marked.js</span>
+                                <span class="tech-tag">FileSaver.js</span>
+                                <span class="tech-tag">CSS Grid/Flex</span>
+                                <span class="tech-tag">PWA-ready</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- === Кейс 5 - Маркетплейс в частных сетях === -->
                 <div class="project-item">
                     <input type="checkbox" id="project4" class="project-checkbox">
                     <label for="project4" class="project-header">
@@ -503,6 +602,102 @@
                     </div>
                 </div>
 
+                <!-- проект 6 - python скриптики -->
+                <div class="project-item">
+                    <input type="checkbox" id="project5" class="project-checkbox">
+                    <label for="project5" class="project-header">
+                        <div class="project-title">
+                        <img src="img/case1_python.png" alt="Python Lessons" class="project-thumbnail">
+                        <h2>Python-скриптотека </h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+
+                    <div class="project-content">
+                        <div class="project-details">
+
+                        <!-- описание -->
+                        <div class="project-description">
+                            <h3>Описание проекта</h3>
+                            <p>
+                            Личный репозиторий «Python-скриптотека», который я собирал для себя и теперь делюсь с сообществом.  
+                            <strong>Начинается с самых базовых логических операций</strong> и заканчивается
+                            <strong>алгоритмическими паттернами</strong>, которые можно «копипастить»
+                            в любой проект без лишней головной боли.
+                            </p>
+
+                            <ul>
+                            <li>100+ примеров от <code>if/else</code> до рекурсивных деревьев</li>
+                            <li>Готовые паттерны: «обход графа», «декораторы», «генераторы», «кэш»</li>
+                            <li>Пошаговые комментарии + playground-файлы</li>
+                            <li>Zero-dependency: запускается в любом Python ≥ 3.8</li>
+                            </ul>
+
+                            <div class="project-actions">
+                            <a href="https://github.com/G0SL0T0/P-thon_members_lessons" target="_blank" class="project-view-btn">
+                                <i class="fab fa-github"></i> GitHub-репозиторий
+                            </a>
+                            </div>
+                        </div>
+
+                        <!-- технологии -->
+                        <div class="project-tech">
+                            <h3>Использованные технологии</h3>
+                            <div class="tech-tags">
+                            <span class="tech-tag">Python 3.10+</span>
+                            <span class="tech-tag">Jupyter</span>
+                            <span class="tech-tag">MkDocs</span>
+                            <span class="tech-tag">Rich CLI</span>
+                            <span class="tech-tag">PyTest</span>
+                            </div>
+                            <h4 style="margin-top: 1rem;">Roadmap</h4>
+                            <ul>
+                            <li>Сети, БД, тесты, асинхронность, фреймворки</li>
+                            <li>JIT-компиляция, профилирование, мультипроцессинг</li>
+                            </ul>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Продолжение следует -->
+                <div class="project-item">
+                    <input type="checkbox" id="project7" class="project-checkbox">
+                    <label for="project7" class="project-header">
+                        <div class="project-title">
+                            <div class="uc-logo" aria-label="UC">
+                                <span>UC</span>
+                            </div>
+                            <h2 style="opacity:.7;">Дальше&nbsp;куда?</h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+
+                    <div class="project-content">
+                        <div class="project-details">
+                            <div class="project-description">
+                                <h3>Что дальше?</h3>
+                                <p>
+                                    Здесь появятся новые кейсы после рефакторинга: React → Vanilla&nbsp;JS, 
+                                    Vue → Vanilla&nbsp;JS, Svelte → Vanilla&nbsp;JS и другие миграции.
+                                    Следите за обновлениями&nbsp;
+                                </p>
+                                <ul>
+                                    <li>Zero-dependency миграции</li>
+                                    <li>Performance-сравнения</li>
+                                    <li>Шаблоны и гайды в code-ing</li>
+                                    <li>Различное - нужное и не очень</li>
+                                </ul>
+                                <div class="project-actions">
+                                    <button class="project-view-btn" disabled style="cursor:not-allowed;opacity:.5;">
+                                        <i class="fas fa-clock"></i> Скоро…
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
