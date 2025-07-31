@@ -102,31 +102,42 @@
             background: linear-gradient(90deg, #007bff, #00b4ff);
             border-radius: 2px;
         }
-
-        .soft-skills-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);   /* ← фиксируем 4 в ряд */
-            gap: 2rem;
-        }
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+        .intro-skills {
+            background: #eef2f7;
+            padding: 4rem 0 3rem;
+            text-align: center;
         }
 
-        .soft-skills-flex {
+        .intro-skills h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #343a40;
+        }
+
+        .intro-skills p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: #495057;
+        }
+
+        .intro-actions {
             display: flex;
-            flex-wrap: wrap;              /* перенос на новую строку */
-            justify-content: center;      /* центрируем ряды */
-            gap: 2rem;                    /* отступы между карточками */
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .soft-skills-flex .skill-card {
-            width: 260px;     /* фиксированная ширина */
-            height: 240px;    /* фиксированная высота (по желанию можно подогнать) */
-            flex-shrink: 0;   /* запрещаем "сжиматься" */
+        .button.secondary {
+            background: transparent;
+            color: #007bff;
+            border: 2px solid #007bff;
         }
-
+        .button.secondary:hover {
+            background: #007bff;
+            color: #fff;
+        }
         @media (max-width: 1200px) {
             .soft-skills-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -195,65 +206,202 @@
 
     </style>
     <style>
-        /* Soft Skills */
-        .soft-skills-wrapper {
-            display: grid;
-            grid-template-columns: repeat(4, calc(260px * 1.15)); /* 4 колонки по 260px */
-            gap: 24px; /* отступы между карточками */
-            justify-content: center; /* центрирование */
-            padding: 0 12px; /* отступы от краев */
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: #f5f7fa;
+            color: #1f2937;
+            margin: 0;
+            padding: 0;
         }
 
-        .soft-skill-card {
-            width: calc(260px * 1.15); /* увеличить ширину на 15% */
-            height: calc(280px * 1.15); /* увеличить высоту на 15% */
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,.08);
-            padding: 1.5rem 1rem;
-            text-align: center;
+        .skill-category {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
         }
 
+        .skill-category h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            color: #111827;
+        }
+
+        .skill-category h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #0ea5e9, #3b82f6);
+            border-radius: 2px;
+        }
+
+        .skills-grid,
+        .soft-skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .skill-card,
+        .soft-skill-card {
+            width: 260px;
+            height: 260px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow:
+            0 6px 16px rgba(0, 0, 0, 0.05),
+            0 2px 6px rgba(0, 0, 0, 0.02);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        .soft-skill-card {
+            height: 300px;
+        }
+        .skill-card:hover,
+        .soft-skill-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow:
+            0 12px 24px rgba(0, 0, 0, 0.08),
+            0 6px 12px rgba(0, 0, 0, 0.04);
+        }
+        .skill-card i {
+            font-size: 2.75rem;
+            color: #0ea5e9;
+            margin-bottom: 0.75rem;
+        }
         .soft-skill-card i {
-            font-size: 2.2rem;
-            color: #007bff;
-            margin-bottom: .5rem;
+            font-size: 2.5rem;
+            margin-top: 1.5rem;
+            transform: translateY(7px);
+            margin-bottom: 0.75rem;
+            color: #0ea5e9;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+            display: block;
         }
 
+        .soft-skill-card::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #0ea5e9, #3b82f6);
+            border-radius: 2px;
+            margin: 0.25rem auto 0.5rem;
+        }
+        .soft-skill-card h3,
+        .skill-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #111827;
+            text-align: center;
+            line-height: 1.3;
+            min-height: 2.6em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
+        }
         .soft-skill-card h3 {
-            font-size: 1.1rem;
-            margin: .5rem 0;
+            white-space: pre-line;
+        }
+
+        .skill-percentage {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #3b82f6;
+            margin: 0.5rem 0;
+        }
+
+        .skill-progress,
+        .soft-skill-progress {
+            width: 100%;
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-progress-bar,
+        .soft-skill-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #0ea5e9, #3b82f6);
+            border-radius: 3px;
+            transition: width 1.5s ease;
         }
 
         .soft-skill-card p {
-            font-size: .85rem;
-            color: #555;
-            flex-grow: 1;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
         }
 
-        .soft-skill-progress {
-            height: 10px;
-            background: #e9ecef;
-            border-radius: 4px;
-            overflow: hidden;
-            margin: .5rem 0 .5rem;
+        /* === Адаптив === */
+        @media (max-width: 1200px) {
+        .skills-grid,
+        .soft-skills-wrapper {
+            grid-template-columns: repeat(3, 260px);
+        }
         }
 
-        .soft-skill-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #007bff, #66a3ff);
-            border-radius: 4px;
-            width: 0;
-            animation: loadSoftProgress 1.5s ease-out forwards;
+        @media (max-width: 900px) {
+        .skills-grid,
+        .soft-skills-wrapper {
+            grid-template-columns: repeat(2, 260px);
+        }
         }
 
-        @keyframes loadSoftProgress { to { width: var(--p); } }
+        @media (max-width: 600px) {
+        .skills-grid,
+        .soft-skills-wrapper {
+            grid-template-columns: 1fr;
+        }
+        }
+        @media (max-width: 1200px) {
+        .skills-grid,
+        .soft-skills-wrapper {
+            grid-template-columns: repeat(3, 260px);
+        }
+        }
 
+        @media (max-width: 900px) {
+        .skills-grid,
+        .soft-skills-wrapper {
+            grid-template-columns: repeat(2, 260px);
+        }
+        }
+
+        @media (max-width: 600px) {
+        .skills-grid,
+        .soft-skills-wrapper {
+            grid-template-columns: 1fr;
+        }
+        }
+        @media (max-width: 600px) {
+        .skill-card,
+        .soft-skill-card {
+            max-width: 100%;
+            width: 300px;
+        }
+        }
     </style>
-
 </head>
 <body>
 
@@ -272,260 +420,257 @@
 </header>
 
 <main>
-    <section class="skills">
+    <section class="intro-skills">
         <div class="container">
-            <h1>Мои навыки</h1>
-            
-            <div class="skill-category">
-                <h2>Фронтенд-разработка</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <i class="fab fa-html5"></i>
-                        <h3>HTML5</h3>
-                        <div class="skill-percentage">95%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 95%"></div>
-                        </div>
-                        <p>Семантическая верстка, доступность, современные API</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fab fa-css3-alt"></i>
-                        <h3>CSS3</h3>
-                        <div class="skill-percentage">90%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 90%"></div>
-                        </div>
-                        <p>Flexbox, Grid, анимации, препроцессоры</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fab fa-js"></i>
-                        <h3>JavaScript</h3>
-                        <div class="skill-percentage">85%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 85%"></div>
-                        </div>
-                        <p>ES6+, асинхронное программирование, паттерны</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fab fa-angular"></i>
-                        <h3>Angular</h3>
-                        <div class="skill-percentage">70%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 70%"></div>
-                        </div>
-                        <p>Hooks, Context API, Redux, Next.js</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fab fa-vuejs"></i>
-                        <h3>Vue.js</h3>
-                        <div class="skill-percentage">70%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 70%"></div>
-                        </div>
-                        <p>Vuex, Vue Router, Composition API</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fab fa-react"></i>
-                        <h3>React</h3>
-                        <div class="skill-percentage">65%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 65%"></div>
-                        </div>
-                        <p>Components, Services, RxJS</p>
-                    </div>
+            <h1>Мои навыки и компетенции</h1>
+            <p>
+                На этой странице собраны ключевые технические и поведенческие навыки, которые я использую в работе.  
+                Каждый элемент включает иконку, название, процент владения и краткое описание при наведении.  
+                Данные регулярно обновляются по мере роста опыта и освоения новых инструментов.
+            </p>
+            <div class="intro-actions">
+                <a href="#frontend" class="button">Фронтенд</a>
+                <a href="#backend" class="button">Бэкенд</a>
+                <a href="#tools" class="button">Инструменты</a>
+                <a href="#soft" class="button secondary">Soft Skills</a>
+            </div>
+        </div>  
+    </section>
+
+    <section class="skill-category" id="frontend">
+        <h2>Фронтенд-разработка</h2>
+        <div class="skills-grid">
+            <div class="skill-card" id="skill-html" data-tooltip="Семантическая верстка, доступность, современные API">
+                <i class="fab fa-html5"></i>
+                <h3>HTML5</h3>
+                <div class="skill-percentage">95%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 95%"></div>
                 </div>
             </div>
-            
-            <div class="skill-category">
-                <h2>Бэкенд-разработка</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <i class="fab fa-python"></i>
-                        <h3>Python</h3>
-                        <div class="skill-percentage">75%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 75%"></div>
-                        </div>
-                        <p>Django, Flask, скрипты, автоматизация, боты</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fas fa-database"></i>
-                        <h3>Базы данных</h3>
-                        <div class="skill-percentage">70%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 70%"></div>
-                        </div>
-                        <p>PostgreSQL, SQLite, MongoDB</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fab fa-node-js"></i>
-                        <h3>Node.js</h3>
-                        <div class="skill-percentage">55%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 55%"></div>
-                        </div>
-                        <p>Express, REST API, аутентификация</p>
-                    </div>
+
+            <div class="skill-card" id="skill-css" data-tooltip="Flexbox, Grid, анимации, препроцессоры">
+                <i class="fab fa-css3-alt"></i>
+                <h3>CSS3</h3>
+                <div class="skill-percentage">90%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 90%"></div>
                 </div>
             </div>
-            
-            <div class="skill-category">
-                <h2>Инструменты и другое</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <i class="fab fa-git-alt"></i>
-                        <h3>Git</h3>
-                        <div class="skill-percentage">85%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 85%"></div>
-                        </div>
-                        <p>Git, GitHub, контроль версий</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fas fa-terminal"></i>
-                        <h3>Командная строка</h3>
-                        <div class="skill-percentage">60%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 60%"></div>
-                        </div>
-                        <p>Bash, автоматизация</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fas fa-cloud"></i>
-                        <h3>Облачные технологии</h3>
-                        <div class="skill-percentage">55%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 55%"></div>
-                        </div>
-                        <p>AWS, Firebase, Vercel</p>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fas fa-cube"></i>
-                        <h3>Docker</h3>
-                        <div class="skill-percentage">50%</div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--progress: 50%"></div>
-                        </div>
-                        <p>Контейнеризация, Docker Compose</p>
-                    </div>
+
+            <div class="skill-card" id="skill-js" data-tooltip="ES6+, асинхронное программирование, паттерны">
+                <i class="fab fa-js"></i>
+                <h3>JavaScript</h3>
+                <div class="skill-percentage">85%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 85%"></div>
+                </div>
+            </div>
+
+            <div class="skill-card" id="skill-angular" data-tooltip="Components, Services, RxJS">
+                <i class="fab fa-angular"></i>
+                <h3>Angular</h3>
+                <div class="skill-percentage">70%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 70%"></div>
+                </div>
+            </div>
+
+            <div class="skill-card" id="skill-vue" data-tooltip="Vuex, Vue Router, Composition API">
+                <i class="fab fa-vuejs"></i>
+                <h3>Vue.js</h3>
+                <div class="skill-percentage">70%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 70%"></div>
+                </div>
+            </div>
+
+            <div class="skill-card" id="skill-react" data-tooltip="Hooks, Context API, Redux, Next.js">
+                <i class="fab fa-react"></i>
+                <h3>React</h3>
+                <div class="skill-percentage">65%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 65%"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="skill-category">
-        <h2 class="section-title">Soft Skills</h2>
+    <section class="skill-category" id="backend">
+        <h2>Бэкенд-разработка</h2>
+        <div class="skills-grid">
+            <div class="skill-card" id="skill-python" data-tooltip="Django, Flask, скрипты, автоматизация, боты">
+                <i class="fab fa-python"></i>
+                <h3>Python</h3>
+                <div class="skill-percentage">75%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 75%"></div>
+                </div>
+            </div>
 
-        <div class="soft-skills-wrapper">
+            <div class="skill-card" id="skill-db" data-tooltip="PostgreSQL, SQLite, MongoDB">
+                <i class="fas fa-database"></i>
+                <h3>Базы данных</h3>
+                <div class="skill-percentage">70%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 70%"></div>
+                </div>
+            </div>
+
+            <div class="skill-card" id="skill-node" data-tooltip="Express, REST API, аутентификация">
+                <i class="fab fa-node-js"></i>
+                <h3>Node.js</h3>
+                <div class="skill-percentage">55%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 55%"></div>
+                </div>
+            </div>
+        </div>  
+    </section>
+
+    <section class="skill-category" id="tools">
+        <h2>Инструменты и другое</h2>
+        <div class="skills-grid">
+            <div class="skill-card" id="skill-git" data-tooltip="Git, GitHub, контроль версий">
+                <i class="fab fa-git-alt"></i>
+                <h3>Git</h3>
+                <div class="skill-percentage">85%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 85%"></div>
+                </div>
+            </div>
+
+            <div class="skill-card" id="skill-cli" data-tooltip="Bash, автоматизация">
+                <i class="fas fa-terminal"></i>
+                <h3>Командная строка</h3>
+                <div class="skill-percentage">60%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 60%"></div>
+                </div>
+            </div>
+
+            <div class="skill-card" id="skill-cloud" data-tooltip="AWS, Firebase, Vercel">
+                <i class="fas fa-cloud"></i>
+                <h3>Облачные технологии</h3>
+                <div class="skill-percentage">55%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 55%"></div>
+                </div>
+            </div>
+
+            <div class="skill-card" id="skill-docker" data-tooltip="Контейнеризация, Docker Compose">
+                <i class="fas fa-cube"></i>
+                <h3>Docker</h3>
+                <div class="skill-percentage">50%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 50%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skill-category" id="soft">
+        <h2>Soft Skills</h2>
+        <div class="skills-grid">
+
             <!-- 1 -->
-
-            <div class="soft-skill-card" id="soft-1">
+            <div class="skill-card" data-tooltip="Чёткое и дружелюбное объяснение технических вещей">
                 <i class="fas fa-comments"></i>
                 <h3>Коммуникация</h3>
                 <div class="skill-percentage">90%</div>
-                <div class="soft-skill-progress">
-                    <div class="soft-skill-progress-bar" style="--p: 90%"></div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 90%"></div>
                 </div>
-                <p>Умение чётко и дружелюбно объяснять технические вещи.</p>
             </div>
 
             <!-- 2 -->
-            <div class="soft-skill-card" id="soft-2">
+            <div class="skill-card" data-tooltip="Code-review, митинги, кросс-функциональные команды">
                 <i class="fas fa-users"></i>
                 <h3>Командная работа</h3>
                 <div class="skill-percentage">85%</div>
-                <div class="soft-skill-progress">
-                    <div class="soft-skill-progress-bar" style="--p: 85%"></div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 85%"></div>
                 </div>
-                <p>Code-review, митинги, кросс-функциональные команды.</p>
             </div>
 
             <!-- 3 -->
-            <div class="soft-skill-card" id="soft-3">
+            <div class="skill-card" data-tooltip="Грамотное планирование и соблюдение дедлайнов">
                 <i class="fas fa-clock"></i>
                 <h3>Тайм-менеджмент</h3>
-                <div class="skill-percentage">80%</div>
-                <div class="soft-skill-progress">
-                    <div class="soft-skill-progress-bar" style="--p: 80%"></div>
+                <div class="skill-percentage">99%</div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 99%"></div>
                 </div>
-                <p>Грамотное планирование и соблюдение дедлайнов.</p>
             </div>
 
             <!-- 4 -->
-            <div class="soft-skill-card" id="soft-4">
+            <div class="skill-card" data-tooltip="Нестандартные решения и улучшение UX/UI">
                 <i class="fas fa-lightbulb"></i>
                 <h3>Креативность</h3>
                 <div class="skill-percentage">75%</div>
-                <div class="soft-skill-progress">
-                    <div class="soft-skill-progress-bar" style="--p: 75%"></div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 75%"></div>
                 </div>
-                <p>Нестандартные решения и улучшение UX/UI.</p>
             </div>
 
             <!-- 5 -->
-            <div class="soft-skill-card" id="soft-5">
+            <div class="skill-card" data-tooltip="Внимание к качеству кода и деталям проекта">
                 <i class="fas fa-shield-alt"></i>
                 <h3>Ответственность</h3>
                 <div class="skill-percentage">95%</div>
-                <div class="soft-skill-progress">
-                    <div class="soft-skill-progress-bar" style="--p: 95%"></div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 95%"></div>
                 </div>
-                <p>Внимание к качеству кода и деталям проекта.</p>
             </div>
 
             <!-- 6 -->
-            <div class="soft-skill-card" id="soft-6">
+            <div class="skill-card" data-tooltip="Постоянное изучение новых технологий">
                 <i class="fas fa-book-open"></i>
                 <h3>Самообучение</h3>
                 <div class="skill-percentage">100%</div>
-                <div class="soft-skill-progress">
-                    <div class="soft-skill-progress-bar" style="--p: 100%"></div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 100%"></div>
                 </div>
-                <p>Постоянное изучение новых технологий.</p>
             </div>
 
             <!-- 7 -->
-            <div class="soft-skill-card" id="soft-7">
+            <div class="skill-card" data-tooltip="Анализ проблем и обоснование решений">
                 <i class="fas fa-bullseye"></i>
                 <h3>Критическое мышление</h3>
                 <div class="skill-percentage">80%</div>
-                <div class="soft-skill-progress">
-                    <div class="soft-skill-progress-bar" style="--p: 80%"></div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 80%"></div>
                 </div>
-                <p>Анализ проблем и обоснование решений.</p>
             </div>
 
             <!-- 8 -->
-            <div class="soft-skill-card" id="soft-8">
+            <div class="skill-card" data-tooltip="Понимание пользователей и коллег">
                 <i class="fas fa-handshake"></i>
                 <h3>Эмпатия</h3>
                 <div class="skill-percentage">85%</div>
-                <div class="soft-skill-progress">
-                    <div class="soft-skill-progress-bar" style="--p: 85%"></div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 85%"></div>
                 </div>
-                <p>Понимание пользователей и коллег.</p>
             </div>
 
             <!-- 9 -->
-            <div class="soft-skill-card" id="soft-9">
+            <div class="skill-card" data-tooltip="Адаптация к изменениям и приоритетам">
                 <i class="fas fa-adjust"></i>
                 <h3>Гибкость</h3>
                 <div class="skill-percentage">80%</div>
-                <div class="soft-skill-progress">
-                    <div class="soft-skill-progress-bar" style="--p: 80%"></div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 80%"></div>
                 </div>
-                <p>Адаптация к изменениям и приоритетам.</p>
             </div>
 
             <!-- 10 -->
-            <div class="soft-skill-card" id="soft-10">
+            <div class="skill-card" data-tooltip="Чёткая структура задач, документация и порядок в работе">
                 <i class="fas fa-tasks"></i>
                 <h3>Организованность</h3>
                 <div class="skill-percentage">85%</div>
-                <div class="soft-skill-progress">
-                    <div class="soft-skill-progress-bar" style="--p: 85%"></div>
+                <div class="skill-progress">
+                    <div class="skill-progress-bar" style="--progress: 85%"></div>
                 </div>
-                <p>Чёткая структура задач, документация и порядок в работе.</p>
             </div>
 
         </div>
@@ -540,7 +685,6 @@
 </footer>
 
 <style>
-    /* Дополнительные стили для процентов */
     .skill-percentage {
         font-size: 1.2rem;
         font-weight: bold;
@@ -559,8 +703,8 @@
         overflow: hidden;
         margin: 0.5rem 0;
     }
-    
-    .skill-progress-bar {
+    .skill-progress-bar,
+    .soft-skill-progress-bar {
         height: 100%;
         background: linear-gradient(to right, #007bff, #66a3ff);
         border-radius: 5px;
@@ -568,7 +712,6 @@
         animation: loadProgress 1.5s ease-out forwards;
     }
     
-    /* Анимация загрузки прогресс-баров */
     @keyframes loadProgress {
         to { width: var(--progress); }
     }
