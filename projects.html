@@ -138,6 +138,28 @@
             font-weight: 700;
             font-size: 1.25rem;
         }
+        .pixel-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            background: #2a2a2a;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            font-weight: 900;
+            font-size: 1.3rem;
+            display: grid;
+            place-items: center;
+            image-rendering: pixelated;
+            box-shadow: 0 0 0 2px #00ff41;
+        }
+        .badge.coming {
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            font-size: .65rem;
+            padding: .25rem .6rem;
+            border-radius: 20px;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+        }
 
         .projects h1 {
             text-align: center;
@@ -666,6 +688,55 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Большой кейс 7 - игра по вселенной -->
+                <div class="project-item">
+                    <input type="checkbox" id="project8" class="project-checkbox">
+                    <label for="project8" class="project-header">
+                        <div class="project-title">
+                            <div class="pixel-logo" aria-label="PR">
+                                <span>PR</span>
+                            </div>
+                            <h2 style="opacity:.7;">Js - game <span class="badge coming">скоро</span></h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+
+                    <div class="project-content">
+                        <div class="project-details">
+                            <div class="project-description">
+                                <h3>Что будет</h3>
+                                <p>
+                                Мини игра с не Мини сюжетом.
+                                Сюжет игры из личной вселенной, исторически сложенный.
+                                Процедурная генерация, продвинутая физика (логика). 
+                                Файловое сохранение - без серверной части.                                
+                                </p>
+                                <ul>
+                                <li>Дизайн - в разработкев</li>
+                                <li>Ключевая механика - в разработке</li>
+                                <li>Физика - в разработке</li>
+                                <li>Работает на всех устройсвах - vanila JS, без привязки к типу устройств.</li>
+                                </ul>
+                                <div class="project-actions">
+                                <button class="project-view-btn" disabled style="cursor:not-allowed;opacity:.5;">
+                                    <i class="fas fa-hourglass-half"></i> Demo скоро
+                                </button>
+                                </div>
+                            </div>
+
+                            <div class="project-tech">
+                                <h3>Будущий стек</h3>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Canvas 2D</span>
+                                    <span class="tech-tag">Web Audio API</span>
+                                    <span class="tech-tag">requestAnimationFrame</span>
+                                    <span class="tech-tag">localStorage</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
 
                 <!-- Продолжение следует -->
                 <div class="project-item">
