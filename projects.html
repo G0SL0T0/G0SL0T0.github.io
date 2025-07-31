@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мои проекты - Иван - Gosloto</title>
     <meta name="description" content="Проекты веб-разработчика Ивана.">
-    <link rel="icon" type="png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +15,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .badge {
+            background: linear-gradient(135deg,#ff416c,#ff4b2b);
+            color: #fff;
+            font-size: .7rem;
+            padding: .2rem .5rem;
+            border-radius: 12px;
+            margin-left: .5rem;
+            vertical-align: text-bottom;
+        }
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -80,6 +92,85 @@
                 margin-bottom: 0.5rem;
             }
         }
+        .projects-prelude::after {
+            content: "";
+            display: block;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #007bff 30%, #007bff 70%, transparent);
+            margin: 3rem 0;
+        }
+                
+        .li-logo {/* Кейс 4 */
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -1px;
+            box-shadow: 0 3px 8px rgba(0,0,0,.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .li-logo::before {
+            content: "";
+            position: absolute;
+            inset: -50%;
+            background: radial-gradient(circle, rgba(255,255,255,.3) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }/* Кейс 4 */
+
+        .uc-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            color: #999;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        .pixel-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            background: #2a2a2a;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            font-weight: 900;
+            font-size: 1.3rem;
+            display: grid;
+            place-items: center;
+            image-rendering: pixelated;
+            box-shadow: 0 0 0 2px #00ff41;
+        }
+        .badge.coming {
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            font-size: .65rem;
+            padding: .25rem .6rem;
+            border-radius: 20px;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+        }
+
+        .projects h1 {
+            text-align: center;
+            font-size: 2.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #007bff, #00b4ff);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            margin: 2rem 0 3rem;
+        }
 
         @media (max-width: 480px) {
             h1 {
@@ -125,33 +216,40 @@
             margin-left: 8px;
         }
         
-        /* Переработанные стили для скриншотов */
         .project-screenshots {
             margin-top: 2rem;
             grid-column: 1 / -1;
         }
-        
+        .screenshot-frame {
+            position: relative;
+            width: 100%;
+            padding-top: 62.5%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,.1);
+        }
         .screenshots-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
             margin-top: 1rem;
         }
-        
-        .screenshots-grid img {
+                
+        .screenshot-frame img {
+            position: absolute;
+            inset: 0;
             width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border: 1px solid #eee;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            cursor: pointer;
+            transition: transform .3s;
         }
         
-        .screenshots-grid img:hover {
+        .screenshot-frame img:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         
-        /* Адаптация для мобильных */
         @media (max-width: 768px) {
             .project-view-btn {
                 width: 100%;
@@ -161,6 +259,30 @@
             .screenshots-grid {
                 grid-template-columns: 1fr;
             }
+        }
+
+        .modal-full {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.9);
+            z-index: 9999;
+            display: none;
+            place-items: center;
+            padding: 2rem;
+        }
+        .modal-full img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .modal-full .close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -181,9 +303,54 @@
 </header>
 
 <main>
+    <!-- Блок-текста -->
+    <section class="projects-prelude">
+        <div class="container">
+            <h2>Кейсы и проекты, список (дополняемый)</h2>
+
+            <p class="prelude-lead">
+            Ниже собраны живые примеры интерфейсов и мини-игр, которые я разрабатывал «с нуля» без бэкенда и сторонних CMS.  
+            Все кейсы открываются в браузере, работают офлайн и демонстрируют именно фронтенд-часть: верстку, логику, анимацию и производительность.
+            </p>
+
+            <div class="prelude-grid">
+            <div class="prelude-card">
+                <i class="fas fa-palette"></i>
+                <h3>UI / UX детали</h3>
+                <p>Тонкая настройка цвета, тени, микро-анимаций и фидбеков на каждое действие.</p>
+            </div>
+
+            <div class="prelude-card">
+                <i class="fas fa-rocket"></i>
+                <h3>Производительность</h3>
+                <p>Метрики Lighthouse, FPS-каунтеры и «чистый» бандл без лишних килобайт.</p>
+            </div>
+
+            <div class="prelude-card">
+                <i class="fas fa-gamepad"></i>
+                <h3>Интерактив</h3>
+                <p>Canvas, WebGL, drag-n-drop и игровые механики на чистом JavaScript.</p>
+            </div>
+
+            <div class="prelude-card">
+                <i class="fas fa-file-export"></i>
+                <h3>Экспорт данных</h3>
+                <p>Генерация CSV, JSON или изображений прямо в браузере без сервера.</p>
+            </div>
+            </div>
+
+            <p class="prelude-note">
+            👉 Нажмите «Посмотреть проект», чтобы открыть демо в новой вкладке.  
+            Исходный код каждого кейса доступен на GitHub по запросу.
+            </p>
+        </div>
+    </section>
+    <div aria-hidden="true" style="text-align:center;">
+        <i class="fas fa-chevron-down fa-2x" style="color:#007bff;"></i>
+    </div>
     <section class="projects">
         <div class="container">
-            <h1>Мои проекты</h1>
+            <h1>Проекты и выполненные Кейсы</h1>
             
             <div class="project-accordion">
                 <!-- Проект 1 - SKYT -->
@@ -192,7 +359,7 @@
                     <label for="project1" class="project-header">
                         <div class="project-title">
                             <img src="img/skyt.png" alt="SKYT" class="project-thumbnail">
-                            <h2>SKYT - Трекер времени</h2>
+                            <h2>SKYT - Трекер времени <span class="badge">BEST</span></h2>
                         </div>
                         <i class="fas fa-chevron-down project-icon"></i>
                     </label>
@@ -226,8 +393,8 @@
                             <div class="project-screenshots">
                                 <h4>Скриншоты проекта:</h4>
                                 <div class="screenshots-grid">
-                                    <img src="img/skyt-screen1.png" alt="SKYT_1">
-                                    <img src="img/Skyt-screenshot_1.png" alt="SKYT_2">
+                                    <img src="img/skyt-screen1.png" alt="SKYT_1" onclick="openModal(this.src)">
+                                    <img src="img/skyt-screen2.png" alt="SKYT_2" onclick="openModal(this.src)">
                                 </div>
                             </div>
                         </div>
@@ -240,7 +407,7 @@
                     <label for="project2" class="project-header">
                         <div class="project-title">
                             <img src="img/shield-icon.png" alt="SentinelGuard" class="project-thumbnail">
-                            <h2>SentinelGuard - Сетевой администратор</h2>
+                            <h2>SentinelGuard - Сетевой администратор <span class="badge">BEST</span></h2>
                         </div>
                         <i class="fas fa-chevron-down project-icon"></i>
                     </label>
@@ -274,17 +441,351 @@
                             <div class="project-screenshots">
                                 <h4>Скриншоты проекта:</h4>
                                 <div class="screenshots-grid">
-                                    <img src="img/sentinel-screen1.png" alt="SentinelGuard интерфейс">
-                                    <img src="img/sentinel-screen2.png" alt="SentinelGuard отчет">
+                                    <img src="img/sentinel-screen1.png" alt="SentinelGuard интерфейс" onclick="openModal(this.src)">
+                                    <img src="img/sentinel-screen2.png" alt="SentinelGuard отчет" onclick="openModal(this.src)">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Проект 3 - Оптимизация Пиксельной Экосистемы -->
+                <div class="project-item">
+                    <input type="checkbox" id="project3" class="project-checkbox">
+                    <label for="project3" class="project-header">
+                        <div class="project-title">
+                            <img src="Pic-world.png" alt="Pixel Ecosystem" class="project-thumbnail">
+                            <h2>Оптимизация Пиксельной Экосистемы <span class="badge">BEST</span></h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+
+                    <div class="project-content">
+                        <div class="project-details">
+                            <!-- Левая колонка: описание -->
+                            <div class="project-description">
+                                <h3>Описание проекта</h3>
+                                <p>
+                                    Полный рефакторинг и переписывание игры с React (3000+ строк) на чистый Vanilla&nbsp;JS.  
+                                    Цель — улучшить производительность, сократить время загрузки и убрать зависимости.
+                                </p>
+
+                                <h4>Ключевые улучшения</h4>
+                                <ul>
+                                    <li>Уменьшение размера бандла на&nbsp;85&nbsp;% (без&nbsp;React&nbsp;+&nbsp;Webpack).</li>
+                                    <li>Ускорение первой отрисовки на&nbsp;40&nbsp;% за&nbsp;счёт отказа от&nbsp;VDOM.</li>
+                                    <li>Архитектура «Entity–Component–System» на&nbsp;чистых классах&nbsp;ES6.</li>
+                                    <li>Анимация через&nbsp;<code>requestAnimationFrame</code> и&nbsp;Canvas&nbsp;2D.</li>
+                                    <li>Локальное хранилище состояния без&nbsp;сторонних библиотек.</li>
+                                </ul>
+
+                                <a href="index.html#pixel-ecosystem-game" target="_blank" class="project-view-btn">
+                                    Запустить симуляцию <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+
+                            <!-- Правая колонка: технологии -->
+                            <div class="project-tech">
+                                <h3>Использованные технологии</h3>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">JavaScript ES6+</span>
+                                    <span class="tech-tag">Canvas 2D API</span>
+                                    <span class="tech-tag">Web Workers (опционально)</span>
+                                    <span class="tech-tag">CSS Custom Properties</span>
+                                </div>
+
+                                <h4 style="margin-top: 1.5rem;">Метрики</h4>
+                                <ul class="mini-stats">
+                                    <li><span class="number">-60 %</span> строк кода</li>
+                                    <li><span class="number">-85 %</span> зависимостей</li>
+                                    <li><span class="number">+40 %</span> производительности</li>
+                                </ul>
+                            </div>
+
+                            <!-- Скриншоты -->
+                            <div class="project-screenshots">
+                                <h4>Скриншоты до / после</h4>
+                                <div class="screenshots-grid">
+                                    <img src="img/pixel-eco-1.png" alt="До оптимизации (React)" onclick="openModal(this.src)">
+                                    <img src="img/pixel-eco-2.png" alt="После оптимизации (Vanilla JS)" onclick="openModal(this.src)">
+                                </div>
+                                <p class="caption">
+                                    Слева — React-версия, справа — Vanilla JS. Визуально идентично, но скорость загрузки и FPS выросли.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Кейс #4 (JS) -->
+                <div class="project-item">
+                    <input type="checkbox" id="project6" class="project-checkbox">
+                    <label for="project6" class="project-header">
+                        <div class="project-title">
+                            <div class="li-logo" aria-label="LI">
+                                <span>SMf</span>
+                            </div>
+                            <h2>Static MarkForge - генератор сайтов (не ИИ)</h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+
+                    <div class="project-content">
+                        <div class="project-details">
+                            <div class="project-description">
+                                <h3>Описание проекта</h3>
+                                <p>
+                                Браузерный генератор статических сайтов из Markdown.  
+                                Drag-and-drop файл → получаем готовый HTML-сайт за 60 секунд, без серверов.
+                                </p>
+                                <ul>
+                                <li>Pure JavaScript (ES2023)</li>
+                                <li>Live-preview и instant ZIP-экспорт</li>
+                                <li>Responsive тема + SEO meta-теги</li>
+                                <li>Работает офлайн, вес < 150 KB</li>
+                                </ul>
+                                <div class="project-actions">
+                                <a href="static-site-gen/index.html" target="_blank" class="project-view-btn">
+                                    <i class="fas fa-play-circle"></i> Запустить генератор
+                                </a>
+                                <a href="https://github.com/G0SL0T0/static-site-gen-js" target="_blank" class="project-view-btn">
+                                    <i class="fab fa-github"></i> Код на GitHub
+                                </a>
+                                </div>
+                            </div>
+
+                            <div class="project-tech">
+                                <h3>Технологии</h3>
+                                <div class="tech-tags">
+                                <span class="tech-tag">Vanilla JS ES2023</span>
+                                <span class="tech-tag">Marked.js</span>
+                                <span class="tech-tag">FileSaver.js</span>
+                                <span class="tech-tag">CSS Grid/Flex</span>
+                                <span class="tech-tag">PWA-ready</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- === Кейс 5 - Маркетплейс в частных сетях === -->
+                <div class="project-item">
+                    <input type="checkbox" id="project4" class="project-checkbox">
+                    <label for="project4" class="project-header">
+                        <div class="project-title">
+                        <img src="Case.png" alt="Ansible Remote Installer" class="project-thumbnail">
+                        <h2>Практический кейс испытания<br>(Лига Рабочих Специальностей)</h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+
+                    <div class="project-content">
+                        <div class="project-details">
+                        <!-- описание -->
+                        <div class="project-description">
+                            <h3>Описание проекта</h3>
+                            <p>
+                            Внутренний сервис для деплоя ПО в закрытых сетях.  
+                            Python-backend отправляет плейбуки Ansible по SSH и отслеживает статус установки на каждом хосте в реальном времени.
+                            </p>
+                            <ul>
+                            <li>REST API: <code>/deploy</code>, <code>/status</code>, <code>/logs</code></li>
+                            <li>Ansible-роли для SAP, Docker, PostgreSQL, Nginx</li>
+                            <li>WebSocket-стрим логов установки</li>
+                            <li>JWT-авторизация и RBAC</li>
+                            </ul>
+                            <div class="project-actions" style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                                <a href="case/remote-admin.html" target="_blank" class="project-view-btn">
+                                    <i class="fas fa-cogs"></i> Интерфейс Администратора
+                                </a>
+                                <a href="case/user-installer.html" target="_blank" class="project-view-btn">
+                                    <i class="fas fa-user"></i> Интерфейс Пользователя
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- технологии -->
+                        <div class="project-tech">
+                            <h3>Технологии</h3>
+                            <div class="tech-tags">
+                            <span class="tech-tag">Python 3.12</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">Ansible Core</span>
+                            <span class="tech-tag">SSH Paramiko</span>
+                            <span class="tech-tag">Redis</span>
+                            <span class="tech-tag">WebSocket</span>
+                            </div>
+                        </div>
+
+                        <!-- скриншоты -->
+                            <div class="project-screenshots">
+                                <h4>Скриншоты</h4>
+                                <div class="screenshots-grid">
+                                    <img src="img/Case_screenshot_1.png" alt="Dashboard" onclick="openModal(this.src)">
+                                    <img src="img/Case_screenshot_2.png" alt="Real-time log" onclick="openModal(this.src)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- проект 6 - python скриптики -->
+                <div class="project-item">
+                    <input type="checkbox" id="project5" class="project-checkbox">
+                    <label for="project5" class="project-header">
+                        <div class="project-title">
+                        <img src="img/case1_python.png" alt="Python Lessons" class="project-thumbnail">
+                        <h2>Python-скриптотека </h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+
+                    <div class="project-content">
+                        <div class="project-details">
+
+                        <!-- описание -->
+                        <div class="project-description">
+                            <h3>Описание проекта</h3>
+                            <p>
+                            Личный репозиторий «Python-скриптотека», который я собирал для себя и теперь делюсь с сообществом.  
+                            <strong>Начинается с самых базовых логических операций</strong> и заканчивается
+                            <strong>алгоритмическими паттернами</strong>, которые можно «копипастить»
+                            в любой проект без лишней головной боли.
+                            </p>
+
+                            <ul>
+                            <li>100+ примеров от <code>if/else</code> до рекурсивных деревьев</li>
+                            <li>Готовые паттерны: «обход графа», «декораторы», «генераторы», «кэш»</li>
+                            <li>Пошаговые комментарии + playground-файлы</li>
+                            <li>Zero-dependency: запускается в любом Python ≥ 3.8</li>
+                            </ul>
+
+                            <div class="project-actions">
+                            <a href="https://github.com/G0SL0T0/P-thon_members_lessons" target="_blank" class="project-view-btn">
+                                <i class="fab fa-github"></i> GitHub-репозиторий
+                            </a>
+                            </div>
+                        </div>
+
+                        <!-- технологии -->
+                        <div class="project-tech">
+                            <h3>Использованные технологии</h3>
+                            <div class="tech-tags">
+                            <span class="tech-tag">Python 3.10+</span>
+                            <span class="tech-tag">Jupyter</span>
+                            <span class="tech-tag">MkDocs</span>
+                            <span class="tech-tag">Rich CLI</span>
+                            <span class="tech-tag">PyTest</span>
+                            </div>
+                            <h4 style="margin-top: 1rem;">Roadmap</h4>
+                            <ul>
+                            <li>Сети, БД, тесты, асинхронность, фреймворки</li>
+                            <li>JIT-компиляция, профилирование, мультипроцессинг</li>
+                            </ul>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Большой кейс 7 - игра по вселенной -->
+                <div class="project-item">
+                    <input type="checkbox" id="project8" class="project-checkbox">
+                    <label for="project8" class="project-header">
+                        <div class="project-title">
+                            <div class="pixel-logo" aria-label="PR">
+                                <span>PR</span>
+                            </div>
+                            <h2 style="opacity:.7;">Js - game <span class="badge coming">скоро</span></h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+
+                    <div class="project-content">
+                        <div class="project-details">
+                            <div class="project-description">
+                                <h3>Что будет</h3>
+                                <p>
+                                Мини игра с не Мини сюжетом.
+                                Сюжет игры из личной вселенной, исторически сложенный.
+                                Процедурная генерация, продвинутая физика (логика). 
+                                Файловое сохранение - без серверной части.                                
+                                </p>
+                                <ul>
+                                <li>Дизайн - в разработкев</li>
+                                <li>Ключевая механика - в разработке</li>
+                                <li>Физика - в разработке</li>
+                                <li>Работает на всех устройсвах - vanila JS, без привязки к типу устройств.</li>
+                                </ul>
+                                <div class="project-actions">
+                                <button class="project-view-btn" disabled style="cursor:not-allowed;opacity:.5;">
+                                    <i class="fas fa-hourglass-half"></i> Demo скоро
+                                </button>
+                                </div>
+                            </div>
+
+                            <div class="project-tech">
+                                <h3>Будущий стек</h3>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Canvas 2D</span>
+                                    <span class="tech-tag">Web Audio API</span>
+                                    <span class="tech-tag">requestAnimationFrame</span>
+                                    <span class="tech-tag">localStorage</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+
+                <!-- Продолжение следует -->
+                <div class="project-item">
+                    <input type="checkbox" id="project7" class="project-checkbox">
+                    <label for="project7" class="project-header">
+                        <div class="project-title">
+                            <div class="uc-logo" aria-label="UC">
+                                <span>UC</span>
+                            </div>
+                            <h2 style="opacity:.7;">Дальше&nbsp;куда?</h2>
+                        </div>
+                        <i class="fas fa-chevron-down project-icon"></i>
+                    </label>
+
+                    <div class="project-content">
+                        <div class="project-details">
+                            <div class="project-description">
+                                <h3>Что дальше?</h3>
+                                <p>
+                                    Здесь появятся новые кейсы после рефакторинга: React → Vanilla&nbsp;JS, 
+                                    Vue → Vanilla&nbsp;JS, Svelte → Vanilla&nbsp;JS и другие миграции.
+                                    Следите за обновлениями&nbsp;
+                                </p>
+                                <ul>
+                                    <li>Zero-dependency миграции</li>
+                                    <li>Performance-сравнения</li>
+                                    <li>Шаблоны и гайды в code-ing</li>
+                                    <li>Различное - нужное и не очень</li>
+                                </ul>
+                                <div class="project-actions">
+                                    <button class="project-view-btn" disabled style="cursor:not-allowed;opacity:.5;">
+                                        <i class="fas fa-clock"></i> Скоро…
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 </main>
+
+<!-- Модальное окно -->
+<div id="imgModal" class="modal-full">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img id="modalImg" src="" alt="Full-size screenshot">
+</div>
 
 <footer>
     <div class="container">
@@ -293,7 +794,6 @@
 </footer>
 
 <style>
-    /* Стили для аккордеона проектов */
     .project-accordion {
         max-width: 900px;
         margin: 2rem auto;
@@ -386,18 +886,7 @@
         gap: 1rem;
         margin-top: 1rem;
     }
-    
-    .screenshots-grid img {
-        width: 100%;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        transition: transform 0.3s;
-    }
-    
-    .screenshots-grid img:hover {
-        transform: scale(1.03);
-    }
-    
+
     @media (max-width: 768px) {
         .project-details {
             grid-template-columns: 1fr;
@@ -414,6 +903,34 @@
 </style>
 
 <script>
+    // Модальное окно
+    function openModal(src) {
+        const modal = document.getElementById('imgModal');
+        document.getElementById('modalImg').src = src;
+        modal.style.display = 'grid';
+        document.body.style.overflow = 'hidden';
+    }
+    // Закрыть модальное окно
+    function closeModal() {
+        document.getElementById('imgModal').style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    // Закрытие по Escape
+    window.addEventListener('keydown', e => e.key === 'Escape' && closeModal());
+    document.getElementById('imgModal').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closeModal();
+    });
+</script>
+
+<script>
+    /* ——— плавный скролл ——— */
+    document.querySelectorAll('.project-header').forEach(header => {
+        header.addEventListener('click', () => {
+            // задержка
+            setTimeout(() => header.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+        });
+    });
+
     document.querySelector('.menu-toggle').addEventListener('click', function() {
         document.querySelector('nav').classList.toggle('show');
     });

@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты - Иван - Gosloto</title>
     <meta name="description" content="Контактная информация веб-разработчика Ивана.">
-    <link rel="icon" type="png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -179,7 +179,7 @@
                 
                 <div class="contact-form">
                     <h2><i class="fas fa-envelope-open-text"></i> Форма обратной связи</h2>
-                    <form action="#" method="post">
+                    <form id="contactForm">
                         <div class="form-group">
                             <label for="name">Ваше имя</label>
                             <input type="text" id="name" name="name" required>
@@ -196,7 +196,10 @@
                             <label for="message">Сообщение</label>
                             <textarea id="message" name="message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="button">Отправить сообщение</button>
+                        <button type="submit" class="button" id="sendBtn">
+                            <i class="fas fa-paper-plane"></i> Отправить
+                        </button>
+                        <span id="status" style="margin-left:1rem;"></span>
                     </form>
                 </div>
             </div>
@@ -210,8 +213,9 @@
     </div>
 </footer>
 
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
 <style>
-    /* Стили для контактной страницы */
     .contact-content {
         display: flex;
         gap: 3rem;
@@ -307,6 +311,37 @@
         }
     }
 </style>
+
+<script>
+/* ===== EmailJS ===== */
+emailjs.init("YOUR_PUBLIC_KEY");            // ← из личного кабинета EmailJS
+const serviceID = "YOUR_SERVICE_ID";        // ← сервис (Gmail, Yandex и т.д.)
+const templateID = "YOUR_TEMPLATE_ID";      // ← шаблон письма
+
+const form   = document.getElementById('contactForm');
+const status = document.getElementById('status');
+const btn    = document.getElementById('sendBtn');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка…';
+
+  emailjs.sendForm(serviceID, templateID, form)
+    .then(() => {
+      status.textContent = '✅ Сообщение отправлено! ✅';
+      status.style.color = '#28a745';
+      form.reset();
+    }, err => {
+      status.textContent = 'Ошибка: ' + err.text;
+      status.style.color = '#dc3545';
+    })
+    .finally(() => {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Отправить';
+    });
+});
+</script>
 
 <script>
     // Скрипт для меню

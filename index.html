@@ -1140,7 +1140,7 @@
 </footer>
 
 <script>
-    // Мини-JS для мобильного меню
+    // Мини-JS
     document.addEventListener('DOMContentLoaded', () => {
         const menuToggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('nav');
@@ -1149,28 +1149,22 @@
 </script>
 
 <script>
-    // Простейшая реализация для демонстрации
     document.querySelector('.menu-toggle').addEventListener('click', function() {
         document.querySelector('nav').classList.toggle('show');
     });
-
-    // Заглушка для игрового раздела (реальная реализация потребует больше кода)
     const canvas = document.getElementById('game-canvas');
     const ctx = canvas.getContext('2d');
-    
     document.querySelector('.game-button.start').addEventListener('click', function() {
         ctx.fillStyle = '#28a745';
         ctx.font = '24px Arial';
         ctx.textAlign = 'center';
         ctx.fillText('Симуляция запущена!', canvas.width/2, canvas.height/2);
     });
-    
     document.querySelector('.game-button.reset').addEventListener('click', function() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = '#dc3545';
         ctx.fillText('Нажмите "Запустить" для начала', canvas.width/2, canvas.height/2);
     });
-    
     // Инициализация
     ctx.fillStyle = '#6c757d';
     ctx.fillText('Нажмите "Запустить" для начала', canvas.width/2, canvas.height/2);
@@ -1185,29 +1179,17 @@
 </script>
 
 <script>
-    // Полная инициализация всех слайд-шоу
     document.addEventListener('DOMContentLoaded', () => {
-        
-        // Обрабатываем каждый кейс
         document.querySelectorAll('.case-demo').forEach((caseDemo, index) => {
-            
             const imagesContainer = caseDemo.querySelector('.case-images, .case-images-grid');
             if (!imagesContainer) return;
-
             const images = Array.from(imagesContainer.querySelectorAll('.case-image'));
             if (images.length <= 1) return;
-
             let currentIndex = 0;
-            
-            // Находим или создаем элементы навигации
             let prevBtn = caseDemo.querySelector('.prev-button');
             let nextBtn = caseDemo.querySelector('.next-button');
             let dots = caseDemo.querySelectorAll('.case-pagination-dot');
-
-            // Создаем навигацию если её нет
             if (!prevBtn || !nextBtn || dots.length === 0) {
-                
-                // Создаем контейнер навигации
                 if (!caseDemo.querySelector('.case-nav')) {
                     const nav = document.createElement('div');
                     nav.className = 'case-nav';
@@ -1221,8 +1203,6 @@
                     `;
                     caseDemo.appendChild(nav);
                 }
-
-                // Создаем точки навигации
                 if (!caseDemo.querySelector('.case-pagination')) {
                     const pagination = document.createElement('div');
                     pagination.className = 'case-pagination';
@@ -1233,30 +1213,19 @@
                     });
                     caseDemo.appendChild(pagination);
                 }
-
-                // Переопределяем элементы
                 prevBtn = caseDemo.querySelector('.prev-button');
                 nextBtn = caseDemo.querySelector('.next-button');
                 dots = caseDemo.querySelectorAll('.case-pagination-dot');
             }
-
-            // Функция обновления слайд-шоу
             function updateSlideshow() {
-                
                 const offset = -currentIndex * 100;
                 imagesContainer.style.transform = `translateX(${offset}%)`;
-
-                // Обновляем точки
                 dots.forEach((dot, i) => {
                     dot.classList.toggle('active', i === currentIndex);
                 });
-
-                // Обновляем кнопки
                 if (prevBtn) prevBtn.disabled = currentIndex === 0;
                 if (nextBtn) nextBtn.disabled = currentIndex === images.length - 1;
             }
-
-            // Обработчики событий
             if (prevBtn) {
                 prevBtn.addEventListener('click', () => {
                     if (currentIndex > 0) {
@@ -1265,7 +1234,6 @@
                     }
                 });
             }
-
             if (nextBtn) {
                 nextBtn.addEventListener('click', () => {
                     if (currentIndex < images.length - 1) {
@@ -1274,32 +1242,24 @@
                     }
                 });
             }
-
-            // Навигация по точкам
             dots.forEach((dot, i) => {
                 dot.addEventListener('click', () => {
                     currentIndex = i;
                     updateSlideshow();
                 });
             });
-
-            // Свайпы для мобильных
             let touchStartX = 0;
             let touchEndX = 0;
-
             caseDemo.addEventListener('touchstart', (e) => {
                 touchStartX = e.changedTouches[0].screenX;
             });
-
             caseDemo.addEventListener('touchend', (e) => {
                 touchEndX = e.changedTouches[0].screenX;
                 handleSwipe();
             });
-
             function handleSwipe() {
                 const swipeThreshold = 50;
                 const swipeDistance = touchEndX - touchStartX;
-
                 if (Math.abs(swipeDistance) > swipeThreshold) {
                     if (swipeDistance > 0 && currentIndex > 0) {
                         currentIndex--;
@@ -1310,7 +1270,6 @@
                     }
                 }
             }
-
             // Инициализация
             updateSlideshow();
         });
@@ -1390,18 +1349,14 @@
 </style>
 
 <script>
-    // Диалоговое окно прогула резюме
     const overlay  = document.getElementById('cv-modal');
     const closeBtn = overlay.querySelector('.cv-modal__close');
-
     function openModal() {
     overlay.classList.remove('hidden');
     }
     function closeModal() {
     overlay.classList.add('hidden');
     }
-
-    // клик по кнопке «Скачать резюме»
     document.getElementById('download-cv').addEventListener('click', async () => {
     const fileName = 'cv.pdf';
     try {
@@ -1415,8 +1370,6 @@
         openModal();
     }
     });
-
-    // закрытие
     overlay.addEventListener('click', (e) => {
     if (e.target === overlay || e.target === closeBtn) closeModal();
     });
