@@ -19,6 +19,7 @@ const ACH_DB = [
   { name: 'Пройти игру на базовом снаряжении',     game: 'The Witcher 3: Wild Hunt',           date: '2023-08-13', unlocked: true,  type: 'challenge' },
   { name: 'Лопата + магия = пройти игру',          game: 'The Witcher 3: Wild Hunt',           date: '2023-09-29', unlocked: true,  type: 'challenge' },
   { name: 'Пройти через: магию/алхимию/физ.дмг.',  game: 'The Witcher 3: Wild Hunt',           date: '2023-08-14', unlocked: true,  type: 'challenge' },
+  { name: 'Пройти через: только мечи+только стартовые',game: 'The Witcher 3: Wild Hunt',       date: '2023-01-14', unlocked: true,  type: 'challenge' },
   { name: 'Ориенттироватся на местности',          game: 'The Witcher 3: Wild Hunt',           date: '2023-11-14', unlocked: true,  type: 'challenge' },
   { name: 'Пройти игру Игни + физ дмг.',           game: 'The Witcher 3: Wild Hunt',           date: '2021-09-24', unlocked: true,  type: 'challenge' },
   { name: '250 уровень торговца',                  game: 'TRADESMAN: Deal to Dealer',          date: '2025-07-23', unlocked: true,  type: 'achievement' },
@@ -68,6 +69,7 @@ const ACH_DB = [
 { name: '500 PvP-фрагов в QuickPlay',            game: 'Hunt: Showdown 1896',      date: '2024-12-11', unlocked: true, type: 'achievement' },
 
 { name: 'Спидран R8A1 - 6:07',                   game: 'GTFO',                     date: '2025-04-11', unlocked: true, type: 'achievement' },
+{ name: 'Великий взломщик 100% журналов',        game: 'GTFO',                     date: '2025-08-02', unlocked: true, type: 'achievement' },
 { name: '100 % достижений GTFO',                 game: 'GTFO',                     date: '2025-04-11', unlocked: true, type: 'achievement' },
 
 { name: 'Победить Yog-Dzewa',                    game: 'Shattered Pixel Dungeon',  date: '2025-03-22', unlocked: true, type: 'achievement' },
