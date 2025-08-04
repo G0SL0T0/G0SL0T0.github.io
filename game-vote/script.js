@@ -3,33 +3,33 @@ const GAMES_BASE = [
   {
     id: "wildgate",
     name: "Wildgate",
-    image: "wildgate.jpg",
-    description: "Многопользовательский PvP-шутер...",
-    tags: ["PvP", "Космос", "Тактика"],
+    image: "https://via.placeholder.com/300x200/4CAF50/fff?text=Wildgate",
+    description: "Онлайн-симулятор дикой природы с выживанием и кооперативом.",
+    tags: ["MMO", "Выживание", "Кооператив"],
     votes: 0
   },
   {
     id: "snowrunner",
     name: "SnowRunner",
-    image: "snowrunner.jpg",
-    description: "Реалистичный симулятор вождения...",
-    tags: ["Симулятор"],
+    image: "https://via.placeholder.com/300x200/2196F3/fff?text=SnowRunner",
+    description: "Реалистичный симулятор вождения по бездорожью и снегу.",
+    tags: ["Симулятор", "Авто", "Физика"],
     votes: 0
   },
   {
     id: "peak",
     name: "Peak",
-    image: "peak.jpg",
-    description: "Приключенческая головоломка...",
+    image: "https://via.placeholder.com/300x200/FF9800/fff?text=Peak",
+    description: "Приключенческая головоломка в горах с погодными катастрофами.",
     tags: ["Головоломка", "Приключение", "Погода"],
     votes: 0
   },
   {
     id: "panicore",
     name: "Panicore",
-    image: "panicore.jpg",
-    description: "Кооперативный хоррор...",
-    tags: ["Хоррор"],
+    image: "https://via.placeholder.com/300x200/9C27B0/fff?text=Panicore",
+    description: "Кооперативный хоррор с элементами стелса и разумными монстрами.",
+    tags: ["Хоррор", "Кооператив", "Стелс"],
     votes: 0
   }
 ];
@@ -39,7 +39,6 @@ let games = [];
 let votesLeft = 3;
 
 function loadData() {
-  // объединяем базу с сохранёнными голосами
   const saved = JSON.parse(localStorage.getItem('games')) || GAMES_BASE;
   games = saved.map(base => ({
     ...base,
@@ -68,7 +67,7 @@ function renderAll() {
       <div class="content">
         <h3>${game.name}</h3>
         <p>${game.description}</p>
-        <div class="tags">${game.tags.map(t => `#${t}`).join('')}</div>
+        <div class="tags">${game.tags.map(t => `<span>#${t}</span>`).join('')}</div>
         <div class="votes-count">${game.votes} голос(а)</div>
       </div>
     `;
@@ -81,8 +80,10 @@ function renderAll() {
   games.filter(g => g.votes > 0)
        .sort((a, b) => b.votes - a.votes)
        .forEach(({ name, votes }) => {
-         list.innerHTML += `<li><span>${name}</span> <span>${votes}</span></li>`;
+         list.innerHTML += `<li><span>${name}</span><span>${votes}</span></li>`;
        });
+
+  updateCounter();
 }
 
 // ---------- 4. Голосование ----------
@@ -101,8 +102,6 @@ function resetVotes() {
   votesLeft = 3;
   saveData();
   renderAll();
-  document.querySelectorAll('.game-card').forEach(c => c.style.pointerEvents = 'auto');
-  document.querySelector('.neon-button').disabled = false;
 }
 
 // ---------- 6. Добавление через Steam ----------
