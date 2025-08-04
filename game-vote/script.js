@@ -62,11 +62,11 @@ function renderAll() {
   games.forEach(game => {
     let imgSrc;
 
+    // Wildgate и Peak — fallback.jpg, т.к. Steam-обложки пока не доступны
     if (game.id === 'wildgate' || game.id === 'peak') {
-      // Локальные изображения для Wildgate и Peak
-      imgSrc = game.image;
+      imgSrc = 'fallback.jpg';
     } else {
-      // Steam-обложка для всех остальных
+      // Все остальные — строго через Steam CDN
       imgSrc = `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.steamId}/header.jpg`;
     }
 
