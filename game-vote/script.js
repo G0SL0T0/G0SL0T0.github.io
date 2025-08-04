@@ -3,7 +3,8 @@ const GAMES_BASE = [
   {
     id: "wildgate",
     name: "Wildgate",
-    image: "https://via.placeholder.com/300x200/4CAF50/fff?text=Wildgate",
+    steamId: "3504780", //Wildgate steam id - 3504780
+    image: "wildgate.jpg",
     description: "Онлайн-симулятор дикой природы с выживанием и кооперативом.",
     tags: ["MMO", "Выживание", "Кооператив"],
     votes: 0
@@ -11,7 +12,7 @@ const GAMES_BASE = [
   {
     id: "snowrunner",
     name: "SnowRunner",
-    image: "https://via.placeholder.com/300x200/2196F3/fff?text=SnowRunner",
+    steamId: "1465360",
     description: "Реалистичный симулятор вождения по бездорожью и снегу.",
     tags: ["Симулятор", "Авто", "Физика"],
     votes: 0
@@ -19,7 +20,8 @@ const GAMES_BASE = [
   {
     id: "peak",
     name: "Peak",
-    image: "https://via.placeholder.com/300x200/FF9800/fff?text=Peak",
+    steamId: "3527290", //Peak steam id - 3527290
+    image: "peak.jpg",
     description: "Приключенческая головоломка в горах с погодными катастрофами.",
     tags: ["Головоломка", "Приключение", "Погода"],
     votes: 0
@@ -27,7 +29,7 @@ const GAMES_BASE = [
   {
     id: "panicore",
     name: "Panicore",
-    image: "https://via.placeholder.com/300x200/9C27B0/fff?text=Panicore",
+    steamId: "2695940", //PANICORE steam id - 2695940
     description: "Кооперативный хоррор с элементами стелса и разумными монстрами.",
     tags: ["Хоррор", "Кооператив", "Стелс"],
     votes: 0
@@ -56,10 +58,18 @@ function saveData() {
 function renderAll() {
   const grid = document.getElementById('gamesGrid');
   grid.innerHTML = '';
+
   games.forEach(game => {
-    const imgSrc = game.steamId
-      ? `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.steamId}/header.jpg`
-      : game.image;
+    let imgSrc;
+
+    if (game.id === 'wildgate' || game.id === 'peak') {
+      // Локальные изображения для Wildgate и Peak
+      imgSrc = game.image;
+    } else {
+      // Steam-обложка для всех остальных
+      imgSrc = `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.steamId}/header.jpg`;
+    }
+
     const card = document.createElement('div');
     card.className = 'game-card';
     card.innerHTML = `
@@ -112,16 +122,23 @@ function addSteamGame() {
   if (!name || !url) return;
 
   const match = url.match(/\/app\/(\d+)/);
-  if (!match) { alert('Неверная ссылка Steam'); return; }
+  if (!match) {
+    alert('Неверная ссылка Steam. Пример: https://store.steampowered.com/app/123456/GameName');
+    return;
+  }
 
   const appid = match[1];
   const id = name.toLowerCase().replace(/\s+/g, '-');
+
+  if (games.some(g => g.steamId === appid)) {
+    alert('Эта игра уже добавлена.');
+    return;
+  }
 
   games.push({
     id,
     name,
     steamId: appid,
-    image: null,
     description: 'Добавлено через Steam',
     tags: ['Steam'],
     votes: 0
