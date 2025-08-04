@@ -9,13 +9,18 @@
   <link rel="icon" type="image/png" href="logo.png"/>
 </head>
 <body>
-  <header>
-    <h1 class="glitch">Во что бы я сыграл</h1>
-    <div class="counter-row">
-      <div class="counter" id="counter">Осталось голосов: 3</div>
-      <button class="neon-button small" onclick="resetVotes()">Сбросить</button>
-    </div>
-  </header>
+    <header>
+        <h1 class="glitch">Во что бы я сыграл</h1>
+
+        <div class="counter-row">
+            <div class="counter" id="counter">Осталось голосов: 3</div>
+        </div>
+
+        <div class="action-row">
+            <button class="neon-button small" onclick="resetVotes()">Сбросить</button>
+            <button class="neon-button small" onclick="submitVotes()">📤 Подтвердить и отправить</button>
+        </div>
+    </header>
 
   <main class="container">
     <p class="subtitle">Отдайте 3 голоса за игры, в которые хотите сыграть.</p>

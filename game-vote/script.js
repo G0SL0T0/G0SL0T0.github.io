@@ -1,9 +1,9 @@
-// ---------- 1. Базовый JSON (встроен) ----------
+// ---------- 1. Базовые игры (встроено в JS) ----------
 const GAMES_BASE = [
   {
     id: "wildgate",
     name: "Wildgate",
-    steamId: "3504780", //Wildgate steam id - 3504780
+    steamId: "3504780",
     image: "wildgate.jpg",
     description: "Онлайн-симулятор дикой природы с выживанием и кооперативом.",
     tags: ["MMO", "Выживание", "Кооператив"],
@@ -13,6 +13,7 @@ const GAMES_BASE = [
     id: "snowrunner",
     name: "SnowRunner",
     steamId: "1465360",
+    image: "snowrunner.jpg",
     description: "Реалистичный симулятор вождения по бездорожью и снегу.",
     tags: ["Симулятор", "Авто", "Физика"],
     votes: 0
@@ -20,7 +21,7 @@ const GAMES_BASE = [
   {
     id: "peak",
     name: "Peak",
-    steamId: "3527290", //Peak steam id - 3527290
+    steamId: "3527290",
     image: "peak.jpg",
     description: "Приключенческая головоломка в горах с погодными катастрофами.",
     tags: ["Головоломка", "Приключение", "Погода"],
@@ -29,7 +30,8 @@ const GAMES_BASE = [
   {
     id: "panicore",
     name: "Panicore",
-    steamId: "2695940", //PANICORE steam id - 2695940
+    steamId: "2695940",
+    image: "panicore.jpg",
     description: "Кооперативный хоррор с элементами стелса и разумными монстрами.",
     tags: ["Хоррор", "Кооператив", "Стелс"],
     votes: 0
@@ -61,12 +63,9 @@ function renderAll() {
 
   games.forEach(game => {
     let imgSrc;
-
-    // Wildgate и Peak — fallback.jpg, т.к. Steam-обложки пока не доступны
-    if (game.id === 'wildgate' || game.id === 'peak') {
-      imgSrc = 'fallback.jpg';
+    if (['wildgate', 'snowrunner', 'peak', 'panicore'].includes(game.id)) {
+      imgSrc = game.image;
     } else {
-      // Все остальные — строго через Steam CDN
       imgSrc = `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.steamId}/header.jpg`;
     }
 
@@ -106,7 +105,38 @@ function vote(id) {
   renderAll();
 }
 
-// ---------- 5. Сброс ----------
+// ---------- 5. Отправка на Beeceptor ----------
+function submitVotes() {
+  const votedGames = games.filter(g => g.votes > 0);
+  const result = [];
+  for (let i = 0; i < 3; i++) {
+    const game = votedGames[i];
+    result.push({
+      place: i + 1,
+      name: game ? game.name : 'пусто',
+      votes: game ? game.votes : 0
+    });
+  }
+
+  const payload = {
+    timestamp: new Date().toISOString(),
+    votes: result
+  };
+
+  fetch('https://gosloto.free.beeceptor.com', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Ошибка отправки');
+    return res.text();
+  })
+  .then(() => alert('✅ Голоса отправлены!'))
+  .catch(err => alert('❌ Ошибка: ' + err.message));
+}
+
+// ---------- 6. Сброс ----------
 function resetVotes() {
   games.forEach(g => g.votes = 0);
   votesLeft = 3;
@@ -114,7 +144,7 @@ function resetVotes() {
   renderAll();
 }
 
-// ---------- 6. Добавление через Steam ----------
+// ---------- 7. Добавление игры ----------
 function addSteamGame() {
   if (votesLeft <= 0) return;
   const name = document.getElementById('steamName').value.trim();
@@ -123,7 +153,7 @@ function addSteamGame() {
 
   const match = url.match(/\/app\/(\d+)/);
   if (!match) {
-    alert('Неверная ссылка Steam. Пример: https://store.steampowered.com/app/123456/GameName');
+    alert('Неверная ссылка Steam.');
     return;
   }
 
@@ -149,7 +179,7 @@ function addSteamGame() {
   document.getElementById('steamUrl').value = '';
 }
 
-// ---------- 7. Старт ----------
+// ---------- 8. Старт ----------
 function updateCounter() {
   document.getElementById('counter').textContent = `Осталось голосов: ${votesLeft}`;
 }

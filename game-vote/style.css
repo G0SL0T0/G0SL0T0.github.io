@@ -83,7 +83,13 @@ header {
   margin: 0 0 0.5rem;
   color: var(--accent);
 }
-
+.action-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
 .game-card p {
   font-size: 0.9rem;
   color: var(--sub);

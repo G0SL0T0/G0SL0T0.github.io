@@ -2,37 +2,33 @@
   {
     "id": "wildgate",
     "name": "Wildgate",
-    "steamId": "3504780",
-    "imageType": "local",
     "image": "wildgate.jpg",
-    "description": "Онлайн-симулятор дикой природы...",
+    "steamId": "3504780",
+    "description": "Онлайн-симулятор дикой природы с выживанием и кооперативом.",
     "tags": ["MMO", "Выживание", "Кооператив"]
   },
   {
     "id": "snowrunner",
     "name": "SnowRunner",
-    "steamId": "1465360",
-    "imageType": "local",
     "image": "snowrunner.jpg",
-    "description": "Реалистичный симулятор вождения...",
+    "steamId": "1465360",
+    "description": "Реалистичный симулятор вождения по бездорожью и снегу.",
     "tags": ["Симулятор", "Авто", "Физика"]
   },
   {
     "id": "peak",
     "name": "Peak",
-    "steamId": "3527290",
-    "imageType": "local",
     "image": "peak.jpg",
-    "description": "Приключенческая головоломка...",
+    "steamId": "3527290",
+    "description": "Приключенческая головоломка в горах с погодными катастрофами.",
     "tags": ["Головоломка", "Приключение", "Погода"]
   },
   {
     "id": "panicore",
     "name": "Panicore",
+    "image": "panicore.jpeg",
     "steamId": "2695940",
-    "imageType": "local",
-    "image": "panicore.jpg",
-    "description": "Кооперативный хоррор...",
+    "description": "Кооперативный хоррор с элементами стелса и разумными монстрами.",
     "tags": ["Хоррор", "Кооператив", "Стелс"]
   }
 ]
