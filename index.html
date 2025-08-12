@@ -779,6 +779,122 @@
         }
         }
 
+
+.resume-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  list-style: none;
+  padding: 0.5rem 0;
+  min-width: 200px;
+  z-index: 10;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 0.6rem 1rem;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.dropdown-menu li a:hover {
+  background: #f3f4f6;
+}
+
+.resume-dropdown:hover .dropdown-menu {
+  display: block;
+}
+.resume-circle-menu {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 2rem auto;
+  transition: transform 0.4s ease;
+}
+
+.resume-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #007bff, #00b4ff);
+  color: white;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,123,255,.4);
+  transition: all 0.3s ease;
+}
+
+.resume-center:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.resume-sector {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  transform-origin: 0 0;
+  transform: rotate(0deg) translateX(0px) scale(0);
+  transition: transform 0.4s ease;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.resume-sector.resume-react {
+  background: #61dafb;
+}
+.resume-sector.resume-vue {
+  background: #4fc08d;
+}
+.resume-sector.resume-angular {
+  background: #dd0031;
+}
+
+/* Активное состояние */
+.resume-circle-menu.open .resume-sector {
+  pointer-events: auto;
+  transform: rotate(0deg) translateX(100px) scale(1);
+}
+
+.resume-circle-menu.open .resume-sector:nth-child(2) {
+  transform: rotate(0deg) translateX(100px) scale(1);
+}
+
+.resume-circle-menu.open .resume-sector:nth-child(3) {
+  transform: rotate(120deg) translateX(100px) scale(1);
+}
+
+.resume-circle-menu.open .resume-sector:nth-child(4) {
+  transform: rotate(240deg) translateX(100px) scale(1);
+}
+
+
         .icon-ring i:nth-child(1){ top: 0; left: 50%; transform: translateX(-50%); }
         .icon-ring i:nth-child(2){ top: 50%; right: 0; transform: translateY(-50%); }
         .icon-ring i:nth-child(3){ bottom: 0; left: 50%; transform: translateX(-50%); }
@@ -861,9 +977,27 @@
 
             <!-- Кнопки действий -->
             <div class="about-actions">
-            <a href="about.html" class="button">Подробнее</a>
-            <button id="download-cv" class="button secondary">Скачать резюме</button>
+                <a href="about.html" class="button">Подробнее</a>
+                <div class="resume-dropdown">
+                    <button class="button primary">Скачать резюме</button>
+                        <div class="resume-circle-menu" id="resumeCircleMenu">
+                            <button class="resume-center" id="resumeCenterBtn">
+                                📄 Общее
+                            </button>
+
+                            <a class="resume-sector resume-react" href="cv-react.pdf" download>
+                                ⚛️ React
+                            </a>
+                            <a class="resume-sector resume-vue" href="cv-vue.pdf" download>
+                                🟢 Vue
+                            </a>
+                            <a class="resume-sector resume-angular" href="cv-angular.pdf" download>
+                                🔺 Angular
+                            </a>
+                        </div>
+                </div>
             </div>       
+
             <div id="cv-modal" class="cv-modal hidden">
                 <div class="cv-modal__box">
                     <p class="cv-modal__text">
@@ -1373,6 +1507,24 @@
     overlay.addEventListener('click', (e) => {
     if (e.target === overlay || e.target === closeBtn) closeModal();
     });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const menu = document.getElementById('resumeCircleMenu');
+  const btn = document.getElementById('resumeCenterBtn');
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('open');
+  });
+
+  // Закрыть при клике вне
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+});
 </script>
 
 <!-- Canvas игра на React -->
