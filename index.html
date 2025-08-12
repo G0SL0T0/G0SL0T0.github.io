@@ -791,83 +791,120 @@
     </style>
 
     <style>
+.resume-expand {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  transition: box-shadow .3s;
+}
 
-.resume-overlay {
+.resume-expand:hover { box-shadow: 0 8px 20px rgba(0,0,0,.2); }
+
+/* Кнопка (всегда на месте) */
+.resume-top {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .75rem 1.5rem;
+  background: linear-gradient(135deg,#007bff,#00b4ff);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: background .3s;
+}
+
+/* Выезжающая панель */
+.resume-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .35s ease;
+}
+
+.resume-panel > div { overflow: hidden; }
+
+.resume-panel.show { grid-template-rows: 1fr; }
+
+.resume-item {
+  display: block;
+  padding: .65rem 1.25rem;
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s;
+}
+
+.resume-item:hover { background: rgba(255,255,255,.15); }
+
+.resume-item.resume-react { background:#61dafb; }
+.resume-item.resume-vue   { background:#4fc08d; }
+.resume-item.resume-angular{ background:#dd0031; }  
+
+.resume-item:hover { background: rgba(255,255,255,.15); }
+
+.resume-item.resume-react { background:#61dafb; }
+.resume-item.resume-vue   { background:#4fc08d; }
+.resume-item.resume-angular{ background:#dd0031; }
+.resume-toggle {
   position: relative;
   display: inline-block;
 }
 
-.resume-circle-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 120px;
-  height: 120px;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 20;
-  transition: opacity 0.3s ease;
+#resumeList {
+  display: none;
+  flex-direction: column;
+  gap: .5rem;
+  margin-top: .5rem;
+  animation: slideDown .3s ease;
 }
 
-.resume-circle-overlay.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.resume-circle-overlay.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.resume-sector {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+#resumeList.show {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  color: white;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.resume-btn {
+  padding: .5rem 1rem;
+  border-radius: 8px;
+  color: #fff;
+  font-size: .85rem;
+  font-weight: 600;
   text-decoration: none;
-  transform: scale(0);
-  transition: transform 0.4s cubic-bezier(.17,.67,.12,.99);
+  transition: transform .2s;
 }
 
-.resume-circle-overlay.show .resume-sector {
-  transform: scale(1);
+.resume-btn:hover {
+  transform: translateY(-1px);
 }
 
-.resume-circle-overlay.show .resume-sector:nth-child(1) {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.resume-circle-overlay.show .resume-sector:nth-child(2) {
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.resume-circle-overlay.show .resume-sector:nth-child(3) {
-  top: 75%;
-  left: 15%;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.resume-circle-overlay.show .resume-sector:nth-child(4) {
-  top: 75%;
-  left: 85%;
-  transform: translate(-50%, -50%) scale(1);
-}
-
+.resume-main    { background: #343a40; }
+.resume-react   { background: #61dafb; }
+.resume-vue     { background: #4fc08d; }
+.resume-angular { background: #dd0031; }
 /* Цвета */
 .resume-main    { background: #343a40; }
 .resume-react   { background: #61dafb; }
 .resume-vue     { background: #4fc08d; }
 .resume-angular { background: #dd0031; }    
 
+#resumeModal {
+  transition: opacity 0.3s ease;
+}
+#resumeModal > div {
+  animation: zoomIn 0.3s ease;
+}
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
     </style>
 </head>
 
@@ -943,17 +980,21 @@
             <div class="about-actions">
                 <a href="about.html" class="button">Подробнее</a>
                 <div class="resume-dropdown">
-                    <div class="resume-overlay" id="resumeOverlay">
-                        <button class="button secondary" id="resumeBtn">📄 Скачать резюме</button>
 
-                        <!-- Круг -->
-                        <div class="resume-circle-overlay hidden" id="resumeCircle">
-                            <a class="resume-sector resume-main" href="cv.pdf" download>📄</a>
-                            <a class="resume-sector resume-react" href="cv-react.pdf" download>⚛️</a>
-                            <a class="resume-sector resume-vue" href="cv-vue.pdf" download>🟢</a>
-                            <a class="resume-sector resume-angular" href="cv-angular.pdf" download>🔺</a>
-                        </div>
-                    </div>
+<!-- Блок двухэтапного выбора -->
+<div class="resume-toggle" id="resumeToggle">
+  <!-- Шаг 1: кнопка-триггер -->
+  <button class="button secondary" id="resumeTrigger">📄 Скачать резюме</button>
+
+  <!-- Шаг 2: список (скрыт по умолчанию) -->
+  <div class="resume-list" id="resumeList">
+    <a class="resume-btn resume-main" href="cv.pdf" download>📄 Общее</a>
+    <a class="resume-btn resume-react" href="cv-react.pdf" download>⚛️ React</a>
+    <a class="resume-btn resume-vue" href="cv-vue.pdf" download>🟢 Vue</a>
+    <a class="resume-btn resume-angular" href="cv-angular.pdf" download>🔺 Angular</a>
+  </div>
+</div>
+
                 </div>
             </div>       
 
@@ -1471,21 +1512,26 @@
 <script>
 //Скрипт для кнопки резюме
 document.addEventListener('DOMContentLoaded', () => {
-  const btn   = document.getElementById('resumeBtn');
-  const circle = document.getElementById('resumeCircle');
+  const trigger = document.getElementById('resumeTrigger');
+  const list    = document.getElementById('resumeList');
 
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    circle.classList.toggle('hidden');
-    circle.classList.toggle('show');
+  trigger.addEventListener('click', () => {
+    list.classList.toggle('show');
   });
 
-  // Закрыть при клике вне
-  document.addEventListener('click', () => {
-    circle.classList.add('hidden');
-    circle.classList.remove('show');
+  // после выбора закрываем список
+  list.addEventListener('click', (e) => {
+    if (e.target.classList.contains('resume-btn')) {
+      list.classList.remove('show');
+    }
+  });
+
+  // закрыть по клику вне
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#resumeToggle')) list.classList.remove('show');
   });
 });
+
 </script>
 
 <!-- Canvas игра на React -->

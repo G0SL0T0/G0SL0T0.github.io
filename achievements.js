@@ -24,6 +24,8 @@ const ACH_DB = [
   { name: 'Пройти игру Игни + физ дмг.',           game: 'The Witcher 3: Wild Hunt',           date: '2021-09-24', unlocked: true,  type: 'challenge' },
   { name: '250 уровень торговца',                  game: 'TRADESMAN: Deal to Dealer',          date: '2025-07-23', unlocked: true,  type: 'achievement' },
   { name: 'Победить босса "Скелехорд"',            game: 'TRADESMAN: Deal to Dealer',          date: '2025-04-20', unlocked: true,  type: 'achievement' },
+  { name: 'Рецепты дядюшки Весемира"',             game: 'TRADESMAN: Deal to Dealer',          date: '2024-11-20', unlocked: true,  type: 'achievement' },
+  { name: '100000 и ещë 1000000 на подходе..."',   game: 'TRADESMAN: Deal to Dealer',          date: '2024-03-20', unlocked: true,  type: 'achievement' },
   { name: 'Получить на счет 1 млн валюты',         game: 'TRADESMAN: Deal to Dealer',          date: 'null',       unlocked: false, type: 'achievement' },
   { name: 'Tradesman 100 %',                       game: 'TRADESMAN: Deal to Dealer',          date: '2025-04-08', unlocked: true,  type: 'achievement' },
   { name: 'Первые 100 км пробег',                  game: 'Expeditions: A MudRunner Game',      date: '2025-07-17', unlocked: true,  type: 'achievement' },
