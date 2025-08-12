@@ -3415,6 +3415,11 @@
     "date": 1753166821255
   },
   {
+    "url": "img/screenshot/4eve/Ятама.png",
+    "game": "EVE Frontier",
+    "date": 1753166811497
+  },
+  {
     "url": "img/screenshot/3expeditions/20250716193006_1.jpg",
     "game": "Expeditions: A MudRunner Game",
     "date": 1752676206916
@@ -3422,12 +3427,12 @@
   {
     "url": "img/screenshot/3expeditions/20250726111045_1.jpg",
     "game": "Expeditions: A MudRunner Game",
-    "date": 1753510245713
+    "date": 1753963503331
   },
   {
     "url": "img/screenshot/3expeditions/20250727183719_1.jpg",
     "game": "Expeditions: A MudRunner Game",
-    "date": 1753623439936
+    "date": 1753963503332
   },
   {
     "url": "img/screenshot/3expeditions/3467864356786.jpg",
@@ -3682,7 +3687,12 @@
   {
     "url": "img/screenshot/7dbd/2025-07-26_16-01-01.png",
     "game": "Dead by Daylight",
-    "date": 1753528137924
+    "date": 1753963503343
+  },
+  {
+    "url": "img/screenshot/7dbd/2025-08-07_19-16-29.png",
+    "game": "Dead by Daylight",
+    "date": 1754576331283
   },
   {
     "url": "img/screenshot/7dbd/20250330133314_1.jpg",
@@ -3693,6 +3703,11 @@
     "url": "img/screenshot/7dbd/20250406175326_1.jpg",
     "game": "Dead by Daylight",
     "date": 1743944006914
+  },
+  {
+    "url": "img/screenshot/7dbd/Геральт+Йенифер.png",
+    "game": "Dead by Daylight",
+    "date": 1753166811459
   },
   {
     "url": "img/screenshot/8everyone/20241214134647_1.jpg",

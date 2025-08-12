@@ -789,6 +789,143 @@
         @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
 
     </style>
+
+    <style>
+        .resume-expand {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,.15);
+            transition: box-shadow .3s;
+        }
+
+        .resume-expand:hover { box-shadow: 0 8px 20px rgba(0,0,0,.2); }
+
+        .resume-top {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .75rem 1.5rem;
+            background: linear-gradient(135deg,#007bff,#00b4ff);
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: background .3s;
+        }
+
+        .resume-panel {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows .35s ease;
+        }
+
+        .resume-panel > div { overflow: hidden; }
+
+        .resume-panel.show { grid-template-rows: 1fr; }
+
+        .resume-item {
+            display: block;
+            padding: .65rem 1.25rem;
+            color: #fff;
+            font-size: .9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background .2s;
+        }
+
+        .resume-item:hover { background: rgba(255,255,255,.15); }
+
+        .resume-item.resume-react { background:#61dafb; }
+        .resume-item.resume-vue   { background:#4fc08d; }
+        .resume-item.resume-angular{ background:#dd0031; }  
+
+        .resume-item:hover { background: rgba(255,255,255,.15); }
+
+        .resume-item.resume-react { background:#61dafb; }
+        .resume-item.resume-vue   { background:#4fc08d; }
+        .resume-item.resume-angular{ background:#dd0031; }
+        .resume-toggle {
+            position: relative;
+            display: inline-block;
+        }
+
+        #resumeList {
+            display: none;
+            flex-direction: column;
+            gap: .5rem;
+            margin-top: .5rem;
+            animation: slideDown .3s ease;
+        }
+
+        #resumeList.show {
+            display: flex;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .resume-btn {
+            padding: .5rem 1rem;
+            border-radius: 8px;
+            color: #fff;
+            font-size: .85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform .2s;
+        }
+
+        .resume-btn:hover {
+            transform: translateY(-1px);
+        }
+        /* Анимация модального окна */
+        #resumeModal {
+            transition: opacity 0.3s ease;
+        }
+        #resumeModal > div {
+            animation: zoomIn 0.3s ease;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to   { transform: scale(1);   opacity: 1; }
+        }
+
+        .resume-choice {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .resume-choice:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Цвета */
+        .resume-main    { background: #343a40; }
+        .resume-react   { background: #61dafb; }
+        .resume-vue     { background: #4fc08d; }
+        .resume-angular { background: #dd0031; }    
+
+        #resumeModal {
+            transition: opacity 0.3s ease;
+        }
+        #resumeModal > div {
+            animation: zoomIn 0.3s ease;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to   { transform: scale(1);   opacity: 1; }
+        }
+    </style>
 </head>
 
 <body>
@@ -861,9 +998,33 @@
 
             <!-- Кнопки действий -->
             <div class="about-actions">
-            <a href="about.html" class="button">Подробнее</a>
-            <button id="download-cv" class="button secondary">Скачать резюме</button>
+                <a href="about.html" class="button">Подробнее</a>
+                <div class="resume-dropdown">
+
+                    <!-- Кнопка-триггер -->
+                    <button class="button secondary" id="openResumeModal">📄 Скачать резюме</button>
+
+                    <!-- Модальное окно -->
+                    <div id="resumeModal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center">
+                        <div class="bg-white rounded-2xl p-6 w-full max-w-sm shadow-2xl">
+                            <h2 class="text-2xl font-bold mb-6 text-center">Выберите нужное</h2>
+
+                            <!-- Варианты -->
+                            <div class="flex flex-col gap-3">
+                                <a class="resume-choice resume-main" href="assets/cv.pdf" download>📄 Общие навыки и увлечения</a>
+                                <a class="resume-choice resume-react" href="assets/cv-react.pdf" download>⚛️ React-специалист</a>
+                                <a class="resume-choice resume-vue" href="assets/cv-vue.pdf" download>🟢 Vue-разработчик</a>
+                                <a class="resume-choice resume-angular" href="assets/cv-angular.pdf" download>🔺 Angular-эксперт</a>
+                            </div>
+
+                            <!-- Кнопка закрытия -->
+                            <button id="closeResumeModal" class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-gray-800">✕</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>       
+
             <div id="cv-modal" class="cv-modal hidden">
                 <div class="cv-modal__box">
                     <p class="cv-modal__text">
@@ -1372,6 +1533,34 @@
     });
     overlay.addEventListener('click', (e) => {
     if (e.target === overlay || e.target === closeBtn) closeModal();
+    });
+</script>
+<script>
+//Скрипт для кнопки резюме
+    document.addEventListener('DOMContentLoaded', () => {
+        const openBtn  = document.getElementById('openResumeModal');
+        const modal    = document.getElementById('resumeModal');
+        const closeBtn = document.getElementById('closeResumeModal');
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        });
+        closeBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            }
+        });
+        modal.addEventListener('click', (e) => {
+            if (e.target.classList.contains('resume-choice')) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            }
+        });
     });
 </script>
 
