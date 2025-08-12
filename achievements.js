@@ -11,6 +11,7 @@ const ACH_DB = [
   { name: 'Открыть 5 секретных секторов',          game: 'EVE Frontier',                       date: null,         unlocked: false, type: 'challenge' },
   { name: 'Убить стационарными турелями',          game: 'EVE Frontier',                       date: '2025-07-01', unlocked: true,  type: 'achievement' },
   { name: 'Пройти кампанию за каждую фракцию',     game: 'Dawn of War - Soulstorm',            date: '2023-11-25', unlocked: true,  type: 'achievement' },
+  { name: 'Победить обороной',                     game: 'Dawn of War - Soulstorm',            date: '2023-10-29', unlocked: true,  type: 'achievement' },
   { name: 'Используя определенных юнитов пройти кампанию',game: 'Dawn of War - Soulstorm',     date: '2024-01-12', unlocked: true,  type: 'challenge' },
   { name: 'Добится 70000 хп в шкале здоровья',     game: 'The Witcher 3: Wild Hunt',           date: '2024-08-19', unlocked: true,  type: 'achievement' },
   { name: 'Арбалет как основное оружие',           game: 'The Witcher 3: Wild Hunt',           date: '2023-08-15', unlocked: true,  type: 'achievement' },
