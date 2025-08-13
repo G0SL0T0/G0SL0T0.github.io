@@ -10,6 +10,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/new.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
@@ -205,6 +206,26 @@
             </div>
         </div>
     </section>
+    <!-- =========== КНОПКА-ВКЛАДКА Новости =========== -->
+    <button id="newsTab" class="news-tab" aria-label="Последние обновления">
+        <!--<i class="fas fa-bolt"></i>-->
+        <span>Новости</span>
+        <small>v3.4</small>
+    </button>
+    <!-- =========== МОДАЛЬНОЕ ОКНО =========== -->
+    <div id="newsModal" class="news-modal" role="dialog" aria-modal="true" aria-labelledby="newsTitle">
+        <div class="news-modal__glass">
+            <button class="news-modal__close" aria-label="Закрыть">&times;</button>
+            <h2 id="newsTitle">Все обновления сайта</h2>
+            <ul class="news-timeline" id="allNewsList">
+            <!-- news_data.js -->
+            </ul>
+            <button id="loadPrevBtn" class="button" style="margin-top:1rem;width:100%;display:none">
+                Показать предыдущие
+            </button>
+        </div>
+    </div>
+    <!-- =========== КНОПКА-ВКЛАДКА Новости =========== -->
 </main>
 
 <footer>
@@ -212,6 +233,30 @@
         <p>&copy; 2025 Gosloto. Все права НЕ защищены.</p>
     </div>
 </footer>
+
+<script src="news_data.js"></script>
+<script>
+/* ---------- логика ---------- */
+const tab   = document.getElementById('newsTab');
+const modal = document.getElementById('newsModal');
+const close = modal.querySelector('.news-modal__close');
+
+function openNews()  {
+  modal.classList.add('show');
+}
+function closeNews() {
+  modal.classList.remove('show');
+}
+
+tab.addEventListener('click', openNews);
+close.addEventListener('click', closeNews);
+modal.addEventListener('click', e => {
+  if (e.target === modal) closeNews();
+});
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeNews();
+});
+</script>
 
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
