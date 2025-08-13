@@ -11,6 +11,7 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/new.css">
+    <link rel="stylesheet" href="css/minigame-button.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
@@ -800,6 +801,23 @@
         </div>
     </div>
     <!-- =========== КНОПКА-ВКЛАДКА Новости =========== -->   
+
+<!-- Кнопка -->
+<button id="stubborn-button" class="stubborn-button" title="Не пытайся...">
+  🏃‍♂️ Поймай меня, если сможешь!
+</button>
+
+<div id="spoiler-modal" class="spoiler-modal hidden">
+  <div class="spoiler-content">
+    <h3>🤯 Ты всё-таки поймал(а) меня?!</h3>
+    <p>Невероятно... вот твой приз:</p>
+    <pre><code>console.log("🏆 Ты победил(а) систему!")</code></pre>
+    <button onclick="closeSpoiler()">Закрыть</button>
+  </div>
+</div>
+<button id="stop-button" class="stop-button" title="Остановить убегающую кнопку">
+  ✖️
+</button>
 </main>
 
 <!-- Модальное окно -->
@@ -813,6 +831,7 @@
         <p>&copy; 2025 Gosloto. Все права НЕ защищены.</p>
     </div>
 </footer>
+<script src="minigame-button.js"></script>
 
 <script src="news_data.js"></script>
 <script>

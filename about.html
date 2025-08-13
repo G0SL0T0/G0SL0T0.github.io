@@ -10,6 +10,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/new.css">
+    <link rel="stylesheet" href="css/minigame-button.css">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -895,6 +896,22 @@
         </div>
     </div>
     <!-- =========== КНОПКА-ВКЛАДКА Новости =========== --> 
+    <!-- Кнопка -->
+    <button id="stubborn-button" class="stubborn-button" title="Не пытайся...">
+        🏃‍♂️ Поймай меня, если сможешь!
+    </button>
+
+    <div id="spoiler-modal" class="spoiler-modal hidden">
+        <div class="spoiler-content">
+            <h3>🤯 Ты всё-таки поймал меня?!</h3>
+            <p>Невероятно... вот твой приз:</p>
+            <pre>🏆 Ты победил систему!</code></pre>
+            <button onclick="closeSpoiler()">Закрыть</button>
+        </div>
+    </div>
+    <button id="stop-button" class="stop-button" title="Остановить убегающую кнопку">
+        ✖️
+    </button>
 </main>
 
 <footer>
@@ -926,6 +943,7 @@ window.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeNews();
 });
 </script>
+<script src="minigame-button.js"></script>
 
 <style>
     /* Стили для прогресс-баров в таймлайне */
