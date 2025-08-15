@@ -1,0 +1,747 @@
+/* src/styles/skills-preview.css */
+/* Специальные стили для компонента SkillsPreview с подарочным контейнером */
+
+/* Основной контейнер */
+.skills-preview {
+  padding: 4rem 0;
+  background: #f8f9fa;
+  position: relative;
+}
+
+.skills-preview h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #343a40;
+}
+
+.skills-intro {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  color: #6c757d;
+}
+
+.skills-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Сетка навыков */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Карточки навыков */
+.skills-grid .skill-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skills-grid .skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Иконки в карточках */
+.skills-grid .skill-card i {
+  font-size: 3.5rem !important;
+  margin-bottom: 1rem !important;
+  display: block !important;
+}
+
+/* Специальные цвета для разных технологий */
+.skills-grid .skill-card[data-skill="js"] i { color: #f7df1e; }
+.skills-grid .skill-card[data-skill="typescript"] i { color: #3178c6; }
+.skills-grid .skill-card[data-skill="react"] i { color: #61dafb; }
+.skills-grid .skill-card[data-skill="vue"] i { color: #4fc08d; }
+.skills-grid .skill-card[data-skill="angular"] i { color: #dd0031; }
+.skills-grid .skill-card[data-skill="git"] i { color: #f05032; }
+.skills-grid .skill-card[data-skill="docker"] i { color: #007bff; }
+
+/* Текст в карточках */
+.skills-grid .skill-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 0.5rem;
+  display: block !important;
+}
+
+.skills-grid .skill-card .skill-percentage {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #007bff;
+  margin-bottom: 1rem;
+  display: block !important;
+}
+
+/* Прогресс-бар */
+.skills-grid .skill-card .skill-progress {
+  width: 100%;
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: auto;
+  display: block !important;
+}
+
+.skills-grid .skill-card .skill-progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #007bff, #0056b3);
+  border-radius: 4px;
+}
+
+/* Разделитель */
+.frameworks-divider {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 1.5rem 0;
+  font-size: 1.2rem;
+  color: #007bff;
+  font-weight: 600;
+  padding: 0.5rem;
+  background: rgba(0, 123, 255, 0.05);
+  border-radius: 8px;
+  position: relative;
+}
+
+.frameworks-divider::before,
+.frameworks-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #007bff, transparent);
+}
+
+.frameworks-divider::before { left: 0; }
+.frameworks-divider::after { right: 0; }
+
+/* Блок инструментов */
+.tools-showcase {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, 
+    rgba(240, 80, 50, 0.03), 
+    rgba(0, 123, 255, 0.03)
+  );
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  min-height: 400px;
+}
+
+.tools-showcase::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f05032, #007bff);
+}
+
+/* Подарочный контейнер */
+.gift-container {
+  width: 100%;
+  max-width: 800px;
+  height: 350px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.gift-container:hover {
+  transform: scale(1.02);
+}
+
+/* Подарочная бумага */
+.gift-paper {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: giftFloat 3s ease-in-out infinite;
+}
+
+@keyframes giftFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Узор на подарочной бумаге */
+.gift-paper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1) 10px,
+    rgba(255, 255, 255, 0.2) 10px,
+    rgba(255, 255, 255, 0.2) 20px
+  );
+}
+
+/* Лента на подарке */
+.gift-ribbon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 100%;
+  background: linear-gradient(90deg, #f1c40f, #f39c12);
+  z-index: 1;
+}
+
+/* Бант - исправленное положение */
+.gift-bow {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 120px;
+}
+
+.bow-left, .bow-right {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+  border-radius: 50% 50% 0 50%;
+  transform-origin: bottom center;
+}
+
+.bow-left {
+  left: 0;
+  transform: rotate(-45deg);
+}
+
+.bow-right {
+  right: 0;
+  transform: rotate(45deg) scaleX(-1);
+}
+
+.bow-center {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  border-radius: 50%;
+  left: 50%;
+  top: 15px;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+/* Надпись на подарке */
+.gift-label {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 3;
+}
+
+.gift-label span {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #e74c3c;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Анимация закрытия подарка */
+.gift-container.closing {
+  animation: giftClose 0.8s ease-in-out forwards;
+}
+
+@keyframes giftClose {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.8) rotate(5deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+/* Контент подарка (после открытия) */
+.gift-content {
+  width: 100%;
+  max-width: 800px;
+  opacity: 0;
+  transform: scale(0.9);
+  animation: giftReveal 0.8s ease-out forwards;
+}
+
+@keyframes giftReveal {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Контейнер для карточек */
+.tools-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideInUp 0.6s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ряд с карточками */
+.tools-row {
+  display: flex;
+  gap: 2rem;
+  align-items: stretch;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Анимированные элементы с задержкой 0.4с */
+.animate-item-1 {
+  animation: slideInUp 0.6s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+.animate-item-2 {
+  animation: slideInUp 0.6s ease-out forwards;
+  animation-delay: 0.8s;
+}
+
+.animate-item-3 {
+  animation: slideInUp 0.6s ease-out forwards;
+  animation-delay: 1.2s;
+}
+
+.animate-item-4 {
+  animation: slideInUp 0.6s ease-out forwards;
+  animation-delay: 1.6s;
+}
+
+.animate-item-5 {
+  animation: slideInUp 0.6s ease-out forwards;
+  animation-delay: 2.0s;
+}
+/* Карточки Git и Docker */
+.tools-row .skill-card {
+  width: 220px;
+  height: 260px;
+  border: 3px solid;
+  background: linear-gradient(135deg, #fff, #f8f9ff);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: popIn 0.5s ease-out forwards;
+}
+
+.tools-row .skill-card[data-skill="git"] {
+  border-color: rgba(240, 80, 50, 0.3);
+  background: linear-gradient(135deg, #fff, #fff5f2);
+  animation-delay: 0.5s;
+}
+
+.tools-row .skill-card[data-skill="docker"] {
+  border-color: rgba(0, 123, 255, 0.3);
+  background: linear-gradient(135deg, #fff, #f0f8ff);
+  animation-delay: 1.3s;
+}
+
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Иконки Git и Docker */
+.tools-row .skill-card i {
+  font-size: 5rem !important;
+  margin-bottom: 1rem !important;
+  display: block !important;
+}
+
+.tools-row .skill-card[data-skill="git"] i { color: #f05032; }
+.tools-row .skill-card[data-skill="docker"] i { color: #007bff; }
+
+/* Карточки этапов */
+.step-card {
+  width: 320px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.step-card.git-step {
+  border-left: 4px solid #f05032;
+  animation-delay: 0.6s;
+}
+
+.step-card.docker-step {
+  border-left: 4px solid #007bff;
+  animation-delay: 1.4s;
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Иконка этапа */
+.step-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-icon i {
+  font-size: 1.5rem;
+}
+
+.git-step .step-icon {
+  background: linear-gradient(135deg, rgba(240, 80, 50, 0.1), rgba(240, 80, 50, 0.05));
+  color: #f05032;
+}
+
+.docker-step .step-icon {
+  background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(0, 123, 255, 0.05));
+  color: #007bff;
+}
+
+/* Содержимое этапа */
+.step-content {
+  flex-grow: 1;
+}
+
+.step-content h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  color: #343a40;
+}
+
+.step-content p {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+/* Детали этапа */
+.step-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.step-details span {
+  padding: 0.3rem 0.8rem;
+  background: #f8f9fa;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #495057;
+}
+
+.git-step .step-details span {
+  background: rgba(240, 80, 50, 0.1);
+  color: #f05032;
+}
+
+.docker-step .step-details span {
+  background: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+}
+
+/* Соединитель */
+.tools-connector {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.connector-line {
+  width: 3px;
+  height: 60px;
+  background: linear-gradient(180deg, #f05032, #007bff);
+  position: relative;
+}
+
+/* Стрелка вместо палочки */
+.connector-arrow {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #f05032, #007bff);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.9rem;
+}
+.connector-icon {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #f05032, #007bff);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.9rem;
+}
+
+/* Контейнер для пайплайна */
+.pipeline-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideInUp 0.6s ease-out forwards;
+  animation-delay: 2s;
+}
+
+/* Заголовок пайплайна */
+.pipeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.pipeline-header i {
+  font-size: 1.8rem;
+  color: #007bff;
+}
+
+.pipeline-header h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #f05032, #007bff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Футер пайплайна */
+.pipeline-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Статус */
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.status-badge i {
+  font-size: 1.2rem;
+}
+
+/* Кнопка */
+.skills-actions .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.skills-actions .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+  background: linear-gradient(135deg, #0056b3, #004085);
+}
+
+.skills-actions .button::after {
+  content: '→';
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.skills-actions .button:hover::after {
+  transform: translateX(3px);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  .tools-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .step-card {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .pipeline-header h3 {
+    font-size: 1.5rem;
+  }
+  
+  /* Стрелка вниз для мобильной версии */
+  .connector-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #f05032, #007bff);
+  }
+  .connector-arrow i {
+    transform: rotate(90deg);
+  }
+  .connector-icon i {
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-preview h2 {
+    font-size: 1.8rem;
+  }
+  
+  .skills-grid .skill-card,
+  .tools-row .skill-card {
+    padding: 1rem;
+  }
+  
+  .skills-grid .skill-card i,
+  .tools-row .skill-card i {
+    font-size: 3rem !important;
+  }
+  
+  .step-card {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .step-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .step-icon i {
+    font-size: 1.2rem;
+  }
+  
+  .gift-container {
+    height: 300px;
+  }
+  
+  .gift-bow {
+    width: 100px;
+  }
+  
+  .bow-left, .bow-right {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .bow-center {
+    width: 25px;
+    height: 25px;
+  }
+}
