@@ -1,0 +1,66 @@
+/* src/styles/about-fix.css */
+/* Файл для исправления проблем с расположением элементов на странице "Обо мне" */
+
+/* Убедимся, что все элементы занимают всю ширину */
+.min-h-screen {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+main {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+section {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+/* Исправляем расположение header и footer */
+header {
+  width: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  position: relative !important;
+}
+
+footer {
+  width: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  position: relative !important;
+}
+
+/* Центрируем контейнеры внутри header и footer */
+.header-container, .footer-container {
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 100% !important;
+}
+
+/* Убедимся, что контейнер для секций центрирован */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+}
+
+/* Дополнительные стили для мобильных устройств */
+@media (max-width: 768px) {
+  .header-container, .footer-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
