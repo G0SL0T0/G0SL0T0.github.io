@@ -1,0 +1,230 @@
+/* src/styles/skills.css */
+.intro-skills {
+    background: #eef2f7;
+    padding: 4rem 0 3rem;
+    text-align: center;
+}
+
+.intro-skills h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #343a40;
+}
+
+.intro-skills p {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #495057;
+}
+
+.intro-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.button.secondary {
+    background: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+}
+
+.button.secondary:hover {
+    background: #007bff;
+    color: #fff;
+}
+
+.skill-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.skill-category h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    color: #111827;
+}
+
+.skill-category h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #0ea5e9, #3b82f6);
+    border-radius: 2px;
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.skill-card,
+.soft-skill-card {
+    width: 260px;
+    height: 260px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.05),
+    0 2px 6px rgba(0, 0, 0, 0.02);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.soft-skill-card {
+    height: 300px;
+}
+
+.skill-card:hover,
+.soft-skill-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.08),
+    0 6px 12px rgba(0, 0, 0, 0.04);
+}
+
+.skill-card i {
+    font-size: 2.75rem;
+    color: #0ea5e9;
+    margin-bottom: 0.75rem;
+}
+
+.soft-skill-card i {
+    font-size: 2.5rem;
+    margin-top: 1.5rem;
+    transform: translateY(7px);
+    margin-bottom: 0.75rem;
+    color: #0ea5e9;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+    display: block;
+}
+
+.soft-skill-card::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #0ea5e9, #3b82f6);
+    border-radius: 2px;
+    margin: 0.25rem auto 0.5rem;
+}
+
+.soft-skill-card h3,
+.skill-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #111827;
+    text-align: center;
+    line-height: 1.3;
+    min-height: 2.6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-word;
+}
+
+.soft-skill-card h3 {
+    white-space: pre-line;
+}
+
+.skill-percentage {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #3b82f6;
+    margin: 0.5rem 0;
+}
+
+.skill-progress,
+.soft-skill-progress {
+    width: 100%;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-progress-bar,
+.soft-skill-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #0ea5e9, #3b82f6);
+    border-radius: 3px;
+    transition: width 1.5s ease;
+}
+
+.soft-skill-card p {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .skills-grid {
+        grid-template-columns: repeat(3, 260px);
+    }
+}
+
+@media (max-width: 900px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 260px);
+    }
+}
+
+@media (max-width: 600px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .skill-card,
+    .soft-skill-card {
+        max-width: 100%;
+        width: 300px;
+    }
+}
+
+/* Tooltip */
+.skill-card::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%) scale(.9);
+    padding: .5rem .75rem;
+    background: #000c;
+    color: #fff;
+    font-size: .8rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: .2s;
+}
+
+.skill-card:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}

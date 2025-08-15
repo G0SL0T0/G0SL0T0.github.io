@@ -1,19 +1,18 @@
-// src/app/skills/page.tsx
+// src/app/hobbies/page.tsx
 'use client';
-import '@/styles/skills.css';
-import SkillsSection from '@/components/SkillsSection';
+
+import HobbiesPageSection from '@/components/hobbies/HobbiesPageSection';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import NewsTab from '@/components/NewsTab';
-
 import StubbornButton from '@/components/StubbornButton';
 
-export default function SkillsPage() {
+export default function HobbiesPage() {
   return (
     <div>
       <Header />
       <main>
-        <SkillsSection />
+        <HobbiesPageSection />
       </main>
       <Footer />
       <NewsTab />
