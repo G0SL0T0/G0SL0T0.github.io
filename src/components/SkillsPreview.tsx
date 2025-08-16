@@ -1,6 +1,5 @@
 // src/components/SkillsPreview.tsx
 'use client';
-
 import '@/styles/skills-preview.css';
 import { useState } from 'react';
 import { skillsData } from '@/data/skillsData';
@@ -47,26 +46,30 @@ const SkillsPreview = () => {
         </p>
         
         <div className="skills-grid">
-          {/* JavaScript и TypeScript */}
-          {previewSkills.filter(skill => ['js', 'typescript'].includes(skill.id)).map(skill => (
-            <SkillCard 
-              key={skill.id} 
-              skill={skill} 
-              category={skill.category} 
-            />
-          ))}
+          {/* JavaScript и TypeScript - в центрированном контейнере */}
+          <div className="skills-row-container">
+            {previewSkills.filter(skill => ['js', 'typescript'].includes(skill.id)).map(skill => (
+              <SkillCard 
+                key={skill.id} 
+                skill={skill} 
+                category={skill.category} 
+              />
+            ))}
+          </div>
           
           {/* Разделитель для фреймворков */}
           <div className="frameworks-divider">Фреймворки</div>
           
-          {/* Фреймворки */}
-          {previewSkills.filter(skill => ['react', 'vue', 'angular'].includes(skill.id)).map(skill => (
-            <SkillCard 
-              key={skill.id} 
-              skill={skill} 
-              category={skill.category} 
-            />
-          ))}
+          {/* Фреймворки - в центрированном контейнере */}
+          <div className="skills-row-container">
+            {previewSkills.filter(skill => ['react', 'vue', 'angular'].includes(skill.id)).map(skill => (
+              <SkillCard 
+                key={skill.id} 
+                skill={skill} 
+                category={skill.category} 
+              />
+            ))}
+          </div>
           
           {/* Подарочный контейнер для Git и Docker */}
           <div className="tools-showcase">

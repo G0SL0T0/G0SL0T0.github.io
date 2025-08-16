@@ -228,3 +228,47 @@
     opacity: 1;
     transform: translateX(-50%) scale(1);
 }
+/* src/styles/skills.css */
+
+/* ... существующие стили ... */
+
+.skills-grid {
+    display: grid; /* Меняем с flex на grid */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Добавляем это */
+    justify-content: center; /* Центрируем сетку */
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* ... существующие стили ... */
+
+/* Исправленные медиа-запросы */
+@media (max-width: 1200px) {
+    .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+        justify-items: center; /* Центрируем элементы внутри ячеек */
+    }
+}
+
+@media (max-width: 600px) {
+    .skill-card,
+    .soft-skill-card {
+        max-width: 100%;
+        width: 300px;
+    }
+}

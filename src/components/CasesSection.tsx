@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 export default function CasesSection() {
-  // Создаем отдельное состояние для каждого кейса
   const [slideStates, setSlideStates] = useState<{[key: number]: number}>({});
   
   const cases = [
@@ -81,8 +80,7 @@ export default function CasesSection() {
       [caseIndex]: slideIndex
     }));
   };
-
-  return (
+return (
     <section className="cases">
       <div className="container">
         <h2 style={{textAlign: "center"}}>Кейсы и результаты</h2>
@@ -128,7 +126,8 @@ export default function CasesSection() {
                   ))}
                 </ul>
                 
-                <Link href={caseItem.link} className="button">
+                {/* Заменяем класс кнопки */}
+                <Link href={caseItem.link} className="btn btn-primary">
                   {caseItem.isSpecial ? "Запустить симуляцию" : "Посмотреть проект"}
                 </Link>
               </div>

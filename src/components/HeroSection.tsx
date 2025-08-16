@@ -1,6 +1,5 @@
 // src/components/HeroSection.tsx
 'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -21,8 +20,8 @@ export default function HeroSection() {
             Создаю современные, адаптивные и удобные веб-приложения с фокусом на производительность и пользовательский опыт.
           </p>
           <div className="hero-actions">
-            <Link href="/about" className="button">Узнать больше</Link>
-            <Link href="/contact" className="button secondary">Связаться</Link>
+            <Link href="/about" className="btn btn-primary">Узнать больше</Link>
+            <Link href="/contact" className="btn btn-secondary">Связаться</Link>
           </div>
         </div>
       </div>

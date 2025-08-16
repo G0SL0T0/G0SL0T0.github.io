@@ -1,7 +1,7 @@
 // src/components/LatestProjectSection.tsx
 'use client';
-
 import Link from 'next/link';
+
 export default function LatestProjectSection() {
   return (
     <section className="latest-project-wrapper">
@@ -35,8 +35,8 @@ export default function LatestProjectSection() {
               <li><i className="fas fa-rocket"></i> Релиз PWA: Декабрь 2025</li>
             </ul>
             <div className="project-actions">
-              <Link href="/SKYT" className="button">Попробовать демо</Link>
-              <Link href="/projects" className="button secondary">Все кейсы</Link>
+              <Link href="/SKYT" className="btn btn-primary">Попробовать демо</Link>
+              <Link href="/projects" className="btn btn-secondary">Все кейсы</Link>
             </div>
           </div>
         </div>
