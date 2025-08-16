@@ -11,13 +11,13 @@ const SkillsPreview = () => {
   const [isGiftOpened, setIsGiftOpened] = useState(false);
   const [showGit, setShowGit] = useState(false);
   const [showDocker, setShowDocker] = useState(false);
+  const [showReadyButton, setShowReadyButton] = useState(false);
 
   const openGift = () => {
     setIsGiftOpened(true);
-    // Появление Git и Code Commit одновременно с открытием подарка
     setShowGit(true);
-    // Появление Docker и Containerize с задержкой
     setTimeout(() => setShowDocker(true), 800);
+    setTimeout(() => setShowReadyButton(true), 1600);
   };
 
   // Явно указываем ID навыков в нужном порядке
@@ -121,7 +121,6 @@ const SkillsPreview = () => {
                   {/* Соединитель - появляется с задержкой */}
                   {showDocker && (
                     <div className="tools-connector animate-item-2">
-                      <div className="connector-line"></div>
                       <div className="connector-arrow">
                         <i className="fas fa-arrow-down"></i>
                       </div>
@@ -166,14 +165,15 @@ const SkillsPreview = () => {
                   </div>
                 )}
                 
-                {/* Production Ready - появляется после CI/CD */}
-                {showDocker && (
-                  <div className="pipeline-footer animate-item-5">
-                    <div className="status-badge success">
-                      <i className="fas fa-check-circle"></i>
-                      <span>Production Ready</span>
+                {/* Кнопка "Проект готов к работе" - появляется последней */}
+                {showReadyButton && (
+                  <button className="ready-button animate-item-5">
+                    <div className="button-icon">
+                      <i className="fas fa-rocket"></i>
                     </div>
-                  </div>
+                    <span>Production Ready</span>
+                    <div className="button-glow"></div>
+                  </button>
                 )}
               </div>
             )}
