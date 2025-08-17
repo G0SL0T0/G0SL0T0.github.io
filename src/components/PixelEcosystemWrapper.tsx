@@ -1,6 +1,5 @@
 // src/components/PixelEcosystemWrapper.tsx
 'use client';
-
 import dynamic from 'next/dynamic';
 
 // Динамически импортируем игру с отключенным SSR
@@ -10,5 +9,9 @@ const PixelEcosystem = dynamic(() => import('./PixelEcosystem'), {
 });
 
 export default function PixelEcosystemWrapper() {
-  return <PixelEcosystem />;
+  return (
+    <div id="pixel-ecosystem-game">
+      <PixelEcosystem />
+    </div>
+  );
 }

@@ -5,6 +5,13 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+[id^="pixel-ecosystem-game"] {
+  scroll-margin-top: 100px;
+}
 body {
   font-family: 'Nunito', sans-serif;
   margin: 0;
