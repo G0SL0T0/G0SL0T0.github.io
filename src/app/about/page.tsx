@@ -15,6 +15,7 @@ import HorizontalScrollContainer from '@/components/HorizontalScrollContainer';
 import TimelineCard from '@/components/TimelineCard';
 import { experienceData } from '@/data/experience';
 import HobbyCard from '@/components/HobbyCard';
+import ScrollToTop from '@/components/ScrollToTop';
 
 interface Hobby {
   id: number;
@@ -268,6 +269,7 @@ const AboutPage = () => {
       {/* Компоненты интерактивных элементов */}
       <NewsTab showModal={showNewsModal} setShowModal={setShowNewsModal} />
       <StubbornButton />
+      <ScrollToTop />
     </div>
   );
 };

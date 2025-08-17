@@ -2,6 +2,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import '@/styles/news-tab.css';
+import ScrollToTop from './ScrollToTop';
 // Тип для новости
 interface NewsItem {
   date: string;

@@ -55,7 +55,7 @@ const EducationSection = () => {
             <div className="certificates-card certificates-card-mincenter">
               <div className="certificates-card-header">
                 <h4 className="certificates-title">МинЦифры России</h4>
-                <div className="certificates-badge">В процессе</div>
+                <div className="certificates-badge certificates-badge-completed">Завершено</div>
               </div>
               <div className="certificates-card-body">
                 <ul className="certificates-list">

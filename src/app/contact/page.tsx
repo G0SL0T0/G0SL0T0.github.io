@@ -9,6 +9,7 @@ import '@/app/globals.css';
 import '@/styles/contact.css';
 import '@/styles/news-tab.css';
 import '@/styles/hobbies.css';
+import ScrollToTop from '@/components/ScrollToTop';
 
 interface FormData {
   name: string;
@@ -282,6 +283,8 @@ const ContactPage = () => {
       <Footer />
       <NewsTab showModal={showNewsModal} setShowModal={setShowNewsModal} />
       <StubbornButton />
+      <ScrollToTop />
+
     </div>
   );
 };

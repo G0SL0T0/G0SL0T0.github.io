@@ -14,13 +14,13 @@ const SkillsSection = () => {
             Данные регулярно обновляются по мере роста опыта и освоения новых инструментов.
           </p>
           <div className="intro-actions">
-            <a href="#frontend" className="button">Фронтенд</a>
-            <a href="#backend" className="button">Бэкенд</a>
-            <a href="#tools" className="button">Инструменты</a>
-            <a href="#testing" className="button">Тестирование</a>
-            <a href="#devops" className="button">DevOps</a>
-            <a href="#additional" className="button">Доп. технологии</a>
-            <a href="#soft" className="button secondary">Soft Skills</a>
+            <a href="#frontend" className="btn btn-primary">Фронтенд</a>
+            <a href="#backend" className="btn btn-primary">Бэкенд</a>
+            <a href="#tools" className="btn btn-primary">Инструменты</a>
+            <a href="#testing" className="btn btn-primary">Тестирование</a>
+            <a href="#devops" className="btn btn-primary">DevOps</a>
+            <a href="#additional" className="btn btn-primary">Доп. технологии</a>
+            <a href="#soft" className="btn btn-secondary">Soft Skills</a>
           </div>
         </div>  
       </section>

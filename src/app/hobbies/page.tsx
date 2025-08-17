@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import NewsTab from '@/components/NewsTab';
 import StubbornButton from '@/components/StubbornButton';
+import ScrollToTop from '@/components/ScrollToTop';
 
 export default function HobbiesPage() {
   return (
@@ -16,6 +17,7 @@ export default function HobbiesPage() {
       <Footer />
       <NewsTab />
       <StubbornButton />
+      <ScrollToTop />
     </div>
   );
 }

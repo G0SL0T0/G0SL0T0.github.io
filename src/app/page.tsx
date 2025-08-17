@@ -11,6 +11,8 @@ import Footer from '@/components/Footer';
 import NewsTab from '@/components/NewsTab';
 import StubbornButton from '@/components/StubbornButton';
 import PixelEcosystemWrapper from '@/components/PixelEcosystemWrapper';
+import ScrollToTop from '@/components/ScrollToTop';
+
 
 export default function Home() {
   return (
@@ -27,6 +29,7 @@ export default function Home() {
       <Footer />
       <NewsTab />
       <StubbornButton />
+      <ScrollToTop />
     </div>
   );
 }
