@@ -1,6 +1,5 @@
 // src/components/CasesSection.tsx
 'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -25,13 +24,12 @@ export default function CasesSection() {
       link: "/SKYT"
     },
     {
-      title: "Оптимизация Пиксельной Экосистемы",
-      description: "Полный рефакторинг и переписывание игры с React на чистый JavaScript для улучшения производительности и уменьшения размера кода.",
+      title: "Пиксельная Экосистема",
+      description: "Интерактивная симуляция экосистемы с различными сущностями, которые взаимодействуют между собой по сложным правилам поведения. Система включает эволюцию, физику столкновений и интеллектуальное поведение ИИ.",
       stats: [
-        { label: "Результат:", value: "Увеличение производительности и скорость загрузки на 40%, уменьшение размера кода на 70%" },
-        { label: "Технологии:", value: "JavaScript (ES6+), Canvas API, Web Workers" },
-        { label: "Особенности:", value: "Полная переработка архитектуры, оптимизация алгоритмов" },
-        { label: "Сложность:", value: "Адаптация React-логики к императивному стилю" }
+        { label: "Результат:", value: "Создана увлекательная экосистема с реалистичным поведением сущностей" },
+        { label: "Технологии:", value: "TypeScript, React, Canvas API" },
+        { label: "Особенности:", value: "Сложное поведение ИИ, физика столкновений, эволюция сущностей" }
       ],
       images: [
         "/img/pixel-eco-1.png",
@@ -55,7 +53,7 @@ export default function CasesSection() {
       link: "/sentinelguard"
     }
   ];
-
+  
   const nextSlide = (caseIndex: number) => {
     setSlideStates(prev => ({
       ...prev,
@@ -64,7 +62,7 @@ export default function CasesSection() {
         : (prev[caseIndex] || 0) + 1
     }));
   };
-
+  
   const prevSlide = (caseIndex: number) => {
     setSlideStates(prev => ({
       ...prev,
@@ -73,14 +71,15 @@ export default function CasesSection() {
         : (prev[caseIndex] || 0) - 1
     }));
   };
-
+  
   const goToSlide = (caseIndex: number, slideIndex: number) => {
     setSlideStates(prev => ({
       ...prev,
       [caseIndex]: slideIndex
     }));
   };
-return (
+
+  return (
     <section className="cases">
       <div className="container">
         <h2 style={{textAlign: "center"}}>Кейсы и результаты</h2>
@@ -96,23 +95,23 @@ return (
                 
                 {caseItem.isSpecial && (
                   <div className="rewrite-info">
-                    <h4><i className="fas fa-code"></i> Рефакторинг кода</h4>
-                    <p>Переписал сложную React-игру (3000+ строк кода) на чистый Vanilla JS, сохранив всю функциональность, но значительно улучшив производительность.</p>
+                    <h4><i className="fas fa-gamepad"></i> Интерактивная симуляция</h4>
+                    <p>Полноценная экосистема с различными типами сущностей, каждая из которых обладает уникальным поведением и способностью к эволюции.</p>
                     <div className="rewrite-stats">
                       <div className="rewrite-stat">
-                        <i className="fas fa-file-code"></i>
-                        <span className="number">-70%</span>
-                        <span className="label">Объема кода</span>
+                        <i className="fas fa-microchip"></i>
+                        <span className="number">4</span>
+                        <span className="label">Типа сущностей</span>
                       </div>
                       <div className="rewrite-stat">
-                        <i className="fas fa-tachometer-alt"></i>
-                        <span className="number">+40%</span>
-                        <span className="label">Производительности</span>
+                        <i className="fas fa-brain"></i>
+                        <span className="number">ИИ</span>
+                        <span className="label">Поведение</span>
                       </div>
                       <div className="rewrite-stat">
-                        <i className="fas fa-weight-hanging"></i>
-                        <span className="number">-85%</span>
-                        <span className="label">Зависимостей</span>
+                        <i className="fas fa-atom"></i>
+                        <span className="number">Физика</span>
+                        <span className="label">Столкновения</span>
                       </div>
                     </div>
                   </div>
@@ -126,8 +125,11 @@ return (
                   ))}
                 </ul>
                 
-                {/* Заменяем класс кнопки */}
-                <Link href={caseItem.link} className="btn btn-primary">
+                {/* Кнопка с улучшенным стилем для специального кейса */}
+                <Link 
+                  href={caseItem.link} 
+                  className={`btn ${caseItem.isSpecial ? 'btn-primary btn-game' : 'btn-primary'}`}
+                >
                   {caseItem.isSpecial ? "Запустить симуляцию" : "Посмотреть проект"}
                 </Link>
               </div>

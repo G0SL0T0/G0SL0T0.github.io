@@ -4834,3 +4834,649 @@ header, footer {
   70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
   100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
 }
+/* ====== CASES ====== */
+.cases {
+  padding: 4rem 0;
+  background: linear-gradient(to bottom,#f8f9fa,#e9ecef);
+}
+.cases h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #343a40;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.cases h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right,#007bff,#00b4ff);
+  border-radius: 3px;
+}
+.case-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,.1);
+  transition: transform .3s ease, box-shadow .3s ease;
+  max-width: 100%;
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+}
+.case-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,.15);
+}
+.case-description { 
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  /* Убираем ограничение высоты и прокрутку */
+  height: 100%;
+}
+.case-description h3 {
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #007bff;
+  position: relative;
+  padding-bottom: .5rem;
+}
+.case-description h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #007bff;
+}
+.case-description p { 
+  color: #6c757d; 
+  line-height: 1.6; 
+  margin-bottom: 1.5rem; 
+  flex-grow: 1;
+}
+.case-stats { 
+  margin: 1.5rem 0; 
+  padding: 0; 
+  list-style: none; 
+}
+.case-stats li {
+  margin-bottom: .8rem;
+  padding-left: 1.8rem;
+  position: relative;
+  color: #495057;
+  line-height: 1.5;
+}
+.case-stats li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .5rem;
+  width: 8px;
+  height: 8px;
+  background-color: #007bff;
+  border-radius: 50%;
+}
+.case-stats strong { color: #343a40; font-weight: 600; }
+.rewrite-info {
+  background: #f8f9fa;
+  border-left: 4px solid #4CAF50;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+}
+.rewrite-info h4 {
+  margin-top: 0;
+  color: #4CAF50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rewrite-info h4 i { font-size: 1.5rem; }
+.rewrite-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.rewrite-stat {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+}
+.rewrite-stat i {
+  font-size: 2rem;
+  color: #4CAF50;
+  margin-bottom: .5rem;
+}
+.rewrite-stat .number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #343a40;
+  display: block;
+}
+.case-demo {
+  position: relative;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  overflow: hidden;
+}
+.case-images {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform .3s ease;
+}
+.case-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.case-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 15px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.case-nav {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 2;
+}
+.case-nav-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s ease;
+}
+.case-nav-button:hover { background: rgba(255,255,255,.4); }
+.case-nav-button:disabled { opacity: .5; cursor: not-allowed; }
+.case-pagination {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.case-pagination-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.case-pagination-dot.active { background: white; transform: scale(1.2); }
+
+/* Специальные стили для кейса с игрой */
+.special-case {
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.15);
+  background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+}
+
+.special-case .case-description {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 123, 255, 0.02) 100%);
+  border-right: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.special-case .case-description h3 {
+  color: #0066cc;
+  font-size: 1.9rem;
+}
+
+.special-case .case-description h3::after {
+  background: linear-gradient(90deg, #0066cc, #004499);
+  width: 70px;
+}
+
+.special-case .rewrite-info {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 123, 255, 0.05) 100%);
+  border-left: 4px solid #0066cc;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+}
+
+.special-case .rewrite-info h4 {
+  color: #0066cc;
+}
+
+.special-case .rewrite-stat i {
+  color: #0066cc;
+}
+
+.special-case .case-demo {
+  background: linear-gradient(135deg, #0a1128 0%, #1a2332 100%);
+  border-left: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.special-case .case-description .btn-primary {
+  background: linear-gradient(135deg, #0066cc, #004499);
+  box-shadow: 0 4px 8px rgba(0, 102, 204, 0.3);
+}
+
+.special-case .case-description .btn-primary:hover {
+  box-shadow: 0 6px 12px rgba(0, 102, 204, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Адаптивность для специальных кейсов */
+@media (max-width: 768px) {
+  .special-case {
+    border-left: 4px solid #0066cc;
+    border-right: none;
+  }
+  
+  .special-case .case-description {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  }
+}
+/* Стили для специальной кнопки игры */
+.btn-game {
+  background: linear-gradient(135deg, #0066cc, #004499) !important;
+  color: white !important;
+  box-shadow: 0 4px 8px rgba(0, 102, 204, 0.3) !important;
+  border: none !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-game::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.btn-game:hover::before {
+  opacity: 1;
+}
+
+.btn-game:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 102, 204, 0.4);
+  background: linear-gradient(135deg, #0052a3, #003366) !important;
+}
+
+/* Анимация пульсации для кнопки игры */
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 0 0 rgba(0, 102, 204, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 102, 204, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 102, 204, 0.4); }
+}
+
+.btn-game {
+  animation: pulse-glow 2s infinite;
+}
+/* ====== CASES ====== */
+.cases {
+  padding: 4rem 0;
+  background: linear-gradient(to bottom,#f8f9fa,#e9ecef);
+}
+.cases h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #343a40;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.cases h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right,#007bff,#00b4ff);
+  border-radius: 3px;
+}
+.case-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,.1);
+  transition: transform .3s ease, box-shadow .3s ease;
+  max-width: 100%;
+  /* Обеспечиваем равную высоту для обоих столбцов */
+  align-items: stretch;
+  /* Устанавливаем минимальную высоту для всего кейса */
+  min-height: 500px;
+}
+.case-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,.15);
+}
+.case-description { 
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  /* Растягиваем на всю высоту родителя */
+  height: 100%;
+  /* Убираем максимальную высоту чтобы не ограничивать */
+  max-height: none;
+}
+.case-description h3 {
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #007bff;
+  position: relative;
+  padding-bottom: .5rem;
+  flex-shrink: 0; /* Запрещаем сжимать заголовок */
+}
+.case-description h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #007bff;
+}
+.case-description p { 
+  color: #6c757d; 
+  line-height: 1.6; 
+  margin-bottom: 1.5rem; 
+  /* Позволяем тексту растягиваться и занимать доступное пространство */
+  flex-grow: 1;
+  /* Добавляем прокрутку только если текст не помещается */
+  overflow-y: auto;
+  /* Убираем внутренние отступы для лучшего использования пространства */
+  margin: 0 0 1.5rem 0;
+  padding-right: 0.5rem;
+}
+/* Стили для скроллбара */
+.case-description p::-webkit-scrollbar {
+  width: 6px;
+}
+.case-description p::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+.case-description p::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+.case-description p::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.case-stats { 
+  margin: 0; /* Убираем внешний отступ */
+  padding: 0; 
+  list-style: none; 
+  flex-shrink: 0; /* Запрещаем сжимать статистику */
+}
+.case-stats li {
+  margin-bottom: .8rem;
+  padding-left: 1.8rem;
+  position: relative;
+  color: #495057;
+  line-height: 1.5;
+}
+.case-stats li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .5rem;
+  width: 8px;
+  height: 8px;
+  background-color: #007bff;
+  border-radius: 50%;
+}
+.case-stats strong { color: #343a40; font-weight: 600; }
+.rewrite-info {
+  background: #f8f9fa;
+  border-left: 4px solid #4CAF50;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  flex-shrink: 0; /* Запрещаем сжимать блок информации */
+}
+.rewrite-info h4 {
+  margin-top: 0;
+  color: #4CAF50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rewrite-info h4 i { font-size: 1.5rem; }
+.rewrite-info p {
+  margin: 0 0 1rem 0; /* Убираем нижний отступ */
+}
+.rewrite-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.rewrite-stat {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+}
+.rewrite-stat i {
+  font-size: 2rem;
+  color: #4CAF50;
+  margin-bottom: .5rem;
+}
+.rewrite-stat .number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #343a40;
+  display: block;
+}
+.case-demo {
+  position: relative;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Растягиваем на всю высоту родителя */
+  height: 100%;
+  /* Убираем минимальную высоту чтобы не конфликтовать с grid */
+  min-height: unset;
+  overflow: hidden;
+}
+.case-images {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform .3s ease;
+}
+.case-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.case-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 15px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.case-nav {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 2;
+}
+.case-nav-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s ease;
+}
+.case-nav-button:hover { background: rgba(255,255,255,.4); }
+.case-nav-button:disabled { opacity: .5; cursor: not-allowed; }
+.case-pagination {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.case-pagination-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.case-pagination-dot.active { background: white; transform: scale(1.2); }
+
+/* Специальные стили для кейса с игрой */
+.special-case {
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.15);
+  background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+}
+
+.special-case .case-description {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 123, 255, 0.02) 100%);
+  border-right: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.special-case .case-description h3 {
+  color: #0066cc;
+  font-size: 1.9rem;
+}
+
+.special-case .case-description h3::after {
+  background: linear-gradient(90deg, #0066cc, #004499);
+  width: 70px;
+}
+
+.special-case .rewrite-info {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 123, 255, 0.05) 100%);
+  border-left: 4px solid #0066cc;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+}
+
+.special-case .rewrite-info h4 {
+  color: #0066cc;
+}
+
+.special-case .rewrite-stat i {
+  color: #0066cc;
+}
+
+.special-case .case-demo {
+  background: linear-gradient(135deg, #0a1128 0%, #1a2332 100%);
+  border-left: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.special-case .case-description .btn-primary {
+  background: linear-gradient(135deg, #0066cc, #004499);
+  box-shadow: 0 4px 8px rgba(0, 102, 204, 0.3);
+  margin-top: auto; /* Прижимаем кнопку к низу */
+  flex-shrink: 0; /* Запрещаем сжимать кнопку */
+}
+
+.special-case .case-description .btn-primary:hover {
+  box-shadow: 0 6px 12px rgba(0, 102, 204, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Адаптивность для специальных кейсов */
+@media (max-width: 768px) {
+  .special-case {
+    border-left: 4px solid #0066cc;
+    border-right: none;
+  }
+  
+  .special-case .case-description {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  }
+}
+
+/* Адаптивность для кейсов */
+@media (max-width: 768px) {
+  .case-card {
+    grid-template-columns: 1fr;
+    min-height: 600px; /* Увеличиваем минимальную высоту для мобильных */
+  }
+}
+
+@media (max-width: 480px) {
+  .case-card {
+    min-height: 500px; /* Немного уменьшаем для очень маленьких экранов */
+  }
+  
+  .case-description {
+    padding: 1rem;
+  }
+}

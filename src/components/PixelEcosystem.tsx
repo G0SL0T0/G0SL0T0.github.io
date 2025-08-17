@@ -56,7 +56,8 @@ export default function PixelEcosystem() {
           speed: 0.5 + Math.random() * 0.5, // 0.5-1.0
           evolved: false,
           panicMode: false,
-          targetContainer: null
+          targetContainer: null,
+          avoidanceAngle: 0 // Угол обхода препятствий
         };
       case ENTITY_TYPES.BUTTON:
         return {
@@ -68,7 +69,8 @@ export default function PixelEcosystem() {
           powerLevel: 1,
           copyEffect: 0,
           panicMode: false,
-          targetContainer: null
+          targetContainer: null,
+          avoidanceAngle: 0 // Угол обхода препятствий
         };
       case ENTITY_TYPES.BASKET:
         return {
@@ -84,9 +86,9 @@ export default function PixelEcosystem() {
           huntingGroup: [],
           avoidanceMode: false,
           targetContainer: null,
-          avoidanceDistance: 250, // Увеличенное расстояние избегания
-          ignoreDistance: 200, // Расстояние, на котором корзина игнорирует контейнер
-          interceptionMode: false // Режим перехвата пути к контейнеру
+          avoidanceDistance: 350, // Увеличенное расстояние избегания
+          interceptionMode: false, // Режим перехвата пути к контейнеру
+          collisionCooldown: 0 // Кулдаун после столкновения
         };
       case ENTITY_TYPES.CONTAINER:
         return {
@@ -249,6 +251,40 @@ export default function PixelEcosystem() {
     return nearest;
   };
   
+  // Новая функция: поиск лучшей цели для корзины (максимально удаленной от контейнеров)
+  const findBestTargetForBasket = (basket: any, entities: any[]) => {
+    let bestTarget = null;
+    let bestScore = -Infinity;
+    
+    // Ищем все возможные цели (пиксели и кнопки)
+    const potentialTargets = entities.filter(entity => 
+      (entity.type === ENTITY_TYPES.PIXEL || entity.type === ENTITY_TYPES.BUTTON) &&
+      !entity.hidden &&
+      entity.id !== basket.id
+    );
+    
+    potentialTargets.forEach(target => {
+      // Расстояние от корзины до цели
+      const distanceToTarget = getDistance(basket, target);
+      
+      // Находим ближайший контейнер к цели
+      const nearestContainerToTarget = findNearestEntity(target, entities, ENTITY_TYPES.CONTAINER);
+      const distanceToContainer = nearestContainerToTarget ? 
+        getDistance(target, nearestContainerToTarget) : 1000; // Если контейнера нет, считаем расстояние большим
+      
+      // Вычисляем "ценность" цели: чем ближе к корзине и чем дальше от контейнера - тем лучше
+      // Используем обратное расстояние до цели (чтобы ближе было лучше) и прямое расстояние до контейнера
+      const targetValue = (1 / (distanceToTarget + 1)) * distanceToContainer;
+      
+      if (targetValue > bestScore) {
+        bestScore = targetValue;
+        bestTarget = target;
+      }
+    });
+    
+    return bestTarget;
+  };
+  
   // Движение к цели
   const moveTowards = (entity: any, target: any, speed = 1) => {
     const dx = target.x - entity.x;
@@ -271,6 +307,111 @@ export default function PixelEcosystem() {
       entity.vx = (dx / distance) * speed;
       entity.vy = (dy / distance) * speed;
     }
+  };
+  
+  // Новая функция: обход препятствий для пикселей и кнопок
+  const avoidObstacles = (entity: any, target: any, entities: any[], speed = 1) => {
+    // Вектор к цели
+    const dx = target.x - entity.x;
+    const dy = target.y - entity.y;
+    const distanceToTarget = Math.sqrt(dx * dx + dy * dy);
+    
+    if (distanceToTarget === 0) return;
+    
+    let targetVectorX = dx / distanceToTarget;
+    let targetVectorY = dy / distanceToTarget;
+    
+    // Проверяем наличие корзин на пути
+    const dangerRadius = 80; // Радиус обнаружения опасности
+    const dangerousBaskets = entities.filter(e => 
+      e.type === ENTITY_TYPES.BASKET && 
+      !e.hidden &&
+      getDistance(entity, e) < dangerRadius
+    );
+    
+    if (dangerousBaskets.length > 0) {
+      // Вычисляем вектор избегания (сумма векторов от всех опасных корзин)
+      let avoidVectorX = 0;
+      let avoidVectorY = 0;
+      
+      dangerousBaskets.forEach(basket => {
+        const basketDx = entity.x - basket.x;
+        const basketDy = entity.y - basket.y;
+        const basketDistance = Math.sqrt(basketDx * basketDx + basketDy * basketDy);
+        
+        if (basketDistance > 0) {
+          // Чем ближе корзина, тем сильнее отталкивание
+          const force = Math.max(0, 1 - basketDistance / dangerRadius);
+          avoidVectorX += (basketDx / basketDistance) * force;
+          avoidVectorY += (basketDy / basketDistance) * force;
+        }
+      });
+      
+      // Нормализуем вектор избегания
+      const avoidLength = Math.sqrt(avoidVectorX * avoidVectorX + avoidVectorY * avoidVectorY);
+      if (avoidLength > 0) {
+        avoidVectorX /= avoidLength;
+        avoidVectorY /= avoidLength;
+      }
+      
+      // Комбинируем векторы: 70% к цели, 30% избегание
+      const combinedVectorX = targetVectorX * 0.7 + avoidVectorX * 0.3;
+      const combinedVectorY = targetVectorY * 0.7 + avoidVectorY * 0.3;
+      
+      // Нормализуем итоговый вектор
+      const combinedLength = Math.sqrt(combinedVectorX * combinedVectorX + combinedVectorY * combinedVectorY);
+      if (combinedLength > 0) {
+        entity.vx = (combinedVectorX / combinedLength) * speed;
+        entity.vy = (combinedVectorY / combinedLength) * speed;
+      }
+    } else {
+      // Если препятствий нет, просто движемся к цели
+      entity.vx = targetVectorX * speed;
+      entity.vy = targetVectorY * speed;
+    }
+  };
+  
+  // Новая функция: предотвращение столкновений между корзинами
+  const preventBasketCollisions = (basket: any, entities: any[]) => {
+    // Уменьшаем кулдаун столкновения
+    if (basket.collisionCooldown > 0) {
+      basket.collisionCooldown--;
+    }
+    
+    // Проверяем столкновения с другими корзинами
+    const otherBaskets = entities.filter(e => 
+      e.type === ENTITY_TYPES.BASKET && 
+      !e.hidden &&
+      e.id !== basket.id
+    );
+    
+    otherBaskets.forEach(otherBasket => {
+      const distance = getDistance(basket, otherBasket);
+      const minDistance = (basket.size + otherBasket.size) / 2; // Минимальное расстояние между центрами
+      
+      if (distance < minDistance && basket.collisionCooldown === 0) {
+        // Вычисляем вектор отталкивания
+        const dx = basket.x - otherBasket.x;
+        const dy = basket.y - otherBasket.y;
+        
+        if (distance > 0) {
+          // Нормализуем вектор
+          const pushX = dx / distance;
+          const pushY = dy / distance;
+          
+          // Сила отталкивания зависит от степени пересечения
+          const overlap = minDistance - distance;
+          const pushForce = Math.min(overlap * 0.5, 2); // Ограничиваем максимальную силу отталкивания
+          
+          // Применяем отталкивание
+          basket.vx += pushX * pushForce;
+          basket.vy += pushY * pushForce;
+          
+          // Устанавливаем кулдаун для предотвращения дрожания
+          basket.collisionCooldown = 5;
+        }
+      }
+    });
   };
   
   // Проверка безопасности зоны (нет корзин рядом)
@@ -361,8 +502,8 @@ export default function PixelEcosystem() {
                 toRemove.add(entity.id);
                 createParticles(entity.x + entity.size/2, entity.y + entity.size/2, entity.color || '#ffffff', 5);
               } else {
-                // Активно движемся к контейнеру
-                moveTowards(entity, nearestContainer, 1.8);
+                // Используем функцию обхода препятствий для движения к контейнеру
+                avoidObstacles(entity, nearestContainer, newEntities, 1.8);
               }
             } else {
               // Нет контейнера, просто убегаем от корзины
@@ -429,8 +570,8 @@ export default function PixelEcosystem() {
                 toRemove.add(entity.id);
                 createParticles(entity.x + entity.size/2, entity.y + entity.size/2, '#4CAF50', 5);
               } else {
-                // Активно движемся к контейнеру
-                moveTowards(entity, buttonNearestContainer, 1.8);
+                // Используем функцию обхода препятствий для движения к контейнеру
+                avoidObstacles(entity, buttonNearestContainer, newEntities, 1.8);
               }
             } else {
               // Нет контейнера, просто убегаем от корзины
@@ -453,18 +594,13 @@ export default function PixelEcosystem() {
           if (nearestContainer) {
             const distanceToContainer = getDistance(entity, nearestContainer);
             
-            if (distanceToContainer < entity.ignoreDistance) {
-              // Если контейнер достаточно близко, игнорируем его и продолжаем охоту
-              entity.avoidanceMode = false;
-              entity.targetContainer = null;
-            } else if (distanceToContainer < entity.avoidanceDistance) {
-              // Если контейнер слишком близко, активно избегаем
+            // Улучшенная логика избегания контейнеров
+            if (distanceToContainer < entity.avoidanceDistance) {
               entity.avoidanceMode = true;
               entity.targetContainer = nearestContainer;
               entity.targetPrey = null; // Игнорируем добычу при избегании контейнера
-              moveAway(entity, nearestContainer, 2.0); // Увеличиваем скорость убегания
+              moveAway(entity, nearestContainer, 2.5); // Увеличиваем скорость убегания
             } else {
-              // Если контейнер далеко, не обращаем на него внимания
               entity.avoidanceMode = false;
               entity.targetContainer = null;
             }
@@ -472,16 +608,8 @@ export default function PixelEcosystem() {
           
           // Если не в режиме избегания, охотимся за добычей
           if (!entity.avoidanceMode) {
-            // Охотимся за видимыми пикселями и кнопками
-            const targetPixel = findNearestEntity(entity, newEntities, ENTITY_TYPES.PIXEL);
-            const targetButton = findNearestEntity(entity, newEntities, ENTITY_TYPES.BUTTON);
-            
-            let huntTarget = null;
-            if (targetPixel && targetButton) {
-              huntTarget = getDistance(entity, targetPixel) < getDistance(entity, targetButton) ? targetPixel : targetButton;
-            } else {
-              huntTarget = targetPixel || targetButton;
-            }
+            // Используем новую функцию поиска лучшей цели
+            const huntTarget = findBestTargetForBasket(entity, newEntities);
             
             if (huntTarget) {
               entity.targetPrey = huntTarget;
@@ -650,6 +778,11 @@ export default function PixelEcosystem() {
         }
       }
       
+      // Предотвращение столкновений для корзин
+      if (entity.type === ENTITY_TYPES.BASKET && !entity.hidden) {
+        preventBasketCollisions(entity, newEntities);
+      }
+      
       // Обновляем возраст
       entity.age++;
       
@@ -793,21 +926,6 @@ export default function PixelEcosystem() {
               ctx.stroke();
               ctx.restore();
             }
-            
-            // Линия к цели (контейнеру)
-            if (entity.targetContainer) {
-              ctx.save();
-              ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-              ctx.lineWidth = 1;
-              ctx.beginPath();
-              ctx.moveTo(0, 0);
-              ctx.lineTo(
-                entity.targetContainer.x - entity.x + entity.size/2,
-                entity.targetContainer.y - entity.y + entity.size/2
-              );
-              ctx.stroke();
-              ctx.restore();
-            }
             break;
             
           case ENTITY_TYPES.BUTTON:
@@ -870,21 +988,6 @@ export default function PixelEcosystem() {
               ctx.stroke();
               ctx.restore();
             }
-            
-            // Линия к цели (контейнеру)
-            if (entity.targetContainer) {
-              ctx.save();
-              ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-              ctx.lineWidth = 1;
-              ctx.beginPath();
-              ctx.moveTo(0, 0);
-              ctx.lineTo(
-                entity.targetContainer.x - entity.x + entity.size/2,
-                entity.targetContainer.y - entity.y + entity.size/2
-              );
-              ctx.stroke();
-              ctx.restore();
-            }
             break;
             
           case ENTITY_TYPES.BASKET:
@@ -894,8 +997,7 @@ export default function PixelEcosystem() {
             ctx.arc(0, 0, entity.size / 2, 0, Math.PI * 2);
             ctx.stroke();
             
-            ctx.fillStyle = '#FF9800';
-            ctx.fillRect(-entity.size / 4, -2, (entity.size / 2) * (entity.collected / entity.capacity), 4);
+            // УДАЛЕНО: Шкала прогресса collected/capacity
             
             // Отображение уровня
             ctx.fillStyle = '#FF9800';
@@ -916,13 +1018,21 @@ export default function PixelEcosystem() {
               entity.levelUpEffect--;
             }
             
-            // Индикатор избегания контейнеров
+            // Улучшенный индикатор избегания контейнеров
             if (entity.avoidanceMode) {
               ctx.save();
               ctx.strokeStyle = '#FF0000';
-              ctx.lineWidth = 2;
+              ctx.lineWidth = 3;
+              ctx.setLineDash([5, 3]);
               ctx.beginPath();
-              ctx.arc(0, 0, entity.size, 0, Math.PI * 2);
+              ctx.arc(0, 0, entity.size + 5, 0, Math.PI * 2);
+              ctx.stroke();
+              
+              // Добавим пульсирующий эффект
+              const pulseSize = entity.size + 5 + Math.sin(Date.now() / 200) * 5;
+              ctx.beginPath();
+              ctx.arc(0, 0, pulseSize, 0, Math.PI * 2);
+              ctx.globalAlpha = 0.5;
               ctx.stroke();
               ctx.restore();
             }
@@ -934,37 +1044,6 @@ export default function PixelEcosystem() {
               ctx.lineWidth = 2;
               ctx.beginPath();
               ctx.arc(0, 0, entity.size, 0, Math.PI * 2);
-              ctx.stroke();
-              ctx.restore();
-            }
-            
-            // Линия к цели (добыче)
-            if (entity.targetPrey) {
-              ctx.save();
-              ctx.strokeStyle = 'rgba(255, 152, 0, 0.5)';
-              ctx.lineWidth = 1;
-              ctx.beginPath();
-              ctx.moveTo(0, 0);
-              ctx.lineTo(
-                entity.targetPrey.x - entity.x + entity.size/2,
-                entity.targetPrey.y - entity.y + entity.size/2
-              );
-              ctx.stroke();
-              ctx.restore();
-            }
-            
-            // Линия от контейнера (если избегает)
-            if (entity.targetContainer) {
-              ctx.save();
-              ctx.strokeStyle = 'rgba(255, 0, 0, 0.7)';
-              ctx.lineWidth = 2;
-              ctx.setLineDash([5, 3]);
-              ctx.beginPath();
-              ctx.moveTo(0, 0);
-              ctx.lineTo(
-                entity.targetContainer.x - entity.x + entity.size/2,
-                entity.targetContainer.y - entity.y + entity.size/2
-              );
               ctx.stroke();
               ctx.restore();
             }
@@ -1282,9 +1361,9 @@ export default function PixelEcosystem() {
         <div className="game-rules">
           <h3>Правила экосистемы</h3>
           <ul>
-            <li>🟣 <strong>Пиксели</strong> - при виде корзины ищут контейнер как убежище, иначе свободно летают</li>
+            <li>🟣 <strong>Пиксели</strong> - при виде корзины ищут контейнер как убежище, обходя препятствия</li>
             <li>🟩 <strong>Кнопки</strong> - копируют пиксели с повышенным шансом, ищут убежище в контейнерах</li>
-            <li>🟠 <strong>Корзины</strong> - быстрые, координируют действия для перехвата добычи, избегают близких контейнеров</li>
+            <li>🟠 <strong>Корзины</strong> - быстрые, координируют действия для перехвата добычи, избегают контейнеров</li>
             <li>🟦 <strong>Контейнеры</strong> - работают как станции, сущности сами решают входить или нет</li>
           </ul>
         </div>
