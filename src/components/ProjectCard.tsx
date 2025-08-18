@@ -2,7 +2,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import Button from '@/components/ui/button'; // Изменено на импорт по умолчанию
+import Button from '@/components/ui/button';
 
 interface ProjectCardProps {
   title: string;

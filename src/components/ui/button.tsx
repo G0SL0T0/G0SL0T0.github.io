@@ -7,7 +7,7 @@ interface ButtonProps {
   variant?: 'default' | 'outline' | 'ghost';
   asChild?: boolean;
   disabled?: boolean;
-  style?: React.CSSProperties; // Добавлено свойство style
+  style?: React.CSSProperties;
   onClick?: () => void;
 }
 
@@ -17,7 +17,7 @@ const Button = ({
   variant = 'default', 
   asChild = false,
   disabled = false,
-  style, // Добавлено свойство style
+  style,
   onClick,
   ...props 
 }: ButtonProps) => {
