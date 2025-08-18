@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentinelGuard - Гибкие тарифы</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Дополнительные услуги */
+        #addons {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .addon-card {
+            background: var(--light-color);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(67, 97, 238, 0.1);
+            text-align: center;
+        }
+
+        [data-theme="dark"] .addon-card {
+            background: rgba(30, 30, 60, 0.7);
+        }
+
+        .addon-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .addon-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        .addon-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-family: var(--font-heading);
+        }
+
+        .addon-card p {
+            color: var(--gray-color);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .addon-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+
+        .addon-card .button {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .addons-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .addons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/shield-icon.png" alt="SentinelGuard Logo" loading="lazy">
+                <h1>Sentinel<span>Guard</span></h1>
+            </div>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="features.html">Возможности</a></li>
+                    <li><a href="security.html">Безопасность</a></li>
+                    <li><a href="solutions.html">Решения</a></li>
+                    <li><a href="pricing.html" class="active">Цены</a></li>
+                    <li><a href="contact.html">Контакты</a></li>
+                    <li><a href="#" class="button primary">Скачать</a></li>
+                    <li>
+                        <div class="theme-switch">
+                            <input type="checkbox" id="theme-toggle">
+                            <label for="theme-toggle" class="theme-toggle-label">
+                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-moon"></i>
+                                <span class="ball"></span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Герой (Hero Section) -->
+    <section id="pricing-hero" class="hero-section">
+        <div class="container">
+            <div class="hero-content-wrapper">
+                <div class="hero-content animate__animated animate__fadeInLeft">
+                    <h1>Гибкие тарифы <span>для любого бизнеса</span></h1>
+                    <p>Выберите оптимальное решение для защиты ваших цифровых активов с помощью инновационных технологий SentinelGuard.</p>
+                    <div class="hero-buttons">
+                        <a href="#compare" class="button primary large pulse">Сравнить тарифы</a>
+                        <a href="#faq" class="button secondary large">Частые вопросы</a>
+                    </div>
+                    <div class="tech-stack">
+                        <span>30-дневная гарантия возврата средств</span>
+                        <div class="tech-icons">
+                            <i class="fas fa-shield-alt" title="Гарантия"></i>
+                            <i class="fas fa-lock" title="Безопасность"></i>
+                            <i class="fas fa-headset" title="Поддержка"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image animate__animated animate__fadeInRight">
+                    <div class="interactive-card">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <i class="fas fa-shield-alt card-icon"></i>
+                                <h3>Выберите идеальную защиту</h3>
+                                <p>Наведите курсор, чтобы увидеть преимущества</p>
+                            </div>
+                            <div class="card-back">
+                                <div class="card-stats">
+                                    <div class="stat-item">
+                                        <div class="stat-value">99.9%</div>
+                                        <div class="stat-label">Эффективность</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-value">24/7</div>
+                                        <div class="stat-label">Мониторинг</div>
+                                    </div>
+                                </div>
+                                <div class="card-animation">
+                                    <div class="animation-circle">
+                                        <div class="animation-pulse"></div>
+                                    </div>
+                                </div>
+                                <p>Наша система защищает ваши данные круглосуточно</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Основные тарифы -->
+    <section id="pricing-plans" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Наши <span>тарифы</span></h2>
+            <p class="section-subtitle">Выберите решение, которое подходит именно вам</p>
+            
+            <div class="pricing-plans">
+                <div class="plan animate__animated" data-animation="animate__fadeInUp">
+                    <div class="plan-header">
+                        <h3>Базовый</h3>
+                        <div class="price">$0<span>/месяц</span></div>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Мониторинг 5 устройств</li>
+                        <li><i class="fas fa-check"></i> Базовый анализ рисков</li>
+                        <li><i class="fas fa-check"></i> Техподдержка по email</li>
+                        <li><i class="fas fa-check"></i> Отчеты раз в неделю</li>
+                        <li><i class="fas fa-check"></i> Защита от базовых угроз</li>
+                    </ul>
+                    <a href="#" class="button secondary">Начать бесплатно</a>
+                </div>
+                <div class="plan recommended animate__animated" data-animation="animate__fadeInUp" data-delay="100">
+                    <div class="plan-badge">Рекомендуем</div>
+                    <div class="plan-header">
+                        <h3>Премиум</h3>
+                        <div class="price">$99<span>/месяц</span></div>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Неограниченное количество устройств</li>
+                        <li><i class="fas fa-check"></i> Расширенный анализ рисков</li>
+                        <li><i class="fas fa-check"></i> Автоматическая блокировка угроз</li>
+                        <li><i class="fas fa-check"></i> Приоритетная техподдержка 24/7</li>
+                        <li><i class="fas fa-check"></i> Ежедневные отчеты</li>
+                        <li><i class="fas fa-check"></i> Защита от сложных атак</li>
+                        <li><i class="fas fa-check"></i> Доступ к бета-функциям</li>
+                    </ul>
+                    <a href="#" class="button primary">Купить сейчас</a>
+                </div>
+                <div class="plan animate__animated" data-animation="animate__fadeInUp" data-delay="200">
+                    <div class="plan-header">
+                        <h3>Корпоративный</h3>
+                        <div class="price">Индивидуально</div>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Индивидуальная настройка</li>
+                        <li><i class="fas fa-check"></i> Интеграция с существующими системами</li>
+                        <li><i class="fas fa-check"></i> Выделенный менеджер</li>
+                        <li><i class="fas fa-check"></i> Обучение сотрудников</li>
+                        <li><i class="fas fa-check"></i> SLA 99.99%</li>
+                        <li><i class="fas fa-check"></i> Расширенная аналитика</li>
+                        <li><i class="fas fa-check"></i> Белый перчаточный сервис</li>
+                    </ul>
+                    <a href="contact.html" class="button secondary">Обсудить проект</a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-40">
+                <p>Нужна помощь с выбором? <a href="contact.html" class="feature-link">Свяжитесь с нами <i class="fas fa-arrow-right"></i></a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Сравнение тарифов -->
+    <section id="compare" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title">Сравнение <span>тарифов</span></h2>
+            <p class="section-subtitle">Подробное сравнение возможностей всех тарифных планов</p>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Функция</th>
+                            <th>Базовый</th>
+                            <th>Премиум</th>
+                            <th>Корпоративный</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Количество устройств</td>
+                            <td>5</td>
+                            <td>Неограниченно</td>
+                            <td>Неограниченно</td>
+                        </tr>
+                        <tr>
+                            <td>Мониторинг в реальном времени</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Автоматическая защита</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Расширенный анализ угроз</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Техподдержка</td>
+                            <td>Email</td>
+                            <td>24/7 Приоритетная</td>
+                            <td>Персональный менеджер</td>
+                        </tr>
+                        <tr>
+                            <td>Отчеты</td>
+                            <td>Еженедельно</td>
+                            <td>Ежедневно</td>
+                            <td>В реальном времени</td>
+                        </tr>
+                        <tr>
+                            <td>Интеграция с SIEM</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Обучение сотрудников</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td>Базовое</td>
+                            <td>Расширенное</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Интерактивный калькулятор -->
+    <section id="calculator" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Калькулятор <span>стоимости</span></h2>
+            <p class="section-subtitle">Рассчитайте стоимость защиты для вашего бизнеса</p>
+            
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label for="devices">Количество устройств</label>
+                        <input type="range" id="devices" min="1" max="500" value="10" class="slider">
+                        <div class="slider-value"><span id="devices-value">10</span> устройств</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="employees">Количество сотрудников</label>
+                        <input type="range" id="employees" min="1" max="1000" value="5" class="slider">
+                        <div class="slider-value"><span id="employees-value">5</span> сотрудников</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sensitivity">Уровень чувствительности данных</label>
+                        <div class="radio-group">
+                            <input type="radio" id="sensitivity-low" name="sensitivity" value="low" checked>
+                            <label for="sensitivity-low">Базовый</label>
+                            
+                            <input type="radio" id="sensitivity-medium" name="sensitivity" value="medium">
+                            <label for="sensitivity-medium">Средний</label>
+                            
+                            <input type="radio" id="sensitivity-high" name="sensitivity" value="high">
+                            <label for="sensitivity-high">Высокий</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="support">Уровень поддержки</label>
+                        <select id="support" class="form-select">
+                            <option value="basic">Базовая (email)</option>
+                            <option value="standard">Стандартная (24/7 чат)</option>
+                            <option value="premium">Премиум (выделенный менеджер)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="calculator-result">
+                    <div class="result-card">
+                        <h3>Рекомендуемый план</h3>
+                        <div class="result-plan">Премиум</div>
+                        <div class="result-price">$<span id="calculated-price">99</span><span>/месяц</span></div>
+                        <div class="result-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Полная защита всех устройств</li>
+                                <li><i class="fas fa-check"></i> Приоритетная поддержка 24/7</li>
+                                <li><i class="fas fa-check"></i> Ежедневные отчеты</li>
+                                <li><i class="fas fa-check"></i> Автоматическое устранение угроз</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="button primary">Начать использование</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Часто задаваемые вопросы -->
+    <section id="faq" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title">Частые <span>вопросы</span></h2>
+            <p class="section-subtitle">Ответы на наиболее распространенные вопросы о наших тарифах</p>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Есть ли бесплатный пробный период? <i class="fas fa-chevron-down"></i></h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да, мы предлагаем 14-дневный бесплатный пробный период для всех тарифных планов, включая Премиум. Вам не нужно вводить данные карты для начала пробного периода.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Могу ли я изменить тарифный план позже? <i class="fas fa-chevron-down"></i></h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Конечно! Вы можете перейти на другой тарифный план в любое время. При переходе на более дорогой план разница будет пропорционально распределена до конца текущего платежного периода.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Есть ли скидки для некоммерческих организаций? <i class="fas fa-chevron-down"></i></h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да, мы предоставляем специальные условия для образовательных учреждений и некоммерческих организаций. Пожалуйста, свяжитесь с нашим отделом продаж для получения дополнительной информации.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Какие способы оплаты вы принимаете? <i class="fas fa-chevron-down"></i></h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Мы принимаем все основные кредитные карты (Visa, MasterCard, American Express), PayPal, банковские переводы, а также криптовалюты (Bitcoin, Ethereum).</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Есть ли долгосрочные контракты? <i class="fas fa-chevron-down"></i></h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Нет, все наши планы работают по подписке и могут быть отменены в любое время. Однако мы предлагаем скидку 20% при оплате за год вперед.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Как происходит процесс внедрения? <i class="fas fa-chevron-down"></i></h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Для базового и премиум тарифов мы предоставляем пошаговые инструкции и автоматические инструменты настройки. Для корпоративных клиентов мы предлагаем полное сопровождение внедрения нашими специалистами.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Дополнительные услуги -->
+    <section id="addons" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Дополнительные <span>услуги</span></h2>
+            <p class="section-subtitle">Расширьте возможности вашего тарифного плана</p>
+            
+            <div class="addons-grid">
+                <div class="addon-card">
+                    <div class="addon-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Персональный аудит безопасности</h3>
+                    <p>Полный анализ вашей текущей инфраструктуры безопасности с рекомендациями по улучшению.</p>
+                    <div class="addon-price">от $500</div>
+                    <a href="#" class="button secondary small">Подробнее</a>
+                </div>
+                
+                <div class="addon-card">
+                    <div class="addon-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Обучение сотрудников</h3>
+                    <p>Специализированные тренинги по кибербезопасности для вашей команды.</p>
+                    <div class="addon-price">от $300/чел</div>
+                    <a href="#" class="button secondary small">Подробнее</a>
+                </div>
+                
+                <div class="addon-card">
+                    <div class="addon-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Резервное копирование</h3>
+                    <p>Автоматическое шифрованное резервное копирование критически важных данных.</p>
+                    <div class="addon-price">от $200/мес</div>
+                    <a href="#" class="button secondary small">Подробнее</a>
+                </div>
+                
+                <div class="addon-card">
+                    <div class="addon-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Мобильная защита</h3>
+                    <p>Расширенная защита для мобильных устройств сотрудников.</p>
+                    <div class="addon-price">$50/устройство</div>
+                    <a href="#" class="button secondary small">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="bg-gradient">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Готовы защитить свой бизнес?</h2>
+                <p>Начните бесплатную 14-дневную пробную версию без необходимости ввода карты</p>
+                <a href="#" class="button primary large">Начать сейчас</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="logo">
+                        <img src="images/shield-icon.png" alt="SentinelGuard Logo" loading="lazy">
+                        <h1>Sentinel<span>Guard</span></h1>
+                    </div>
+                    <p>Инновационные решения для кибербезопасности вашего бизнеса.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Продукт</h3>
+                    <ul>
+                        <li><a href="features.html">Возможности</a></li>
+                        <li><a href="security.html">Безопасность</a></li>
+                        <li><a href="solutions.html">Решения</a></li>
+                        <li><a href="pricing.html">Цены</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Ресурсы</h3>
+                    <ul>
+                        <li><a href="#">Документация</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">Статус системы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Компания</h3>
+                    <ul>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="careers.html">Карьера</a></li>
+                        <li><a href="contact.html">Контакты</a></li>
+                        <li><a href="#">Партнеры</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2000 SentinelGuard. Все права защищены.</p>
+                <div class="legal-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Кнопка "Наверх" -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Встроенный JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Переключение темы
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            
+            // Проверяем сохраненную тему
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+            themeToggle.checked = savedTheme === 'dark';
+            
+            themeToggle.addEventListener('change', function() {
+                const theme = this.checked ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                
+                // Принудительное обновление стилей
+                const logo = document.querySelector('header .logo h1');
+                logo.style.display = 'none';
+                logo.offsetHeight; // Триггер reflow
+                logo.style.display = '';
+            });
+            
+            // Мобильное меню
+            const menuToggle = document.getElementById('menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            
+            menuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mainNav.classList.toggle('active');
+            });
+            
+            // Плавная прокрутка
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Закрываем меню, если оно открыто
+                        menuToggle.classList.remove('active');
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Кнопка "Наверх"
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+            
+            backToTop.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Фиксированная шапка при скролле
+            const header = document.querySelector('header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Анимация элементов при скролле
+            const animateElements = document.querySelectorAll('.animate__animated');
+            
+            const elementObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animation = entry.target.getAttribute('data-animation');
+                        const delay = entry.target.getAttribute('data-delay') || 0;
+                        
+                        setTimeout(() => {
+                            entry.target.classList.add(animation);
+                        }, delay);
+                        
+                        elementObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animateElements.forEach(element => {
+                elementObserver.observe(element);
+            });
+            
+            // FAQ аккордеон
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const icon = question.querySelector('i');
+                    
+                    // Закрываем все открытые ответы
+                    document.querySelectorAll('.faq-answer').forEach(item => {
+                        if (item !== answer && item.classList.contains('active')) {
+                            item.classList.remove('active');
+                            item.previousElementSibling.querySelector('i').classList.remove('fa-chevron-up');
+                            item.previousElementSibling.querySelector('i').classList.add('fa-chevron-down');
+                        }
+                    });
+                    
+                    // Переключаем текущий ответ
+                    answer.classList.toggle('active');
+                    
+                    if (answer.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+            
+            // Калькулятор стоимости
+            const devicesSlider = document.getElementById('devices');
+            const devicesValue = document.getElementById('devices-value');
+            const employeesSlider = document.getElementById('employees');
+            const employeesValue = document.getElementById('employees-value');
+            const calculatedPrice = document.getElementById('calculated-price');
+            
+            function updateCalculator() {
+                const devices = parseInt(devicesSlider.value);
+                const employees = parseInt(employeesSlider.value);
+                const sensitivity = document.querySelector('input[name="sensitivity"]:checked').value;
+                const support = document.getElementById('support').value;
+                
+                let basePrice = 0;
+                
+                // Определяем базовую цену
+                if (devices <= 5 && employees <= 5) {
+                    basePrice = 0; // Базовый тариф
+                } else if (devices <= 50 && employees <= 50) {
+                    basePrice = 99; // Премиум тариф
+                } else {
+                    basePrice = 299; // Корпоративный тариф
+                }
+                
+                // Модификаторы цены
+                if (sensitivity === 'medium') basePrice *= 1.2;
+                if (sensitivity === 'high') basePrice *= 1.5;
+                
+                if (support === 'standard') basePrice *= 1.3;
+                if (support === 'premium') basePrice *= 1.8;
+                
+                // Обновляем отображение
+                calculatedPrice.textContent = Math.round(basePrice);
+                
+                // Обновляем рекомендуемый план
+                const resultPlan = document.querySelector('.result-plan');
+                if (basePrice === 0) {
+                    resultPlan.textContent = 'Базовый';
+                } else if (basePrice < 300) {
+                    resultPlan.textContent = 'Премиум';
+                } else {
+                    resultPlan.textContent = 'Корпоративный';
+                }
+            }
+            
+            devicesSlider.addEventListener('input', function() {
+                devicesValue.textContent = this.value;
+                updateCalculator();
+            });
+            
+            employeesSlider.addEventListener('input', function() {
+                employeesValue.textContent = this.value;
+                updateCalculator();
+            });
+            
+            document.querySelectorAll('input[name="sensitivity"]').forEach(radio => {
+                radio.addEventListener('change', updateCalculator);
+            });
+            
+            document.getElementById('support').addEventListener('change', updateCalculator);
+            
+            // Инициализация калькулятора
+            updateCalculator();
+        });
+    </script>
+</body>
+</html>

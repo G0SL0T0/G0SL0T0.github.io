@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentinelGuard | Security Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Сайдбар -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="shield-icon.png" alt="Logo">
+                <h1>Sentinel<span>Guard</span></h1>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Защита</span>
+                        <span class="nav-badge">3</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-chart-network"></i>
+                        <span>Мониторинг</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-bell"></i>
+                        <span>Оповещения</span>
+                        <span class="nav-badge">5</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-network-wired"></i>
+                        <span>Сеть</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-user-lock"></i>
+                        <span>Доступы</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-history"></i>
+                        <span>Журналы</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Настройки</span>
+                    </a>
+                </li>
+                <li class="nav-item" style="margin-top: 30px;">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-life-ring"></i>
+                        <span>Поддержка</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Основное содержимое -->
+        <main class="main-content">
+            <!-- Верхняя панель -->
+            <div class="top-bar">
+                <div class="page-title">
+                    <h2>Панель управления безопасностью</h2>
+                    <p>Последнее обновление: сегодня, 15:42</p>
+                </div>
+                
+                <div class="user-menu">
+                    <div class="quick-actions">
+                        <button class="action-btn" title="Обновить данные" id="refresh-btn">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <button class="action-btn" title="Быстрый поиск">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="action-btn alert" title="Критические события">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    
+                    <div class="user-profile" id="user-profile">
+                        <div class="user-avatar">SG</div>
+                        <div class="user-info">
+                            <div class="user-name">Security Admin</div>
+                            <div class="user-role">Администратор</div>
+                        </div>
+                        <i class="fas fa-chevron-down" style="margin-left: 8px; font-size: 0.8rem;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточки статистики -->
+            <div class="stats-grid">
+                <div class="stat-card protected">
+                    <div class="stat-header">
+                        <div class="stat-title">Защищено устройств</div>
+                        <div class="stat-icon protected">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">1,428</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 14% за месяц
+                    </div>
+                    <div class="stat-footer">
+                        <span>Всего в сети: 1,502</span>
+                        <button class="stat-btn">
+                            <i class="fas fa-list"></i> Список
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="stat-card threats">
+                    <div class="stat-header">
+                        <div class="stat-title">Блокировано угроз</div>
+                        <div class="stat-icon threats">
+                            <i class="fas fa-shield-virus"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">4,215</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 22% за неделю
+                    </div>
+                    <div class="stat-footer">
+                        <span>За сегодня: 127</span>
+                        <button class="stat-btn">
+                            <i class="fas fa-chart-bar"></i> Анализ
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="stat-card attacks">
+                    <div class="stat-header">
+                        <div class="stat-title">Активных атак</div>
+                        <div class="stat-icon attacks">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-arrow-up"></i> 2 новых
+                    </div>
+                    <div class="stat-footer">
+                        <span>Критических: 3</span>
+                        <button class="stat-btn">
+                            <i class="fas fa-eye"></i> Мониторинг
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="stat-card vulnerabilities">
+                    <div class="stat-header">
+                        <div class="stat-title">Уязвимости</div>
+                        <div class="stat-icon vulnerabilities">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">18</div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-exclamation-circle"></i> 5 критических
+                    </div>
+                    <div class="stat-footer">
+                        <span>Высокий риск: 7</span>
+                        <button class="stat-btn">
+                            <i class="fas fa-tasks"></i> Исправить
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Основные панели -->
+            <div class="dashboard-panels">
+                <!-- Левая панель (график) -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title">Активность угроз в реальном времени</div>
+                        <div class="panel-actions">
+                            <div class="btn-group">
+                                <button class="btn btn-outline active">Час</button>
+                                <button class="btn btn-outline">День</button>
+                                <button class="btn btn-outline">Неделя</button>
+                            </div>
+                            <button class="btn btn-primary btn-effect">
+                                <i class="fas fa-download"></i> Экспорт
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div class="chart-placeholder">
+                            [Интерактивный график активности угроз]
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                        <button class="btn btn-outline">
+                            <i class="fas fa-filter"></i> Фильтры
+                        </button>
+                        <button class="btn btn-outline">
+                            <i class="fas fa-sliders-h"></i> Настройки графика
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Правая панель (последние угрозы) -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title">Последние угрозы</div>
+                        <div class="panel-actions">
+                            <button class="btn btn-outline" id="mark-all-read">
+                                <i class="fas fa-check-double"></i> Прочитать все
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <ul class="threat-list">
+                        <li class="threat-item fade-in">
+                            <div class="threat-icon critical">
+                                <i class="fas fa-skull-crossbones"></i>
+                            </div>
+                            <div class="threat-info">
+                                <div class="threat-title">Критическая уязвимость: CVE-2023-32456</div>
+                                <div class="threat-desc">Обнаружена эксплуатация уязвимости в сетевом оборудовании</div>
+                            </div>
+                            <div class="threat-time">15:30</div>
+                            <div class="threat-actions">
+                                <button class="threat-btn" title="Подробнее">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="threat-btn" title="Действия">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </li>
+                        <li class="threat-item fade-in" style="animation-delay: 0.1s;">
+                            <div class="threat-icon critical">
+                                <i class="fas fa-virus"></i>
+                            </div>
+                            <div class="threat-info">
+                                <div class="threat-title">Ransomware.WannaCry</div>
+                                <div class="threat-desc">Попытка запуска шифровальщика на рабочей станции</div>
+                            </div>
+                            <div class="threat-time">14:52</div>
+                            <div class="threat-actions">
+                                <button class="threat-btn" title="Подробнее">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="threat-btn" title="Действия">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </li>
+                        <li class="threat-item fade-in" style="animation-delay: 0.2s;">
+                            <div class="threat-icon warning">
+                                <i class="fas fa-user-secret"></i>
+                            </div>
+                            <div class="threat-info">
+                                <div class="threat-title">Brute Force SSH атака</div>
+                                <div class="threat-desc">Множественные попытки входа на сервер 192.168.1.45</div>
+                            </div>
+                            <div class="threat-time">13:21</div>
+                            <div class="threat-actions">
+                                <button class="threat-btn" title="Подробнее">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="threat-btn" title="Действия">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </li>
+                        <li class="threat-item fade-in" style="animation-delay: 0.3s;">
+                            <div class="threat-icon info">
+                                <i class="fas fa-phishing"></i>
+                            </div>
+                            <div class="threat-info">
+                                <div class="threat-title">Фишинговая кампания</div>
+                                <div class="threat-desc">Обнаружены подозрительные emails в 12 почтовых ящиках</div>
+                            </div>
+                            <div class="threat-time">11:45</div>
+                            <div class="threat-actions">
+                                <button class="threat-btn" title="Подробнее">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="threat-btn" title="Действия">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </li>
+                        <li class="threat-item fade-in" style="animation-delay: 0.4s;">
+                            <div class="threat-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="threat-info">
+                                <div class="threat-title">Подозрительная сетевая активность</div>
+                                <div class="threat-desc">Необычно высокий исходящий трафик с рабочей станции</div>
+                            </div>
+                            <div class="threat-time">10:18</div>
+                            <div class="threat-actions">
+                                <button class="threat-btn" title="Подробнее">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="threat-btn" title="Действия">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div style="margin-top: 15px; text-align: center;">
+                        <button class="btn btn-outline">
+                            <i class="fas fa-history"></i> Показать больше
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Кнопка быстрого действия -->
+    <button class="quick-action-btn" id="quick-action-btn">
+        <i class="fas fa-plus"></i>
+    </button>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    
+</body>
+</html>

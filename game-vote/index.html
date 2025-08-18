@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Во что бы я сыграл</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="logo.png"/>
+</head>
+<body>
+    <header>
+        <h1 class="glitch">Во что бы я сыграл</h1>
+
+        <div class="counter-row">
+            <div class="counter" id="counter">Осталось голосов: 3</div>
+        </div>
+
+        <div class="action-row">
+            <button class="neon-button small" onclick="resetVotes()">Сбросить</button>
+            <button class="neon-button small" onclick="submitVotes()">📤 Подтвердить и отправить</button>
+        </div>
+    </header>
+
+  <main class="container">
+    <p class="subtitle">Отдайте 3 голоса за игры, в которые хотите сыграть.</p>
+
+    <div class="games-grid" id="gamesGrid"></div>
+
+    <div class="custom-game">
+        <input type="text" id="steamName" placeholder="Название игры" />
+        <input type="url" id="steamUrl" class="steam-input" placeholder="https://store.steampowered.com/app/12345/GameName" />
+        <button class="neon-button" onclick="addSteamGame()">Добавить по Steam</button>
+    </div>
+
+    <div class="results" id="results">
+      <h3>📋 Итоги</h3>
+      <ul id="resultsList"></ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Gosloto. Все права НЕ защищены.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

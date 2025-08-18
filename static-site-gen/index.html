@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <title>Static-Site-Gen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="assets/styles.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Static MarkForge</h1>
+    <p>Перетащите Markdown-файл или выберите вручную → получите готовый сайт.</p>
+  </header>
+
+  <main>
+    <!-- Зона drag-and-drop -->
+    <div id="dropZone" class="drop-zone">
+      <i class="fas fa-cloud-upload-alt fa-3x"></i>
+      <p>Перетащите .md файл сюда</p>
+      <input type="file" id="fileInput" accept=".md" hidden/>
+      <button onclick="document.getElementById('fileInput').click()">Выбрать файл</button>
+    </div>
+
+    <!-- Live-preview -->
+    <section id="preview" class="preview hidden">
+      <h2>Предпросмотр</h2>
+      <div id="htmlContent"></div>
+    </section>
+
+    <!-- Кнопка скачивания -->
+    <button id="downloadBtn" class="download-btn hidden">
+      <i class="fas fa-download"></i> Скачать ZIP
+    </button>
+  </main>
+
+  <script>
+  /* ---------- Drag & Drop ---------- */
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+  const preview = document.getElementById('preview');
+  const htmlContent = document.getElementById('htmlContent');
+  const downloadBtn = document.getElementById('downloadBtn');
+
+  let mdText = '';
+
+  ['dragenter', 'dragover'].forEach(evt =>
+    dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.add('hover'); })
+  );
+  ['dragleave', 'drop'].forEach(evt =>
+    dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.remove('hover'); })
+  );
+  dropZone.addEventListener('drop', e => {
+    const file = e.dataTransfer.files[0];
+    handleFile(file);
+  });
+  fileInput.addEventListener('change', e => handleFile(e.target.files[0]));
+
+  function handleFile(file) {
+    if (!file || !file.name.endsWith('.md')) return alert('Только .md файлы!');
+    const reader = new FileReader();
+    reader.onload = e => {
+      mdText = e.target.result;
+      renderPreview();
+      downloadBtn.classList.remove('hidden');
+    };
+    reader.readAsText(file);
+  }
+
+  function renderPreview() {
+    const html = marked.parse(mdText);
+    htmlContent.innerHTML = html;
+    preview.classList.remove('hidden');
+  }
+
+  /* ---------- Сборка ZIP ---------- */
+  downloadBtn.addEventListener('click', () => {
+    const zip = new JSZip();
+    zip.file('index.html', generateHTML(htmlContent.innerHTML));
+    zip.file('assets/styles.css', themeCSS);
+    zip.generateAsync({ type: 'blob' }).then(blob => {
+      saveAs(blob, 'static-site.zip');
+    });
+  });
+
+  function generateHTML(body) {
+    return `
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <title>Generated Site</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="stylesheet" href="assets/styles.css"/>
+</head>
+<body>
+  <main class="post">
+    ${body}
+  </main>
+</body>
+</html>`;
+  }
+
+  const themeCSS = `body{margin:0;font-family:system-ui;background:#fafafa;color:#222}
+header{padding:2rem;background:linear-gradient(135deg,#007bff,#00b4ff);color:#fff;text-align:center}
+.post{max-width:800px;margin:2rem auto;padding:1rem 2rem}
+h1,h2,h3{line-height:1.3}
+code{background:#f0f0f0;padding:.2em .4em;border-radius:4px}
+pre{background:#f7f7f7;padding:1em;border-radius:6px;overflow-x:auto}
+img{max-width:100%;border-radius:6px}`;
+  </script>
+</body>
+</html>
