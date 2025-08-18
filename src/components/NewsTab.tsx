@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import '@/styles/news-tab.css';
 import ScrollToTop from './ScrollToTop';
+
 // Тип для новости
 interface NewsItem {
   date: string;
@@ -163,7 +164,8 @@ export default function NewsTab({ showModal, setShowModal }: NewsTabProps) {
     }
   };
   
-  const getImportanceBadge = (importance?: string, index: number) => {
+  // ИСПРАВЛЕНО: Поменяли порядок параметров - сначала обязательный, потом необязательный
+  const getImportanceBadge = (index: number, importance?: string) => {
     if (index === 0) {
       return <span className="news-badge-custom latest">Последнее</span>;
     }
@@ -232,7 +234,8 @@ export default function NewsTab({ showModal, setShowModal }: NewsTabProps) {
                   <div className="news-meta-custom">
                     <time>{formatDate(item.date)}</time>
                     <span className="news-version-custom">{item.version}</span>
-                    {getImportanceBadge(item.importance, index)}
+                    {/* ИСПРАВЛЕНО: Поменяли порядок аргументов при вызове функции */}
+                    {getImportanceBadge(index, item.importance)}
                   </div>
                   
                   <div className="news-content-custom">

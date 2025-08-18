@@ -2,12 +2,104 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
+// Определяем интерфейсы для всех типов данных
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  color: string;
+  life: number;
+}
+
+interface Trail {
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+  life: number;
+}
+
+interface BaseEntity {
+  id: string;
+  type: string;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  age: number;
+  energy: number;
+  hidden: boolean;
+  containerId: string | null;
+}
+
+interface PixelEntity extends BaseEntity {
+  type: 'pixel';
+  color: string;
+  size: number;
+  speed: number;
+  evolved: boolean;
+  panicMode: boolean;
+  targetContainer: ContainerEntity | null;
+  avoidanceAngle: number;
+}
+
+interface ButtonEntity extends BaseEntity {
+  type: 'button';
+  buttonType: string;
+  size: number;
+  speed: number;
+  cooldown: number;
+  powerLevel: number;
+  copyEffect: number;
+  panicMode: boolean;
+  targetContainer: ContainerEntity | null;
+  avoidanceAngle: number;
+  mergeEffect: number;
+}
+
+interface BasketEntity extends BaseEntity {
+  type: 'basket';
+  size: number;
+  speed: number;
+  capacity: number;
+  collected: number;
+  level: number;
+  experience: number;
+  levelUpEffect: number;
+  targetPrey: PixelEntity | ButtonEntity | null;
+  huntingGroup: BasketEntity[];
+  avoidanceMode: boolean;
+  targetContainer: ContainerEntity | null;
+  avoidanceDistance: number;
+  interceptionMode: boolean;
+  collisionCooldown: number;
+}
+
+interface ContainerEntity extends BaseEntity {
+  type: 'container';
+  size: number;
+  speed: number;
+  stored: (PixelEntity | ButtonEntity)[];
+  safeRadius: number;
+  releaseTimer: number;
+  shieldEnergy: number;
+  shelterMode: boolean;
+  shelterTimer: number;
+  absorptionRadius: number;
+  releaseRate: number;
+}
+
+type Entity = PixelEntity | ButtonEntity | BasketEntity | ContainerEntity;
+type PreyEntity = PixelEntity | ButtonEntity;
+
 export default function PixelEcosystem() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isRunning, setIsRunning] = useState(false);
   const [stats, setStats] = useState({ pixels: 0, buttons: 0, baskets: 0, containers: 0 });
-  const [particles, setParticles] = useState<any[]>([]);
-  const [trails, setTrails] = useState<any[]>([]);
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [trails, setTrails] = useState<Trail[]>([]);
   const [performance, setPerformance] = useState<'high' | 'medium' | 'low'>('high');
   
   // Типы сущностей
@@ -27,14 +119,30 @@ export default function PixelEcosystem() {
   };
   
   // Состояние для хранения сущностей
-  const [entities, setEntities] = useState<any[]>([]);
+  const [entities, setEntities] = useState<Entity[]>([]);
   
   // Режим отладки для визуализации хитбоксов
   const DEBUG_HITBOXES = false;
   
+  // Вспомогательная функция для получения цвета сущности
+  const getEntityColor = (entity: Entity): string => {
+    switch (entity.type) {
+      case ENTITY_TYPES.PIXEL:
+        return (entity as PixelEntity).color;
+      case ENTITY_TYPES.BUTTON:
+        return '#4CAF50';
+      case ENTITY_TYPES.BASKET:
+        return '#FF9800';
+      case ENTITY_TYPES.CONTAINER:
+        return '#2196F3';
+      default:
+        return '#ffffff';
+    }
+  };
+  
   // Создание новой сущности
-  const createEntity = (type: string, x?: number, y?: number, buttonType?: string) => {
-    const baseEntity = {
+  const createEntity = (type: string, x?: number, y?: number, buttonType?: string): Entity => {
+    const baseEntity: BaseEntity = {
       id: Math.random().toString(36).substr(2, 9),
       type,
       x: x || Math.random() * 760,
@@ -46,11 +154,12 @@ export default function PixelEcosystem() {
       hidden: false,
       containerId: null
     };
-    
+
     switch (type) {
       case ENTITY_TYPES.PIXEL:
         return {
           ...baseEntity,
+          type: 'pixel',
           color: `hsl(${Math.random() * 360}, 70%, 50%)`,
           size: 4,
           speed: 0.5 + Math.random() * 0.5, // 0.5-1.0
@@ -62,6 +171,7 @@ export default function PixelEcosystem() {
       case ENTITY_TYPES.BUTTON:
         return {
           ...baseEntity,
+          type: 'button',
           buttonType: buttonType || Object.values(BUTTON_TYPES)[Math.floor(Math.random() * 4)],
           size: 12,
           speed: 0.5 + Math.random() * 0.3, // 0.5-0.8
@@ -70,11 +180,13 @@ export default function PixelEcosystem() {
           copyEffect: 0,
           panicMode: false,
           targetContainer: null,
-          avoidanceAngle: 0 // Угол обхода препятствий
+          avoidanceAngle: 0, // Угол обхода препятствий
+          mergeEffect: 0
         };
       case ENTITY_TYPES.BASKET:
         return {
           ...baseEntity,
+          type: 'basket',
           size: 20,
           speed: 0.6 + Math.random() * 0.1, // 0.6-0.7 (чуть быстрее пикселей)
           capacity: 10,
@@ -93,6 +205,7 @@ export default function PixelEcosystem() {
       case ENTITY_TYPES.CONTAINER:
         return {
           ...baseEntity,
+          type: 'container',
           size: 30,
           speed: 0.1 + Math.random() * 0.2,
           stored: [],
@@ -105,7 +218,18 @@ export default function PixelEcosystem() {
           releaseRate: 0.02 // Шанс выпуска сущности в каждом кадре
         };
       default:
-        return baseEntity;
+        // Добавляем обработку неизвестного типа
+        return {
+          ...baseEntity,
+          type: 'pixel', // По умолчанию создаем пиксель
+          color: `hsl(${Math.random() * 360}, 70%, 50%)`,
+          size: 4,
+          speed: 0.5 + Math.random() * 0.5,
+          evolved: false,
+          panicMode: false,
+          targetContainer: null,
+          avoidanceAngle: 0
+        } as Entity; // Явное приведение типа
     }
   };
   
@@ -117,7 +241,7 @@ export default function PixelEcosystem() {
   
   // Функция для создания частиц
   const createParticles = (x: number, y: number, color: string, count: number) => {
-    const newParticles = [];
+    const newParticles: Particle[] = []; // Явно указываем тип массива
     for (let i = 0; i < count; i++) {
       newParticles.push({
         x,
@@ -155,7 +279,7 @@ export default function PixelEcosystem() {
   
   // Инициализация экосистемы
   const initializeEcosystem = () => {
-    const newEntities = [];
+    const newEntities: Entity[] = [];
     
     // Создаем начальные сущности
     for (let i = 0; i < 40; i++) {
@@ -177,7 +301,7 @@ export default function PixelEcosystem() {
   };
   
   // Обновление статистики
-  const updateStats = (entities: any[]) => {
+  const updateStats = (entities: Entity[]) => {
     let totalPixels = 0;
     let totalButtons = 0;
     let totalBaskets = 0;
@@ -197,8 +321,9 @@ export default function PixelEcosystem() {
         case ENTITY_TYPES.CONTAINER:
           totalContainers++;
           // Добавляем скрытые элементы в контейнере
-          if (entity.stored) {
-            entity.stored.forEach((stored: any) => {
+          const container = entity as ContainerEntity; // Приводим к типу ContainerEntity
+          if (container.stored) {
+            container.stored.forEach((stored) => {
               if (stored.type === ENTITY_TYPES.PIXEL) totalPixels++;
               if (stored.type === ENTITY_TYPES.BUTTON) totalButtons++;
             });
@@ -226,15 +351,15 @@ export default function PixelEcosystem() {
   };
   
   // Функция расстояния между сущностями
-  const getDistance = (entity1: any, entity2: any) => {
+  const getDistance = (entity1: Entity, entity2: Entity) => {
     const dx = entity1.x - entity2.x;
     const dy = entity1.y - entity2.y;
     return Math.sqrt(dx * dx + dy * dy);
   };
   
   // Поиск ближайшего элемента определенного типа
-  const findNearestEntity = (entity: any, entities: any[], targetType: string, excludeHidden = true) => {
-    let nearest = null;
+  const findNearestEntity = (entity: Entity, entities: Entity[], targetType: string, excludeHidden = true) => {
+    let nearest: Entity | null = null;
     let minDistance = Infinity;
     
     entities.forEach(other => {
@@ -252,8 +377,8 @@ export default function PixelEcosystem() {
   };
   
   // Новая функция: поиск лучшей цели для корзины (максимально удаленной от контейнеров)
-  const findBestTargetForBasket = (basket: any, entities: any[]) => {
-    let bestTarget = null;
+  const findBestTargetForBasket = (basket: BasketEntity, entities: Entity[]): PreyEntity | null => {
+    let bestTarget: PreyEntity | null = null;
     let bestScore = -Infinity;
     
     // Ищем все возможные цели (пиксели и кнопки)
@@ -261,14 +386,14 @@ export default function PixelEcosystem() {
       (entity.type === ENTITY_TYPES.PIXEL || entity.type === ENTITY_TYPES.BUTTON) &&
       !entity.hidden &&
       entity.id !== basket.id
-    );
+    ) as PreyEntity[];
     
     potentialTargets.forEach(target => {
       // Расстояние от корзины до цели
       const distanceToTarget = getDistance(basket, target);
       
       // Находим ближайший контейнер к цели
-      const nearestContainerToTarget = findNearestEntity(target, entities, ENTITY_TYPES.CONTAINER);
+      const nearestContainerToTarget = findNearestEntity(target, entities, ENTITY_TYPES.CONTAINER) as ContainerEntity | null;
       const distanceToContainer = nearestContainerToTarget ? 
         getDistance(target, nearestContainerToTarget) : 1000; // Если контейнера нет, считаем расстояние большим
       
@@ -286,7 +411,7 @@ export default function PixelEcosystem() {
   };
   
   // Движение к цели
-  const moveTowards = (entity: any, target: any, speed = 1) => {
+  const moveTowards = (entity: Entity, target: Entity, speed = 1) => {
     const dx = target.x - entity.x;
     const dy = target.y - entity.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
@@ -298,7 +423,7 @@ export default function PixelEcosystem() {
   };
   
   // Движение от цели (убегание)
-  const moveAway = (entity: any, target: any, speed = 1) => {
+  const moveAway = (entity: Entity, target: Entity, speed = 1) => {
     const dx = entity.x - target.x;
     const dy = entity.y - target.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
@@ -310,7 +435,7 @@ export default function PixelEcosystem() {
   };
   
   // Новая функция: обход препятствий для пикселей и кнопок
-  const avoidObstacles = (entity: any, target: any, entities: any[], speed = 1) => {
+  const avoidObstacles = (entity: Entity, target: Entity, entities: Entity[], speed = 1) => {
     // Вектор к цели
     const dx = target.x - entity.x;
     const dy = target.y - entity.y;
@@ -327,7 +452,7 @@ export default function PixelEcosystem() {
       e.type === ENTITY_TYPES.BASKET && 
       !e.hidden &&
       getDistance(entity, e) < dangerRadius
-    );
+    ) as BasketEntity[];
     
     if (dangerousBaskets.length > 0) {
       // Вычисляем вектор избегания (сумма векторов от всех опасных корзин)
@@ -372,7 +497,7 @@ export default function PixelEcosystem() {
   };
   
   // Новая функция: предотвращение столкновений между корзинами
-  const preventBasketCollisions = (basket: any, entities: any[]) => {
+  const preventBasketCollisions = (basket: BasketEntity, entities: Entity[]) => {
     // Уменьшаем кулдаун столкновения
     if (basket.collisionCooldown > 0) {
       basket.collisionCooldown--;
@@ -383,7 +508,7 @@ export default function PixelEcosystem() {
       e.type === ENTITY_TYPES.BASKET && 
       !e.hidden &&
       e.id !== basket.id
-    );
+    ) as BasketEntity[];
     
     otherBaskets.forEach(otherBasket => {
       const distance = getDistance(basket, otherBasket);
@@ -415,7 +540,7 @@ export default function PixelEcosystem() {
   };
   
   // Проверка безопасности зоны (нет корзин рядом)
-  const isAreaSafe = (x: number, y: number, entities: any[], radius = 100) => {
+  const isAreaSafe = (x: number, y: number, entities: Entity[], radius = 100) => {
     return !entities.some(entity => 
       entity.type === ENTITY_TYPES.BASKET && 
       !entity.hidden &&
@@ -424,16 +549,16 @@ export default function PixelEcosystem() {
   };
   
   // Обновление сущностей
-  const updateEntities = (entities: any[]) => {
+  const updateEntities = (entities: Entity[]) => {
     const newEntities = [...entities];
-    const toRemove = new Set();
-    const toAdd: any[] = [];
+    const toRemove = new Set<string>();
+    const toAdd: Entity[] = [];
     
     // Создание следов движения
-    const newTrails = [...trails];
+    const newTrails: Trail[] = [...trails];
     
     // Формирование охотничьих групп для корзин
-    const baskets = newEntities.filter(e => e.type === ENTITY_TYPES.BASKET && !e.hidden);
+    const baskets = newEntities.filter(e => e.type === ENTITY_TYPES.BASKET && !e.hidden) as BasketEntity[];
     baskets.forEach(basket => {
       basket.huntingGroup = [];
     });
@@ -449,7 +574,7 @@ export default function PixelEcosystem() {
       }
     }
     
-    newEntities.forEach((entity, index) => {
+    newEntities.forEach((entity) => {
       if (toRemove.has(entity.id) || entity.hidden) return;
       
       // Создание следов движения
@@ -458,9 +583,7 @@ export default function PixelEcosystem() {
           x: entity.x + entity.size/2,
           y: entity.y + entity.size/2,
           size: entity.size / 3,
-          color: entity.type === ENTITY_TYPES.PIXEL ? entity.color : 
-                 entity.type === ENTITY_TYPES.BUTTON ? '#4CAF50' :
-                 entity.type === ENTITY_TYPES.BASKET ? '#FF9800' : '#2196F3',
+          color: getEntityColor(entity),
           life: 20
         });
       }
@@ -468,155 +591,158 @@ export default function PixelEcosystem() {
       // Логика поведения для каждого типа
       switch (entity.type) {
         case ENTITY_TYPES.PIXEL:
+          const pixel = entity as PixelEntity;
           // Эволюция пикселей
-          if (entity.age > 500 && entity.energy > 80 && !entity.evolved) {
+          if (pixel.age > 500 && pixel.energy > 80 && !pixel.evolved) {
             if (Math.random() < 0.001) {
-              entity.evolved = true;
-              entity.size = 6;
-              entity.speed = 1.2;
-              entity.color = `hsl(${(parseInt(entity.color.split('(')[1].split(',')[0]) + 180) % 360}, 70%, 60%)`;
-              createParticles(entity.x + entity.size/2, entity.y + entity.size/2, entity.color, 15);
+              pixel.evolved = true;
+              pixel.size = 6;
+              pixel.speed = 1.2;
+              pixel.color = `hsl(${(parseInt(pixel.color.split('(')[1].split(',')[0]) + 180) % 360}, 70%, 60%)`;
+              createParticles(pixel.x + pixel.size/2, pixel.y + pixel.size/2, pixel.color, 15);
               playSound(600, 200);
             }
           }
           
           // Проверяем близость к корзинам
-          const nearestBasket = findNearestEntity(entity, newEntities, ENTITY_TYPES.BASKET);
-          const isInDanger = nearestBasket && getDistance(entity, nearestBasket) < 100;
+          const nearestBasket = findNearestEntity(pixel, newEntities, ENTITY_TYPES.BASKET) as BasketEntity | null;
+          const isInDanger = nearestBasket && getDistance(pixel, nearestBasket) < 100;
           
           if (isInDanger) {
             // Активируем панический режим
-            entity.panicMode = true;
+            pixel.panicMode = true;
             
             // Ищем ближайший контейнер для убежища
-            const nearestContainer = findNearestEntity(entity, newEntities, ENTITY_TYPES.CONTAINER);
+            const nearestContainer = findNearestEntity(pixel, newEntities, ENTITY_TYPES.CONTAINER) as ContainerEntity | null;
             if (nearestContainer) {
-              entity.targetContainer = nearestContainer;
-              const distanceToContainer = getDistance(entity, nearestContainer);
+              pixel.targetContainer = nearestContainer;
+              const distanceToContainer = getDistance(pixel, nearestContainer);
               
               // Если достаточно близко к контейнеру, прячемся в него
               if (distanceToContainer < nearestContainer.absorptionRadius) {
-                entity.hidden = true;
-                entity.containerId = nearestContainer.id;
-                nearestContainer.stored.push({...entity});
-                toRemove.add(entity.id);
-                createParticles(entity.x + entity.size/2, entity.y + entity.size/2, entity.color || '#ffffff', 5);
+                pixel.hidden = true;
+                pixel.containerId = nearestContainer.id;
+                nearestContainer.stored.push({...pixel});
+                toRemove.add(pixel.id);
+                createParticles(pixel.x + pixel.size/2, pixel.y + pixel.size/2, pixel.color, 5);
               } else {
                 // Используем функцию обхода препятствий для движения к контейнеру
-                avoidObstacles(entity, nearestContainer, newEntities, 1.8);
+                avoidObstacles(pixel, nearestContainer, newEntities, 1.8);
               }
             } else {
               // Нет контейнера, просто убегаем от корзины
-              moveAway(entity, nearestBasket, 2.2);
+              moveAway(pixel, nearestBasket, 2.2);
             }
           } else {
             // Выключаем панический режим
-            entity.panicMode = false;
-            entity.targetContainer = null;
+            pixel.panicMode = false;
+            pixel.targetContainer = null;
             
             // Обычное поведение - просто летаем по полю
-            entity.vx += (Math.random() - 0.5) * 0.5;
-            entity.vy += (Math.random() - 0.5) * 0.5;
+            pixel.vx += (Math.random() - 0.5) * 0.5;
+            pixel.vy += (Math.random() - 0.5) * 0.5;
           }
           break;
           
         case ENTITY_TYPES.BUTTON:
+          const button = entity as ButtonEntity;
           // Объединение кнопок одного типа
-          if (!entity.hidden && entity.powerLevel === 1) {
+          if (!button.hidden && button.powerLevel === 1) {
             const nearbyButtons = newEntities.filter(other => 
               other.type === ENTITY_TYPES.BUTTON && 
-              other.id !== entity.id && 
+              other.id !== button.id && 
               !other.hidden &&
-              other.buttonType === entity.buttonType &&
-              other.powerLevel === 1 &&
-              getDistance(entity, other) < 40
-            );
+              (other as ButtonEntity).buttonType === button.buttonType &&
+              (other as ButtonEntity).powerLevel === 1 &&
+              getDistance(button, other) < 40
+            ) as ButtonEntity[];
             
             if (nearbyButtons.length > 0 && Math.random() < 0.005) {
               // Объединяем кнопки
-              entity.size = 16;
-              entity.powerLevel = 2;
-              entity.cooldown = 0;
+              button.size = 16;
+              button.powerLevel = 2;
+              button.cooldown = 0;
               
               // Удаляем вторую кнопку
               toRemove.add(nearbyButtons[0].id);
               
               // Визуальный эффект объединения
-              entity.mergeEffect = 20;
-              createParticles(entity.x + entity.size/2, entity.y + entity.size/2, '#4CAF50', 10);
+              button.mergeEffect = 20;
+              createParticles(button.x + button.size/2, button.y + button.size/2, '#4CAF50', 10);
               playSound(500, 150);
             }
           }
           
           // Проверяем близость к корзинам
-          const buttonNearestBasket = findNearestEntity(entity, newEntities, ENTITY_TYPES.BASKET);
-          const buttonIsInDanger = buttonNearestBasket && getDistance(entity, buttonNearestBasket) < 100;
+          const buttonNearestBasket = findNearestEntity(button, newEntities, ENTITY_TYPES.BASKET) as BasketEntity | null;
+          const buttonIsInDanger = buttonNearestBasket && getDistance(button, buttonNearestBasket) < 100;
           
           if (buttonIsInDanger) {
             // Активируем панический режим
-            entity.panicMode = true;
+            button.panicMode = true;
             
             // Ищем ближайший контейнер для убежища
-            const buttonNearestContainer = findNearestEntity(entity, newEntities, ENTITY_TYPES.CONTAINER);
+            const buttonNearestContainer = findNearestEntity(button, newEntities, ENTITY_TYPES.CONTAINER) as ContainerEntity | null;
             if (buttonNearestContainer) {
-              entity.targetContainer = buttonNearestContainer;
-              const distanceToContainer = getDistance(entity, buttonNearestContainer);
+              button.targetContainer = buttonNearestContainer;
+              const distanceToContainer = getDistance(button, buttonNearestContainer);
               
               // Если достаточно близко к контейнеру, прячемся в него
               if (distanceToContainer < buttonNearestContainer.absorptionRadius) {
-                entity.hidden = true;
-                entity.containerId = buttonNearestContainer.id;
-                buttonNearestContainer.stored.push({...entity});
-                toRemove.add(entity.id);
-                createParticles(entity.x + entity.size/2, entity.y + entity.size/2, '#4CAF50', 5);
+                button.hidden = true;
+                button.containerId = buttonNearestContainer.id;
+                buttonNearestContainer.stored.push({...button});
+                toRemove.add(button.id);
+                createParticles(button.x + button.size/2, button.y + button.size/2, '#4CAF50', 5);
               } else {
                 // Используем функцию обхода препятствий для движения к контейнеру
-                avoidObstacles(entity, buttonNearestContainer, newEntities, 1.8);
+                avoidObstacles(button, buttonNearestContainer, newEntities, 1.8);
               }
             } else {
               // Нет контейнера, просто убегаем от корзины
-              moveAway(entity, buttonNearestBasket, 2.2);
+              moveAway(button, buttonNearestBasket, 2.2);
             }
           } else {
             // Выключаем панический режим
-            entity.panicMode = false;
-            entity.targetContainer = null;
+            button.panicMode = false;
+            button.targetContainer = null;
             
             // Обычное поведение - просто летаем по полю
-            entity.vx += (Math.random() - 0.5) * 0.5;
-            entity.vy += (Math.random() - 0.5) * 0.5;
+            button.vx += (Math.random() - 0.5) * 0.5;
+            button.vy += (Math.random() - 0.5) * 0.5;
           }
           break;
           
         case ENTITY_TYPES.BASKET:
+          const basket = entity as BasketEntity;
           // Проверяем наличие контейнеров поблизости
-          const nearestContainer = findNearestEntity(entity, newEntities, ENTITY_TYPES.CONTAINER);
+          const nearestContainer = findNearestEntity(basket, newEntities, ENTITY_TYPES.CONTAINER) as ContainerEntity | null;
           if (nearestContainer) {
-            const distanceToContainer = getDistance(entity, nearestContainer);
+            const distanceToContainer = getDistance(basket, nearestContainer);
             
             // Улучшенная логика избегания контейнеров
-            if (distanceToContainer < entity.avoidanceDistance) {
-              entity.avoidanceMode = true;
-              entity.targetContainer = nearestContainer;
-              entity.targetPrey = null; // Игнорируем добычу при избегании контейнера
-              moveAway(entity, nearestContainer, 2.5); // Увеличиваем скорость убегания
+            if (distanceToContainer < basket.avoidanceDistance) {
+              basket.avoidanceMode = true;
+              basket.targetContainer = nearestContainer;
+              basket.targetPrey = null; // Игнорируем добычу при избегании контейнера
+              moveAway(basket, nearestContainer, 2.5); // Увеличиваем скорость убегания
             } else {
-              entity.avoidanceMode = false;
-              entity.targetContainer = null;
+              basket.avoidanceMode = false;
+              basket.targetContainer = null;
             }
           }
           
           // Если не в режиме избегания, охотимся за добычей
-          if (!entity.avoidanceMode) {
+          if (!basket.avoidanceMode) {
             // Используем новую функцию поиска лучшей цели
-            const huntTarget = findBestTargetForBasket(entity, newEntities);
+            const huntTarget = findBestTargetForBasket(basket, newEntities);
             
             if (huntTarget) {
-              entity.targetPrey = huntTarget;
+              basket.targetPrey = huntTarget;
               
               // Проверяем, не движется ли цель к контейнеру (режим перехвата)
               if (huntTarget.panicMode && huntTarget.targetContainer) {
-                entity.interceptionMode = true;
+                basket.interceptionMode = true;
                 
                 // Рассчитываем точку перехвата между целью и контейнером
                 const targetToContainerX = huntTarget.targetContainer.x - huntTarget.x;
@@ -628,23 +754,23 @@ export default function PixelEcosystem() {
                 const interceptionY = huntTarget.y + (targetToContainerY / distanceToContainer) * (distanceToContainer * 0.3);
                 
                 // Двигаемся к точке перехвата
-                moveTowards(entity, { x: interceptionX, y: interceptionY }, entity.speed * 1.2);
+                moveTowards(basket, { x: interceptionX, y: interceptionY } as Entity, basket.speed * 1.2);
               } else {
-                entity.interceptionMode = false;
+                basket.interceptionMode = false;
                 
                 // Координация с другими корзинами
-                if (entity.huntingGroup.length > 0) {
+                if (basket.huntingGroup.length > 0) {
                   // Стратегия окружения
-                  const angleToPrey = Math.atan2(huntTarget.y - entity.y, huntTarget.x - entity.x);
-                  const distanceToPrey = getDistance(entity, huntTarget);
+                  const angleToPrey = Math.atan2(huntTarget.y - basket.y, huntTarget.x - basket.x);
+                  const distanceToPrey = getDistance(basket, huntTarget);
                   
                   // Определяем позицию в окружении
                   let desiredAngle = angleToPrey;
-                  const groupSize = entity.huntingGroup.length + 1;
+                  const groupSize = basket.huntingGroup.length + 1;
                   const angleStep = (Math.PI * 2) / groupSize;
                   
                   // Находим свою позицию в группе
-                  const groupIndex = entity.huntingGroup.findIndex(b => b.id < entity.id);
+                  const groupIndex = basket.huntingGroup.findIndex(b => b.id < basket.id);
                   desiredAngle += angleStep * (groupIndex + 1);
                   
                   // Желаемое расстояние до цели
@@ -655,86 +781,87 @@ export default function PixelEcosystem() {
                   const desiredY = huntTarget.y + Math.sin(desiredAngle) * desiredDistance;
                   
                   // Двигаемся к желаемой позиции
-                  const dx = desiredX - entity.x;
-                  const dy = desiredY - entity.y;
+                  const dx = desiredX - basket.x;
+                  const dy = desiredY - basket.y;
                   const distance = Math.sqrt(dx * dx + dy * dy);
                   
                   if (distance > 0) {
-                    entity.vx = (dx / distance) * entity.speed;
-                    entity.vy = (dy / distance) * entity.speed;
+                    basket.vx = (dx / distance) * basket.speed;
+                    basket.vy = (dy / distance) * basket.speed;
                   }
                 } else {
                   // Если группы нет, просто движемся к цели
-                  moveTowards(entity, huntTarget, entity.speed);
+                  moveTowards(basket, huntTarget, basket.speed);
                 }
               }
             } else {
-              entity.targetPrey = null;
-              entity.interceptionMode = false;
+              basket.targetPrey = null;
+              basket.interceptionMode = false;
             }
           }
           break;
           
         case ENTITY_TYPES.CONTAINER:
+          const container = entity as ContainerEntity;
           // Восстановление щита
-          if (entity.shieldEnergy < 100) {
-            entity.shieldEnergy += 0.2;
+          if (container.shieldEnergy < 100) {
+            container.shieldEnergy += 0.2;
           }
           
           // Активация режима убежища при опасности
           const nearbyBaskets = newEntities.filter(other => 
             other.type === ENTITY_TYPES.BASKET && 
             !other.hidden &&
-            getDistance(entity, other) < entity.safeRadius * 1.5
-          );
+            getDistance(container, other) < container.safeRadius * 1.5
+          ) as BasketEntity[];
           
-          if (nearbyBaskets.length > 0 && !entity.shelterMode && entity.shieldEnergy > 50) {
-            entity.shelterMode = true;
-            entity.shelterTimer = 100; // Длительность режима убежища
+          if (nearbyBaskets.length > 0 && !container.shelterMode && container.shieldEnergy > 50) {
+            container.shelterMode = true;
+            container.shelterTimer = 100; // Длительность режима убежища
             playSound(700, 300);
           }
           
           // Режим убежища
-          if (entity.shelterMode) {
-            entity.shelterTimer--;
+          if (container.shelterMode) {
+            container.shelterTimer--;
             
-            if (entity.shelterTimer <= 0) {
-              entity.shelterMode = false;
+            if (container.shelterTimer <= 0) {
+              container.shelterMode = false;
             }
             
             // Расход энергии щита
-            entity.shieldEnergy -= 0.5;
+            container.shieldEnergy -= 0.5;
           }
           
           // Замедление корзин в радиусе действия
           newEntities.forEach(other => {
             if (other.type === ENTITY_TYPES.BASKET && !other.hidden) {
-              const distance = getDistance(entity, other);
-              if (distance < entity.safeRadius) {
+              const distance = getDistance(container, other);
+              if (distance < container.safeRadius) {
                 // Замедление корзины
                 other.vx *= 0.9;
                 other.vy *= 0.9;
                 
                 // Расход энергии щита
-                entity.shieldEnergy -= 0.2;
+                container.shieldEnergy -= 0.2;
               }
             }
           });
           
           // Выпуск сущностей из контейнера (без КД, но с шансом)
-          if (entity.stored && entity.stored.length > 0) {
+          if (container.stored && container.stored.length > 0) {
             // Выпускаем сущности с определенным шансом в каждом кадре
-            if (Math.random() < entity.releaseRate) {
-              const releasedEntity = entity.stored.pop();
+            if (Math.random() < container.releaseRate) {
+              const releasedEntity = container.stored.pop();
               if (releasedEntity) {
                 releasedEntity.hidden = false;
                 releasedEntity.containerId = null;
                 
                 // Размещаем элемент рядом с контейнером
                 const angle = Math.random() * Math.PI * 2;
-                const distance = entity.size + 25;
-                releasedEntity.x = entity.x + Math.cos(angle) * distance;
-                releasedEntity.y = entity.y + Math.sin(angle) * distance;
+                const distance = container.size + 25;
+                releasedEntity.x = container.x + Math.cos(angle) * distance;
+                releasedEntity.y = container.y + Math.sin(angle) * distance;
                 
                 // Убедимся, что элемент не выходит за границы канваса
                 releasedEntity.x = Math.max(15, Math.min(785, releasedEntity.x));
@@ -745,7 +872,7 @@ export default function PixelEcosystem() {
                 releasedEntity.vy = Math.sin(angle) * 1.0;
                 
                 toAdd.push(releasedEntity);
-                createParticles(releasedEntity.x, releasedEntity.y, releasedEntity.color || '#ffffff', 8);
+                createParticles(releasedEntity.x, releasedEntity.y, getEntityColor(releasedEntity), 8);
                 playSound(350, 100);
               }
             }
@@ -753,8 +880,8 @@ export default function PixelEcosystem() {
           
           // Медленное случайное движение
           if (Math.random() < 0.005) {
-            entity.vx = (Math.random() - 0.5) * 0.5;
-            entity.vy = (Math.random() - 0.5) * 0.5;
+            container.vx = (Math.random() - 0.5) * 0.5;
+            container.vy = (Math.random() - 0.5) * 0.5;
           }
           break;
       }
@@ -780,7 +907,7 @@ export default function PixelEcosystem() {
       
       // Предотвращение столкновений для корзин
       if (entity.type === ENTITY_TYPES.BASKET && !entity.hidden) {
-        preventBasketCollisions(entity, newEntities);
+        preventBasketCollisions(entity as BasketEntity, newEntities);
       }
       
       // Обновляем возраст
@@ -788,23 +915,24 @@ export default function PixelEcosystem() {
       
       // Логика для корзин - поглощение (только видимых элементов)
       if (entity.type === ENTITY_TYPES.BASKET) {
+        const basket = entity as BasketEntity;
         newEntities.forEach(other => {
-          if (other.id !== entity.id && 
+          if (other.id !== basket.id && 
               (other.type === ENTITY_TYPES.PIXEL || other.type === ENTITY_TYPES.BUTTON) &&
               !other.hidden &&
-              getDistance(entity, other) < entity.size + other.size) {
+              getDistance(basket, other) < basket.size + other.size) {
             toRemove.add(other.id);
-            entity.collected++;
-            entity.experience += 10;
+            basket.collected++;
+            basket.experience += 10;
             
             // Повышение уровня
-            if (entity.experience >= entity.level * 50) {
-              entity.level++;
-              entity.experience = 0;
-              entity.size += 2;
-              entity.speed += 0.05;
-              entity.capacity += 2;
-              entity.levelUpEffect = 30;
+            if (basket.experience >= basket.level * 50) {
+              basket.level++;
+              basket.experience = 0;
+              basket.size += 2;
+              basket.speed += 0.05;
+              basket.capacity += 2;
+              basket.levelUpEffect = 30;
               playSound(800, 300);
             }
             
@@ -812,7 +940,7 @@ export default function PixelEcosystem() {
             createParticles(
               other.x + other.size/2, 
               other.y + other.size/2, 
-              other.color || '#ffffff', 
+              getEntityColor(other), 
               10
             );
             playSound(200, 100);
@@ -820,7 +948,7 @@ export default function PixelEcosystem() {
         });
       }
       
-      if (entity.cooldown > 0) {
+      if ('cooldown' in entity && entity.cooldown > 0) {
         entity.cooldown--;
       }
       
@@ -904,132 +1032,133 @@ export default function PixelEcosystem() {
         
         switch (entity.type) {
           case ENTITY_TYPES.PIXEL:
-            if (entity.evolved) {
+            const pixel = entity as PixelEntity;
+            if (pixel.evolved) {
               ctx.save();
-              ctx.shadowColor = entity.color;
+              ctx.shadowColor = pixel.color;
               ctx.shadowBlur = 10;
-              ctx.fillStyle = entity.color;
-              ctx.fillRect(-entity.size / 2, -entity.size / 2, entity.size, entity.size);
+              ctx.fillStyle = pixel.color;
+              ctx.fillRect(-pixel.size / 2, -pixel.size / 2, pixel.size, pixel.size);
               ctx.restore();
             } else {
-              ctx.fillStyle = entity.color;
-              ctx.fillRect(-entity.size / 2, -entity.size / 2, entity.size, entity.size);
+              ctx.fillStyle = pixel.color;
+              ctx.fillRect(-pixel.size / 2, -pixel.size / 2, pixel.size, pixel.size);
             }
             
             // Индикатор паники
-            if (entity.panicMode) {
+            if (pixel.panicMode) {
               ctx.save();
               ctx.strokeStyle = '#FF0000';
               ctx.lineWidth = 1;
               ctx.beginPath();
-              ctx.arc(0, 0, entity.size, 0, Math.PI * 2);
+              ctx.arc(0, 0, pixel.size, 0, Math.PI * 2);
               ctx.stroke();
               ctx.restore();
             }
             break;
             
           case ENTITY_TYPES.BUTTON:
+            const button = entity as ButtonEntity;
             ctx.strokeStyle = '#4CAF50';
             ctx.lineWidth = 2;
-            ctx.strokeRect(-entity.size / 2, -entity.size / 2, entity.size, entity.size);
+            ctx.strokeRect(-button.size / 2, -button.size / 2, button.size, button.size);
             
             ctx.fillStyle = '#4CAF50';
             ctx.font = '8px Arial';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            const buttonText = entity.buttonType === BUTTON_TYPES.COPY ? 'C' : 
-                            entity.buttonType === BUTTON_TYPES.MOVE ? 'M' :
-                            entity.buttonType === BUTTON_TYPES.CREATE ? '+' : 'D';
+            const buttonText = button.buttonType === BUTTON_TYPES.COPY ? 'C' : 
+                            button.buttonType === BUTTON_TYPES.MOVE ? 'M' :
+                            button.buttonType === BUTTON_TYPES.CREATE ? '+' : 'D';
             ctx.fillText(buttonText, 0, 0);
             
             // Эффект объединения
-            if (entity.mergeEffect > 0) {
-              ctx.globalAlpha = entity.mergeEffect / 20;
+            if (button.mergeEffect > 0) {
+              ctx.globalAlpha = button.mergeEffect / 20;
               ctx.fillStyle = '#FFD700';
-              ctx.fillRect(-entity.size / 2, -entity.size / 2, entity.size, entity.size);
-              entity.mergeEffect--;
+              ctx.fillRect(-button.size / 2, -button.size / 2, button.size, button.size);
+              button.mergeEffect--;
             }
             
             // Эффект копирования
-            if (entity.copyEffect > 0) {
+            if (button.copyEffect > 0) {
               ctx.save();
-              ctx.globalAlpha = entity.copyEffect / 15;
+              ctx.globalAlpha = button.copyEffect / 15;
               ctx.strokeStyle = '#00FFFF';
               ctx.lineWidth = 2;
               
               // Рисуем круги, расходящиеся от центра кнопки
               for (let i = 0; i < 3; i++) {
-                const radius = (entity.copyEffect / 15) * (i + 1) * 15;
+                const radius = (button.copyEffect / 15) * (i + 1) * 15;
                 ctx.beginPath();
                 ctx.arc(0, 0, radius, 0, Math.PI * 2);
                 ctx.stroke();
               }
               
               ctx.restore();
-              entity.copyEffect--;
+              button.copyEffect--;
             }
             
             // Индикатор уровня силы
-            if (entity.powerLevel > 1) {
+            if (button.powerLevel > 1) {
               ctx.save();
               ctx.strokeStyle = '#FFD700';
               ctx.lineWidth = 2;
-              ctx.strokeRect(-entity.size / 2, -entity.size / 2, entity.size, entity.size);
+              ctx.strokeRect(-button.size / 2, -button.size / 2, button.size, button.size);
               ctx.restore();
             }
             
             // Индикатор паники
-            if (entity.panicMode) {
+            if (button.panicMode) {
               ctx.save();
               ctx.strokeStyle = '#FF0000';
               ctx.lineWidth = 1;
               ctx.beginPath();
-              ctx.arc(0, 0, entity.size, 0, Math.PI * 2);
+              ctx.arc(0, 0, button.size, 0, Math.PI * 2);
               ctx.stroke();
               ctx.restore();
             }
             break;
             
           case ENTITY_TYPES.BASKET:
+            const basket = entity as BasketEntity;
             ctx.strokeStyle = '#FF9800';
             ctx.lineWidth = 3;
             ctx.beginPath();
-            ctx.arc(0, 0, entity.size / 2, 0, Math.PI * 2);
+            ctx.arc(0, 0, basket.size / 2, 0, Math.PI * 2);
             ctx.stroke();
-            
-            // УДАЛЕНО: Шкала прогресса collected/capacity
             
             // Отображение уровня
             ctx.fillStyle = '#FF9800';
             ctx.font = '10px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText(`Lv.${entity.level}`, 0, -entity.size/2 - 5);
+            ctx.fillText(`Lv.${basket.level}`, 0, -basket.size/2 - 5);
             
             // Эффект повышения уровня
-            if (entity.levelUpEffect > 0) {
+            if (basket.levelUpEffect > 0) {
               ctx.save();
-              ctx.globalAlpha = entity.levelUpEffect / 30;
+              ctx.globalAlpha = basket.levelUpEffect / 30;
               ctx.strokeStyle = '#FFD700';
               ctx.lineWidth = 2;
               ctx.beginPath();
-              ctx.arc(0, 0, entity.size/2 + entity.levelUpEffect/2, 0, Math.PI * 2);
+              ctx.arc(0, 0, basket.size/2 + basket.levelUpEffect/2, 0, Math.PI * 2);
               ctx.stroke();
               ctx.restore();
-              entity.levelUpEffect--;
+              basket.levelUpEffect--;
             }
             
             // Улучшенный индикатор избегания контейнеров
-            if (entity.avoidanceMode) {
+            if (basket.avoidanceMode) {
               ctx.save();
               ctx.strokeStyle = '#FF0000';
               ctx.lineWidth = 3;
               ctx.setLineDash([5, 3]);
               ctx.beginPath();
-              ctx.arc(0, 0, entity.size + 5, 0, Math.PI * 2);
+              ctx.arc(0, 0, basket.size + 5, 0, Math.PI * 2);
               ctx.stroke();
               
               // Добавим пульсирующий эффект
-              const pulseSize = entity.size + 5 + Math.sin(Date.now() / 200) * 5;
+              const pulseSize = basket.size + 5 + Math.sin(Date.now() / 200) * 5;
               ctx.beginPath();
               ctx.arc(0, 0, pulseSize, 0, Math.PI * 2);
               ctx.globalAlpha = 0.5;
@@ -1038,25 +1167,26 @@ export default function PixelEcosystem() {
             }
             
             // Индикатор режима перехвата
-            if (entity.interceptionMode) {
+            if (basket.interceptionMode) {
               ctx.save();
               ctx.strokeStyle = '#FFFF00';
               ctx.lineWidth = 2;
               ctx.beginPath();
-              ctx.arc(0, 0, entity.size, 0, Math.PI * 2);
+              ctx.arc(0, 0, basket.size, 0, Math.PI * 2);
               ctx.stroke();
               ctx.restore();
             }
             break;
             
           case ENTITY_TYPES.CONTAINER:
+            const container = entity as ContainerEntity;
             // Защитное поле
             ctx.save();
-            ctx.globalAlpha = entity.shieldEnergy / 100 * 0.3;
+            ctx.globalAlpha = container.shieldEnergy / 100 * 0.3;
             ctx.strokeStyle = '#2196F3';
             ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.arc(0, 0, entity.safeRadius, 0, Math.PI * 2);
+            ctx.arc(0, 0, container.safeRadius, 0, Math.PI * 2);
             ctx.stroke();
             ctx.restore();
             
@@ -1066,42 +1196,42 @@ export default function PixelEcosystem() {
             ctx.strokeStyle = '#00FF00';
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.arc(0, 0, entity.absorptionRadius, 0, Math.PI * 2);
+            ctx.arc(0, 0, container.absorptionRadius, 0, Math.PI * 2);
             ctx.stroke();
             ctx.restore();
             
             // Индикатор энергии щита
             ctx.fillStyle = 'rgba(33, 150, 243, 0.7)';
-            ctx.fillRect(-entity.size/2, -entity.size/2 - 8, entity.size * (entity.shieldEnergy / 100), 3);
+            ctx.fillRect(-container.size/2, -container.size/2 - 8, container.size * (container.shieldEnergy / 100), 3);
             
             ctx.strokeStyle = '#2196F3';
             ctx.lineWidth = 2;
-            ctx.strokeRect(-entity.size / 2, -entity.size / 2, entity.size, entity.size);
+            ctx.strokeRect(-container.size / 2, -container.size / 2, container.size, container.size);
             
             ctx.fillStyle = 'rgba(33, 150, 243, 0.2)';
-            ctx.fillRect(-entity.size / 2 + 2, -entity.size / 2 + 2, entity.size - 4, entity.size - 4);
+            ctx.fillRect(-container.size / 2 + 2, -container.size / 2 + 2, container.size - 4, container.size - 4);
             
             // Показываем количество скрытых элементов
-            if (entity.stored && entity.stored.length > 0) {
+            if (container.stored && container.stored.length > 0) {
               ctx.fillStyle = '#2196F3';
               ctx.font = '10px Arial';
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
-              ctx.fillText(entity.stored.length.toString(), 0, 0);
+              ctx.fillText(container.stored.length.toString(), 0, 0);
             }
             
             // Режим убежища
-            if (entity.shelterMode) {
+            if (container.shelterMode) {
               ctx.save();
               ctx.strokeStyle = '#00FF00';
               ctx.lineWidth = 3;
-              ctx.strokeRect(-entity.size / 2, -entity.size / 2, entity.size, entity.size);
+              ctx.strokeRect(-container.size / 2, -container.size / 2, container.size, container.size);
               
               // Эффект пульсации
               const pulse = Math.sin(Date.now() / 200) * 0.2 + 0.8;
               ctx.globalAlpha = pulse * 0.3;
               ctx.fillStyle = '#00FF00';
-              ctx.fillRect(-entity.size / 2, -entity.size / 2, entity.size, entity.size);
+              ctx.fillRect(-container.size / 2, -container.size / 2, container.size, container.size);
               ctx.restore();
             }
             
@@ -1109,7 +1239,7 @@ export default function PixelEcosystem() {
             ctx.strokeStyle = 'rgba(33, 150, 243, 0.1)';
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.arc(0, 0, entity.safeRadius, 0, Math.PI * 2);
+            ctx.arc(0, 0, container.safeRadius, 0, Math.PI * 2);
             ctx.stroke();
             break;
         }
@@ -1199,7 +1329,7 @@ export default function PixelEcosystem() {
         // Находим ближайшую сущность и удаляем ее
         setEntities(prev => {
           let minDistance = Infinity;
-          let entityToRemove = null;
+          let entityToRemove: Entity | null = null;
           
           prev.forEach(entity => {
             const distance = Math.sqrt((entity.x - x) ** 2 + (entity.y - y) ** 2);
@@ -1210,16 +1340,16 @@ export default function PixelEcosystem() {
           });
           
           if (entityToRemove) {
+            // Явно приводим к типу Entity, чтобы избежать ошибки типа never
+            const removedEntity = entityToRemove as Entity;
             createParticles(
-              entityToRemove.x + entityToRemove.size/2, 
-              entityToRemove.y + entityToRemove.size/2, 
-              entityToRemove.type === ENTITY_TYPES.PIXEL ? entityToRemove.color : 
-              entityToRemove.type === ENTITY_TYPES.BUTTON ? '#4CAF50' :
-              entityToRemove.type === ENTITY_TYPES.BASKET ? '#FF9800' : '#2196F3', 
+              removedEntity.x + removedEntity.size/2, 
+              removedEntity.y + removedEntity.size/2, 
+              getEntityColor(removedEntity), 
               15
             );
             playSound(200, 100);
-            return prev.filter(e => e.id !== entityToRemove.id);
+            return prev.filter(e => e.id !== removedEntity.id);
           }
           return prev;
         });

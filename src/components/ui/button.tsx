@@ -6,6 +6,8 @@ interface ButtonProps {
   className?: string;
   variant?: 'default' | 'outline' | 'ghost';
   asChild?: boolean;
+  disabled?: boolean;
+  style?: React.CSSProperties; // Добавлено свойство style
   onClick?: () => void;
 }
 
@@ -14,6 +16,8 @@ const Button = ({
   className = '', 
   variant = 'default', 
   asChild = false,
+  disabled = false,
+  style, // Добавлено свойство style
   onClick,
   ...props 
 }: ButtonProps) => {
@@ -25,18 +29,27 @@ const Button = ({
     ghost: 'bg-transparent hover:bg-gray-100'
   };
   
-  const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${className}`;
+  // Добавляем класс для отключенной кнопки
+  const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : '';
+  
+  const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${disabledClasses} ${className}`;
   
   if (asChild) {
     return (
-      <div className={combinedClasses} {...props}>
+      <div className={combinedClasses} style={style} {...props}>
         {children}
       </div>
     );
   }
   
   return (
-    <button className={combinedClasses} onClick={onClick} {...props}>
+    <button 
+      className={combinedClasses} 
+      style={style}
+      onClick={disabled ? undefined : onClick} 
+      disabled={disabled}
+      {...props}
+    >
       {children}
     </button>
   );

@@ -1,6 +1,5 @@
 // src/data/projectsData.ts
 import { Project } from '@/types/project';
-
 export const projectsData: Project[] = [
   {
     id: 'skyt',
@@ -72,7 +71,7 @@ export const projectsData: Project[] = [
       { src: '/img/pixel-eco-2.png', alt: 'После оптимизации (Vanilla JS)' }
     ],
     demoUrl: '/index.html#pixel-ecosystem-game',
-    thumbnail: '/Pic-world.png',
+    thumbnail: '/img/pixel.png',
     badge: 'BEST'
   },
   {
@@ -95,7 +94,8 @@ export const projectsData: Project[] = [
     screenshots: [],
     demoUrl: '/static-site-gen/index.html',
     githubUrl: 'https://github.com/G0SL0T0/static-site-gen-js',
-    logoType: 'li'
+    logoType: 'li',
+    thumbnail: '/img/casein.png'
   },
   {
     id: 'remote-installer',
@@ -120,7 +120,7 @@ export const projectsData: Project[] = [
       { src: '/img/Case_screenshot_2.png', alt: 'Real-time log' }
     ],
     demoUrl: '/case/remote-admin.html',
-    thumbnail: '/Case.png'
+    thumbnail: '/img/case.png'
   },
   {
     id: 'python-scripts',
@@ -151,7 +151,7 @@ export const projectsData: Project[] = [
       { text: 'Дизайн - в разработке' },
       { text: 'Ключевая механика - в разработке' },
       { text: 'Физика - в разработке' },
-      { text: 'Работает на всех устройсвах - vanila JS, без привязки к типу устройств' }
+      { text: 'Работает на всех устройствасх - vanila JS, без привязки к типу устройств' }
     ],
     technologies: [
       { name: 'Canvas 2D' },
@@ -161,12 +161,13 @@ export const projectsData: Project[] = [
     ],
     screenshots: [],
     comingSoon: true,
-    logoType: 'pixel'
+    thumbnail: '/img/case1_python.png',
+    logoType: 'li'
   },
   {
     id: 'future-projects',
     title: 'Дальше куда?',
-    description: 'Здесь появятся новые кейсы после рефакторинга: React → Vanilla JS, Vue → Vanilla JS, Svelte → Vanilla JS и другие миграции. Следите за обновлениями',
+    description: 'Здесь появятся новые кейсы после рефакторинга: React → Vanilla JS и другие миграции. Следите за обновлениями',
     features: [
       { text: 'Zero-dependency миграции' },
       { text: 'Performance-сравнения' },
@@ -176,6 +177,8 @@ export const projectsData: Project[] = [
     technologies: [],
     screenshots: [],
     comingSoon: true,
+    thumbnail: '/img/lerr.png',
     logoType: 'uc'
+    
   }
 ];

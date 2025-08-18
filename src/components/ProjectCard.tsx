@@ -1,8 +1,8 @@
+// src/components/ProjectCard.tsx
 'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import Button from '@/components/ui/button'; // Изменено на импорт по умолчанию
 
 interface ProjectCardProps {
   title: string;
