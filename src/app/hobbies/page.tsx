@@ -1,0 +1,23 @@
+// src/app/hobbies/page.tsx
+import HobbiesPageSection from '@/components/hobbies/HobbiesPageSection';
+import '@/styles/hobbies.css';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import NewsTab from '@/components/NewsTab';
+import StubbornButton from '@/components/StubbornButton';
+import ScrollToTop from '@/components/ScrollToTop';
+
+export default function HobbiesPage() {
+  return (
+    <div>
+      <Header />
+      <main>
+        <HobbiesPageSection />
+      </main>
+      <Footer />
+      <NewsTab />
+      <StubbornButton />
+      <ScrollToTop />
+    </div>
+  );
+}
