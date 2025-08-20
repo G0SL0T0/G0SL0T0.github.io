@@ -8,7 +8,7 @@ export const hobbiesData: Hobby[] = [
     highlight: 'The Witcher 3: Wild Hunt',
     stats: '6000+ часов',
     image: '/img/game.png',
-    link: '/hobby-games',
+    link: '/hobbies/games',
     description: 'Глубокие RPG, стратегии и инди-игры',
     icon: 'fas fa-gamepad',
     color: '#FF6B6B'
