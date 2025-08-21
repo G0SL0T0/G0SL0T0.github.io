@@ -5,8 +5,8 @@ export interface Hobby {
   description: string;
   image: string;
   icon: string;
-  stats?: {
-    label: string;
-    value: string;
-  }[];
+  highlight?: string;
+  stats?: string;
+  link: string;
+  color?: string;
 }
