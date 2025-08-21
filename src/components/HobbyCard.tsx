@@ -41,7 +41,7 @@ const HobbyCard = ({ hobby }: HobbyCardProps) => {
           </div>
         </div>
         
-        <p className="hobby-highlight">{hobby.highlight}</p>
+        {/*<p className="hobby-highlight">{hobby.highlight}</p>*/}
         
         <div className="hobby-stats">
           <div className="hobby-stat">

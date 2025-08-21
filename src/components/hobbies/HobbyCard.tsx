@@ -99,9 +99,9 @@ const HobbyCard = ({ hobby }: HobbyCardProps) => {
             <div className="info-icon">
               <i className="fas fa-star"></i>
             </div>
-            <div className="info-text">
+            {/*<div className="info-text">
               {hobby.highlight}
-            </div>
+            </div>*/}
           </div>
           <div className="hobby-info-item">
             <div className="info-icon">
