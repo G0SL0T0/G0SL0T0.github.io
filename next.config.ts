@@ -3,9 +3,21 @@
 const nextConfig = {
   output: 'export',
   trailingSlash: true,
+  
   images: {
     unoptimized: true
+  },
+  
+  compress: true,
+  poweredByHeader: false,
+  generateEtags: false,
+  httpAgentOptions: {
+    keepAlive: true,
+  },
+  experimental: {
+    optimizeCss: false,
+    optimizePackageImports: ['react-window']
   }
-}
+};
 
-export default nextConfig
+export default nextConfig;
