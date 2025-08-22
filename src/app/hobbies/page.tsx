@@ -1,23 +1,19 @@
 // src/app/hobbies/page.tsx
-import HobbiesPageSection from '@/components/hobbies/HobbiesPageSection';
-import '@/styles/hobbies.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import NewsTab from '@/components/NewsTab';
-import StubbornButton from '@/components/StubbornButton';
-import ScrollToTop from '@/components/ScrollToTop';
+import DynamicHobbiesSection from '@/components/hobbies/DynamicHobbiesSection';
+import DynamicHobbiesComponents from '@/components/hobbies/DynamicHobbiesComponents';
+import '@/styles/hobbies.css';
 
 export default function HobbiesPage() {
   return (
-    <div>
+    <div className="hobbies-page">
       <Header />
       <main>
-        <HobbiesPageSection />
+        <DynamicHobbiesSection />
       </main>
+      <DynamicHobbiesComponents />
       <Footer />
-      <NewsTab />
-      <StubbornButton />
-      <ScrollToTop />
     </div>
   );
 }

@@ -2,7 +2,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import '@/styles/news-tab.css';
-import ScrollToTop from './ScrollToTop';
+import { useGradientAnimation } from '@/hooks/useGradientAnimation';
 
 // Тип для новости
 interface NewsItem {
@@ -88,6 +88,7 @@ export default function NewsTab({ showModal, setShowModal }: NewsTabProps) {
   const [internalModalOpen, setInternalModalOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const [visibleNews, setVisibleNews] = useState<NewsItem[]>([]);
+  const { buttonRef } = useGradientAnimation(); // Используем наш хук
   
   // Определяем количество новостей для начального отображения
   const initialDisplayCount = 3;
@@ -164,7 +165,6 @@ export default function NewsTab({ showModal, setShowModal }: NewsTabProps) {
     }
   };
   
-  // ИСПРАВЛЕНО: Поменяли порядок параметров - сначала обязательный, потом необязательный
   const getImportanceBadge = (index: number, importance?: string) => {
     if (index === 0) {
       return <span className="news-badge-custom latest">Последнее</span>;
@@ -183,6 +183,7 @@ export default function NewsTab({ showModal, setShowModal }: NewsTabProps) {
   return (
     <>
       <button 
+        ref={buttonRef} // Привязываем реф к кнопке
         className="news-tab-custom"
         onClick={openModal} 
         aria-label="Последние обновления"
@@ -234,7 +235,6 @@ export default function NewsTab({ showModal, setShowModal }: NewsTabProps) {
                   <div className="news-meta-custom">
                     <time>{formatDate(item.date)}</time>
                     <span className="news-version-custom">{item.version}</span>
-                    {/* ИСПРАВЛЕНО: Поменяли порядок аргументов при вызове функции */}
                     {getImportanceBadge(index, item.importance)}
                   </div>
                   

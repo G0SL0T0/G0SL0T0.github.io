@@ -1,8 +1,8 @@
 // src/components/NewsSection.tsx
 'use client';
-
 import { useState } from 'react';
-import '@/app/globals.css';
+import '@/styles/news-tab.css';
+import { useGradientAnimation } from '@/hooks/useGradientAnimation';
 
 const newsData = [
   {
@@ -49,33 +49,63 @@ const newsData = [
 
 export default function NewsSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const { buttonRef } = useGradientAnimation(); // Используем наш хук
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
+  
   const formatDate = (dateStr: string) => {
     const d = new Date(dateStr);
     return d.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: '2-digit' });
   };
-
+  
   return (
     <>
-      <button className="news-tab" onClick={openModal} aria-label="Последние обновления">
-        <span>Новости</span>
-        <small>v3.4</small>
+      <button 
+        ref={buttonRef} // Привязываем реф к кнопке
+        className="news-tab-custom"
+        onClick={openModal} 
+        aria-label="Последние обновления"
+      >
+        <div className="news-tab-icon-custom">
+          <i className="fas fa-newspaper"></i>
+        </div>
+        <div className="news-tab-content-custom">
+          <span className="news-tab-text-custom">Новости</span>
+          <span className="news-tab-version-custom">{newsData[0].version}</span>
+        </div>
       </button>
-
+      
       {isModalOpen && (
-        <div className="news-modal show" role="dialog" aria-modal="true" aria-labelledby="newsTitle">
-          <div className="news-modal__glass">
-            <button className="news-modal__close" onClick={closeModal} aria-label="Закрыть">&times;</button>
-            <h2 id="newsTitle">Все обновления сайта</h2>
-            <ul className="news-timeline">
+        <div className="news-modal-custom show" role="dialog" aria-modal="true" aria-labelledby="newsTitle">
+          <div className="news-modal__glass-custom">
+            <button className="news-modal__close-custom" onClick={closeModal} aria-label="Закрыть">&times;</button>
+            
+            <div className="news-header-custom">
+              <h2 id="newsTitle">Все обновления сайта</h2>
+              <div className="news-stats-custom">
+                <span className="news-count-custom">
+                  <i className="fas fa-newspaper"></i> {newsData.length} обновлений
+                </span>
+                <span className="news-date-range-custom">
+                  <i className="fas fa-calendar-alt"></i> {formatDate(newsData[newsData.length - 1].date)} - {formatDate(newsData[0].date)}
+                </span>
+              </div>
+            </div>
+            
+            <ul className="news-timeline-custom">
               {newsData.map((item, index) => (
-                <li key={index}>
-                  <time>{formatDate(item.date)}</time>
-                  <span className="news-version">{item.version}</span>
-                  <p>{item.text}</p>
+                <li key={index} className={`news-item-custom ${index === 0 ? 'latest-news' : ''}`}>
+                  <div className="news-meta-custom">
+                    <time>{formatDate(item.date)}</time>
+                    <span className="news-version-custom">{item.version}</span>
+                    {index === 0 && <span className="news-badge-custom latest">Последнее</span>}
+                  </div>
+                  <div className="news-content-custom">
+                    <div className="news-category-custom" style={{ backgroundColor: '#9E9E9E' }}>
+                      <i className="fas fa-info-circle"></i>
+                    </div>
+                    <p>{item.text}</p>
+                  </div>
                 </li>
               ))}
             </ul>

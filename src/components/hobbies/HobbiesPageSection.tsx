@@ -1,10 +1,34 @@
 // src/components/hobbies/HobbiesPageSection.tsx
 'use client';
-
 import { hobbiesData } from '@/data/hobbiesData';
 import HobbyCard from './HobbyCard';
+import { useState, useEffect, useRef } from 'react';
 
 const HobbiesPageSection = () => {
+  const [visibleItems, setVisibleItems] = useState(6);
+  const observerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisibleItems((prev) => Math.min(prev + 3, hobbiesData.length));
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, []);
+
   return (
     <section className="hobbies-section">
       <div className="container">
@@ -15,11 +39,18 @@ const HobbiesPageSection = () => {
           но и постоянно подкидывают идей, которые потом превращаются в фичи, оптимизации
           или просто вдохновляют на новые проекты.
         </p>
+        
         <div className="hobbies-grid">
-          {hobbiesData.map((hobby) => (
+          {hobbiesData.slice(0, visibleItems).map((hobby) => (
             <HobbyCard key={hobby.id} hobby={hobby} />
           ))}
         </div>
+        
+        {visibleItems < hobbiesData.length && (
+          <div ref={observerRef} className="loading-trigger">
+            <div className="loading-spinner"></div>
+          </div>
+        )}
       </div>
     </section>
   );
