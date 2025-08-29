@@ -1,0 +1,1054 @@
+/* src/styles/enhanced-hobbies.css */
+
+/* Основные стили для улучшенной страницы хобби */
+.enhanced-hobbies-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.enhanced-hobbies-page main {
+  flex: 1;
+}
+
+/* Стили для основной секции хобби */
+.enhanced-hobbies-page .hobbies-section {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.enhanced-hobbies-page .hobbies-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #007bff, #00b4ff, #28a745, #ffc107, #dc3545);
+  z-index: 2;
+  animation: gradientShift 8s ease infinite;
+  background-size: 200% 100%;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.enhanced-hobbies-page .hobbies-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #343a40;
+  position: relative;
+}
+
+.enhanced-hobbies-page .hobbies-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #007bff, #00b4ff);
+  border-radius: 3px;
+}
+
+.enhanced-hobbies-page .intro-wide {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: #495057;
+  text-align: center;
+}
+
+.enhanced-hobbies-page .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.enhanced-hobbies-page .hobbies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Стили для секции игр */
+.enhanced-hobbies-page .enhanced-games-section {
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0;
+}
+
+.enhanced-hobbies-page .enhanced-games-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ff6b6b, #4d96ff, #6bcb77, #9c51e0, #ffd93d);
+  z-index: 2;
+  animation: gradientShift 6s ease infinite;
+  background-size: 200% 100%;
+}
+
+.enhanced-hobbies-page .enhanced-games-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Стили для загрузки */
+.enhanced-hobbies-page .loading-trigger {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 50px;
+}
+
+.enhanced-hobbies-page .loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 123, 255, 0.1);
+  border-top-color: #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Стили для скелетонов */
+.enhanced-hobbies-page .skeleton-title {
+  height: 40px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 0 auto 2rem;
+  width: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.enhanced-hobbies-page .skeleton-title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.enhanced-hobbies-page .skeleton-text {
+  height: 20px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin: 0 auto 3rem;
+  width: 80%;
+  max-width: 800px;
+  position: relative;
+  overflow: hidden;
+}
+
+.enhanced-hobbies-page .skeleton-text::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.enhanced-hobbies-page .skeleton-card {
+  height: 500px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.enhanced-hobbies-page .skeleton-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .enhanced-hobbies-page .hobbies-section {
+    padding: 3rem 0;
+  }
+  
+  .enhanced-hobbies-page .hobbies-title {
+    font-size: 2rem;
+  }
+  
+  .enhanced-hobbies-page .hobbies-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .enhanced-hobbies-page .intro-wide {
+    font-size: 1rem;
+  }
+  
+  .enhanced-hobbies-page .enhanced-games-section {
+    padding: 3rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .enhanced-hobbies-page .hobbies-section {
+    padding: 2rem 0;
+  }
+  
+  .enhanced-hobbies-page .hobbies-title {
+    font-size: 1.8rem;
+  }
+  
+  .enhanced-hobbies-page .intro-wide {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .enhanced-hobbies-page .hobbies-grid {
+    gap: 1rem;
+  }
+  
+  .enhanced-hobbies-page .enhanced-games-section {
+    padding: 2rem 0;
+  }
+}
+
+/* Дополнительные стили для плавных переходов */
+.enhanced-hobbies-page .hobbies-section,
+.enhanced-hobbies-page .enhanced-games-section {
+  transition: all 0.3s ease;
+}
+
+/* Стили для улучшения читаемости */
+.enhanced-hobbies-page .enhanced-games-section .hobbies-games-section .section-header h2 {
+  color: #ffffff;
+}
+
+.enhanced-hobbies-page .enhanced-games-section .hobbies-games-section .section-header h2::after {
+  background: linear-gradient(90deg, #ff6b6b, #4d96ff);
+}
+
+.enhanced-hobbies-page .enhanced-games-section .hobbies-games-section .section-header p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Анимации для элементов */
+.enhanced-hobbies-page .hobbies-grid > * {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.enhanced-hobbies-page .hobbies-grid > *:nth-child(1) { animation-delay: 0.1s; }
+.enhanced-hobbies-page .hobbies-grid > *:nth-child(2) { animation-delay: 0.2s; }
+.enhanced-hobbies-page .hobbies-grid > *:nth-child(3) { animation-delay: 0.3s; }
+.enhanced-hobbies-page .hobbies-grid > *:nth-child(4) { animation-delay: 0.4s; }
+.enhanced-hobbies-page .hobbies-grid > *:nth-child(5) { animation-delay: 0.5s; }
+.enhanced-hobbies-page .hobbies-grid > *:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Стили для разделителей между секциями */
+.enhanced-hobbies-page .enhanced-games-section {
+  margin-top: 2rem;
+  position: relative;
+}
+
+.enhanced-hobbies-page .enhanced-games-section::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+/* Улучшенные стили для контейнера */
+.enhanced-hobbies-page .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Фоновые эффекты */
+.enhanced-hobbies-page .hobbies-section {
+  position: relative;
+}
+
+.enhanced-hobbies-page .hobbies-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(0, 123, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(40, 167, 69, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255, 193, 7, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.enhanced-hobbies-page .enhanced-games-section {
+  position: relative;
+}
+
+.enhanced-hobbies-page .enhanced-games-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(77, 150, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(156, 81, 224, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .steam-list ul {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .top-card {
+    height: 200px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .stat-card h3 {
+    font-size: 2.2rem;
+  }
+
+  .sidebar-block {
+    padding: 1.75rem;
+    margin-bottom: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hobby-info {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .steam-list ul {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .mini-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .top-card {
+    height: 180px;
+  }
+
+  .top-card-overlay {
+    padding: 1.25rem;
+  }
+
+  .top-card-overlay h3 {
+    font-size: 1.1rem;
+  }
+
+  .stat-card {
+    padding: 1.75rem;
+  }
+
+  .stat-card h3 {
+    font-size: 2rem;
+  }
+
+  .stat-card i {
+    font-size: 2.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .sidebar-block {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .sidebar-block h3 {
+    font-size: 1.1rem;
+  }
+
+  .genre-list li,
+  .achievements-list li {
+    padding: 0.75rem 0;
+    font-size: 0.9rem;
+  }
+
+  .platform-tag {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .section-header p {
+    font-size: 1rem;
+  }
+
+  /* Mobile menu improvements */
+  .menu-toggle {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  nav {
+    backdrop-filter: blur(20px);
+    background: rgba(31, 41, 55, 0.99);
+  }
+
+  nav a {
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  nav a:last-child {
+    border-bottom: none;
+  }
+
+  /* Banner adjustments */
+  .hobby-banner {
+    height: 300px;
+  }
+
+  .banner-overlay {
+    padding: 2rem;
+  }
+
+  .banner-overlay h1 {
+    font-size: 2.5rem;
+  }
+
+  .banner-overlay p {
+    font-size: 1rem;
+  }
+
+  /* Button adjustments */
+  .btn-screens {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .mini-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Modal adjustments */
+  .steam-modal-content {
+    margin: 1rem;
+    padding: 2rem;
+    max-width: calc(100% - 2rem);
+  }
+
+  .steam-modal-close {
+    width: 36px;
+    height: 36px;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  /* Game card adjustments */
+  .steam-item {
+    aspect-ratio: 16/10;
+  }
+
+  .steam-item h4 {
+    font-size: 1rem;
+  }
+
+  .steam-item .hours {
+    font-size: 0.8rem;
+  }
+
+  /* Fun facts section */
+  .fun-facts {
+    padding: 1.5rem;
+  }
+
+  .fun-facts h3 {
+    font-size: 1.1rem;
+  }
+
+  .fun-facts .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .mini-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .mini-grid img {
+    height: 120px;
+  }
+
+  .banner-overlay h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .banner-overlay p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .steam-item {
+    aspect-ratio: 4/3;
+  }
+
+  .stat-card {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .stat-card i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .stat-card h3 {
+    font-size: 1.8rem;
+  }
+
+  .stat-card p {
+    font-size: 0.9rem;
+  }
+
+  .sidebar-block {
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .sidebar-block h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .genre-list li,
+  .achievements-list li {
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+  }
+
+  .platform-tag {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .section-header p {
+    font-size: 0.9rem;
+  }
+
+  /* Controls section */
+  .controls-section {
+    padding: 1rem;
+  }
+
+  .controls-section .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Buttons */
+  .btn-screens {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+
+  /* Modal */
+  .steam-modal-content {
+    padding: 1.5rem;
+  }
+
+  .steam-modal-close {
+    width: 32px;
+    height: 32px;
+    font-size: 1.5rem;
+  }
+
+  /* Header */
+  header {
+    padding: 0.5rem 0;
+  }
+
+  .header-container {
+    padding: 0 1rem;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  /* Footer */
+  footer {
+    padding: 1.5rem 0;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+  }
+
+  /* Top games section */
+  .top-vertical {
+    gap: 1rem;
+  }
+
+  .top-card {
+    height: 160px;
+  }
+
+  .rank-badge {
+    width: 8px;
+    height: 8px;
+    font-size: 0.7rem;
+  }
+
+  .top-card-wrapper h3 {
+    font-size: 1rem;
+  }
+
+  /* Stat items */
+  .stat-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .stat-item {
+    padding: 0.75rem;
+  }
+
+  .stat-item .flex {
+    gap: 0.5rem;
+  }
+
+  .stat-item i {
+    font-size: 1rem;
+  }
+
+  .stat-item p {
+    font-size: 0.8rem;
+  }
+
+  .stat-item .text-lg {
+    font-size: 1rem;
+  }
+
+  /* No results */
+  .no-results {
+    padding: 2rem 0;
+  }
+
+  .no-results .text-6xl {
+    font-size: 3rem;
+  }
+
+  .no-results h3 {
+    font-size: 1.2rem;
+  }
+
+  .no-results p {
+    font-size: 0.9rem;
+  }
+
+  /* Mini gallery */
+  .mini-gallery {
+    padding: 1rem;
+  }
+
+  .mini-gallery h2 {
+    font-size: 1rem;
+  }
+
+  .mini-grid img {
+    height: 80px;
+  }
+
+  /* Quick stats */
+  .stat-row {
+    font-size: 0.8rem;
+  }
+
+  /* Decorative elements */
+  .absolute.top-4.left-4,
+  .absolute.top-4.right-4,
+  .absolute.bottom-4.left-1\/4 {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+  .steam-item:hover img,
+  .mini-grid img:hover,
+  .stat-card:hover,
+  .sidebar-block:hover,
+  .top-card:hover {
+    transform: none;
+  }
+
+  .steam-item::before,
+  .mini-grid img::before {
+    display: none;
+  }
+
+  .group-hover\:opacity-100 {
+    opacity: 0;
+  }
+
+  .group-hover\:scale-105 {
+    transform: none;
+  }
+
+  .group-hover\:bg-purple-50,
+  .group-hover\:bg-blue-50,
+  .group-hover\:bg-green-50,
+  .group-hover\:bg-yellow-50,
+  .group-hover\:bg-red-50 {
+    background-color: transparent;
+  }
+
+  .group-hover\:translate-x-2 {
+    transform: none;
+  }
+
+  .group-hover\:text-blue-600,
+  .group-hover\:text-purple-600,
+  .group-hover\:text-green-600,
+  .group-hover\:text-yellow-600 {
+    color: inherit;
+  }
+
+  /* Make touch targets larger */
+  .steam-item,
+  .top-card,
+  .stat-card,
+  .sidebar-block,
+  .genre-item,
+  .platform-tag,
+  .btn-screens,
+  .mini-toggle {
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Remove hover states that don't work on touch */
+  .hover-lift:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+
+  /* Ensure buttons are easily tappable */
+  .btn-screens,
+  .mini-toggle,
+  .platform-tag {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* High DPI/Retina display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .stat-card,
+  .sidebar-block,
+  .steam-item,
+  .top-card {
+    border-width: 0.5px;
+  }
+
+  .mini-grid img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  .hobby-banner {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-pulse,
+  .animate-fade-in,
+  .animate-fade-in-delay {
+    animation: none;
+  }
+
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .steam-modal,
+  .top-card-drawer,
+  .current-drawer {
+    animation: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+  }
+
+  .stat-card {
+    color: #fff;
+  }
+
+  .stat-card p {
+    opacity: 0.9;
+  }
+
+  .sidebar-block {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+  }
+
+  .sidebar-block h3 {
+    color: #fff;
+  }
+
+  .genre-list li,
+  .achievements-list li {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  .genre-list li:hover {
+    background: rgba(99, 102, 241, 0.2);
+  }
+
+  .platform-tag {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  .platform-tag:hover {
+    background: rgba(99, 102, 241, 0.3);
+  }
+
+  .mini-gallery {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+  }
+
+  .mini-gallery h2 {
+    color: #fff;
+  }
+
+  .controls-section {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+  }
+
+  .controls-section label {
+    color: #fff;
+  }
+
+  .controls-section input,
+  .controls-section select {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .fun-facts {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.3);
+  }
+
+  .fact-item {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+  }
+
+  .no-results {
+    color: #fff;
+  }
+
+  .section-header p {
+    color: #ccc;
+  }
+}
+
+/* Print styles */
+@media print {
+  .games-page {
+    background: white;
+    color: black;
+  }
+
+  header,
+  footer,
+  .menu-toggle,
+  .mini-toggle,
+  .btn-screens,
+  .steam-modal,
+  .action-buttons {
+    display: none;
+  }
+
+  .hobby-info {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .stat-card,
+  .sidebar-block,
+  .steam-item,
+  .top-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hobby-banner {
+    height: 200px;
+  }
+
+  .banner-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .text-gradient {
+    background: none;
+    -webkit-text-fill-color: black;
+    color: black;
+  }
+}

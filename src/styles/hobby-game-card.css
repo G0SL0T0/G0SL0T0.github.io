@@ -1,0 +1,405 @@
+/* src/styles/hobby-game-card.css */
+
+/* Основные стили для карточки игры в хобби */
+.hobby-game-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  position: relative;
+}
+
+.hobby-game-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.hobby-game-card:active {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Контейнер для изображения */
+.hobby-game-card .relative.h-48 {
+  position: relative;
+  height: 192px;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  overflow: hidden;
+}
+
+.hobby-game-card .relative.h-48::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Стили для Next.js Image */
+.hobby-game-card .relative.h-48 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hobby-game-card:hover .relative.h-48 img {
+  transform: scale(1.05);
+}
+
+/* Бейдж для активной игры */
+.hobby-game-card .absolute.top-2.right-2 {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+}
+
+.hobby-game-card .bg-green-500 {
+  background-color: #10b981;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.hobby-game-card .fas.fa-circle.text-xs {
+  font-size: 0.5rem;
+  animation: blink 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+
+/* Контент карточки */
+.hobby-game-card .p-4 {
+  padding: 1.5rem;
+}
+
+.hobby-game-card h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  height: 3.2em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  position: relative;
+}
+
+.hobby-game-card h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40px;
+  height: 1.2em;
+  background: linear-gradient(to right, transparent, #ffffff 70%);
+  pointer-events: none;
+}
+
+/* Информационные блоки */
+.hobby-game-card .space-y-2 > * + * {
+  margin-top: 0.75rem;
+}
+
+.hobby-game-card .flex.items-center.justify-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hobby-game-card .text-sm {
+  font-size: 0.875rem;
+}
+
+.hobby-game-card .text-gray-600 {
+  color: #6b7280;
+}
+
+.hobby-game-card .font-semibold {
+  font-weight: 600;
+  color: #374151;
+}
+
+.hobby-game-card .flex.items-center.gap-1 {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.hobby-game-card .fas {
+  font-size: 0.875rem;
+  width: 16px;
+  text-align: center;
+}
+
+.hobby-game-card .text-blue-500 {
+  color: #3b82f6;
+}
+
+.hobby-game-card .text-green-500 {
+  color: #10b981;
+}
+
+.hobby-game-card .text-yellow-500 {
+  color: #eab308;
+}
+
+/* Кнопка действия */
+.hobby-game-card .w-full {
+  width: 100%;
+}
+
+.hobby-game-card .mt-4 {
+  margin-top: 1rem;
+}
+
+.hobby-game-card .bg-blue-500 {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.hobby-game-card .bg-blue-500::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.hobby-game-card .bg-blue-500:hover::before {
+  left: 100%;
+}
+
+.hobby-game-card .bg-blue-500:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+  transform: translateY(-1px);
+}
+
+.hobby-game-card .bg-blue-500:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .hobby-game-card {
+    border-radius: 12px;
+  }
+  
+  .hobby-game-card .relative.h-48 {
+    height: 160px;
+  }
+  
+  .hobby-game-card .p-4 {
+    padding: 1rem;
+  }
+  
+  .hobby-game-card h3 {
+    font-size: 1rem;
+    height: 2.8em;
+    margin-bottom: 0.75rem;
+  }
+  
+  .hobby-game-card .space-y-2 > * + * {
+    margin-top: 0.5rem;
+  }
+  
+  .hobby-game-card .text-sm {
+    font-size: 0.8rem;
+  }
+  
+  .hobby-game-card .bg-blue-500 {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hobby-game-card {
+    border-radius: 8px;
+  }
+  
+  .hobby-game-card .relative.h-48 {
+    height: 140px;
+  }
+  
+  .hobby-game-card .p-4 {
+    padding: 0.75rem;
+  }
+  
+  .hobby-game-card h3 {
+    font-size: 0.95rem;
+    height: 2.6em;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hobby-game-card .bg-blue-500 {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  
+  .hobby-game-card .fas {
+    font-size: 0.8rem;
+  }
+}
+
+/* Дополнительные стили для улучшения визуального опыта */
+.hobby-game-card {
+  animation: cardEntry 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes cardEntry {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Анимация для карточек в сетке */
+.hobbies-games-section .games-grid .hobby-game-card:nth-child(1) { animation-delay: 0.1s; }
+.hobbies-games-section .games-grid .hobby-game-card:nth-child(2) { animation-delay: 0.2s; }
+.hobbies-games-section .games-grid .hobby-game-card:nth-child(3) { animation-delay: 0.3s; }
+.hobbies-games-section .games-grid .hobby-game-card:nth-child(4) { animation-delay: 0.4s; }
+.hobbies-games-section .games-grid .hobby-game-card:nth-child(5) { animation-delay: 0.5s; }
+.hobbies-games-section .games-grid .hobby-game-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Стили для темной темы (если понадобится) */
+@media (prefers-color-scheme: dark) {
+  .hobby-game-card {
+    background: #1f2937;
+    border-color: rgba(75, 85, 99, 0.8);
+    color: #f9fafb;
+  }
+  
+  .hobby-game-card h3 {
+    color: #f9fafb;
+  }
+  
+  .hobby-game-card .text-gray-600 {
+    color: #d1d5db;
+  }
+  
+  .hobby-game-card .font-semibold {
+    color: #f3f4f6;
+  }
+  
+  .hobby-game-card h3::after {
+    background: linear-gradient(to right, transparent, #1f2937 70%);
+  }
+}
+
+/* Микро-взаимодействия */
+.hobby-game-card .relative.h-48 {
+  position: relative;
+  cursor: pointer;
+}
+
+.hobby-game-card .relative.h-48::after {
+  content: '👁️';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hobby-game-card:hover .relative.h-48::after {
+  opacity: 0.8;
+}
+
+/* Дополнительные визуальные улучшения */
+.hobby-game-card {
+  position: relative;
+}
+
+.hobby-game-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hobby-game-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Стили для состояния фокуса (доступность) */
+.hobby-game-card:focus-within {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.hobby-game-card .bg-blue-500:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}

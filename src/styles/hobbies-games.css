@@ -1,0 +1,587 @@
+/* src/styles/hobbies-games.css */
+
+/* Основные стили для секции игр в хобби */
+.hobbies-games-section {
+  padding: 3rem 0;
+  position: relative;
+}
+
+.hobbies-games-section .section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.hobbies-games-section .section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.hobbies-games-section .section-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 2px;
+}
+
+.hobbies-games-section .section-header p {
+  font-size: 1.1rem;
+  color: #6b7280;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Стили для статистики игр */
+.hobbies-games-section .game-stats {
+  margin-bottom: 3rem;
+}
+
+.hobbies-games-section .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.hobbies-games-section .stat-card {
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.hobbies-games-section .stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.hobbies-games-section .stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.hobbies-games-section .stat-card h3 {
+  font-size: 2.5rem;
+  margin: 0.5rem 0 0;
+  font-weight: 700;
+}
+
+.hobbies-games-section .stat-card p {
+  font-size: 1.1rem;
+  margin: 0.25rem 0 0;
+  opacity: 0.95;
+  font-weight: 500;
+}
+
+.hobbies-games-section .stat-card i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+/* Стили для топ-игр */
+.hobbies-games-section .top-games {
+  margin-bottom: 3rem;
+}
+
+.hobbies-games-section .top-games h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hobbies-games-section .top-games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.hobbies-games-section .top-game-card {
+  position: relative;
+}
+
+.hobbies-games-section .top-game-card .relative {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hobbies-games-section .top-game-card .relative:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.hobbies-games-section .top-game-card .absolute {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.hobbies-games-section .top-game-card .flex {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hobbies-games-section .top-game-card .bg-yellow-500 {
+  background-color: #eab308;
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.hobbies-games-section .top-game-card h4 {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+
+.hobbies-games-section .top-game-card .text-white\/80 {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+}
+
+/* Стили для текущих игр */
+.hobbies-games-section .current-games {
+  margin-bottom: 3rem;
+}
+
+.hobbies-games-section .current-games h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hobbies-games-section .current-games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.hobbies-games-section .current-game-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.hobbies-games-section .current-game-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.hobbies-games-section .current-game-card .flex {
+  display: flex;
+  gap: 1rem;
+}
+
+.hobbies-games-section .current-game-card img {
+  width: 80px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.hobbies-games-section .current-game-card .flex-1 {
+  flex: 1;
+}
+
+.hobbies-games-section .current-game-card h4 {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.hobbies-games-section .current-game-card .text-sm {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.hobbies-games-section .current-game-card .mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.hobbies-games-section .current-game-card .flex.justify-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hobbies-games-section .current-game-card .text-gray-600 {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.hobbies-games-section .current-game-card .w-full {
+  width: 100%;
+}
+
+.hobbies-games-section .current-game-card .bg-gray-200 {
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.hobbies-games-section .current-game-card .bg-gradient-to-r {
+  background: linear-gradient(to right, #10b981, #34d399);
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.6s ease;
+}
+
+.hobbies-games-section .current-game-card .text-xs {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* Стили для коллекции игр */
+.hobbies-games-section .games-collection {
+  margin-bottom: 3rem;
+}
+
+.hobbies-games-section .games-collection .flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.hobbies-games-section .games-collection h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hobbies-games-section .games-collection .bg-blue-500 {
+  background-color: #3b82f6;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hobbies-games-section .games-collection .bg-blue-500:hover {
+  background-color: #2563eb;
+}
+
+.hobbies-games-section .games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Стили для модального окна игры */
+.hobbies-games-section .game-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.hobbies-games-section .game-modal-content {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hobbies-games-section .game-modal .absolute {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6b7280;
+  transition: color 0.2s ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.hobbies-games-section .game-modal .absolute:hover {
+  color: #374151;
+  background: #f3f4f6;
+}
+
+.hobbies-games-section .game-modal .text-center {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.hobbies-games-section .game-modal img {
+  width: 100%;
+  height: 128px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.hobbies-games-section .game-modal h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #3b82f6;
+  margin: 0;
+}
+
+.hobbies-games-section .game-modal .space-y-3 > * + * {
+  margin-top: 0.75rem;
+}
+
+.hobbies-games-section .game-modal .flex.justify-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hobbies-games-section .game-modal .font-semibold {
+  font-weight: 600;
+  color: #374151;
+}
+
+.hobbies-games-section .game-modal .mt-6 {
+  margin-top: 1.5rem;
+}
+
+.hobbies-games-section .game-modal .flex.gap-2 {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hobbies-games-section .game-modal .flex-1 {
+  flex: 1;
+}
+
+.hobbies-games-section .game-modal .bg-blue-500,
+.hobbies-games-section .game-modal .bg-gray-500 {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.hobbies-games-section .game-modal .bg-blue-500 {
+  background-color: #3b82f6;
+  color: #fff;
+}
+
+.hobbies-games-section .game-modal .bg-blue-500:hover {
+  background-color: #2563eb;
+}
+
+.hobbies-games-section .game-modal .bg-gray-500 {
+  background-color: #6b7280;
+  color: #fff;
+}
+
+.hobbies-games-section .game-modal .bg-gray-500:hover {
+  background-color: #4b5563;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .hobbies-games-section .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .hobbies-games-section .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .hobbies-games-section .top-games-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+  
+  .hobbies-games-section .current-games-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .hobbies-games-section .games-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  .hobbies-games-section .games-collection .flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .hobbies-games-section .top-game-card .relative {
+    height: 160px;
+  }
+  
+  .hobbies-games-section .stat-card h3 {
+    font-size: 2rem;
+  }
+  
+  .hobbies-games-section .stat-card i {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hobbies-games-section {
+    padding: 2rem 0;
+  }
+  
+  .hobbies-games-section .section-header h2 {
+    font-size: 1.75rem;
+  }
+  
+  .hobbies-games-section .section-header p {
+    font-size: 1rem;
+  }
+  
+  .hobbies-games-section .top-games-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hobbies-games-section .games-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hobbies-games-section .game-modal-content {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .hobbies-games-section .game-modal .flex.gap-2 {
+    flex-direction: column;
+  }
+}
+
+/* Дополнительные стили для улучшенного визуального оформления */
+.hobbies-games-section .bg-gray-50 {
+  background-color: #f9fafb;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.hobbies-games-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Анимации и переходы */
+.hobbies-games-section * {
+  transition-property: transform, box-shadow, background-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+/* Стили для состояния загрузки */
+.hobbies-games-section .flex.items-center.justify-center.h-64 {
+  min-height: 16rem;
+}
+
+.hobbies-games-section .animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hobbies-games-section .border-b-2 {
+  border-bottom-width: 2px;
+}
+
+.hobbies-games-section .border-blue-500 {
+  border-color: #3b82f6;
+}
